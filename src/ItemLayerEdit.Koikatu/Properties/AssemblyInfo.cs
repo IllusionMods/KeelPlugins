@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KeelPlugins")]
+[assembly: AssemblyTitle("ItemLayerEdit.Koikatu")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KeelPlugins")]
+[assembly: AssemblyProduct("ItemLayerEdit.Koikatu")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ff724eab-0e8a-43f0-88b2-828e2fd0f67b")]
+[assembly: Guid("a9a5b556-b590-4948-9e89-87d38623daf1")]
 
 // Version information for an assembly consists of the following four values:
 //
