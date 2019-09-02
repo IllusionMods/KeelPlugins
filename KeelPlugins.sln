@@ -3,21 +3,163 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeelPlugins", "KeelPlugins\KeelPlugins.csproj", "{FF724EAB-0E8A-43F0-88B2-828E2FD0F67B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LockOnPlugin", "LockOnPlugin", "{FAF05F03-1080-46D3-AB9B-C67556251D3A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LockOnPlugin.Core", "src\LockOnPlugin.Core\LockOnPlugin.Core.shproj", "{073D65BA-9BB7-4386-9B01-F86FA6DF6984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockOnPlugin.Koikatu", "src\LockOnPlugin.Koikatu\LockOnPlugin.Koikatu.csproj", "{0902BF3D-81D2-4AEE-AB32-EF238F15052E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core", "src\Common.Core\Common.Core.shproj", "{DD7D6945-54A6-4190-8F49-46A189EE32CD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Koikatu", "src\Common.Koikatu\Common.Koikatu.shproj", "{5FC98374-508A-40B7-B4E1-EDB3B1D482F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DragAndDrop", "DragAndDrop", "{6867199F-B91A-43D8-B331-36BBA44AD5C2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DragAndDrop.Core", "src\DragAndDrop.Core\DragAndDrop.Core.shproj", "{C1D7DE50-A471-425D-A28D-9F360417A991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragAndDrop.Koikatu", "src\DragAndDrop.Koikatu\DragAndDrop.Koikatu.csproj", "{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{109CAC30-4703-427D-BD31-A64B50CBC942}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archive", "Archive", "{AD19F107-FED6-4ABD-B57E-1D584CCF0EC1}"
+	ProjectSection(SolutionItems) = preProject
+		archive\AssetHelper.cs = archive\AssetHelper.cs
+		archive\SelfieCam.cs = archive\SelfieCam.cs
+		archive\ShadowRealm.cs = archive\ShadowRealm.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CharaStateX", "CharaStateX", "{E88E800F-6D94-450F-B756-66B3960E4795}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CharaStateX.Core", "src\CharaStateX.Core\CharaStateX.Core.shproj", "{E6FC0727-CF45-4F39-80C6-8816DBA8D060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharaStateX.Koikatu", "src\CharaStateX.Koikatu\CharaStateX.Koikatu.csproj", "{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DefaultParamEditor", "DefaultParamEditor", "{F41D7322-8267-4A9A-866D-6517616A5996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultParamEditor.Koikatu", "src\DefaultParamEditor.Koikatu\DefaultParamEditor.Koikatu.csproj", "{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GraphicsSettings", "GraphicsSettings", "{DA19B394-65A3-4A82-A8A5-B8C47AFCE746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.Koikatu", "src\ItemLayerEdit.Koikatu\ItemLayerEdit.Koikatu.csproj", "{A9A5B556-B590-4948-9E89-87D38623DAF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsSettings.Koikatu", "src\GraphicsSettings.Koikatu\GraphicsSettings.Koikatu.csproj", "{AE057971-5893-41BE-A377-8CD92DF46D22}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GraphicsSettings.Core", "src\GraphicsSettings.Core\GraphicsSettings.Core.shproj", "{A51940B9-0F2A-429D-826B-4238C7BDD83D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LightManager", "LightManager", "{21652626-F032-4986-B258-C36B4C9115E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MakerBridge", "MakerBridge", "{17FF704B-6D86-4F64-8052-123DC8C2AC0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TitleShortcuts", "TitleShortcuts", "{E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LightManager.Core", "src\LightManager.Core\LightManager.Core.shproj", "{D2938A42-199F-4A5B-8C9B-6592E9E53424}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightManager.Koikatu", "src\LightManager.Koikatu\LightManager.Koikatu.csproj", "{9495FFE8-C90D-44E6-AE4F-A21506594AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakerBridge.Koikatu", "src\MakerBridge.Koikatu\MakerBridge.Koikatu.csproj", "{858D3C30-B4C8-4C81-88E3-D569B61B0443}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MakerBridge.Core", "src\MakerBridge.Core\MakerBridge.Core.shproj", "{3B6CD84F-6327-46B6-91E1-5EB972BC60FE}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TitleShortcuts.Core", "src\TitleShortcuts.Core\TitleShortcuts.Core.shproj", "{A8773D4B-F14F-4382-BA17-FA6359D32B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleShortcuts.Koikatu", "src\TitleShortcuts.Koikatu\TitleShortcuts.Koikatu.csproj", "{CA3A790C-911E-441B-B9C6-4D45DCB9882E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UIUtility", "src\UIUtility\UIUtility.shproj", "{7F30866A-1B8B-40F1-8960-0E203EEDE225}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemLayerEdit", "ItemLayerEdit", "{6A7D2408-FF32-4273-BACD-B0CDC6D65DE7}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
+		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
+		src\MakerBridge.Core\MakerBridge.Core.projitems*{3b6cd84f-6327-46b6-91e1-5eb972bc60fe}*SharedItemsImports = 13
+		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
+		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
+		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
+		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
+		src\UIUtility\UIUtility.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
+		src\GraphicsSettings.Core\GraphicsSettings.Core.projitems*{a51940b9-0f2a-429d-826b-4238c7bdd83d}*SharedItemsImports = 13
+		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{a8773d4b-f14f-4382-ba17-fa6359d32b3c}*SharedItemsImports = 13
+		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{c1d7de50-a471-425d-a28d-9f360417a991}*SharedItemsImports = 13
+		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
+		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
+		src\Common.Koikatu\Common.Koikatu.projitems*{de5f203a-f19c-4a8d-954e-bf1bca15cced}*SharedItemsImports = 4
+		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{de5f203a-f19c-4a8d-954e-bf1bca15cced}*SharedItemsImports = 4
+		src\CharaStateX.Core\CharaStateX.Core.projitems*{e6fc0727-cf45-4f39-80c6-8816dba8d060}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF724EAB-0E8A-43F0-88B2-828E2FD0F67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF724EAB-0E8A-43F0-88B2-828E2FD0F67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF724EAB-0E8A-43F0-88B2-828E2FD0F67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF724EAB-0E8A-43F0-88B2-828E2FD0F67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0902BF3D-81D2-4AEE-AB32-EF238F15052E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0902BF3D-81D2-4AEE-AB32-EF238F15052E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0902BF3D-81D2-4AEE-AB32-EF238F15052E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0902BF3D-81D2-4AEE-AB32-EF238F15052E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE057971-5893-41BE-A377-8CD92DF46D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE057971-5893-41BE-A377-8CD92DF46D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE057971-5893-41BE-A377-8CD92DF46D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE057971-5893-41BE-A377-8CD92DF46D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858D3C30-B4C8-4C81-88E3-D569B61B0443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858D3C30-B4C8-4C81-88E3-D569B61B0443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858D3C30-B4C8-4C81-88E3-D569B61B0443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858D3C30-B4C8-4C81-88E3-D569B61B0443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA3A790C-911E-441B-B9C6-4D45DCB9882E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA3A790C-911E-441B-B9C6-4D45DCB9882E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA3A790C-911E-441B-B9C6-4D45DCB9882E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA3A790C-911E-441B-B9C6-4D45DCB9882E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{073D65BA-9BB7-4386-9B01-F86FA6DF6984} = {FAF05F03-1080-46D3-AB9B-C67556251D3A}
+		{0902BF3D-81D2-4AEE-AB32-EF238F15052E} = {FAF05F03-1080-46D3-AB9B-C67556251D3A}
+		{C1D7DE50-A471-425D-A28D-9F360417A991} = {6867199F-B91A-43D8-B331-36BBA44AD5C2}
+		{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED} = {6867199F-B91A-43D8-B331-36BBA44AD5C2}
+		{E6FC0727-CF45-4F39-80C6-8816DBA8D060} = {E88E800F-6D94-450F-B756-66B3960E4795}
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220} = {E88E800F-6D94-450F-B756-66B3960E4795}
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8} = {F41D7322-8267-4A9A-866D-6517616A5996}
+		{A9A5B556-B590-4948-9E89-87D38623DAF1} = {6A7D2408-FF32-4273-BACD-B0CDC6D65DE7}
+		{AE057971-5893-41BE-A377-8CD92DF46D22} = {DA19B394-65A3-4A82-A8A5-B8C47AFCE746}
+		{A51940B9-0F2A-429D-826B-4238C7BDD83D} = {DA19B394-65A3-4A82-A8A5-B8C47AFCE746}
+		{D2938A42-199F-4A5B-8C9B-6592E9E53424} = {21652626-F032-4986-B258-C36B4C9115E7}
+		{9495FFE8-C90D-44E6-AE4F-A21506594AAD} = {21652626-F032-4986-B258-C36B4C9115E7}
+		{858D3C30-B4C8-4C81-88E3-D569B61B0443} = {17FF704B-6D86-4F64-8052-123DC8C2AC0A}
+		{3B6CD84F-6327-46B6-91E1-5EB972BC60FE} = {17FF704B-6D86-4F64-8052-123DC8C2AC0A}
+		{A8773D4B-F14F-4382-BA17-FA6359D32B3C} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
+		{CA3A790C-911E-441B-B9C6-4D45DCB9882E} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
