@@ -7,7 +7,7 @@ using UnityEngine;
 namespace KeelPlugins
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
-    [BepInProcess(KoikatuConstants.KoikatuStudioProcessName)]
+    [BepInProcess(KoikatuConstants.StudioProcessName)]
     [BepInPlugin(GUID, "Light Manager", Version)]
     public class LightManagerPlugin : BaseUnityPlugin
     {

@@ -2,10 +2,10 @@
 {
     internal static class KoikatuConstants
     {
-        public const string KoikatuMainProcessName = "Koikatu.exe";
-        public const string KoikatuSteamProcessName = "Koikatsu Party.exe";
-        public const string KoikatuVRProcessName = "KoikatsuVR.exe";
-        public const string KoikatuSteamVRProcessName = "Koikatsu Party VR.exe";
-        public const string KoikatuStudioProcessName = "CharaStudio.exe";
+        public const string MainGameProcessName = "Koikatu";
+        public const string MainGameProcessNameSteam = "Koikatsu Party";
+        public const string VRProcessName = "KoikatsuVR";
+        public const string VRProcessNameSteam = "Koikatsu Party VR";
+        public const string StudioProcessName = "CharaStudio";
     }
 }
