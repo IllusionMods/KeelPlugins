@@ -4,7 +4,7 @@ using HarmonyLib;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.KoikatuStudioProcessName)]
+    [BepInProcess(KoikatuConstants.StudioProcessName)]
     [BepInPlugin(GUID, "CharaStateX", Version)]
     public class CharaStateX : BaseUnityPlugin
     {

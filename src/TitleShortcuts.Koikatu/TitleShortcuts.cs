@@ -9,10 +9,10 @@ using UnityEngine.SceneManagement;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.KoikatuMainProcessName)]
-    [BepInProcess(KoikatuConstants.KoikatuSteamProcessName)]
-    [BepInProcess(KoikatuConstants.KoikatuVRProcessName)]
-    [BepInProcess(KoikatuConstants.KoikatuSteamVRProcessName)]
+    [BepInProcess(KoikatuConstants.MainGameProcessName)]
+    [BepInProcess(KoikatuConstants.MainGameProcessNameSteam)]
+    [BepInProcess(KoikatuConstants.VRProcessName)]
+    [BepInProcess(KoikatuConstants.VRProcessNameSteam)]
     [BepInPlugin(GUID, "TitleShortcuts", Version)]
     public class TitleShortcuts : BaseUnityPlugin
     {

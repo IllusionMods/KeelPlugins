@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.KoikatuStudioProcessName)]
+    [BepInProcess(KoikatuConstants.StudioProcessName)]
     [BepInPlugin(GUID, "DefaultParamEditor", Version)]
     public class DefaultParamEditor : BaseUnityPlugin
     {
