@@ -1,31 +1,24 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.MainGameProcessName)]
-    [BepInProcess(KoikatuConstants.MainGameProcessNameSteam)]
-    [BepInProcess(KoikatuConstants.VRProcessName)]
-    [BepInProcess(KoikatuConstants.VRProcessNameSteam)]
+    [BepInProcess(HoneySelectConstants.MainGameProcessName64bit)]
+    [BepInProcess(HoneySelectConstants.MainGameProcessName32bit)]
     [BepInPlugin(GUID, "TitleShortcuts", Version)]
     public class TitleShortcuts : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.titleshortcuts";
-        public const string Version = "1.1.1";
+        public const string Version = "1.0.0";
 
         private ConfigWrapper<AutoStartOption> AutoStart { get; }
         private ConfigWrapper<KeyboardShortcut> StartFemaleMaker { get; }
         private ConfigWrapper<KeyboardShortcut> StartMaleMaker { get; }
-        private ConfigWrapper<KeyboardShortcut> StartUploader { get; }
-        private ConfigWrapper<KeyboardShortcut> StartDownloader { get; }
-        private ConfigWrapper<KeyboardShortcut> StartFreeH { get; }
-        private ConfigWrapper<KeyboardShortcut> StartLiveShow { get; }
 
         private bool check = false;
         private bool cancelAuto = false;
@@ -37,11 +30,7 @@ namespace KeelPlugins
             [Description("Female maker")]
             FemaleMaker,
             [Description("Male maker")]
-            MaleMaker,
-            [Description("Free H")]
-            FreeH,
-            [Description("Live stage")]
-            LiveStage
+            MaleMaker
         }
 
         private TitleShortcuts()
@@ -49,18 +38,9 @@ namespace KeelPlugins
             AutoStart = Config.GetSetting("", "AutoStartMode", AutoStartOption.Disabled, new ConfigDescription(TitleShortcutsConstants.DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.GetSetting("", "StartFemaleMaker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.GetSetting("", "StartMaleMaker", new KeyboardShortcut(KeyCode.M));
-            StartUploader = Config.GetSetting("", "StartUploader", new KeyboardShortcut(KeyCode.U));
-            StartDownloader = Config.GetSetting("", "StartDownloader", new KeyboardShortcut(KeyCode.D));
-            StartFreeH = Config.GetSetting("", "StartFreeH", new KeyboardShortcut(KeyCode.H));
-            StartLiveShow = Config.GetSetting("", "StartLiveShow", new KeyboardShortcut(KeyCode.L));
         }
 
-        private void Awake()
-        {
-            SceneManager.sceneLoaded += StartInput;
-        }
-
-        private void StartInput(Scene scene, LoadSceneMode mode)
+        private void OnLevelWasLoaded(int level)
         {
             var title = FindObjectOfType<TitleScene>();
 
@@ -100,24 +80,6 @@ namespace KeelPlugins
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
 
-                    else if(StartUploader.Value.IsPressed())
-                    {
-                        StartMode(titleScene.OnUploader, "Starting uploader");
-                    }
-                    else if(StartDownloader.Value.IsPressed())
-                    {
-                        StartMode(titleScene.OnDownloader, "Starting downloader");
-                    }
-
-                    else if(StartFreeH.Value.IsPressed())
-                    {
-                        StartMode(titleScene.OnOtherFreeH, "Starting free H");
-                    }
-                    else if(StartLiveShow.Value.IsPressed())
-                    {
-                        StartMode(titleScene.OnOtherIdolLive, "Starting live show");
-                    }
-
                     else if(!cancelAuto && AutoStart.Value != AutoStartOption.Disabled)
                     {
                         switch(AutoStart.Value)
@@ -129,14 +91,6 @@ namespace KeelPlugins
                             case AutoStartOption.MaleMaker:
                                 StartMode(titleScene.OnCustomMale, "Automatically starting male maker");
                                 break;
-
-                            case AutoStartOption.FreeH:
-                                StartMode(titleScene.OnOtherFreeH, "Automatically starting free H");
-                                break;
-
-                            case AutoStartOption.LiveStage:
-                                StartMode(titleScene.OnOtherIdolLive, "Automatically starting live show");
-                                break;
                         }
                     }
 
@@ -147,7 +101,7 @@ namespace KeelPlugins
             }
         }
 
-        private void StartMode(UnityAction action, string msg)
+        private void StartMode(Action action, string msg)
         {
             if(!FindObjectOfType<ConfigScene>())
             {

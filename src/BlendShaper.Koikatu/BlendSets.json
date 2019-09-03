@@ -1,0 +1,113 @@
+﻿{
+	"Categories":
+	[
+		{
+			"Name": "Eyes",
+			"Sets":
+			[
+				{
+					"Name": "Fully open 1",
+					"Shapes":
+					[
+						{ "Renderer": "cf_O_face", "Index": 0 },
+						{ "Renderer": "cf_O_eyeline", "Index": 0 },
+						{ "Renderer": "cf_O_eyeline_low", "Index": 0 },
+						{ "Renderer": "cf_Ohitomi_L", "Index": 0 },
+						{ "Renderer": "cf_Ohitomi_R", "Index": 0 },
+					]
+				},
+				{
+					"Name": "Fully open 2",
+					"Shapes":
+					[
+						{ "Renderer": "cf_O_face", "Index": 2 },
+						{ "Renderer": "cf_O_eyeline", "Index": 2 },
+						{ "Renderer": "cf_O_eyeline_low", "Index": 2 },
+						{ "Renderer": "cf_Ohitomi_L", "Index": 2 },
+						{ "Renderer": "cf_Ohitomi_R", "Index": 2 },
+					]
+				},
+			]
+		},
+		{
+			"Name": "Mouth",
+			"Sets":
+			[
+				{
+					"Name": "Fully open 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 29 }]
+				},
+				{
+					"Name": "Fully open 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 30 }]
+				},
+				{
+					"Name": "Fully open 3",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 33 }]
+				},
+
+				{
+					"Name": "Slightly open 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 34 }]
+				},
+				{
+					"Name": "Slightly open 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 35 }]
+				},
+				{
+					"Name": "Slightly open 3",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 37 }]
+				},
+				{
+					"Name": "Slightly open 4",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 40 }]
+				},
+
+				{
+					"Name": "Smile 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 31 }]
+				},
+				{
+					"Name": "Smile 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 32 }]
+				},
+
+				{
+					"Name": "Frown 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 36 }]
+				},
+				{
+					"Name": "Frown 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 38 }]
+				},
+				{
+					"Name": "Frown 3",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 39 }]
+				},
+
+				{
+					"Name": "Sad 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 41 }]
+				},
+				{
+					"Name": "Sad 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 45 }]
+				},
+
+				{
+					"Name": "Grimace 1",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 42 }]
+				},
+				{
+					"Name": "Grimace 2",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 43 }]
+				},
+
+				{
+					"Name": "O face",
+					"Shapes": [{ "Renderer": "cf_O_face", "Index": 44 }]
+				},
+			]
+		},
+	]
+}
