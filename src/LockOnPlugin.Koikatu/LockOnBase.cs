@@ -130,7 +130,7 @@ namespace KeelPlugins
                 bool UpArrow = Input.GetKey(KeyCode.UpArrow), DownArrow = Input.GetKey(KeyCode.DownArrow);
                 bool PageUp = Input.GetKey(KeyCode.PageUp), PageDown = Input.GetKey(KeyCode.PageDown);
 
-                if(!InputFieldSelected && KeyboardShortcutHotkey.allowHotkeys && (RightArrow || LeftArrow || UpArrow || DownArrow || PageUp || PageDown))
+                if(!InputFieldSelected && (RightArrow || LeftArrow || UpArrow || DownArrow || PageUp || PageDown))
                 {
                     reduceOffset = false;
                     offsetKeyHeld += Time.deltaTime / 3f;

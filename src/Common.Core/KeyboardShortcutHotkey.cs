@@ -8,8 +8,6 @@ namespace KeelPlugins
 {
     internal class KeyboardShortcutHotkey
     {
-        public static bool allowHotkeys = true;
-
         private KeyboardShortcut key;
         private float procTime = 0f;
         private float timeHeld = 0f;
@@ -36,8 +34,11 @@ namespace KeelPlugins
                 released = false;
             }
         }
-
-        // this always needs at least KeyUpAction(null) after it
+        
+        /// <summary>
+        /// This always needs at least KeyUpAction(null) after it.
+        /// </summary>
+        /// <param name="action"></param>
         public void KeyHoldAction(UnityAction action)
         {
             if(ResetIfShould()) return;
@@ -60,9 +61,7 @@ namespace KeelPlugins
             if(enabled && key.IsUp())
             {
                 if(released)
-                {
-                    action();
-                }
+                    action?.Invoke();
 
                 timeHeld = 0f;
                 released = true;
@@ -73,15 +72,11 @@ namespace KeelPlugins
         {
             bool shouldReset = false;
 
-            if(!allowHotkeys || GUIUtility.keyboardControl > 0)
-            {
+            if(GUIUtility.keyboardControl > 0)
                 shouldReset = true;
-            }
 
             if(EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<InputField>() != null)
-            {
                 shouldReset = true;
-            }
 
             if(shouldReset)
             {

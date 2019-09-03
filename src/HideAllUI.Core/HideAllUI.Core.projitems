@@ -3,12 +3,11 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>4d175c74-23cc-45db-8225-537db7e33142</SharedGUID>
+    <SharedGUID>fe4aa260-c540-4842-b0da-9b2f76efe688</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>TitleShortcuts.Core</Import_RootNamespace>
+    <Import_RootNamespace>HideAllUI.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)TitleShortcutsConstants.cs" />
   </ItemGroup>
 </Project>
