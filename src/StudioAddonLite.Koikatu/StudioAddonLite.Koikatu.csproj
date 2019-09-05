@@ -15,6 +15,10 @@
   </PropertyGroup>
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\lib\bepinex5\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\lib\kk\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -23,9 +27,17 @@
       <HintPath>..\..\lib\bepinex5\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="BepInEx.Harmony">
+      <HintPath>..\..\lib\bepinex5\BepInEx.Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\lib\kk\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\lib\kk\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -35,5 +47,6 @@
     <Compile Include="StudioAddonLite.cs" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

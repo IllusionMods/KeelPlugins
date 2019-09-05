@@ -46,7 +46,6 @@ namespace KeelPlugins
         {
             defaultCameraSpeed = CameraMoveSpeed;
             lockOnHotkey = new KeyboardShortcutHotkey(LockOnPlugin.LockOnKey.Value, 0.4f);
-            lockOnGUIHotkey = new KeyboardShortcutHotkey(LockOnPlugin.LockOnGuiKey.Value);
             prevCharaHotkey = new KeyboardShortcutHotkey(LockOnPlugin.PrevCharaKey.Value);
             nextCharaHotkey = new KeyboardShortcutHotkey(LockOnPlugin.NextCharaKey.Value);
         }
@@ -66,7 +65,6 @@ namespace KeelPlugins
 
             lockOnHotkey.KeyHoldAction(LockOnRelease);
             lockOnHotkey.KeyUpAction(() => LockOn());
-            lockOnGUIHotkey.KeyDownAction(ToggleLockOnGUI);
             prevCharaHotkey.KeyDownAction(() => CharaSwitch(false));
             nextCharaHotkey.KeyDownAction(() => CharaSwitch(true));
 
@@ -190,11 +188,6 @@ namespace KeelPlugins
                     targetOffsetSizeAdded = targetOffsetSize;
                     lastTargetPos = LockOnTargetPos + targetOffsetSize;
                 }
-            }
-
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                HideLockOnTargets();
             }
         }
 
@@ -326,23 +319,6 @@ namespace KeelPlugins
             }
         }
 
-        protected virtual void ToggleLockOnGUI()
-        {
-            if(currentCharaInfo)
-            {
-                var targetManager = CameraTargetManager.GetTargetManager(currentCharaInfo);
-                targetManager.ToggleGUITargets();
-            }
-        }
-
-        protected void HideLockOnTargets()
-        {
-            foreach(var targetManager in FindObjectsOfType<CameraTargetManager>())
-            {
-                targetManager.ShowGUITargets(false);
-            }
-        }
-
         protected virtual void CharaSwitch(bool scrollDown = true)
         {
             LockOnPlugin.Logger.Log(LogLevel.Info, "Character switching not implemented in this version");
@@ -350,7 +326,6 @@ namespace KeelPlugins
 
         protected virtual void ResetModState()
         {
-            HideLockOnTargets();
             lockedOn = false;
             reduceOffset = true;
             lockOnTarget = null;

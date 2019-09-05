@@ -22,14 +22,11 @@ namespace KeelPlugins
         private const string PngExt = ".png";
         private Harmony harmony;
 
-        private void Start()
+        private void Awake()
         {
             Logger = base.Logger;
-
-            SaveFolder = Config.GetSetting("General", "SaveFolder", "");
-
-            harmony = new Harmony("keelhauled.posepng.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            SaveFolder = Config.GetSetting("", "Save folder path", "");
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
 #if DEBUG
@@ -64,8 +61,8 @@ namespace KeelPlugins
                 }
                 catch(Exception ex)
                 {
-                    Logger.Log(LogLevel.Message, "PosePng plugin save path has not been set properly");
-                    Logger.Log(LogLevel.Error, ex);
+                    Logger.LogMessage("Save path has not been set properly");
+                    Logger.LogError(ex);
                 }
 
                 return false;

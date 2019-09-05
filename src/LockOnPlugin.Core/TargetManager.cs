@@ -39,16 +39,6 @@ namespace KeelPlugins
             return point.name == MOVEMENTPOINT_NAME;
         }
 
-        public void ShowGUITargets(bool flag)
-        {
-            showLockOnTargets = flag;
-        }
-
-        public void ToggleGUITargets()
-        {
-            showLockOnTargets = !showLockOnTargets;
-        }
-
         public List<GameObject> GetTargets()
         {
             return quickTargets;

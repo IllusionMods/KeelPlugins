@@ -11,73 +11,54 @@ namespace KeelPlugins
         public const string GUID = "keelhauled.graphicssettings";
         public const string Version = "1.0.3";
 
-        const string CATEGORY_RENDER = "Rendering";
-        const string CATEGORY_SHADOW = "Shadows";
-        const string CATEGORY_MISC = "Misc";
+        private const string CATEGORY_RENDER = "Rendering";
+        private const string CATEGORY_SHADOW = "Shadows";
+        private const string CATEGORY_MISC = "Misc";
 
-        const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
-        const string DESCRIPTION_VSYNC = "VSync synchronizes the output video of the graphics card to the refresh rate of the monitor. " +
+        private const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
+        private const string DESCRIPTION_VSYNC = "VSync synchronizes the output video of the graphics card to the refresh rate of the monitor. " +
                                          "This prevents tearing and produces a smoother video output.\n" +
                                          "Half vsync synchronizes the output to half the refresh rate of your monitor.";
-        const string DESCRIPTION_LIMITFRAMERATE = "VSync has to be disabled for this to take effect.";
-        const string DESCRIPTION_ANTIALIASING = "Smooths out jagged edges on objects.";
-        const string DESCRIPTION_SHADOWPROJECTION = "Close Fit renders higher resolution shadows but they can sometimes wobble slightly if the camera moves." +
+        private const string DESCRIPTION_LIMITFRAMERATE = "VSync has to be disabled for this to take effect.";
+        private const string DESCRIPTION_ANTIALIASING = "Smooths out jagged edges on objects.";
+        private const string DESCRIPTION_SHADOWPROJECTION = "Close Fit renders higher resolution shadows but they can sometimes wobble slightly if the camera moves." +
                                                     "Stable Fit is lower resolution but no wobble.";
-        const string DESCRIPTION_SHADOWCASCADES = "Increasing the number of cascades lessens the effects of perspective aliasing on shadows.";
-        const string DESCRIPTION_SHADOWDISTANCE = "Increasing the distance lowers the shadow resolution slighly.";
-        const string DESCRIPTION_SHADOWNEARPLANEOFFSET = "A low shadow near plane offset value can create the appearance of holes in shadows.";
-        const string DESCRIPTION_CAMERANEARCLIPPLANE = "Determines how close the camera can be to objects without clipping into them. Lower equals closer.\n" +
+        private const string DESCRIPTION_SHADOWCASCADES = "Increasing the number of cascades lessens the effects of perspective aliasing on shadows.";
+        private const string DESCRIPTION_SHADOWDISTANCE = "Increasing the distance lowers the shadow resolution slighly.";
+        private const string DESCRIPTION_SHADOWNEARPLANEOFFSET = "A low shadow near plane offset value can create the appearance of holes in shadows.";
+        private const string DESCRIPTION_CAMERANEARCLIPPLANE = "Determines how close the camera can be to objects without clipping into them. Lower equals closer.\n" +
                                                        "Note: The saved value is not loaded at the start currently.";
-        const string DESCRIPTION_RUNINBACKGROUND = "Should the game be running when it is in the background (when the window is not focused)?\n" +
+        private const string DESCRIPTION_RUNINBACKGROUND = "Should the game be running when it is in the background (when the window is not focused)?\n" +
                                                    "On \"no\", the game will stop completely when it is in the background.\n" +
                                                    "On \"limited\", the game will stop if it has been unfocused and not loading anything for a couple seconds.";
-        const string DESCRIPTION_OPTIMIZEINBACKGROUND = "Optimize the game when it is the background and unfocused. " +
+        private const string DESCRIPTION_OPTIMIZEINBACKGROUND = "Optimize the game when it is the background and unfocused. " +
                                                         "Settings such as anti-aliasing will be turned off or reduced in this state.";
 
         [Browsable(true)]
-        [Category(CATEGORY_RENDER)]
-        [DisplayName("!Resolution")]
         [CustomSettingDraw(nameof(ResolutionDrawer))]
-        ConfigWrapper<string> ApplyResolution { get; set; }
-        
-        ConfigWrapper<VSyncType> VSyncCount { get; }
-        ConfigWrapper<bool> LimitFrameRate { get; }
-        ConfigWrapper<int> TargetFrameRate { get; }
-        ConfigWrapper<int> AntiAliasing { get; }
-        ConfigWrapper<AnisotropicFiltering> AnisotropicTextures { get; }
-        ConfigWrapper<ShadowQuality2> ShadowType { get; }
-        ConfigWrapper<ShadowResolution> ShadowRes { get; }
-        ConfigWrapper<ShadowProjection> ShadowProject { get; }
-        ConfigWrapper<int> ShadowCascades { get; }
-        ConfigWrapper<float> ShadowDistance { get; }
-        ConfigWrapper<float> ShadowNearPlaneOffset { get; }
-        ConfigWrapper<float> CameraNearClipPlane { get; }
-        ConfigWrapper<BackgroundRun> RunInBackground { get; }
-        ConfigWrapper<bool> OptimizeInBackground { get; }
+        private static ConfigWrapper<string> ApplyResolution { get; set; }
 
-        GraphicsSettings()
-        {
-            VSyncCount = Config.GetSetting(CATEGORY_RENDER, "VSyncLevel", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
-            LimitFrameRate = Config.GetSetting(CATEGORY_RENDER, "LimitFramerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
-            TargetFrameRate = Config.GetSetting(CATEGORY_RENDER, "TargetFrameRate", 60);
-            AntiAliasing = Config.GetSetting(CATEGORY_RENDER, "AntiAliasingMultiplier", 8, new ConfigDescription(DESCRIPTION_ANTIALIASING));
-            AnisotropicTextures = Config.GetSetting(CATEGORY_RENDER, "AnisotropicFiltering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
-            ShadowType = Config.GetSetting(CATEGORY_SHADOW, "ShadowType", ShadowQuality2.SoftHard);
-            ShadowRes = Config.GetSetting(CATEGORY_SHADOW, "ShadowRes", ShadowResolution.VeryHigh);
-            ShadowProject = Config.GetSetting(CATEGORY_SHADOW, "ShadowProjection", ShadowProjection.CloseFit);
-            ShadowCascades = Config.GetSetting(CATEGORY_SHADOW, "ShadowCascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
-            ShadowDistance = Config.GetSetting(CATEGORY_SHADOW, "ShadowDistance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
-            ShadowNearPlaneOffset = Config.GetSetting(CATEGORY_SHADOW, "ShadowNearPlaneOffset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
-            CameraNearClipPlane = Config.GetSetting(CATEGORY_MISC, "CameraNearClipPlane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
-            RunInBackground = Config.GetSetting(CATEGORY_MISC, "RunInBackground", BackgroundRun.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
-            OptimizeInBackground = Config.GetSetting(CATEGORY_MISC, "OptimizeInBackground", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
-        }
+        private static ConfigWrapper<VSyncType> VSyncCount { get; set; }
+        private static ConfigWrapper<bool> LimitFrameRate { get; set; }
+        private static ConfigWrapper<int> TargetFrameRate { get; set; }
+        private static ConfigWrapper<int> AntiAliasing { get; set; }
+        private static ConfigWrapper<AnisotropicFiltering> AnisotropicTextures { get; set; }
+        private static ConfigWrapper<ShadowQuality2> ShadowType { get; set; }
+        private static ConfigWrapper<ShadowResolution> ShadowRes { get; set; }
+        private static ConfigWrapper<ShadowProjection> ShadowProject { get; set; }
+        private static ConfigWrapper<int> ShadowCascades { get; set; }
+        private static ConfigWrapper<float> ShadowDistance { get; set; }
+        private static ConfigWrapper<float> ShadowNearPlaneOffset { get; set; }
+        private static ConfigWrapper<float> CameraNearClipPlane { get; set; }
+        private static ConfigWrapper<BackgroundRun> RunInBackground { get; set; }
+        private static ConfigWrapper<bool> OptimizeInBackground { get; set; }
 
-        bool fullscreen = Screen.fullScreen;
-        string resolutionX = Screen.width.ToString();
-        string resolutionY = Screen.height.ToString();
+        private bool fullscreen = Screen.fullScreen;
+        private string resolutionX = Screen.width.ToString();
+        private string resolutionY = Screen.height.ToString();
+        private int _focusFrameCounter;
 
-        void ResolutionDrawer()
+        private void ResolutionDrawer()
         {
             fullscreen = GUILayout.Toggle(fullscreen, " Fullscreen", GUILayout.Width(90));
             string resX = GUILayout.TextField(resolutionX, GUILayout.Width(60));
@@ -96,8 +77,23 @@ namespace KeelPlugins
             }
         }
 
-        void Awake()
+        private void Awake()
         {
+            VSyncCount = Config.GetSetting(CATEGORY_RENDER, "VSync level", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
+            LimitFrameRate = Config.GetSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
+            TargetFrameRate = Config.GetSetting(CATEGORY_RENDER, "Target framefate", 60);
+            AntiAliasing = Config.GetSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 8, new ConfigDescription(DESCRIPTION_ANTIALIASING));
+            AnisotropicTextures = Config.GetSetting(CATEGORY_RENDER, "Anisotropic filtering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
+            ShadowType = Config.GetSetting(CATEGORY_SHADOW, "Shadow type", ShadowQuality2.SoftHard);
+            ShadowRes = Config.GetSetting(CATEGORY_SHADOW, "Shadow resolution", ShadowResolution.VeryHigh);
+            ShadowProject = Config.GetSetting(CATEGORY_SHADOW, "Shadow projection", ShadowProjection.CloseFit);
+            ShadowCascades = Config.GetSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
+            ShadowDistance = Config.GetSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
+            ShadowNearPlaneOffset = Config.GetSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
+            CameraNearClipPlane = Config.GetSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
+            RunInBackground = Config.GetSetting(CATEGORY_MISC, "Run in background", BackgroundRun.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
+            OptimizeInBackground = Config.GetSetting(CATEGORY_MISC, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
+
             QualitySettings.vSyncCount = (int)VSyncCount.Value;
             VSyncCount.SettingChanged += (sender, args) => QualitySettings.vSyncCount = (int)VSyncCount.Value;
 
@@ -151,9 +147,7 @@ namespace KeelPlugins
             };
         }
 
-        int _focusFrameCounter;
-
-        void Update()
+        private void Update()
         {
             if(RunInBackground.Value != BackgroundRun.Limited) return;
 
@@ -168,7 +162,7 @@ namespace KeelPlugins
             }
         }
 
-        void OnApplicationFocus(bool hasFocus)
+        private void OnApplicationFocus(bool hasFocus)
         {
             if(OptimizeInBackground.Value)
             {
@@ -181,14 +175,14 @@ namespace KeelPlugins
             _focusFrameCounter = 0;
         }
 
-        enum VSyncType
+        private enum VSyncType
         {
             Disabled,
             Enabled,
             Half
         }
 
-        enum ShadowQuality2
+        private enum ShadowQuality2
         {
             Disabled = ShadowQuality.Disable,
             [Description("Hard only")]
@@ -197,7 +191,7 @@ namespace KeelPlugins
             SoftHard = ShadowQuality.All
         }
 
-        enum BackgroundRun
+        private enum BackgroundRun
         {
             No,
             Yes,

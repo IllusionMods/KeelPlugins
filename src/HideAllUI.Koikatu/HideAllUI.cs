@@ -25,11 +25,10 @@ namespace KeelPlugins
         private Harmony harmony;
         private static HideUI currentUIHandler;
 
-        private void Start()
+        private void Awake()
         {
             HideHotkey = Config.GetSetting("Keyboard Shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
-            harmony = new Harmony($"{GUID}.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
 #if DEBUG
