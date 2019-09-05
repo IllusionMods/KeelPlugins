@@ -23,7 +23,7 @@ namespace KeelPlugins
 
         private UnityDragAndDropHook hook;
 
-        private DragAndDrop()
+        private void Awake()
         {
             Logger = base.Logger;
         }

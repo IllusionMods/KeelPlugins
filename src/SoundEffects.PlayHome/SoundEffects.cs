@@ -18,7 +18,7 @@ namespace KeelPlugins
         private Harmony harmony;
         private static List<AudioClip> slaps = new List<AudioClip>();
 
-        private void Start()
+        private void Awake()
         {
             harmony = new Harmony($"{GUID}.harmony");
             harmony.PatchAll(typeof(Hooks));

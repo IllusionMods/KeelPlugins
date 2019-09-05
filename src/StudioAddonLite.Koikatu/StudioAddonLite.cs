@@ -1,7 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using BepInEx.Harmony;
+using HarmonyLib;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace KeelPlugins
 {
@@ -9,7 +10,7 @@ namespace KeelPlugins
     [BepInPlugin(GUID, "StudioAddonLite", Version)]
     public class StudioAddonLite : BaseUnityPlugin
     {
-        public const string GUID = "studioaddonlite";
+        public const string GUID = "keelhauled.studioaddonlite";
         public const string Version = "1.0.0";
 
         private const string SECTION_GENERAL = "General";
@@ -35,48 +36,39 @@ namespace KeelPlugins
         internal static ConfigWrapper<KeyboardShortcut> KEY_OBJ_SCALE_Y { get; set; }
         internal static ConfigWrapper<KeyboardShortcut> KEY_OBJ_SCALE_Z { get; set; }
 
-        private StudioAddonLite()
-        {
-            MOVE_RATIO = Config.GetSetting(SECTION_GENERAL, "MOVE_RATIO", 2.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 10f)));
-            ROTATE_RATIO = Config.GetSetting(SECTION_GENERAL, "ROTATE_RATIO", 90f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 360f)));
-            SCALE_RATIO = Config.GetSetting(SECTION_GENERAL, "SCALE_RATIO", 0.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 2f)));
-
-            KEY_OBJ_MOVE_XZ = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_MOVE_XZ", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_MOVE_Y = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_MOVE_Y", new KeyboardShortcut(KeyCode.H));
-
-            KEY_OBJ_ROT_X = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_X", new KeyboardShortcut(KeyCode.G, KeyCode.LeftShift));
-            KEY_OBJ_ROT_Y = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_Y", new KeyboardShortcut(KeyCode.H, KeyCode.LeftShift));
-            KEY_OBJ_ROT_Z = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_Z", new KeyboardShortcut(KeyCode.Y, KeyCode.LeftShift));
-            KEY_OBJ_ROT_X_2 = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_X_2", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_ROT_Y_2 = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_Y_2", new KeyboardShortcut(KeyCode.H));
-            KEY_OBJ_ROT_Z_2 = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_ROT_Z_2", new KeyboardShortcut(KeyCode.Y));
-
-            KEY_OBJ_SCALE_ALL = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_SCALE_ALL", new KeyboardShortcut(KeyCode.T));
-            KEY_OBJ_SCALE_X = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_SCALE_X", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_SCALE_Y = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_SCALE_Y", new KeyboardShortcut(KeyCode.H));
-            KEY_OBJ_SCALE_Z = Config.GetSetting(SECTION_HOTKEYS, "KEY_OBJ_SCALE_Z", new KeyboardShortcut(KeyCode.Y));
-        }
+        private static GameObject bepinex;
 
         private void Awake()
         {
-            SceneManager.sceneLoaded += SceneLoaded;
+            MOVE_RATIO = Config.GetSetting(SECTION_GENERAL, "Move ratio", 2.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 10f)));
+            ROTATE_RATIO = Config.GetSetting(SECTION_GENERAL, "Rotate ratio", 90f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 360f)));
+            SCALE_RATIO = Config.GetSetting(SECTION_GENERAL, "Scaling ratio", 0.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 2f)));
+
+            KEY_OBJ_MOVE_XZ = Config.GetSetting(SECTION_HOTKEYS, "Move XZ", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_MOVE_Y = Config.GetSetting(SECTION_HOTKEYS, "Move Y", new KeyboardShortcut(KeyCode.H));
+
+            KEY_OBJ_ROT_X = Config.GetSetting(SECTION_HOTKEYS, "Rotate X (Local)", new KeyboardShortcut(KeyCode.G, KeyCode.LeftShift));
+            KEY_OBJ_ROT_Y = Config.GetSetting(SECTION_HOTKEYS, "Rotate Y (Local)", new KeyboardShortcut(KeyCode.H, KeyCode.LeftShift));
+            KEY_OBJ_ROT_Z = Config.GetSetting(SECTION_HOTKEYS, "Rotate Z (Local)", new KeyboardShortcut(KeyCode.Y, KeyCode.LeftShift));
+            KEY_OBJ_ROT_X_2 = Config.GetSetting(SECTION_HOTKEYS, "Rotate X (World)", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_ROT_Y_2 = Config.GetSetting(SECTION_HOTKEYS, "Rotate Y (World)", new KeyboardShortcut(KeyCode.H));
+            KEY_OBJ_ROT_Z_2 = Config.GetSetting(SECTION_HOTKEYS, "Rotate Z (World)", new KeyboardShortcut(KeyCode.Y));
+
+            KEY_OBJ_SCALE_ALL = Config.GetSetting(SECTION_HOTKEYS, "Scale All", new KeyboardShortcut(KeyCode.T));
+            KEY_OBJ_SCALE_X = Config.GetSetting(SECTION_HOTKEYS, "Scale X", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_SCALE_Y = Config.GetSetting(SECTION_HOTKEYS, "Scale Y", new KeyboardShortcut(KeyCode.H));
+            KEY_OBJ_SCALE_Z = Config.GetSetting(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
+
+            bepinex = gameObject;
+            HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
-#if DEBUG
-        private void OnDestroy() // for ScriptEngine
+        private class Hooks
         {
-            SceneManager.sceneLoaded -= SceneLoaded;
-        }
-#endif
-
-        private bool done = false;
-
-        private void SceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if(!done && FindObjectOfType<StudioScene>())
+            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+            public static void StudioEntrypoint()
             {
-                done = true;
-                gameObject.AddComponent<ObjMoveRotAssistMgr>();
+                bepinex.GetOrAddComponent<ObjMoveRotAssistMgr>();
             }
         }
     }

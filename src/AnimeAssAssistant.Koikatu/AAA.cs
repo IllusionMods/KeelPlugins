@@ -41,26 +41,29 @@ namespace KeelPlugins
 
         internal static bool EnableAAA;
 
-        private void Start()
+        private void Awake()
         {
             Logger = base.Logger;
 
-            HotkeyNext = Config.GetSetting(SECTION_HOTKEY, "NextCharacter", new KeyboardShortcut(KeyCode.RightArrow));
-            HotkeyPrev = Config.GetSetting(SECTION_HOTKEY, "PreviousCharacter", new KeyboardShortcut(KeyCode.LeftArrow));
-            HotkeyKill = Config.GetSetting(SECTION_HOTKEY, "KillCharacter", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription("Moves the current character to the recycle bin"));
-            HotkeySave = Config.GetSetting(SECTION_HOTKEY, "SaveCharacter", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription("Moves the current character to the save folder"));
+            HotkeyNext = Config.GetSetting(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow));
+            HotkeyPrev = Config.GetSetting(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow));
+            HotkeyKill = Config.GetSetting(SECTION_HOTKEY, "Move character to recycle bin", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription("Moves the current character to the recycle bin"));
+            HotkeySave = Config.GetSetting(SECTION_HOTKEY, "Move character to save folder", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription("Moves the current character to the save folder"));
 
-            HotkeyOutfit1 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit1", new KeyboardShortcut(KeyCode.Alpha1));
-            HotkeyOutfit2 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit2", new KeyboardShortcut(KeyCode.Alpha2));
-            HotkeyOutfit3 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit3", new KeyboardShortcut(KeyCode.Alpha3));
-            HotkeyOutfit4 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit4", new KeyboardShortcut(KeyCode.Alpha4));
-            HotkeyOutfit5 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit5", new KeyboardShortcut(KeyCode.Alpha5));
-            HotkeyOutfit6 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit6", new KeyboardShortcut(KeyCode.Alpha6));
-            HotkeyOutfit7 = Config.GetSetting(SECTION_HOTKEY, "ChooseOutfit7", new KeyboardShortcut(KeyCode.Alpha7));
+            HotkeyOutfit1 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 1", new KeyboardShortcut(KeyCode.Alpha1));
+            HotkeyOutfit2 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 2", new KeyboardShortcut(KeyCode.Alpha2));
+            HotkeyOutfit3 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 3", new KeyboardShortcut(KeyCode.Alpha3));
+            HotkeyOutfit4 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 4", new KeyboardShortcut(KeyCode.Alpha4));
+            HotkeyOutfit5 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 5", new KeyboardShortcut(KeyCode.Alpha5));
+            HotkeyOutfit6 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 6", new KeyboardShortcut(KeyCode.Alpha6));
+            HotkeyOutfit7 = Config.GetSetting(SECTION_HOTKEY, "Select outfit 7", new KeyboardShortcut(KeyCode.Alpha7));
 
-            SearchFolder = Config.GetSetting(SECTION_FOLDER, "SearchFolder", "", new ConfigDescription("The folder where the plugin draws characters from"));
-            SaveFolder = Config.GetSetting(SECTION_FOLDER, "SaveFolder", "", new ConfigDescription("The folder where characters are saved to when pressing the save hotkey"));
+            SearchFolder = Config.GetSetting(SECTION_FOLDER, "Search folder path", "", new ConfigDescription("The folder where the plugin draws characters from"));
+            SaveFolder = Config.GetSetting(SECTION_FOLDER, "Save folder path", "", new ConfigDescription("The folder where characters are saved to when pressing the save hotkey"));
+        }
 
+        private void Start()
+        {
             MakerAPI.RegisterCustomSubCategories += (sender, e) =>
             {
                 EnableAAA = false;

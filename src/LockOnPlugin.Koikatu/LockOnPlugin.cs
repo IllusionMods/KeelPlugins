@@ -15,7 +15,7 @@ namespace KeelPlugins
         internal static new ManualLogSource Logger;
 
         private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
-        private const string SECTION_GENERAL = "";
+        private const string SECTION_GENERAL = "General";
 
         private const string DESCRIPTION_TRACKSPEED = "The speed at which the target is followed.";
         private const string DESCRIPTION_SCROLLMALES = "Choose whether to include males in the rotation when switching between characters using the hotkeys from the plugin.";
@@ -27,9 +27,7 @@ namespace KeelPlugins
         internal static ConfigWrapper<bool> ShowInfoMsg { get; set; }
         internal static ConfigWrapper<float> LockLeashLength { get; set; }
         internal static ConfigWrapper<bool> AutoSwitchLock { get; set; }
-        internal static ConfigWrapper<bool> ShowDebugTargets { get; set; }
         internal static ConfigWrapper<KeyboardShortcut> LockOnKey { get; set; }
-        internal static ConfigWrapper<KeyboardShortcut> LockOnGuiKey { get; set; }
         internal static ConfigWrapper<KeyboardShortcut> PrevCharaKey { get; set; }
         internal static ConfigWrapper<KeyboardShortcut> NextCharaKey { get; set; }
 
@@ -43,20 +41,17 @@ namespace KeelPlugins
 
             TargetData.LoadData();
 
-            TrackingSpeedNormal = Config.GetSetting(SECTION_GENERAL, "TrackingSpeed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
-            ScrollThroughMalesToo = Config.GetSetting(SECTION_GENERAL, "ScrollThroughMalesToo", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
-            ShowInfoMsg = Config.GetSetting(SECTION_GENERAL, "ShowInfoMsg", false);
-            LockLeashLength = Config.GetSetting(SECTION_GENERAL, "LeashLength", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f)));
-            AutoSwitchLock = Config.GetSetting(SECTION_GENERAL, "AutoSwitchLock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK));
-            ShowDebugTargets = Config.GetSetting(SECTION_GENERAL, "ShowDebugTargets", false, new ConfigDescription("", null, "Advanced"));
+            TrackingSpeedNormal = Config.GetSetting(SECTION_GENERAL, "Tracking peed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
+            ScrollThroughMalesToo = Config.GetSetting(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
+            ShowInfoMsg = Config.GetSetting(SECTION_GENERAL, "Show info messages", false);
+            LockLeashLength = Config.GetSetting(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f)));
+            AutoSwitchLock = Config.GetSetting(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK));
 
-            LockOnKey = Config.GetSetting(SECTION_HOTKEYS, "LockOn", new KeyboardShortcut(KeyCode.Mouse4));
-            LockOnGuiKey = Config.GetSetting(SECTION_HOTKEYS, "ShowTargetGUI", new KeyboardShortcut(KeyCode.None));
-            PrevCharaKey = Config.GetSetting(SECTION_HOTKEYS, "SelectPrevChara", new KeyboardShortcut(KeyCode.None));
-            NextCharaKey = Config.GetSetting(SECTION_HOTKEYS, "SelectNextChara", new KeyboardShortcut(KeyCode.None));
+            LockOnKey = Config.GetSetting(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4));
+            PrevCharaKey = Config.GetSetting(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None));
+            NextCharaKey = Config.GetSetting(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None));
 
-            harmony = new Harmony($"{GUID}.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
 #if DEBUG

@@ -21,39 +21,36 @@ namespace KeelPlugins
 
         internal static ConfigWrapper<KeyboardShortcut> SendChara { get; set; }
 
-        private MakerBridge()
-        {
-            Logger = base.Logger;
-            SendChara = Config.GetSetting("", "SendCharacter", new KeyboardShortcut(KeyCode.B));
-        }
-
         private void Awake()
         {
+            Logger = base.Logger;
+            bepinex = gameObject;
+
+            SendChara = Config.GetSetting("", "Send character", new KeyboardShortcut(KeyCode.B));
+
             var tempPath = Path.GetTempPath();
             MakerCardPath = Path.Combine(tempPath, "makerbridge1.png");
             OtherCardPath = Path.Combine(tempPath, "makerbridge2.png");
 
-            bepinex = gameObject;
-            var harmony = new Harmony("keelhauled.makerbridge.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
         private class Hooks
         {
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
-            public static void CustomSceneInit()
+            public static void MakerEntrypoint()
             {
                 bepinex.GetOrAddComponent<MakerHandler>();
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
-            public static void CustomSceneStop()
+            public static void MakerEnd()
             {
                 Destroy(bepinex.GetComponent<MakerHandler>());
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
-            public static void StudioSceneInit()
+            public static void StudioEntrypoint()
             {
                 bepinex.GetOrAddComponent<StudioHandler>();
             }

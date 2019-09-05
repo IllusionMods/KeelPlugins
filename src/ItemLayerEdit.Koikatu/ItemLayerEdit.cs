@@ -29,8 +29,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = new Harmony($"{GUID}.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
         }
 
