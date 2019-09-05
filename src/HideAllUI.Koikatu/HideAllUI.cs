@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
 
-namespace HideAllUI
+namespace KeelPlugins
 {
     [BepInIncompatibility("HideStudioUI")]
     [BepInIncompatibility("HideHInterface")]

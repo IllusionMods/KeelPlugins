@@ -36,9 +36,12 @@ namespace KeelPlugins
         private static Harmony harmony;
         private static GameObject bepinex;
 
-        private LockOnPlugin()
+        private void Awake()
         {
+            bepinex = gameObject;
             Logger = base.Logger;
+
+            TargetData.LoadData();
 
             TrackingSpeedNormal = Config.GetSetting(SECTION_GENERAL, "TrackingSpeed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
             ScrollThroughMalesToo = Config.GetSetting(SECTION_GENERAL, "ScrollThroughMalesToo", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
@@ -51,13 +54,7 @@ namespace KeelPlugins
             LockOnGuiKey = Config.GetSetting(SECTION_HOTKEYS, "ShowTargetGUI", new KeyboardShortcut(KeyCode.None));
             PrevCharaKey = Config.GetSetting(SECTION_HOTKEYS, "SelectPrevChara", new KeyboardShortcut(KeyCode.None));
             NextCharaKey = Config.GetSetting(SECTION_HOTKEYS, "SelectNextChara", new KeyboardShortcut(KeyCode.None));
-        }
 
-        private void Awake()
-        {
-            TargetData.LoadData();
-
-            bepinex = gameObject;
             harmony = new Harmony($"{GUID}.harmony");
             HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
         }
@@ -72,25 +69,25 @@ namespace KeelPlugins
         private class Hooks
         {
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
-            public static void CustomSceneInit()
+            public static void MakerEntrypoint()
             {
                 bepinex.GetOrAddComponent<MakerMono>();
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
-            public static void CustomSceneStop()
+            public static void MakerEnd()
             {
                 Destroy(bepinex.GetComponent<MakerMono>());
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
-            public static void StudioSceneInit()
+            public static void StudioEntrypoint()
             {
                 bepinex.GetOrAddComponent<StudioMono>();
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "SetShortcutKey")]
-            public static void HSceneStart()
+            public static void HSceneEntrypoint()
             {
                 bepinex.GetOrAddComponent<HSceneMono>();
             }

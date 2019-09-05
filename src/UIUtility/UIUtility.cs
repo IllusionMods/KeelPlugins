@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -43,12 +44,12 @@ namespace UILib
 
         private static bool _initCalled = false;
 
-        public static void Init(string resourceNamespace)
+        public static void Init()
         {
             if(_initCalled)
                 return;
             _initCalled = true;
-            Resource.Namespace = resourceNamespace;
+            Resource.Namespace = Assembly.GetExecutingAssembly().GetName().Name;
             AssetBundle bundle = AssetBundle.LoadFromMemory(Resource.DefaultResourceKOI);
             foreach(Sprite sprite in bundle.LoadAllAssets<Sprite>())
             {

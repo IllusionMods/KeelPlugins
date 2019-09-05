@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 649 // disable never assigned warning
 
+using BepInEx;
 using BepInEx.Logging;
 using ParadoxNotion.Serialization;
 using System;
@@ -16,8 +17,7 @@ namespace KeelPlugins
 
         public static void LoadData()
         {
-            var ass = Assembly.GetExecutingAssembly();
-            string dataPath = Path.Combine(Path.GetDirectoryName(ass.Location), dataFileName);
+            var dataPath = Path.Combine(Paths.ConfigPath, dataFileName);
 
             if(File.Exists(dataPath))
             {
@@ -42,8 +42,10 @@ namespace KeelPlugins
 
         private static void LoadResourceData()
         {
-            string resourceName = $"{nameof(KeelPlugins)}.{dataFileName}";
-            using(var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            var ass = Assembly.GetExecutingAssembly();
+            var resourceName = $"{ass.GetName().Name}.{dataFileName}";
+
+            using(var stream = ass.GetManifestResourceStream(resourceName))
             {
                 using(var reader = new StreamReader(stream))
                 {

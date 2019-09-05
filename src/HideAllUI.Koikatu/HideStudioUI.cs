@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace HideAllUI
+namespace KeelPlugins
 {
     internal class HideStudioUI : HideUI
     {

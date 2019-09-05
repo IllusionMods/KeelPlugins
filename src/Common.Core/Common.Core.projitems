@@ -9,6 +9,7 @@
     <Import_RootNamespace>Common.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)FileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HarmonyExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KeyboardShortcutHotkey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnityExtensions.cs" />

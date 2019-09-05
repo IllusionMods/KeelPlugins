@@ -2,13 +2,14 @@
 using HarmonyLib;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace KeelPlugins
 {
     [BepInPlugin(GUID, PluginName, Version)]
-    internal class SoundLoader : BaseUnityPlugin
+    internal class SoundEffects : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.soundloader";
         public const string PluginName = "SoundLoader";
@@ -22,7 +23,8 @@ namespace KeelPlugins
             harmony = new Harmony($"{GUID}.harmony");
             harmony.PatchAll(typeof(Hooks));
 
-            var soundDir = Path.Combine(Paths.PluginPath, PluginName);
+            var ass = Assembly.GetExecutingAssembly();
+            var soundDir = Path.Combine(Path.GetDirectoryName(ass.Location), PluginName);
             foreach(var filePath in Directory.GetFiles(soundDir))
             {
                 var clip = ExternalAudioClip.Load(filePath);
