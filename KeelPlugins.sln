@@ -113,6 +113,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockOnPlugin.HoneySelect", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0FD-465F-93F2-D73BD193AC86}"
 	ProjectSection(SolutionItems) = preProject
+		src\BuildSettings.AISyoujyo.props = src\BuildSettings.AISyoujyo.props
 		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
@@ -137,7 +138,6 @@ Global
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
 		src\Common.PlayHome\Common.PlayHome.projitems*{624f7c3f-0557-4fa6-a915-c99c5a40a851}*SharedItemsImports = 13
-		src\Common.HoneySelect\Common.HoneySelect.projitems*{6ad7923d-2810-4098-bb0c-ba91c2f030e8}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{7b61e051-ba51-4285-b320-a88e2573f50d}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
@@ -159,7 +159,6 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
-		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{d27ad499-3292-48cb-ac8b-45fdd49f9e21}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
 		src\Common.Koikatu\Common.Koikatu.projitems*{de5f203a-f19c-4a8d-954e-bf1bca15cced}*SharedItemsImports = 4
