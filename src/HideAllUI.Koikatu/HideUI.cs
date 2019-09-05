@@ -1,4 +1,4 @@
-﻿namespace HideAllUI
+﻿namespace KeelPlugins
 {
     internal abstract class HideUI
     {

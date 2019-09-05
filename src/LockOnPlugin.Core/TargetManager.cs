@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using IllusionUtility.GetUtility;
+﻿using IllusionUtility.GetUtility;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,7 +58,7 @@ namespace KeelPlugins
         {
             UpdateCustomTargetTransforms();
         }
-        
+
         private void UpdateCustomTargetTransforms()
         {
             for(int i = 0; i < customTargets.Count; i++) customTargets[i].UpdateTransform();
@@ -160,12 +159,12 @@ namespace KeelPlugins
                     }
                     else
                     {
-                        LockOnPlugin.Logger.Log(LogLevel.Info, $"CustomTarget '{data.target}' failed");
+                        LockOnPlugin.Logger.LogInfo($"CustomTarget '{data.target}' failed");
                     }
                 }
                 else
                 {
-                    LockOnPlugin.Logger.Log(LogLevel.Info, $"CustomTarget '{data.target}' skipped because it is not in use");
+                    LockOnPlugin.Logger.LogDebug($"CustomTarget '{data.target}' skipped because it is not in use");
                 }
             }
 

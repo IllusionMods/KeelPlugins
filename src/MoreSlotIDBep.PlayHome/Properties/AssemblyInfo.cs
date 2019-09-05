@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PosePng.Koikatu")]
+[assembly: AssemblyTitle("MoreSlotIDBep.PlayHome")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PosePng.Koikatu")]
+[assembly: AssemblyProduct("MoreSlotIDBep.PlayHome")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("987845c6-3389-4d18-9e1d-43cb0414573e")]
+[assembly: Guid("be9297c1-8920-433d-8dcc-1d7c4f7b155d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion(KeelPlugins.PosePng.Version)]
+[assembly: AssemblyFileVersion(KeelPlugins.MoreSlotID.Version)]
