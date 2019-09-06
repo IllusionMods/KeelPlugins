@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace KeelPlugins
 {
-    internal abstract class CardHandlerCommon<T> where T : CardHandlerCommon<T>
+    internal abstract class CardHandlerCore<T> where T : CardHandlerCore<T>
     {
         private static Dictionary<Type, T> cardHandlers = new Dictionary<Type, T>();
 

@@ -113,11 +113,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
+		src\BuildSettings.Tools.props = src\BuildSettings.Tools.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreSlotIDBep.PlayHome", "src\MoreSlotIDBep.PlayHome\MoreSlotIDBep.PlayHome.csproj", "{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainThreadDispatcher", "src\MainThreadDispatcher\MainThreadDispatcher.csproj", "{6672B0E9-B623-47B0-A70B-508610846944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragAndDrop.AISyoujyo", "src\DragAndDrop.AISyoujyo\DragAndDrop.AISyoujyo.csproj", "{DAC82A17-7FE0-478E-932D-4EF293A31A32}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -162,6 +167,7 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
+		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{dac82a17-7fe0-478e-932d-4ef293a31a32}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
 		src\Common.Koikatu\Common.Koikatu.projitems*{de5f203a-f19c-4a8d-954e-bf1bca15cced}*SharedItemsImports = 4
 		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{de5f203a-f19c-4a8d-954e-bf1bca15cced}*SharedItemsImports = 4
@@ -261,6 +267,14 @@ Global
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6672B0E9-B623-47B0-A70B-508610846944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6672B0E9-B623-47B0-A70B-508610846944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6672B0E9-B623-47B0-A70B-508610846944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6672B0E9-B623-47B0-A70B-508610846944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC82A17-7FE0-478E-932D-4EF293A31A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC82A17-7FE0-478E-932D-4EF293A31A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC82A17-7FE0-478E-932D-4EF293A31A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC82A17-7FE0-478E-932D-4EF293A31A32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -311,6 +325,8 @@ Global
 		{D27AD499-3292-48CB-AC8B-45FDD49F9E21} = {FAF05F03-1080-46D3-AB9B-C67556251D3A}
 		{394BC9B7-DB38-4172-9B2C-60918E87B763} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{6672B0E9-B623-47B0-A70B-508610846944} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{DAC82A17-7FE0-478E-932D-4EF293A31A32} = {6867199F-B91A-43D8-B331-36BBA44AD5C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
