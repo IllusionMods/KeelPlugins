@@ -36,6 +36,7 @@ namespace KeelPlugins
         internal static ConfigWrapper<KeyboardShortcut> KEY_OBJ_SCALE_Y { get; set; }
         internal static ConfigWrapper<KeyboardShortcut> KEY_OBJ_SCALE_Z { get; set; }
 
+        private Harmony harmony;
         private static GameObject bepinex;
 
         private void Awake()
@@ -60,8 +61,15 @@ namespace KeelPlugins
             KEY_OBJ_SCALE_Z = Config.GetSetting(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
 
             bepinex = gameObject;
-            HarmonyWrapper.PatchAll(typeof(Hooks));
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
+
+#if DEBUG
+        private void OnDestroy()
+        {
+            harmony.UnpatchAll();
+        }
+#endif
 
         private class Hooks
         {

@@ -1,6 +1,6 @@
 ﻿namespace KeelPlugins
 {
-    public abstract class CardHandlerMethods : CardHandlerCommon<CardHandlerMethods>
+    internal abstract class CardHandlerMethods : CardHandlerCommon<CardHandlerMethods>
     {
         public virtual void Scene_Load(string path, POINT pos) { }
         public virtual void Scene_Import(string path, POINT pos) { }

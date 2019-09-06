@@ -1,15 +1,13 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace KeelPlugins
 {
-    public abstract class CardHandlerCommon<T> where T : CardHandlerCommon<T>
+    internal abstract class CardHandlerCommon<T> where T : CardHandlerCommon<T>
     {
-        static Dictionary<Type, T> cardHandlers = new Dictionary<Type, T>();
-        
+        private static Dictionary<Type, T> cardHandlers = new Dictionary<Type, T>();
+
         /// <summary>
         /// This has to be completely unique, the first Condition property to return true will be picked
         /// </summary>
@@ -37,7 +35,7 @@ namespace KeelPlugins
                 if(handler.Condition)
                     return handler;
             }
-            
+
             return null;
         }
     }

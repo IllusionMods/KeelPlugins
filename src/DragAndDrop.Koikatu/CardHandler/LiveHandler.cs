@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace KeelPlugins
 {
-    public class LiveHandler : CardHandlerMethods
+    internal class LiveHandler : CardHandlerMethods
     {
         public override bool Condition => Scene.Instance && Scene.Instance.NowSceneNames.Any(x => x == "LiveStage");
 
