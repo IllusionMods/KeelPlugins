@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)B83.Win32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BoyerMoore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CardHandlerCommon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CardHandlerCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CardHandlerMethods.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DragAndDropCore.cs" />
   </ItemGroup>
 </Project>

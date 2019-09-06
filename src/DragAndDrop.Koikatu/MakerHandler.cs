@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using ChaCustom;
+﻿using ChaCustom;
 using Manager;
 using MessagePack;
 using System;

@@ -4,27 +4,23 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DE5F203A-F19C-4A8D-954E-BF1BCA15CCED}</ProjectGuid>
+    <ProjectGuid>{DAC82A17-7FE0-478E-932D-4EF293A31A32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DragAndDrop.Koikatu</RootNamespace>
-    <AssemblyName>DragAndDrop.Koikatu</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>DragAndDrop.AISyoujyo</RootNamespace>
+    <AssemblyName>DragAndDrop.AISyoujyo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <Import Project="..\BuildSettings.Koikatu.props" />
+  <Import Project="..\BuildSettings.AISyoujyo.props" />
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\lib\bepinex5\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\lib\kk\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\lib\kk\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\..\lib\ai\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
@@ -33,23 +29,23 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\lib\kk\UnityEngine.dll</HintPath>
+      <HintPath>..\..\lib\ai\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\lib\ai\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\lib\kk\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\lib\ai\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FreeHSelectHandler.cs" />
-    <Compile Include="LiveHandler.cs" />
-    <Compile Include="MakerHandler.cs" />
-    <Compile Include="StudioHandler.cs" />
     <Compile Include="DragAndDrop.cs" />
+    <Compile Include="MakerHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\DragAndDrop.Core\DragAndDrop.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

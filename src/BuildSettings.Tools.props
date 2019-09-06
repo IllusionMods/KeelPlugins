@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>$(SolutionDir)bin\KeelPluginsKK</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Tools</OutputPath>
     <Optimize>false</Optimize>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
@@ -11,7 +11,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
-    <OutputPath>$(SolutionDir)bin\KeelPluginsKK</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Tools</OutputPath>
     <Optimize>true</Optimize>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
