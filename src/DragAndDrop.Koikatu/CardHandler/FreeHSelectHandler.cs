@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    public class FreeHSelectHandler : CardHandlerMethods
+    internal class FreeHSelectHandler : CardHandlerMethods
     {
         private const string NormalMaleCanvas = "FreeHScene/Canvas/Panel/Normal/MaleCard";
         private const string NormalFemaleCanvas = "FreeHScene/Canvas/Panel/Normal/FemaleCard";

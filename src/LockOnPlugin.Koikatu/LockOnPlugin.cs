@@ -10,7 +10,7 @@ namespace KeelPlugins
     [BepInPlugin(GUID, "LockOnPlugin", Version)]
     public class LockOnPlugin : BaseUnityPlugin
     {
-        public const string GUID = "keelhauled.lockonpluginkk";
+        public const string GUID = "keelhauled.lockonplugin";
         public const string Version = "1.0.0";
         internal static new ManualLogSource Logger;
 
@@ -21,6 +21,7 @@ namespace KeelPlugins
         private const string DESCRIPTION_SCROLLMALES = "Choose whether to include males in the rotation when switching between characters using the hotkeys from the plugin.";
         private const string DESCRIPTION_LEASHLENGTH = "The amount of slack allowed when tracking.";
         private const string DESCRIPTION_AUTOLOCK = "Lock on automatically after switching characters.";
+        private const string DESCRIPTION_SHOWINFOMSG = "Show various messages about the plugin on screen.";
 
         internal static ConfigWrapper<float> TrackingSpeedNormal { get; set; }
         internal static ConfigWrapper<bool> ScrollThroughMalesToo { get; set; }
@@ -43,7 +44,7 @@ namespace KeelPlugins
 
             TrackingSpeedNormal = Config.GetSetting(SECTION_GENERAL, "Tracking peed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
             ScrollThroughMalesToo = Config.GetSetting(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
-            ShowInfoMsg = Config.GetSetting(SECTION_GENERAL, "Show info messages", false);
+            ShowInfoMsg = Config.GetSetting(SECTION_GENERAL, "Show info messages", false, new ConfigDescription(DESCRIPTION_SHOWINFOMSG));
             LockLeashLength = Config.GetSetting(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f)));
             AutoSwitchLock = Config.GetSetting(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK));
 

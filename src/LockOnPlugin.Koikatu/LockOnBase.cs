@@ -26,7 +26,6 @@ namespace KeelPlugins
         protected virtual bool InputFieldSelected => EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<InputField>() != null;
 
         protected KeyboardShortcutHotkey lockOnHotkey;
-        protected KeyboardShortcutHotkey lockOnGUIHotkey;
         protected KeyboardShortcutHotkey prevCharaHotkey;
         protected KeyboardShortcutHotkey nextCharaHotkey;
 
@@ -59,7 +58,7 @@ namespace KeelPlugins
         {
             if(!lockOnTarget && lockedOn)
             {
-                LockOnPlugin.Logger.Log(LogLevel.Info, "Reset LockOnPlugin");
+                LockOnPlugin.Logger.LogDebug("Reset LockOnPlugin");
                 ResetModState();
             }
 

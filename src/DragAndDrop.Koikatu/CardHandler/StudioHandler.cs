@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    public class StudioHandler : CardHandlerMethods
+    internal class StudioHandler : CardHandlerMethods
     {
         public override bool Condition => Scene.Instance && Scene.Instance.NowSceneNames.Any(x => x == "Studio");
 
