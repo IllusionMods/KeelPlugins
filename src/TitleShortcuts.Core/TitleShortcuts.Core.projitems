@@ -9,6 +9,6 @@
     <Import_RootNamespace>TitleShortcuts.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)TitleShortcutsConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TitleShortcutsCore.cs" />
   </ItemGroup>
 </Project>
