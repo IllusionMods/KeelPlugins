@@ -9,5 +9,7 @@
     <Import_RootNamespace>HideAllUI.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)HideAllUICore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HideUIAction.cs" />
   </ItemGroup>
 </Project>

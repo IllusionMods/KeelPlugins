@@ -1,6 +1,6 @@
 ﻿namespace KeelPlugins
 {
-    internal abstract class HideUI
+    internal abstract class HideUIAction
     {
         public abstract void ToggleUI();
     }
