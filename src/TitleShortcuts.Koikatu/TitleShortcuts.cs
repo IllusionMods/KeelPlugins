@@ -13,14 +13,10 @@ namespace KeelPlugins
     [BepInProcess(KoikatuConstants.MainGameProcessNameSteam)]
     [BepInProcess(KoikatuConstants.VRProcessName)]
     [BepInProcess(KoikatuConstants.VRProcessNameSteam)]
-    [BepInPlugin(GUID, "TitleShortcuts", Version)]
-    public class TitleShortcuts : BaseUnityPlugin
+    [BepInPlugin(GUID, PluginName, Version)]
+    public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string GUID = "keelhauled.titleshortcuts";
         public const string Version = "1.1.1";
-
-        private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
-        private const string SECTION_GENERAL = "General";
 
         private ConfigWrapper<AutoStartOption> AutoStart { get; set; }
         private ConfigWrapper<KeyboardShortcut> StartFemaleMaker { get; set; }
@@ -30,34 +26,19 @@ namespace KeelPlugins
         private ConfigWrapper<KeyboardShortcut> StartFreeH { get; set; }
         private ConfigWrapper<KeyboardShortcut> StartLiveShow { get; set; }
 
-        private bool check = false;
+        private bool checkInput = false;
         private bool cancelAuto = false;
         private TitleScene titleScene;
 
-        private enum AutoStartOption
-        {
-            Disabled,
-            [Description("Female maker")]
-            FemaleMaker,
-            [Description("Male maker")]
-            MaleMaker,
-            [Description("Free H")]
-            FreeH,
-            [Description("Live stage")]
-            LiveStage
-        }
-
         private void Awake()
         {
-            AutoStart = Config.GetSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(TitleShortcutsConstants.DESCRIPTION_AUTOSTART));
+            AutoStart = Config.GetSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
             StartUploader = Config.GetSetting(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
             StartDownloader = Config.GetSetting(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
             StartFreeH = Config.GetSetting(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.GetSetting(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
-
-            SceneManager.sceneLoaded += StartInput;
         }
 
         private void StartInput(Scene scene, LoadSceneMode mode)
@@ -66,22 +47,23 @@ namespace KeelPlugins
 
             if(title)
             {
-                if(!check)
+                if(!checkInput)
                 {
                     titleScene = title;
-                    check = true;
+                    checkInput = true;
                     StartCoroutine(InputCheck());
                 }
             }
             else
             {
-                check = false;
+                checkInput = false;
             }
         }
 
+
         private IEnumerator InputCheck()
         {
-            while(check)
+            while(checkInput)
             {
                 if(!cancelAuto && AutoStart.Value != AutoStartOption.Disabled && (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.F1)))
                 {
@@ -152,9 +134,22 @@ namespace KeelPlugins
             if(!FindObjectOfType<ConfigScene>())
             {
                 Logger.LogMessage(msg);
-                check = false;
+                checkInput = false;
                 action();
             }
+        }
+
+        private enum AutoStartOption
+        {
+            Disabled,
+            [Description("Female maker")]
+            FemaleMaker,
+            [Description("Male maker")]
+            MaleMaker,
+            [Description("Free H")]
+            FreeH,
+            [Description("Live stage")]
+            LiveStage
         }
     }
 }
