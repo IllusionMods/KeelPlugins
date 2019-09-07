@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    internal class HideHSceneUI : HideUIAction
+    internal class HideMakerUI : HideUIAction
     {
         private IEnumerable<Canvas> canvasList;
         private bool visible = true;
 
-        public HideHSceneUI()
+        public HideMakerUI()
         {
-            canvasList = GameObject.FindObjectsOfType<Canvas>().Where(x => x.name == "Canvas");
+            var go = GameObject.Find("CustomControl");
+            canvasList = go.GetComponentsInChildren<Canvas>().Where(x => x.gameObject.name.Contains("Canvas"));
         }
 
         public override void ToggleUI()

@@ -1,6 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.Harmony;
 using ChaCustom;
 using HarmonyLib;
 using System;
@@ -14,40 +12,11 @@ namespace KeelPlugins
     [BepInIncompatibility("HideStudioUI")]
     [BepInIncompatibility("HideHInterface")]
     [BepInPlugin(GUID, "HideAllUI", Version)]
-    public class HideAllUI : BaseUnityPlugin
+    public class HideAllUI : HideAllUICore
     {
-        public const string GUID = "keelhauled.hideallui";
         public const string Version = "1.0.0";
 
-        // must be static for the transpiler
-        private static ConfigWrapper<KeyboardShortcut> HideHotkey { get; set; }
-
-        private Harmony harmony;
-        private static HideUI currentUIHandler;
-
-        private void Awake()
-        {
-            HideHotkey = Config.GetSetting("Keyboard Shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
-        }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll(typeof(Hooks));
-        }
-#endif
-
-        private void Update()
-        {
-            if(currentUIHandler != null && HideHotkey.Value.IsDown())
-                currentUIHandler.ToggleUI();
-        }
-
-        private static bool HotkeyIsDown()
-        {
-            return HideHotkey.Value.IsDown();
-        }
+        private static bool HotkeyIsDown() => HideHotkey.Value.IsDown();
 
         private class Hooks
         {

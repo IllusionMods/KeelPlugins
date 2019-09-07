@@ -4,23 +4,23 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B61E051-BA51-4285-B320-A88E2573F50D}</ProjectGuid>
+    <ProjectGuid>{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HideAllUI.Koikatu</RootNamespace>
-    <AssemblyName>HideAllUI.Koikatu</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>HideAllUI.AISyoujyo</RootNamespace>
+    <AssemblyName>HideAllUI.AISyoujyo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <Import Project="..\BuildSettings.Koikatu.props" />
+  <Import Project="..\BuildSettings.AISyoujyo.props" />
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\lib\bepinex5\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\lib\kk\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\lib\ai\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
@@ -33,21 +33,27 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\lib\kk\UnityEngine.dll</HintPath>
+      <HintPath>..\..\lib\ai\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\lib\ai\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\lib\kk\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\lib\ai\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\lib\ai\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HideAllUI.cs" />
-    <Compile Include="HideHSceneUI.cs" />
-    <Compile Include="HideStudioUI.cs" />
+    <Compile Include="HideMakerUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\HideAllUI.Core\HideAllUI.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
