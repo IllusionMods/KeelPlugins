@@ -13,23 +13,34 @@ namespace KeelPlugins
         public const string PluginName = "MakerBridge";
         internal static new ManualLogSource Logger;
 
+        private const string DESCRIPTION_SENDCHARA = "Sends the selected character to the other open koikatu application.";
+        private const string DESCRIPTION_SHOWMSG = "Show on screen messages about things the plugin is doing.";
+
         internal static string MakerCardPath;
         internal static string OtherCardPath;
         protected static GameObject bepinex;
 
         internal static ConfigWrapper<KeyboardShortcut> SendChara { get; set; }
+        internal static ConfigWrapper<bool> ShowMessages { get; set; }
 
         private void Awake()
         {
             Logger = base.Logger;
             bepinex = gameObject;
 
-            SendChara = Config.GetSetting("Keyboard Shortcuts", "Send character", new KeyboardShortcut(KeyCode.B));
-            
-            MakerCardPath = Path.Combine(Paths.ConfigPath, "makerbridge1.png");
-            OtherCardPath = Path.Combine(Paths.ConfigPath, "makerbridge2.png");
+            SendChara = Config.GetSetting("Keyboard Shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
+            ShowMessages = Config.GetSetting("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
+
+            var tempFolder = Path.GetTempPath();
+            MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");
+            OtherCardPath = Path.Combine(tempFolder, "makerbridge2.png");
 
             HarmonyWrapper.PatchAll();
+        }
+
+        internal static void Log(object data)
+        {
+            Logger.Log(ShowMessages.Value ? LogLevel.Message : LogLevel.Info, data);
         }
     }
 }

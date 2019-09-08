@@ -1,71 +1,25 @@
 ﻿using ChaCustom;
-using HarmonyLib;
 using System;
-using System.IO;
-using System.Threading;
-using UniRx;
+using System.Linq;
 using UnityEngine;
 
 namespace KeelPlugins
 {
-    internal class MakerHandler : MonoBehaviour
+    internal class MakerHandler : HandlerCore
     {
         private void Start()
         {
-            var watcher = new FileSystemWatcher
-            {
-                Path = Path.GetDirectoryName(MakerBridge.OtherCardPath),
-                Filter = Path.GetFileName(MakerBridge.OtherCardPath)
-            };
-
-            watcher.Created += FileChanged;
-            watcher.Changed += FileChanged;
+            watcher = CharaCardWatcher.Watch(MakerBridgeCore.OtherCardPath, LoadChara);
             watcher.EnableRaisingEvents = true;
-        }
-
-        private void FileChanged(object sender, FileSystemEventArgs e)
-        {
-            bool fileIsBusy = true;
-            while(fileIsBusy)
-            {
-                try
-                {
-                    using(var file = File.Open(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
-                    fileIsBusy = false;
-                }
-                catch(IOException)
-                {
-                    MakerBridge.Logger.LogDebug("File is still being written to, retrying.");
-                    Thread.Sleep(100);
-                }
-            }
-
-            MainThreadDispatcher.Post(LoadChara, null);
         }
 
         private void Update()
         {
-            if(MakerBridge.SendChara.Value.IsDown())
-                SaveCharacter();
+            if(MakerBridgeCore.SendChara.Value.IsDown())
+                SaveCharacter(MakerBridgeCore.MakerCardPath);
         }
 
-        private void LoadChara(object x)
-        {
-            var customCharaFile = FindObjectOfType<CustomCharaFile>();
-            var traverse = Traverse.Create(customCharaFile);
-            var fileWindow = traverse.Field("fileWindow").GetValue<CustomFileWindow>();
-            var listCtrl = traverse.Field("listCtrl").GetValue<CustomFileListCtrl>();
-
-            var index = listCtrl.GetInclusiveCount() + 1;
-            listCtrl.AddList(index, "", "", "", MakerBridge.OtherCardPath, "", new DateTime());
-            listCtrl.Create(customCharaFile.OnChangeSelect);
-            listCtrl.SelectItem(index);
-            fileWindow.btnChaLoadLoad.onClick.Invoke();
-            listCtrl.RemoveList(index);
-            listCtrl.Create(customCharaFile.OnChangeSelect);
-        }
-
-        private void SaveCharacter()
+        private void SaveCharacter(string path)
         {
             var customBase = CustomBase.Instance;
             if(customBase)
@@ -78,8 +32,46 @@ namespace KeelPlugins
                 charFile.pngData = empty.EncodeToPNG();
                 charFile.facePngData = empty.EncodeToPNG();
 
-                customBase.chaCtrl.chaFile.SaveCharaFile(MakerBridge.MakerCardPath, byte.MaxValue, false);
+                customBase.chaCtrl.chaFile.SaveCharaFile(path, byte.MaxValue, false);
             }
+        }
+
+        private void LoadChara(string path)
+        {
+            var cfw = GameObject.FindObjectsOfType<CustomFileWindow>().FirstOrDefault(x => x.fwType == CustomFileWindow.FileWindowType.CharaLoad);
+            var loadFace = true;
+            var loadBody = true;
+            var loadHair = true;
+            var parameter = true;
+            var loadCoord = true;
+
+            if(cfw)
+            {
+                loadFace = cfw.tglChaLoadFace && cfw.tglChaLoadFace.isOn;
+                loadBody = cfw.tglChaLoadBody && cfw.tglChaLoadBody.isOn;
+                loadHair = cfw.tglChaLoadHair && cfw.tglChaLoadHair.isOn;
+                parameter = cfw.tglChaLoadParam && cfw.tglChaLoadParam.isOn;
+                loadCoord = cfw.tglChaLoadCoorde && cfw.tglChaLoadCoorde.isOn;
+            }
+
+            var chaCtrl = CustomBase.Instance.chaCtrl;
+            var originalSex = chaCtrl.sex;
+
+            chaCtrl.chaFile.LoadFileLimited(path, chaCtrl.sex, loadFace, loadBody, loadHair, parameter, loadCoord);
+            if(chaCtrl.chaFile.GetLastErrorCode() != 0)
+                throw new Exception("LoadFileLimited failed");
+
+            if(chaCtrl.chaFile.parameter.sex != originalSex)
+            {
+                chaCtrl.chaFile.parameter.sex = originalSex;
+                MakerBridgeCore.Log("Warning: The character's sex has been changed to match the editor mode.");
+            }
+
+            chaCtrl.ChangeCoordinateType(true);
+            chaCtrl.Reload(!loadCoord, !loadFace && !loadCoord, !loadHair, !loadBody);
+            CustomBase.Instance.updateCustomUI = true;
+
+            MakerBridgeCore.Log("Character received");
         }
     }
 }

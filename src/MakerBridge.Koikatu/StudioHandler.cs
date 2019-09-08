@@ -1,58 +1,27 @@
-﻿using BepInEx.Logging;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Studio;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using UniRx;
 using UnityEngine;
 
 namespace KeelPlugins
 {
-    internal class StudioHandler : MonoBehaviour
+    internal class StudioHandler : HandlerCore
     {
         private void Start()
         {
-            var watcher = new FileSystemWatcher
-            {
-                Path = Path.GetDirectoryName(MakerBridge.MakerCardPath),
-                Filter = Path.GetFileName(MakerBridge.MakerCardPath)
-            };
-
-            watcher.Created += FileChanged;
-            watcher.Changed += FileChanged;
+            watcher = CharaCardWatcher.Watch(MakerBridgeCore.MakerCardPath, LoadChara);
             watcher.EnableRaisingEvents = true;
-        }
-
-        private void FileChanged(object sender, FileSystemEventArgs e)
-        {
-            bool fileIsBusy = true;
-            while(fileIsBusy)
-            {
-                try
-                {
-                    using(var file = File.Open(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
-                    fileIsBusy = false;
-                }
-                catch(IOException)
-                {
-                    Console.WriteLine("File is still being written to, retrying.");
-                    Thread.Sleep(100);
-                }
-            }
-
-            MainThreadDispatcher.Post(LoadCharas, null);
         }
 
         private void Update()
         {
-            if(MakerBridge.SendChara.Value.IsDown())
-                SaveChara();
+            if(MakerBridgeCore.SendChara.Value.IsDown())
+                SaveCharacter(MakerBridgeCore.OtherCardPath);
         }
 
-        private void SaveChara()
+        private void SaveCharacter(string path)
         {
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)
@@ -65,30 +34,30 @@ namespace KeelPlugins
                 charFile.pngData = empty.EncodeToPNG();
                 charFile.facePngData = empty.EncodeToPNG();
 
-                using(var fileStream = new FileStream(MakerBridge.OtherCardPath, FileMode.Create, FileAccess.Write))
+                using(var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                     charFile.SaveCharaFile(fileStream, true);
             }
             else
             {
-                MakerBridge.Logger.Log(LogLevel.Message, "Select a character to send to maker");
+                MakerBridgeCore.Log("Select a character to send to maker");
             }
         }
 
-        private void LoadCharas(object x)
+        private void LoadChara(string path)
         {
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)
             {
-                MakerBridge.Logger.Log(LogLevel.Message, "Character received");
+                MakerBridgeCore.Log("Character received");
 
                 foreach(var chara in characters)
-                    chara.ChangeChara(MakerBridge.MakerCardPath);
+                    chara.ChangeChara(path);
 
                 UpdateStateInfo();
             }
             else
             {
-                MakerBridge.Logger.Log(LogLevel.Message, "Select a character before replacing it");
+                MakerBridgeCore.Log("Select a character before replacing it");
             }
         }
 
