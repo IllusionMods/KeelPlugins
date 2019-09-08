@@ -39,6 +39,8 @@ namespace KeelPlugins
             StartDownloader = Config.GetSetting(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
             StartFreeH = Config.GetSetting(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.GetSetting(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
+
+            SceneManager.sceneLoaded += StartInput;
         }
 
         private void StartInput(Scene scene, LoadSceneMode mode)

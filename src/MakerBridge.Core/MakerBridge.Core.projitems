@@ -9,6 +9,8 @@
     <Import_RootNamespace>MakerBridge.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)HandlerCore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CharaCardWatcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MakerBridgeCore.cs" />
   </ItemGroup>
 </Project>

@@ -23,10 +23,6 @@
       <HintPath>..\..\lib\kk\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\lib\kk\Assembly-CSharp-firstpass.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\..\lib\bepinex5\BepInEx.dll</HintPath>
       <Private>False</Private>
