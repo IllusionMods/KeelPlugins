@@ -7,8 +7,8 @@ Configuration Manager is recommended to make managing and changing the numerous 
 
 ## Installation
 1. Install BepInEx 5.
-2. Download the latest release from the releases tab.
-3. Put dll files to the `bepinex/plugins` folder.
+2. Download the latest artifact from the [Appveyor page](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
+3. Put the dll files you want in the `bepinex/plugins` folder.
 
 ## Plugin descriptions
 
