@@ -9,7 +9,6 @@ namespace KeelPlugins
         private const string MOVEMENTPOINT_NAME = "MovementPoint";
         private const string CENTERPOINT_NAME = "CenterPoint";
 
-        private bool showLockOnTargets = false;
         private ChaInfo chara;
 
         private List<GameObject> quickTargets = new List<GameObject>();
