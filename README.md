@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/j2aa50y5o9onu8b0/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fail)](https://ci.appveyor.com/project/Keelhauled/keelplugins/branch/master/artifacts)
+
 # KeelPlugins
 
 Various plugins for Illusion's Unity games like Koikatu, Honey select, PlayHome and AI Syoujyo.  
