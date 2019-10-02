@@ -124,6 +124,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragAndDrop.AISyoujyo", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HideAllUI.AISyoujyo", "src\HideAllUI.AISyoujyo\HideAllUI.AISyoujyo.csproj", "{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{ADF9B683-B6F6-49BC-B71F-DF551E16C6A3}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+		.paket\paket.targets = .paket\paket.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx", "paket-files\github.com\BepInEx\BepInEx\BepInEx\BepInEx.csproj", "{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.Harmony", "paket-files\github.com\BepInEx\BepInEx\submodules\BepInEx.Harmony\BepInEx.Harmony\BepInEx.Harmony.csproj", "{54161CFE-FF42-4DDE-B161-3A49545DB5CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harmony", "paket-files\github.com\BepInEx\BepInEx\submodules\BepInEx.Harmony\submodules\Harmony\Harmony\Harmony.csproj", "{802F631C-9493-4270-A974-24335B14D213}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -275,6 +287,18 @@ Global
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54161CFE-FF42-4DDE-B161-3A49545DB5CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54161CFE-FF42-4DDE-B161-3A49545DB5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54161CFE-FF42-4DDE-B161-3A49545DB5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54161CFE-FF42-4DDE-B161-3A49545DB5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{802F631C-9493-4270-A974-24335B14D213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802F631C-9493-4270-A974-24335B14D213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802F631C-9493-4270-A974-24335B14D213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802F631C-9493-4270-A974-24335B14D213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -327,6 +351,9 @@ Global
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{DAC82A17-7FE0-478E-932D-4EF293A31A32} = {6867199F-B91A-43D8-B331-36BBA44AD5C2}
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE} = {0F9F887B-A79A-40F8-9B3A-199EEC224D47}
+		{4FFBA620-F5ED-47F9-B90C-DAD1316FD9B9} = {ADF9B683-B6F6-49BC-B71F-DF551E16C6A3}
+		{54161CFE-FF42-4DDE-B161-3A49545DB5CD} = {ADF9B683-B6F6-49BC-B71F-DF551E16C6A3}
+		{802F631C-9493-4270-A974-24335B14D213} = {ADF9B683-B6F6-49BC-B71F-DF551E16C6A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
