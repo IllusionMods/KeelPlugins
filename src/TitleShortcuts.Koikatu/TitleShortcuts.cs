@@ -18,13 +18,13 @@ namespace KeelPlugins
     {
         public const string Version = "1.1.1";
 
-        private ConfigWrapper<AutoStartOption> AutoStart { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartFemaleMaker { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartMaleMaker { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartUploader { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartDownloader { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartFreeH { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartLiveShow { get; set; }
+        private ConfigEntry<AutoStartOption> AutoStart { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartUploader { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartDownloader { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartFreeH { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartLiveShow { get; set; }
 
         private bool checkInput = false;
         private bool cancelAuto = false;
@@ -32,13 +32,13 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            AutoStart = Config.GetSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
-            StartFemaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
-            StartMaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
-            StartUploader = Config.GetSetting(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
-            StartDownloader = Config.GetSetting(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
-            StartFreeH = Config.GetSetting(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
-            StartLiveShow = Config.GetSetting(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
+            AutoStart = Config.AddSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
+            StartFemaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
+            StartMaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
+            StartUploader = Config.AddSetting(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
+            StartDownloader = Config.AddSetting(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
+            StartFreeH = Config.AddSetting(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
+            StartLiveShow = Config.AddSetting(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
 
             SceneManager.sceneLoaded += StartInput;
         }

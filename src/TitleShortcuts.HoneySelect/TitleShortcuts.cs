@@ -15,9 +15,9 @@ namespace KeelPlugins
     {
         public const string Version = "1.0.0";
 
-        private ConfigWrapper<AutoStartOption> AutoStart { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartFemaleMaker { get; set; }
-        private ConfigWrapper<KeyboardShortcut> StartMaleMaker { get; set; }
+        private ConfigEntry<AutoStartOption> AutoStart { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
+        private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
 
         private bool checkInput = false;
         private bool cancelAuto = false;
@@ -25,9 +25,9 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            AutoStart = Config.GetSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
-            StartFemaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
-            StartMaleMaker = Config.GetSetting(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
+            AutoStart = Config.AddSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
+            StartFemaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
+            StartMaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
         }
 
         private void OnLevelWasLoaded(int level)

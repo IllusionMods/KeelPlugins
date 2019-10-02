@@ -20,16 +20,16 @@ namespace KeelPlugins
         internal static string OtherCardPath;
         protected static GameObject bepinex;
 
-        internal static ConfigWrapper<KeyboardShortcut> SendChara { get; set; }
-        internal static ConfigWrapper<bool> ShowMessages { get; set; }
+        internal static ConfigEntry<KeyboardShortcut> SendChara { get; set; }
+        internal static ConfigEntry<bool> ShowMessages { get; set; }
 
         private void Awake()
         {
             Logger = base.Logger;
             bepinex = gameObject;
 
-            SendChara = Config.GetSetting("Keyboard Shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
-            ShowMessages = Config.GetSetting("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
+            SendChara = Config.AddSetting("Keyboard Shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
+            ShowMessages = Config.AddSetting("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
 
             var tempFolder = Path.GetTempPath();
             MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");
