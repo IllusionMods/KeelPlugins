@@ -1,0 +1,3 @@
+[submodule "submodules/BepInEx"]
+	path = submodules/BepInEx
+	url = https://github.com/BepInEx/BepInEx
