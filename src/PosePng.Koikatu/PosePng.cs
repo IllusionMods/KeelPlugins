@@ -17,7 +17,7 @@ namespace KeelPlugins
         public const string Version = "1.0.0";
         internal static new ManualLogSource Logger;
 
-        private static ConfigWrapper<string> SaveFolder { get; set; }
+        private static ConfigEntry<string> SaveFolder { get; set; }
 
         private const string PngExt = ".png";
         private Harmony harmony;
@@ -25,7 +25,7 @@ namespace KeelPlugins
         private void Awake()
         {
             Logger = base.Logger;
-            SaveFolder = Config.GetSetting("", "Save folder path", "");
+            SaveFolder = Config.AddSetting("", "Save folder path", "");
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 

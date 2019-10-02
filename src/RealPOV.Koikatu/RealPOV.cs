@@ -16,10 +16,10 @@ namespace KeelPlugins
         private const string SECTION_GENERAL = "General";
         private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
 
-        private static ConfigWrapper<float> ViewOffset { get; set; }
-        private static ConfigWrapper<float> DefaultFov { get; set; }
-        private static ConfigWrapper<float> MouseSens { get; set; }
-        private static ConfigWrapper<KeyboardShortcut> PovHotkey { get; set; }
+        private static ConfigEntry<float> ViewOffset { get; set; }
+        private static ConfigEntry<float> DefaultFov { get; set; }
+        private static ConfigEntry<float> MouseSens { get; set; }
+        private static ConfigEntry<KeyboardShortcut> PovHotkey { get; set; }
 
         private Harmony harmony;
         private static List<Vector3> rotation = new List<Vector3> { new Vector3(), new Vector3() };
@@ -31,10 +31,10 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            ViewOffset = Config.GetSetting(SECTION_GENERAL, "View offset", 0.03f);
-            DefaultFov = Config.GetSetting(SECTION_GENERAL, "Default FOV", 70f);
-            MouseSens = Config.GetSetting(SECTION_GENERAL, "Mouse sensitivity", 1f);
-            PovHotkey = Config.GetSetting(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
+            ViewOffset = Config.AddSetting(SECTION_GENERAL, "View offset", 0.03f);
+            DefaultFov = Config.AddSetting(SECTION_GENERAL, "Default FOV", 70f);
+            MouseSens = Config.AddSetting(SECTION_GENERAL, "Mouse sensitivity", 1f);
+            PovHotkey = Config.AddSetting(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
 
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
 

@@ -23,17 +23,17 @@ namespace KeelPlugins
                                                            "Only rotating the second bone can be useful in positions where the partner is very close to the camera and rotating both bones would cause clipping.\n" +
                                                            "Only rotating the first bone can be useful in positions where it would be helpful to extend the character's neck forward to see the partner better.";
 
-        internal static ConfigWrapper<KeyboardShortcut> POVKey { get; set; }
+        internal static ConfigEntry<KeyboardShortcut> POVKey { get; set; }
         internal static KeyboardShortcutHotkey POVHotkey;
-        internal static ConfigWrapper<float> DefaultFOV { get; set; }
-        internal static ConfigWrapper<float> MouseSensitivity { get; set; }
-        internal static ConfigWrapper<NeckMode> DefaultNeckMode { get; set; }
-        internal static ConfigWrapper<float> FemaleOffsetX { get; set; }
-        internal static ConfigWrapper<float> FemaleOffsetY { get; set; }
-        internal static ConfigWrapper<float> FemaleOffsetZ { get; set; }
-        internal static ConfigWrapper<float> MaleOffsetX { get; set; }
-        internal static ConfigWrapper<float> MaleOffsetY { get; set; }
-        internal static ConfigWrapper<float> MaleOffsetZ { get; set; }
+        internal static ConfigEntry<float> DefaultFOV { get; set; }
+        internal static ConfigEntry<float> MouseSensitivity { get; set; }
+        internal static ConfigEntry<NeckMode> DefaultNeckMode { get; set; }
+        internal static ConfigEntry<float> FemaleOffsetX { get; set; }
+        internal static ConfigEntry<float> FemaleOffsetY { get; set; }
+        internal static ConfigEntry<float> FemaleOffsetZ { get; set; }
+        internal static ConfigEntry<float> MaleOffsetX { get; set; }
+        internal static ConfigEntry<float> MaleOffsetY { get; set; }
+        internal static ConfigEntry<float> MaleOffsetZ { get; set; }
 
         private Harmony harmony;
         private static GameObject bepinex;
@@ -43,19 +43,19 @@ namespace KeelPlugins
             Logger = base.Logger;
             bepinex = gameObject;
 
-            POVKey = Config.GetSetting(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace), new ConfigDescription(DESCRIPTION_POVHOTKEY));
+            POVKey = Config.AddSetting(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace), new ConfigDescription(DESCRIPTION_POVHOTKEY));
             POVHotkey = new KeyboardShortcutHotkey(POVKey.Value, 0.3f);
-            DefaultFOV = Config.GetSetting(SECTION_GENERAL, "Default FOV", 70f, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
-            MouseSensitivity = Config.GetSetting(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
-            DefaultNeckMode = Config.GetSetting(SECTION_GENERAL, "Default rotation mode", NeckMode.Both);
+            DefaultFOV = Config.AddSetting(SECTION_GENERAL, "Default FOV", 70f, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
+            MouseSensitivity = Config.AddSetting(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
+            DefaultNeckMode = Config.AddSetting(SECTION_GENERAL, "Default rotation mode", NeckMode.Both);
 
-            FemaleOffsetX = Config.GetSetting(SECTION_OFFSETS, "Female offset X", 0f, new ConfigDescription("", null, "Advanced"));
-            FemaleOffsetY = Config.GetSetting(SECTION_OFFSETS, "Female offset Y", 0.0315f, new ConfigDescription("", null, "Advanced"));
-            FemaleOffsetZ = Config.GetSetting(SECTION_OFFSETS, "Female offset Z", 0f, new ConfigDescription("", null, "Advanced"));
+            FemaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Female offset X", 0f, new ConfigDescription("", null, "Advanced"));
+            FemaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Female offset Y", 0.0315f, new ConfigDescription("", null, "Advanced"));
+            FemaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Female offset Z", 0f, new ConfigDescription("", null, "Advanced"));
 
-            MaleOffsetX = Config.GetSetting(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, "Advanced"));
-            MaleOffsetY = Config.GetSetting(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, "Advanced"));
-            MaleOffsetZ = Config.GetSetting(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, "Advanced"));
+            MaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, "Advanced"));
+            MaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, "Advanced"));
+            MaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, "Advanced"));
 
             harmony = new Harmony($"{GUID}.harmony");
             harmony.PatchAll(typeof(PointOfView));

@@ -11,7 +11,7 @@ namespace KeelPlugins
         public const string GUID = "keelhauled.hideallui";
 
         // must be static for the transpiler
-        protected static ConfigWrapper<KeyboardShortcut> HideHotkey { get; set; }
+        protected static ConfigEntry<KeyboardShortcut> HideHotkey { get; set; }
 
         private Harmony harmony;
         internal static HideUIAction currentUIHandler;
@@ -24,7 +24,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            HideHotkey = Config.GetSetting("Keyboard Shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
+            HideHotkey = Config.AddSetting("Keyboard Shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
             harmony = HarmonyWrapper.PatchAll();
         }
 

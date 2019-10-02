@@ -36,22 +36,22 @@ namespace KeelPlugins
 
         [Browsable(true)]
         [CustomSettingDraw(nameof(ResolutionDrawer))]
-        private static ConfigWrapper<string> ApplyResolution { get; set; }
+        private static ConfigEntry<string> ApplyResolution { get; set; }
 
-        private static ConfigWrapper<VSyncType> VSyncCount { get; set; }
-        private static ConfigWrapper<bool> LimitFrameRate { get; set; }
-        private static ConfigWrapper<int> TargetFrameRate { get; set; }
-        private static ConfigWrapper<int> AntiAliasing { get; set; }
-        private static ConfigWrapper<AnisotropicFiltering> AnisotropicTextures { get; set; }
-        private static ConfigWrapper<ShadowQuality2> ShadowType { get; set; }
-        private static ConfigWrapper<ShadowResolution> ShadowRes { get; set; }
-        private static ConfigWrapper<ShadowProjection> ShadowProject { get; set; }
-        private static ConfigWrapper<int> ShadowCascades { get; set; }
-        private static ConfigWrapper<float> ShadowDistance { get; set; }
-        private static ConfigWrapper<float> ShadowNearPlaneOffset { get; set; }
-        private static ConfigWrapper<float> CameraNearClipPlane { get; set; }
-        private static ConfigWrapper<BackgroundRun> RunInBackground { get; set; }
-        private static ConfigWrapper<bool> OptimizeInBackground { get; set; }
+        private static ConfigEntry<VSyncType> VSyncCount { get; set; }
+        private static ConfigEntry<bool> LimitFrameRate { get; set; }
+        private static ConfigEntry<int> TargetFrameRate { get; set; }
+        private static ConfigEntry<int> AntiAliasing { get; set; }
+        private static ConfigEntry<AnisotropicFiltering> AnisotropicTextures { get; set; }
+        private static ConfigEntry<ShadowQuality2> ShadowType { get; set; }
+        private static ConfigEntry<ShadowResolution> ShadowRes { get; set; }
+        private static ConfigEntry<ShadowProjection> ShadowProject { get; set; }
+        private static ConfigEntry<int> ShadowCascades { get; set; }
+        private static ConfigEntry<float> ShadowDistance { get; set; }
+        private static ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
+        private static ConfigEntry<float> CameraNearClipPlane { get; set; }
+        private static ConfigEntry<BackgroundRun> RunInBackground { get; set; }
+        private static ConfigEntry<bool> OptimizeInBackground { get; set; }
 
         private bool fullscreen = Screen.fullScreen;
         private string resolutionX = Screen.width.ToString();
@@ -79,20 +79,20 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            VSyncCount = Config.GetSetting(CATEGORY_RENDER, "VSync level", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
-            LimitFrameRate = Config.GetSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
-            TargetFrameRate = Config.GetSetting(CATEGORY_RENDER, "Target framefate", 60);
-            AntiAliasing = Config.GetSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 8, new ConfigDescription(DESCRIPTION_ANTIALIASING));
-            AnisotropicTextures = Config.GetSetting(CATEGORY_RENDER, "Anisotropic filtering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
-            ShadowType = Config.GetSetting(CATEGORY_SHADOW, "Shadow type", ShadowQuality2.SoftHard);
-            ShadowRes = Config.GetSetting(CATEGORY_SHADOW, "Shadow resolution", ShadowResolution.VeryHigh);
-            ShadowProject = Config.GetSetting(CATEGORY_SHADOW, "Shadow projection", ShadowProjection.CloseFit);
-            ShadowCascades = Config.GetSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
-            ShadowDistance = Config.GetSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
-            ShadowNearPlaneOffset = Config.GetSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
-            CameraNearClipPlane = Config.GetSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
-            RunInBackground = Config.GetSetting(CATEGORY_MISC, "Run in background", BackgroundRun.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
-            OptimizeInBackground = Config.GetSetting(CATEGORY_MISC, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
+            VSyncCount = Config.AddSetting(CATEGORY_RENDER, "VSync level", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
+            LimitFrameRate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
+            TargetFrameRate = Config.AddSetting(CATEGORY_RENDER, "Target framefate", 60);
+            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 8, new ConfigDescription(DESCRIPTION_ANTIALIASING));
+            AnisotropicTextures = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
+            ShadowType = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", ShadowQuality2.SoftHard);
+            ShadowRes = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", ShadowResolution.VeryHigh);
+            ShadowProject = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", ShadowProjection.CloseFit);
+            ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
+            ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
+            ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
+            CameraNearClipPlane = Config.AddSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
+            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", BackgroundRun.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
+            OptimizeInBackground = Config.AddSetting(CATEGORY_MISC, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
 
             QualitySettings.vSyncCount = (int)VSyncCount.Value;
             VSyncCount.SettingChanged += (sender, args) => QualitySettings.vSyncCount = (int)VSyncCount.Value;
