@@ -179,6 +179,8 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{d27ad499-3292-48cb-ac8b-45fdd49f9e21}*SharedItemsImports = 4
+		src\Common.HoneySelect\Common.HoneySelect.projitems*{d27ad499-3292-48cb-ac8b-45fdd49f9e21}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{dac82a17-7fe0-478e-932d-4ef293a31a32}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
