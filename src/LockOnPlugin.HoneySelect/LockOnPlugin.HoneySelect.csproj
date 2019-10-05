@@ -15,10 +15,58 @@
   </PropertyGroup>
   <Import Project="..\BuildSettings.HoneySelect.props" />
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\lib\bepinex5\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\lib\hs\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\lib\hs\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>..\..\lib\bepinex5\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.Harmony">
+      <HintPath>..\..\lib\bepinex5\BepInEx.Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\lib\hs\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\lib\hs\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="XInputDotNetPure">
+      <HintPath>..\..\lib\XInputDotNetPure.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileManager.cs" />
+    <Compile Include="HoneySelectPatches.cs" />
+    <Compile Include="Hotkey.cs" />
+    <Compile Include="HSceneMono.cs" />
+    <Compile Include="HSceneProperties.cs" />
+    <Compile Include="LockOnBase.cs" />
+    <Compile Include="LockOnPlugin.cs" />
+    <Compile Include="MakerMono.cs" />
+    <Compile Include="MakerProperties.cs" />
+    <Compile Include="NeoMono.cs" />
+    <Compile Include="NeoProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudioNeoPatches.cs" />
+    <Compile Include="TargetManager.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
+  <Import Project="..\Common.HoneySelect\Common.HoneySelect.projitems" Label="Shared" />
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
