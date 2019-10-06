@@ -1,10 +1,13 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using ConfigurationManager;
+using System;
 using System.ComponentModel;
 using UnityEngine;
 
 namespace KeelPlugins
 {
+    [BepInDependency(ConfigurationManager.ConfigurationManager.GUID)]
     [BepInPlugin(GUID, "Graphics Settings", Version)]
     public class GraphicsSettings : BaseUnityPlugin
     {
@@ -15,6 +18,7 @@ namespace KeelPlugins
         private const string CATEGORY_SHADOW = "Shadows";
         private const string CATEGORY_MISC = "Misc";
 
+        private const string DESCRIPTION_RESOLUTION = "Dummy setting for the custom drawer.";
         private const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
         private const string DESCRIPTION_VSYNC = "VSync synchronizes the output video of the graphics card to the refresh rate of the monitor. " +
                                          "This prevents tearing and produces a smoother video output.\n" +
@@ -33,11 +37,8 @@ namespace KeelPlugins
                                                    "On \"limited\", the game will stop if it has been unfocused and not loading anything for a couple seconds.";
         private const string DESCRIPTION_OPTIMIZEINBACKGROUND = "Optimize the game when it is the background and unfocused. " +
                                                         "Settings such as anti-aliasing will be turned off or reduced in this state.";
-
-        [Browsable(true)]
-        [CustomSettingDraw(nameof(ResolutionDrawer))]
-        private static ConfigEntry<string> ApplyResolution { get; set; }
-
+        
+        private static ConfigEntry<string> Resolution { get; set; }
         private static ConfigEntry<VSyncType> VSyncCount { get; set; }
         private static ConfigEntry<bool> LimitFrameRate { get; set; }
         private static ConfigEntry<int> TargetFrameRate { get; set; }
@@ -58,7 +59,7 @@ namespace KeelPlugins
         private string resolutionY = Screen.height.ToString();
         private int _focusFrameCounter;
 
-        private void ResolutionDrawer()
+        private void ResolutionDrawer(SettingEntryBase entry)
         {
             fullscreen = GUILayout.Toggle(fullscreen, " Fullscreen", GUILayout.Width(90));
             string resX = GUILayout.TextField(resolutionX, GUILayout.Width(60));
@@ -79,6 +80,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
+            Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new Action<SettingEntryBase>(ResolutionDrawer)));
             VSyncCount = Config.AddSetting(CATEGORY_RENDER, "VSync level", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
             LimitFrameRate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
             TargetFrameRate = Config.AddSetting(CATEGORY_RENDER, "Target framefate", 60);
