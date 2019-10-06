@@ -18,41 +18,41 @@ namespace KeelPlugins
         private const string CATEGORY_SHADOW = "Shadows";
         private const string CATEGORY_MISC = "Misc";
 
-        private const string DESCRIPTION_RESOLUTION = "Dummy setting for the custom drawer.";
+        private const string DESCRIPTION_RESOLUTION = "Dummy setting for the custom drawer. Resolution is saved automatically by the game after clicking apply.";
         private const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
         private const string DESCRIPTION_VSYNC = "VSync synchronizes the output video of the graphics card to the refresh rate of the monitor. " +
-                                         "This prevents tearing and produces a smoother video output.\n" +
-                                         "Half vsync synchronizes the output to half the refresh rate of your monitor.";
+                                                 "This prevents tearing and produces a smoother video output.\n" +
+                                                 "Half vsync synchronizes the output to half the refresh rate of your monitor.";
         private const string DESCRIPTION_LIMITFRAMERATE = "VSync has to be disabled for this to take effect.";
         private const string DESCRIPTION_ANTIALIASING = "Smooths out jagged edges on objects.";
         private const string DESCRIPTION_SHADOWPROJECTION = "Close Fit renders higher resolution shadows but they can sometimes wobble slightly if the camera moves." +
-                                                    "Stable Fit is lower resolution but no wobble.";
+                                                            "Stable Fit is lower resolution but no wobble.";
         private const string DESCRIPTION_SHADOWCASCADES = "Increasing the number of cascades lessens the effects of perspective aliasing on shadows.";
         private const string DESCRIPTION_SHADOWDISTANCE = "Increasing the distance lowers the shadow resolution slighly.";
         private const string DESCRIPTION_SHADOWNEARPLANEOFFSET = "A low shadow near plane offset value can create the appearance of holes in shadows.";
         private const string DESCRIPTION_CAMERANEARCLIPPLANE = "Determines how close the camera can be to objects without clipping into them. Lower equals closer.\n" +
-                                                       "Note: The saved value is not loaded at the start currently.";
+                                                               "Note: The saved value is not loaded at the start currently.";
         private const string DESCRIPTION_RUNINBACKGROUND = "Should the game be running when it is in the background (when the window is not focused)?\n" +
-                                                   "On \"no\", the game will stop completely when it is in the background.\n" +
-                                                   "On \"limited\", the game will stop if it has been unfocused and not loading anything for a couple seconds.";
+                                                           "On \"no\", the game will stop completely when it is in the background.\n" +
+                                                           "On \"limited\", the game will stop if it has been unfocused and not loading anything for a couple seconds.";
         private const string DESCRIPTION_OPTIMIZEINBACKGROUND = "Optimize the game when it is the background and unfocused. " +
-                                                        "Settings such as anti-aliasing will be turned off or reduced in this state.";
-        
-        private static ConfigEntry<string> Resolution { get; set; }
-        private static ConfigEntry<VSyncType> VSyncCount { get; set; }
-        private static ConfigEntry<bool> LimitFrameRate { get; set; }
-        private static ConfigEntry<int> TargetFrameRate { get; set; }
-        private static ConfigEntry<int> AntiAliasing { get; set; }
-        private static ConfigEntry<AnisotropicFiltering> AnisotropicTextures { get; set; }
-        private static ConfigEntry<ShadowQuality2> ShadowType { get; set; }
-        private static ConfigEntry<ShadowResolution> ShadowRes { get; set; }
-        private static ConfigEntry<ShadowProjection> ShadowProject { get; set; }
-        private static ConfigEntry<int> ShadowCascades { get; set; }
-        private static ConfigEntry<float> ShadowDistance { get; set; }
-        private static ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
-        private static ConfigEntry<float> CameraNearClipPlane { get; set; }
-        private static ConfigEntry<BackgroundRun> RunInBackground { get; set; }
-        private static ConfigEntry<bool> OptimizeInBackground { get; set; }
+                                                                "Settings such as anti-aliasing will be turned off or reduced in this state.";
+
+        private ConfigEntry<string> Resolution { get; set; }
+        private ConfigEntry<VSyncType> VSyncCount { get; set; }
+        private ConfigEntry<bool> LimitFrameRate { get; set; }
+        private ConfigEntry<int> TargetFrameRate { get; set; }
+        private ConfigEntry<int> AntiAliasing { get; set; }
+        private ConfigEntry<AnisotropicFiltering> AnisotropicTextures { get; set; }
+        private ConfigEntry<ShadowQuality2> ShadowType { get; set; }
+        private ConfigEntry<ShadowResolution> ShadowRes { get; set; }
+        private ConfigEntry<ShadowProjection> ShadowProject { get; set; }
+        private ConfigEntry<int> ShadowCascades { get; set; }
+        private ConfigEntry<float> ShadowDistance { get; set; }
+        private ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
+        private ConfigEntry<float> CameraNearClipPlane { get; set; }
+        private ConfigEntry<BackgroundRun> RunInBackground { get; set; }
+        private ConfigEntry<bool> OptimizeInBackground { get; set; }
 
         private bool fullscreen = Screen.fullScreen;
         private string resolutionX = Screen.width.ToString();
