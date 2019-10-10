@@ -12,7 +12,7 @@ namespace KeelPlugins
     public class GraphicsSettings : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.graphicssettings";
-        public const string Version = "1.0.4";
+        public const string Version = "1.1.0";
 
         private const string CATEGORY_RENDER = "Rendering";
         private const string CATEGORY_SHADOW = "Shadows";
