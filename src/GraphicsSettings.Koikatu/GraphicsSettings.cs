@@ -74,11 +74,11 @@ namespace KeelPlugins
 
                 if(Screen.width != x || Screen.height != y)
                 {
-                    DisplayInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
+                    WindowInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
                     {
                         Traverse.Create(FindObjectOfType<ConfigurationManager.ConfigurationManager>()).Method("CalculateWindowRect").GetValue();
                         if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
-                            DisplayInterop.MakeBorderless(this);
+                            WindowInterop.MakeBorderless(this);
                     });
                 }
             }
@@ -162,13 +162,13 @@ namespace KeelPlugins
             switch(DisplayMode.Value)
             {
                 case SettingEnum.DisplayMode.Windowed:
-                    DisplayInterop.MakeWindowed();
+                    WindowInterop.MakeWindowed();
                     break;
                 case SettingEnum.DisplayMode.Fullscreen:
-                    DisplayInterop.MakeFullscreen();
+                    WindowInterop.MakeFullscreen();
                     break;
                 case SettingEnum.DisplayMode.BorderlessFullscreen:
-                    DisplayInterop.MakeBorderless(this);
+                    WindowInterop.MakeBorderless(this);
                     break;
             }
         }
