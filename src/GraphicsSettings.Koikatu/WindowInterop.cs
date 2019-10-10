@@ -30,7 +30,7 @@ namespace KeelPlugins
             }
 
             var newStandard = backupStandard
-                              & ~(WinAPI.WindowStyleFlags.Caption
+                              & ~( WinAPI.WindowStyleFlags.Caption
                                  | WinAPI.WindowStyleFlags.ThickFrame
                                  | WinAPI.WindowStyleFlags.SystemMenu
                                  | WinAPI.WindowStyleFlags.MaximizeBox // same as TabStop
@@ -38,7 +38,7 @@ namespace KeelPlugins
                               );
 
             var newExtended = backupExtended
-                              & ~(WinAPI.WindowStyleFlags.ExtendedDlgModalFrame
+                              & ~( WinAPI.WindowStyleFlags.ExtendedDlgModalFrame
                                  | WinAPI.WindowStyleFlags.ExtendedComposited
                                  | WinAPI.WindowStyleFlags.ExtendedWindowEdge
                                  | WinAPI.WindowStyleFlags.ExtendedClientEdge
@@ -48,9 +48,7 @@ namespace KeelPlugins
                                  | WinAPI.WindowStyleFlags.ExtendedAppWindow
                               );
 
-            var width = Screen.width;
-            var height = Screen.height;
-
+            int width = Screen.width, height = Screen.height;
             WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.Style, newStandard);
             WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.ExtendedStyle, newExtended);
             WinAPI.SetWindowPos(hwnd, 0, 0, 0, width, height, WinAPI.SetWindowPosFlags.NoMove);
