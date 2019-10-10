@@ -12,7 +12,7 @@ namespace KeelPlugins
     public class GraphicsSettings : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.graphicssettings";
-        public const string Version = "1.0.3";
+        public const string Version = "1.0.4";
 
         private const string CATEGORY_RENDER = "Rendering";
         private const string CATEGORY_SHADOW = "Shadows";
@@ -39,31 +39,30 @@ namespace KeelPlugins
                                                                 "Settings such as anti-aliasing will be turned off or reduced in this state.";
 
         private ConfigEntry<string> Resolution { get; set; }
-        private ConfigEntry<VSyncType> VSyncCount { get; set; }
+        private ConfigEntry<DisplayModes> DisplayMode { get; set; }
+        private ConfigEntry<VSyncTypes> VSync { get; set; }
         private ConfigEntry<bool> LimitFrameRate { get; set; }
         private ConfigEntry<int> TargetFrameRate { get; set; }
         private ConfigEntry<int> AntiAliasing { get; set; }
         private ConfigEntry<AnisotropicFiltering> AnisotropicTextures { get; set; }
-        private ConfigEntry<ShadowQuality2> ShadowType { get; set; }
+        private ConfigEntry<ShadowTypes> ShadowType { get; set; }
         private ConfigEntry<ShadowResolution> ShadowRes { get; set; }
         private ConfigEntry<ShadowProjection> ShadowProject { get; set; }
         private ConfigEntry<int> ShadowCascades { get; set; }
         private ConfigEntry<float> ShadowDistance { get; set; }
         private ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
         private ConfigEntry<float> CameraNearClipPlane { get; set; }
-        private ConfigEntry<BackgroundRun> RunInBackground { get; set; }
+        private ConfigEntry<BackgroundRunModes> RunInBackground { get; set; }
         private ConfigEntry<bool> OptimizeInBackground { get; set; }
 
-        private bool fullscreen = Screen.fullScreen;
         private string resolutionX = Screen.width.ToString();
         private string resolutionY = Screen.height.ToString();
         private int _focusFrameCounter;
 
         private void ResolutionDrawer(SettingEntryBase entry)
         {
-            fullscreen = GUILayout.Toggle(fullscreen, " Fullscreen", GUILayout.Width(90));
-            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(60));
-            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(60));
+            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(70));
+            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(70));
 
             if(resX != resolutionX && int.TryParse(resX, out _)) resolutionX = resX;
             if(resY != resolutionY && int.TryParse(resY, out _)) resolutionY = resY;
@@ -73,31 +72,41 @@ namespace KeelPlugins
                 int x = int.Parse(resolutionX);
                 int y = int.Parse(resolutionY);
 
-                if(Screen.width != x || Screen.height != y || Screen.fullScreen != fullscreen)
-                    Screen.SetResolution(x, y, fullscreen);
+                if(Screen.width != x || Screen.height != y)
+                {
+                    DisplayInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
+                    {
+                        if(DisplayMode.Value == DisplayModes.BorderlessFullscreen)
+                            StartCoroutine(DisplayInterop.MakeBorderless());
+                    });
+                }
             }
         }
 
         private void Awake()
         {
             Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new Action<SettingEntryBase>(ResolutionDrawer)));
-            VSyncCount = Config.AddSetting(CATEGORY_RENDER, "VSync level", VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
+            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", DisplayModes.Windowed);
+            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync level", VSyncTypes.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
             LimitFrameRate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
             TargetFrameRate = Config.AddSetting(CATEGORY_RENDER, "Target framefate", 60);
-            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 8, new ConfigDescription(DESCRIPTION_ANTIALIASING));
+            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING));
             AnisotropicTextures = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
-            ShadowType = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", ShadowQuality2.SoftHard);
+            ShadowType = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", ShadowTypes.SoftHard);
             ShadowRes = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", ShadowResolution.VeryHigh);
             ShadowProject = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", ShadowProjection.CloseFit);
             ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
             ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
             ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
             CameraNearClipPlane = Config.AddSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
-            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", BackgroundRun.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
+            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", BackgroundRunModes.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
             OptimizeInBackground = Config.AddSetting(CATEGORY_MISC, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
 
-            QualitySettings.vSyncCount = (int)VSyncCount.Value;
-            VSyncCount.SettingChanged += (sender, args) => QualitySettings.vSyncCount = (int)VSyncCount.Value;
+            SetDisplayMode();
+            DisplayMode.SettingChanged += (sender, args) => SetDisplayMode();
+
+            QualitySettings.vSyncCount = (int)VSync.Value;
+            VSync.SettingChanged += (sender, args) => QualitySettings.vSyncCount = (int)VSync.Value;
 
             if(LimitFrameRate.Value) Application.targetFrameRate = TargetFrameRate.Value;
             LimitFrameRate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFrameRate.Value ? TargetFrameRate.Value : -1;
@@ -130,19 +139,19 @@ namespace KeelPlugins
             //SceneManager.sceneLoaded += (scene, mode) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
             CameraNearClipPlane.SettingChanged += (sender, args) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
 
-            if(RunInBackground.Value == BackgroundRun.No)
+            if(RunInBackground.Value == BackgroundRunModes.No)
                 Application.runInBackground = false;
 
             RunInBackground.SettingChanged += (sender, args) =>
             {
                 switch(RunInBackground.Value)
                 {
-                    case BackgroundRun.No:
+                    case BackgroundRunModes.No:
                         Application.runInBackground = false;
                         break;
 
-                    case BackgroundRun.Limited:
-                    case BackgroundRun.Yes:
+                    case BackgroundRunModes.Limited:
+                    case BackgroundRunModes.Yes:
                         Application.runInBackground = true;
                         break;
                 }
@@ -151,7 +160,8 @@ namespace KeelPlugins
 
         private void Update()
         {
-            if(RunInBackground.Value != BackgroundRun.Limited) return;
+            if(RunInBackground.Value != BackgroundRunModes.Limited)
+                return;
 
             if(!Manager.Scene.Instance.IsNowLoadingFade)
             {
@@ -167,24 +177,39 @@ namespace KeelPlugins
         private void OnApplicationFocus(bool hasFocus)
         {
             if(OptimizeInBackground.Value)
-            {
                 QualitySettings.antiAliasing = hasFocus ? AntiAliasing.Value : 0;
-            }
 
-            if(RunInBackground.Value != BackgroundRun.Limited) return;
+            if(RunInBackground.Value != BackgroundRunModes.Limited)
+                return;
 
             Application.runInBackground = true;
             _focusFrameCounter = 0;
         }
 
-        private enum VSyncType
+        private void SetDisplayMode()
+        {
+            switch(DisplayMode.Value)
+            {
+                case DisplayModes.Windowed:
+                    DisplayInterop.MakeWindowed();
+                    break;
+                case DisplayModes.Fullscreen:
+                    DisplayInterop.MakeFullscreen();
+                    break;
+                case DisplayModes.BorderlessFullscreen:
+                    StartCoroutine(DisplayInterop.MakeBorderless());
+                    break;
+            }
+        }
+
+        private enum VSyncTypes
         {
             Disabled,
             Enabled,
             Half
         }
 
-        private enum ShadowQuality2
+        private enum ShadowTypes
         {
             Disabled = ShadowQuality.Disable,
             [Description("Hard only")]
@@ -193,11 +218,19 @@ namespace KeelPlugins
             SoftHard = ShadowQuality.All
         }
 
-        private enum BackgroundRun
+        private enum BackgroundRunModes
         {
             No,
             Yes,
             Limited
+        }
+
+        private enum DisplayModes
+        {
+            Fullscreen,
+            [Description("Borderless fullscreen")]
+            BorderlessFullscreen,
+            Windowed
         }
     }
 }
