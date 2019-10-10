@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using ConfigurationManager;
+using HarmonyLib;
 using System;
 using UnityEngine;
 
@@ -75,6 +76,7 @@ namespace KeelPlugins
                 {
                     DisplayInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
                     {
+                        Traverse.Create(FindObjectOfType<ConfigurationManager.ConfigurationManager>()).Method("CalculateWindowRect").GetValue();
                         if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
                             DisplayInterop.MakeBorderless(this);
                     });
