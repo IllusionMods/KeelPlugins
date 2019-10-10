@@ -15,6 +15,10 @@
   </PropertyGroup>
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\lib\bepinex5\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\lib\kk\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
