@@ -2,7 +2,6 @@
 using BepInEx.Configuration;
 using ConfigurationManager;
 using System;
-using System.ComponentModel;
 using UnityEngine;
 
 namespace KeelPlugins
@@ -39,20 +38,20 @@ namespace KeelPlugins
                                                                 "Settings such as anti-aliasing will be turned off or reduced in this state.";
 
         private ConfigEntry<string> Resolution { get; set; }
-        private ConfigEntry<DisplayModes> DisplayMode { get; set; }
-        private ConfigEntry<VSyncTypes> VSync { get; set; }
-        private ConfigEntry<bool> LimitFrameRate { get; set; }
-        private ConfigEntry<int> TargetFrameRate { get; set; }
+        private ConfigEntry<SettingEnum.DisplayMode> DisplayMode { get; set; }
+        private ConfigEntry<SettingEnum.VSyncType> VSync { get; set; }
+        private ConfigEntry<bool> LimitFramerate { get; set; }
+        private ConfigEntry<int> TargetFramerate { get; set; }
         private ConfigEntry<int> AntiAliasing { get; set; }
-        private ConfigEntry<AnisotropicFiltering> AnisotropicTextures { get; set; }
-        private ConfigEntry<ShadowTypes> ShadowType { get; set; }
-        private ConfigEntry<ShadowResolution> ShadowRes { get; set; }
-        private ConfigEntry<ShadowProjection> ShadowProject { get; set; }
+        private ConfigEntry<AnisotropicFiltering> AnisotropicFiltering { get; set; }
+        private ConfigEntry<SettingEnum.ShadowQuality> ShadowQuality { get; set; }
+        private ConfigEntry<ShadowResolution> ShadowResolution { get; set; }
+        private ConfigEntry<ShadowProjection> ShadowProjection { get; set; }
         private ConfigEntry<int> ShadowCascades { get; set; }
         private ConfigEntry<float> ShadowDistance { get; set; }
         private ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
         private ConfigEntry<float> CameraNearClipPlane { get; set; }
-        private ConfigEntry<BackgroundRunModes> RunInBackground { get; set; }
+        private ConfigEntry<SettingEnum.BackgroundRunMode> RunInBackground { get; set; }
         private ConfigEntry<bool> OptimizeInBackground { get; set; }
 
         private string resolutionX = Screen.width.ToString();
@@ -76,8 +75,8 @@ namespace KeelPlugins
                 {
                     DisplayInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
                     {
-                        if(DisplayMode.Value == DisplayModes.BorderlessFullscreen)
-                            StartCoroutine(DisplayInterop.MakeBorderless());
+                        if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
+                            DisplayInterop.MakeBorderless(this);
                     });
                 }
             }
@@ -86,81 +85,51 @@ namespace KeelPlugins
         private void Awake()
         {
             Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new Action<SettingEntryBase>(ResolutionDrawer)));
-            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", DisplayModes.Windowed);
-            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync level", VSyncTypes.Enabled, new ConfigDescription(DESCRIPTION_VSYNC));
-            LimitFrameRate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE));
-            TargetFrameRate = Config.AddSetting(CATEGORY_RENDER, "Target framefate", 60);
-            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti aliasing multiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING));
-            AnisotropicTextures = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
-            ShadowType = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", ShadowTypes.SoftHard);
-            ShadowRes = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", ShadowResolution.VeryHigh);
-            ShadowProject = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", ShadowProjection.CloseFit);
+            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", SettingEnum.DisplayMode.Windowed);
+            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync level", SettingEnum.VSyncType.Enabled, DESCRIPTION_VSYNC);
+            LimitFramerate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, DESCRIPTION_LIMITFRAMERATE);
+            TargetFramerate = Config.AddSetting(CATEGORY_RENDER, "Target framerate", 60);
+            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti-aliasing multiplier", 4, DESCRIPTION_ANTIALIASING);
+            AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", UnityEngine.AnisotropicFiltering.ForceEnable, DESCRIPTION_ANISOFILTER);
+            ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", SettingEnum.ShadowQuality.SoftHard);
+            ShadowResolution = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", UnityEngine.ShadowResolution.VeryHigh);
+            ShadowProjection = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", UnityEngine.ShadowProjection.CloseFit);
             ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
             ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
             ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
             CameraNearClipPlane = Config.AddSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
-            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", BackgroundRunModes.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
-            OptimizeInBackground = Config.AddSetting(CATEGORY_MISC, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
+            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", SettingEnum.BackgroundRunMode.Yes, DESCRIPTION_RUNINBACKGROUND);
+            OptimizeInBackground = Config.AddSetting(CATEGORY_MISC, "Optimize in background", true, DESCRIPTION_OPTIMIZEINBACKGROUND);
 
-            SetDisplayMode();
-            DisplayMode.SettingChanged += (sender, args) => SetDisplayMode();
-
-            QualitySettings.vSyncCount = (int)VSync.Value;
-            VSync.SettingChanged += (sender, args) => QualitySettings.vSyncCount = (int)VSync.Value;
-
-            if(LimitFrameRate.Value) Application.targetFrameRate = TargetFrameRate.Value;
-            LimitFrameRate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFrameRate.Value ? TargetFrameRate.Value : -1;
-            TargetFrameRate.SettingChanged += (sender, args) => { if(LimitFrameRate.Value) Application.targetFrameRate = TargetFrameRate.Value; };
-
-            QualitySettings.antiAliasing = AntiAliasing.Value;
-            AntiAliasing.SettingChanged += (sender, args) => QualitySettings.antiAliasing = AntiAliasing.Value;
-
-            QualitySettings.anisotropicFiltering = AnisotropicTextures.Value;
-            AnisotropicTextures.SettingChanged += (sender, args) => QualitySettings.anisotropicFiltering = AnisotropicTextures.Value;
-
-            QualitySettings.shadows = (ShadowQuality)ShadowType.Value;
-            ShadowType.SettingChanged += (sender, args) => QualitySettings.shadows = (ShadowQuality)ShadowType.Value;
-
-            QualitySettings.shadowResolution = ShadowRes.Value;
-            ShadowRes.SettingChanged += (sender, args) => QualitySettings.shadowResolution = ShadowRes.Value;
-
-            QualitySettings.shadowProjection = ShadowProject.Value;
-            ShadowProject.SettingChanged += (sender, args) => QualitySettings.shadowProjection = ShadowProject.Value;
-
-            QualitySettings.shadowCascades = ShadowCascades.Value;
-            ShadowCascades.SettingChanged += (sender, args) => QualitySettings.shadowCascades = ShadowCascades.Value;
-
-            QualitySettings.shadowDistance = ShadowDistance.Value;
-            ShadowDistance.SettingChanged += (sender, args) => QualitySettings.shadowDistance = ShadowDistance.Value;
-
-            QualitySettings.shadowNearPlaneOffset = ShadowNearPlaneOffset.Value;
-            ShadowNearPlaneOffset.SettingChanged += (sender, args) => QualitySettings.shadowNearPlaneOffset = ShadowNearPlaneOffset.Value;
+            if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value;
+            LimitFramerate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFramerate.Value ? TargetFramerate.Value : -1;
+            TargetFramerate.SettingChanged += (sender, args) => { if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value; };
 
             //SceneManager.sceneLoaded += (scene, mode) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
             CameraNearClipPlane.SettingChanged += (sender, args) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
 
-            if(RunInBackground.Value == BackgroundRunModes.No)
-                Application.runInBackground = false;
+            InitSetting(DisplayMode, SetDisplayMode);
+            InitSetting(VSync, () => QualitySettings.vSyncCount = (int)VSync.Value);
+            InitSetting(AntiAliasing, () => QualitySettings.antiAliasing = AntiAliasing.Value);
+            InitSetting(AnisotropicFiltering, () => QualitySettings.anisotropicFiltering = AnisotropicFiltering.Value);
+            InitSetting(ShadowQuality, () => QualitySettings.shadows = (ShadowQuality)ShadowQuality.Value);
+            InitSetting(ShadowResolution, () => QualitySettings.shadowResolution = ShadowResolution.Value);
+            InitSetting(ShadowProjection, () => QualitySettings.shadowProjection = ShadowProjection.Value);
+            InitSetting(ShadowCascades, () => QualitySettings.shadowCascades = ShadowCascades.Value);
+            InitSetting(ShadowDistance, () => QualitySettings.shadowDistance = ShadowDistance.Value);
+            InitSetting(ShadowNearPlaneOffset, () => QualitySettings.shadowNearPlaneOffset = ShadowNearPlaneOffset.Value);
+            InitSetting(RunInBackground, SetBackgroundRunMode);
+        }
 
-            RunInBackground.SettingChanged += (sender, args) =>
-            {
-                switch(RunInBackground.Value)
-                {
-                    case BackgroundRunModes.No:
-                        Application.runInBackground = false;
-                        break;
-
-                    case BackgroundRunModes.Limited:
-                    case BackgroundRunModes.Yes:
-                        Application.runInBackground = true;
-                        break;
-                }
-            };
+        private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)
+        {
+            setter();
+            configEntry.SettingChanged += (sender, args) => setter();
         }
 
         private void Update()
         {
-            if(RunInBackground.Value != BackgroundRunModes.Limited)
+            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
                 return;
 
             if(!Manager.Scene.Instance.IsNowLoadingFade)
@@ -179,7 +148,7 @@ namespace KeelPlugins
             if(OptimizeInBackground.Value)
                 QualitySettings.antiAliasing = hasFocus ? AntiAliasing.Value : 0;
 
-            if(RunInBackground.Value != BackgroundRunModes.Limited)
+            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
                 return;
 
             Application.runInBackground = true;
@@ -190,47 +159,31 @@ namespace KeelPlugins
         {
             switch(DisplayMode.Value)
             {
-                case DisplayModes.Windowed:
+                case SettingEnum.DisplayMode.Windowed:
                     DisplayInterop.MakeWindowed();
                     break;
-                case DisplayModes.Fullscreen:
+                case SettingEnum.DisplayMode.Fullscreen:
                     DisplayInterop.MakeFullscreen();
                     break;
-                case DisplayModes.BorderlessFullscreen:
-                    StartCoroutine(DisplayInterop.MakeBorderless());
+                case SettingEnum.DisplayMode.BorderlessFullscreen:
+                    DisplayInterop.MakeBorderless(this);
                     break;
             }
         }
 
-        private enum VSyncTypes
+        private void SetBackgroundRunMode()
         {
-            Disabled,
-            Enabled,
-            Half
-        }
+            switch(RunInBackground.Value)
+            {
+                case SettingEnum.BackgroundRunMode.No:
+                    Application.runInBackground = false;
+                    break;
 
-        private enum ShadowTypes
-        {
-            Disabled = ShadowQuality.Disable,
-            [Description("Hard only")]
-            HardOnly = ShadowQuality.HardOnly,
-            [Description("Soft and hard")]
-            SoftHard = ShadowQuality.All
-        }
-
-        private enum BackgroundRunModes
-        {
-            No,
-            Yes,
-            Limited
-        }
-
-        private enum DisplayModes
-        {
-            Fullscreen,
-            [Description("Borderless fullscreen")]
-            BorderlessFullscreen,
-            Windowed
+                case SettingEnum.BackgroundRunMode.Limited:
+                case SettingEnum.BackgroundRunMode.Yes:
+                    Application.runInBackground = true;
+                    break;
+            }
         }
     }
 }

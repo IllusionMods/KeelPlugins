@@ -11,14 +11,16 @@ namespace KeelPlugins
         private static WindowStyleFlags backupExtended;
         private static bool backupDone = false;
 
-        public static IEnumerator MakeBorderless()
+        public static void MakeBorderless(MonoBehaviour monoBehaviour)
         {
             if(Screen.fullScreen)
-            {
-                Screen.SetResolution(Screen.width, Screen.height, false);
-                yield return null; // wait for Screen.SetResolution to finish
-            }
+                SetResolutionCallback(monoBehaviour, Screen.width, Screen.height, false, MakeBorderless);
+            else
+                MakeBorderless();
+        }
 
+        private static void MakeBorderless()
+        {
             var hwnd = GetActiveWindow();
 
             if(!backupDone)
@@ -80,9 +82,9 @@ namespace KeelPlugins
         public static void SetResolutionCallback(MonoBehaviour monoBehaviour, int width, int height, bool fullscreen, Action callback)
         {
             Screen.SetResolution(width, height, fullscreen);
-            monoBehaviour.StartCoroutine(Coroutine());
+            monoBehaviour.StartCoroutine(WaitFrame());
 
-            IEnumerator Coroutine()
+            IEnumerator WaitFrame()
             {
                 yield return null;
                 callback();
