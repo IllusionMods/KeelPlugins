@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using BepInEx.Harmony;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -56,17 +57,14 @@ namespace KeelPlugins
             MaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, "Advanced"));
             MaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, "Advanced"));
             MaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, "Advanced"));
-
-            harmony = new Harmony($"{GUID}.harmony");
-            harmony.PatchAll(typeof(PointOfView));
-            harmony.PatchAll(typeof(Hooks));
+            
+            harmony = HarmonyWrapper.PatchAll();
         }
 
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(typeof(PointOfView));
-            harmony.UnpatchAll(typeof(Hooks));
+            harmony.UnpatchAll();
         } 
 #endif
 

@@ -36,7 +36,7 @@ namespace KeelPlugins
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(GetType());
+            harmony.UnpatchAll();
             DestroyImmediate(panel);
 
             var studio = Studio.Studio.Instance;

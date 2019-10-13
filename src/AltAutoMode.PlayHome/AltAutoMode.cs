@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Harmony;
 using H;
 using HarmonyLib;
 using System;
@@ -24,14 +25,13 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = new Harmony($"{GUID}.harmony");
-            harmony.PatchAll(typeof(Hooks));
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(typeof(Hooks));
+            harmony.UnpatchAll();
         }
 #endif
 

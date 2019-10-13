@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Harmony;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.IO;
@@ -17,9 +18,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            var harmony = new Harmony("keelhauled.phmoreslotidbep.harmony");
-            harmony.PatchAll(typeof(EditModePatch));
-            harmony.PatchAll(typeof(ItemDataBasePatch));
+            var harmony = HarmonyWrapper.PatchAll();
             CustomDataSetupLoaderPatch.Patch(harmony);
         }
     }

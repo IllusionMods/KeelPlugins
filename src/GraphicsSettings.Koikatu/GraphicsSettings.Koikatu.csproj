@@ -34,12 +34,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationManagerAttributes.cs" />
     <Compile Include="WindowInterop.cs" />
     <Compile Include="GraphicsSettings.cs" />
     <Compile Include="WinAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingEnum.cs" />
   </ItemGroup>
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

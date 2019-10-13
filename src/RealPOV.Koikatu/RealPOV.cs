@@ -70,7 +70,7 @@ namespace KeelPlugins
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(typeof(Hooks));
+            harmony.UnpatchAll();
         }
 #endif
 

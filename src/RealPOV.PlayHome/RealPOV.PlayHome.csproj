@@ -48,5 +48,6 @@
     <Compile Include="RealPOV.cs" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+  <Import Project="..\Common.Core.Events\Common.Core.Events.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
