@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Harmony;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.IO;
@@ -20,8 +21,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = new Harmony($"{GUID}.harmony");
-            harmony.PatchAll(typeof(Hooks));
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
 
             var ass = Assembly.GetExecutingAssembly();
             var soundDir = Path.Combine(Path.GetDirectoryName(ass.Location), PluginName);
@@ -35,7 +35,7 @@ namespace KeelPlugins
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(typeof(Hooks));
+            harmony.UnpatchAll();
         }
 #endif
 

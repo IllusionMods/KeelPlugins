@@ -20,15 +20,14 @@ namespace KeelPlugins
         private void Awake()
         {
             bepinex = gameObject;
-            harmony = new Harmony($"{GUID}.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
         }
 
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll(typeof(Hooks));
+            harmony.UnpatchAll();
         }
 #endif
 
