@@ -1,4 +1,6 @@
-﻿namespace KeelPlugins
+﻿#pragma warning disable 0649
+
+namespace KeelPlugins
 {
     /// <summary>
     /// Special class that controls how a setting is displayed inside ConfigurationManager.
