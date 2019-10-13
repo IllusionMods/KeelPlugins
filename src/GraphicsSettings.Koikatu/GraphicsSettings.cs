@@ -21,7 +21,7 @@ namespace KeelPlugins
         private const string DESCRIPTION_VSYNC = "VSync synchronizes the output video of the graphics card to the refresh rate of the monitor. " +
                                                  "This prevents tearing and produces a smoother video output.\n" +
                                                  "Half vsync synchronizes the output to half the refresh rate of your monitor.";
-        private const string DESCRIPTION_LIMITFRAMERATE = "VSync has to be disabled for this to take effect.";
+        private const string DESCRIPTION_LIMITFRAMERATE = "Limits your framerate to whatever value is set. VSync has to be disabled for this to take effect.";
         private const string DESCRIPTION_ANTIALIASING = "Smooths out jagged edges on objects.";
         private const string DESCRIPTION_SHADOWPROJECTION = "Close Fit renders higher resolution shadows but they can sometimes wobble slightly if the camera moves." +
                                                             "Stable Fit is lower resolution but no wobble.";
@@ -39,7 +39,6 @@ namespace KeelPlugins
         private ConfigEntry<string> Resolution { get; set; }
         private ConfigEntry<SettingEnum.DisplayMode> DisplayMode { get; set; }
         private ConfigEntry<SettingEnum.VSyncType> VSync { get; set; }
-        private ConfigEntry<bool> LimitFramerate { get; set; }
         private ConfigEntry<int> TargetFramerate { get; set; }
         private ConfigEntry<int> AntiAliasing { get; set; }
         private ConfigEntry<AnisotropicFiltering> AnisotropicFiltering { get; set; }
@@ -54,15 +53,15 @@ namespace KeelPlugins
 
         private string resolutionX = Screen.width.ToString();
         private string resolutionY = Screen.height.ToString();
-        private int _focusFrameCounter;
+        private int focusFrameCounter = 0;
+        private bool framerateToggle = false;
 
         private void Awake()
         {
             Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new ConfigurationManagerAttributes { CustomDrawer = new Action<ConfigEntryBase>(ResolutionDrawer), Order = 9, HideDefaultButton = true }));
             DisplayMode = Config.AddSetting(CATEGORY_RENDER, "DisplayMode", SettingEnum.DisplayMode.Windowed, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10, DispName = "Display mode" }));
             VSync = Config.AddSetting(CATEGORY_RENDER, "VSync", SettingEnum.VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC, null, new ConfigurationManagerAttributes { Order = 8 }));
-            LimitFramerate = Config.AddSetting(CATEGORY_RENDER, "LimitFramerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE, null, new ConfigurationManagerAttributes { Order = 7, DispName = "Limit framerate" }));
-            TargetFramerate = Config.AddSetting(CATEGORY_RENDER, "TargetFramerate", 60, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 6, DispName = "Target framerate" }));
+            TargetFramerate = Config.AddSetting(CATEGORY_RENDER, "FramerateLimit", -1, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE, null, new ConfigurationManagerAttributes { CustomDrawer = new Action<ConfigEntryBase>(FramerateLimitDrawer), Order = 7, DispName = "Framerate limit", HideDefaultButton = true }));
             AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "AntialiasingMultiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING, null, new ConfigurationManagerAttributes { DispName = "Anti-aliasing multiplier" }));
             AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "AnisotropicFiltering", UnityEngine.AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER, null, new ConfigurationManagerAttributes { DispName = "Anisotropic filtering" }));
             ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "ShadowQuality", SettingEnum.ShadowQuality.SoftHard, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow quality" }));
@@ -74,9 +73,11 @@ namespace KeelPlugins
             RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "RunInBackground", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Run in background" }));
             OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "OptimizeInBackground", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Optimize in background" }));
 
-            if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value;
-            LimitFramerate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFramerate.Value ? TargetFramerate.Value : -1;
-            TargetFramerate.SettingChanged += (sender, args) => { if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value; };
+            if(TargetFramerate.Value != -1)
+            {
+                Application.targetFrameRate = TargetFramerate.Value;
+                framerateToggle = true;
+            }
 
             InitSetting(DisplayMode, SetDisplayMode);
             InitSetting(VSync, () => QualitySettings.vSyncCount = (int)VSync.Value);
@@ -91,7 +92,7 @@ namespace KeelPlugins
             InitSetting(RunInBackground, SetBackgroundRunMode);
         }
 
-        private void ResolutionDrawer(ConfigEntryBase entry)
+        private void ResolutionDrawer(ConfigEntryBase configEntry)
         {
             string resX = GUILayout.TextField(resolutionX, GUILayout.Width(70));
             string resY = GUILayout.TextField(resolutionY, GUILayout.Width(70));
@@ -117,6 +118,35 @@ namespace KeelPlugins
             }
         }
 
+        private void FramerateLimitDrawer(ConfigEntryBase configEntry)
+        {
+            var toggle = GUILayout.Toggle(framerateToggle, "Enabled", GUILayout.Width(70));
+            if(toggle != framerateToggle)
+            {
+                if(framerateToggle = toggle)
+                {
+                    var refreshRate = Screen.currentResolution.refreshRate;
+                    TargetFramerate.Value = refreshRate;
+                    Application.targetFrameRate = refreshRate;
+                }
+                else
+                {
+                    TargetFramerate.Value = -1;
+                    Application.targetFrameRate = -1;
+                }
+            }
+
+            var slider = (int)GUILayout.HorizontalSlider(TargetFramerate.Value, 30, 200, GUILayout.ExpandWidth(true));
+            if(slider != TargetFramerate.Value && framerateToggle)
+            {
+                TargetFramerate.Value = Application.targetFrameRate = slider;
+                if(!framerateToggle)
+                    framerateToggle = true;
+            }
+
+            GUILayout.TextField(TargetFramerate.Value.ToString(), GUILayout.Width(50));
+        }
+
         private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)
         {
             setter();
@@ -132,9 +162,9 @@ namespace KeelPlugins
             {
                 // Run for a bunch of frames to let the game load anything it's currently loading (scenes, cards, etc)
                 // When loading it sometimes advances a frame at which point it would stop without this
-                if(_focusFrameCounter < 100)
-                    _focusFrameCounter++;
-                else if(_focusFrameCounter == 100)
+                if(focusFrameCounter < 100)
+                    focusFrameCounter++;
+                else if(focusFrameCounter == 100)
                     Application.runInBackground = false;
             }
         }
@@ -148,7 +178,7 @@ namespace KeelPlugins
                 return;
 
             Application.runInBackground = true;
-            _focusFrameCounter = 0;
+            focusFrameCounter = 0;
         }
 
         private void SetDisplayMode()
