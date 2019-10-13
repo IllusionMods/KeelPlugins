@@ -49,7 +49,6 @@ namespace KeelPlugins
         private ConfigEntry<int> ShadowCascades { get; set; }
         private ConfigEntry<float> ShadowDistance { get; set; }
         private ConfigEntry<float> ShadowNearPlaneOffset { get; set; }
-        private ConfigEntry<float> CameraNearClipPlane { get; set; }
         private ConfigEntry<SettingEnum.BackgroundRunMode> RunInBackground { get; set; }
         private ConfigEntry<bool> OptimizeInBackground { get; set; }
 
@@ -72,16 +71,12 @@ namespace KeelPlugins
             ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "ShadowCascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4), new ConfigurationManagerAttributes { DispName = "Shadow cascades" }));
             ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "ShadowFistance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f), new ConfigurationManagerAttributes { DispName = "Shadow distance" }));
             ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "ShadowNearPlaneOffset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f), new ConfigurationManagerAttributes { DispName = "Shadow near plane offset" }));
-            CameraNearClipPlane = Config.AddSetting(CATEGORY_GENERAL, "CameraNearClipPlane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f), new ConfigurationManagerAttributes { DispName = "Camera near clip plane" }));
             RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "RunInBackground", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Run in background" }));
             OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "OptimizeInBackground", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Optimize in background" }));
 
             if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value;
             LimitFramerate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFramerate.Value ? TargetFramerate.Value : -1;
             TargetFramerate.SettingChanged += (sender, args) => { if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value; };
-
-            //SceneManager.sceneLoaded += (scene, mode) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
-            CameraNearClipPlane.SettingChanged += (sender, args) => { if(Camera.main) Camera.main.nearClipPlane = CameraNearClipPlane.Value; };
 
             InitSetting(DisplayMode, SetDisplayMode);
             InitSetting(VSync, () => QualitySettings.vSyncCount = (int)VSync.Value);
