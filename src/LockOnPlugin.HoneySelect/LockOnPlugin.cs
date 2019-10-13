@@ -13,8 +13,6 @@ namespace LockOnPlugin
         public const string GUID = "keelhauled.lockonplugin";
         public const string Version = "2.6.0";
 
-        internal static new ManualLogSource Logger;
-
         private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
         private const string SECTION_GENERAL = "General";
 
