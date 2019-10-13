@@ -1,13 +1,11 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using ConfigurationManager;
 using HarmonyLib;
 using System;
 using UnityEngine;
 
 namespace KeelPlugins
 {
-    [BepInDependency(ConfigurationManager.ConfigurationManager.GUID)]
     [BepInPlugin(GUID, "Graphics Settings", Version)]
     public class GraphicsSettings : BaseUnityPlugin
     {
@@ -16,7 +14,7 @@ namespace KeelPlugins
 
         private const string CATEGORY_RENDER = "Rendering";
         private const string CATEGORY_SHADOW = "Shadows";
-        private const string CATEGORY_MISC = "Misc";
+        private const string CATEGORY_GENERAL = "General";
 
         private const string DESCRIPTION_RESOLUTION = "Dummy setting for the custom drawer. Resolution is saved automatically by the game after clicking apply.";
         private const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
@@ -59,49 +57,24 @@ namespace KeelPlugins
         private string resolutionY = Screen.height.ToString();
         private int _focusFrameCounter;
 
-        private void ResolutionDrawer(SettingEntryBase entry)
-        {
-            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(70));
-            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(70));
-
-            if(resX != resolutionX && int.TryParse(resX, out _)) resolutionX = resX;
-            if(resY != resolutionY && int.TryParse(resY, out _)) resolutionY = resY;
-
-            if(GUILayout.Button("Apply", GUILayout.ExpandWidth(true)))
-            {
-                int x = int.Parse(resolutionX);
-                int y = int.Parse(resolutionY);
-
-                if(Screen.width != x || Screen.height != y)
-                {
-                    WindowInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
-                    {
-                        Traverse.Create(FindObjectOfType<ConfigurationManager.ConfigurationManager>()).Method("CalculateWindowRect").GetValue();
-                        if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
-                            WindowInterop.MakeBorderless(this);
-                    });
-                }
-            }
-        }
-
         private void Awake()
         {
-            Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new Action<SettingEntryBase>(ResolutionDrawer)));
-            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", SettingEnum.DisplayMode.Windowed);
-            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync level", SettingEnum.VSyncType.Enabled, DESCRIPTION_VSYNC);
-            LimitFramerate = Config.AddSetting(CATEGORY_RENDER, "Limit framerate", false, DESCRIPTION_LIMITFRAMERATE);
-            TargetFramerate = Config.AddSetting(CATEGORY_RENDER, "Target framerate", 60);
-            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti-aliasing multiplier", 4, DESCRIPTION_ANTIALIASING);
-            AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", UnityEngine.AnisotropicFiltering.ForceEnable, DESCRIPTION_ANISOFILTER);
-            ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "Shadow type", SettingEnum.ShadowQuality.SoftHard);
-            ShadowResolution = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", UnityEngine.ShadowResolution.VeryHigh);
-            ShadowProjection = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", UnityEngine.ShadowProjection.CloseFit);
-            ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
-            ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
-            ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
-            CameraNearClipPlane = Config.AddSetting(CATEGORY_MISC, "Camera near clip plane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f)));
-            RunInBackground = Config.AddSetting(CATEGORY_MISC, "Run in background", SettingEnum.BackgroundRunMode.Yes, DESCRIPTION_RUNINBACKGROUND);
-            OptimizeInBackground = Config.AddSetting(CATEGORY_MISC, "Optimize in background", true, DESCRIPTION_OPTIMIZEINBACKGROUND);
+            Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new ConfigurationManagerAttributes { CustomDrawer = new Action<ConfigEntryBase>(ResolutionDrawer), Order = 9, HideDefaultButton = true }));
+            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "DisplayMode", SettingEnum.DisplayMode.Windowed, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10, DispName = "Display mode" }));
+            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync", SettingEnum.VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC, null, new ConfigurationManagerAttributes { Order = 8 }));
+            LimitFramerate = Config.AddSetting(CATEGORY_RENDER, "LimitFramerate", false, new ConfigDescription(DESCRIPTION_LIMITFRAMERATE, null, new ConfigurationManagerAttributes { Order = 7, DispName = "Limit framerate" }));
+            TargetFramerate = Config.AddSetting(CATEGORY_RENDER, "TargetFramerate", 60, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 6, DispName = "Target framerate" }));
+            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "AntialiasingMultiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING, null, new ConfigurationManagerAttributes { DispName = "Anti-aliasing multiplier" }));
+            AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "AnisotropicFiltering", UnityEngine.AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER, null, new ConfigurationManagerAttributes { DispName = "Anisotropic filtering" }));
+            ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "ShadowQuality", SettingEnum.ShadowQuality.SoftHard, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow quality" }));
+            ShadowResolution = Config.AddSetting(CATEGORY_SHADOW, "ShadowResolution", UnityEngine.ShadowResolution.VeryHigh, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow resolution" }));
+            ShadowProjection = Config.AddSetting(CATEGORY_SHADOW, "ShadowProjection", UnityEngine.ShadowProjection.CloseFit, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow projection" }));
+            ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "ShadowCascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4), new ConfigurationManagerAttributes { DispName = "Shadow cascades" }));
+            ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "ShadowFistance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f), new ConfigurationManagerAttributes { DispName = "Shadow distance" }));
+            ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "ShadowNearPlaneOffset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f), new ConfigurationManagerAttributes { DispName = "Shadow near plane offset" }));
+            CameraNearClipPlane = Config.AddSetting(CATEGORY_GENERAL, "CameraNearClipPlane", 0.06f, new ConfigDescription(DESCRIPTION_CAMERANEARCLIPPLANE, new AcceptableValueRange<float>(0.01f, 0.06f), new ConfigurationManagerAttributes { DispName = "Camera near clip plane" }));
+            RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "RunInBackground", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Run in background" }));
+            OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "OptimizeInBackground", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Optimize in background" }));
 
             if(LimitFramerate.Value) Application.targetFrameRate = TargetFramerate.Value;
             LimitFramerate.SettingChanged += (sender, args) => Application.targetFrameRate = LimitFramerate.Value ? TargetFramerate.Value : -1;
@@ -121,6 +94,32 @@ namespace KeelPlugins
             InitSetting(ShadowDistance, () => QualitySettings.shadowDistance = ShadowDistance.Value);
             InitSetting(ShadowNearPlaneOffset, () => QualitySettings.shadowNearPlaneOffset = ShadowNearPlaneOffset.Value);
             InitSetting(RunInBackground, SetBackgroundRunMode);
+        }
+
+        private void ResolutionDrawer(ConfigEntryBase entry)
+        {
+            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(70));
+            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(70));
+
+            if(resX != resolutionX && int.TryParse(resX, out _)) resolutionX = resX;
+            if(resY != resolutionY && int.TryParse(resY, out _)) resolutionY = resY;
+
+            if(GUILayout.Button("Apply", GUILayout.ExpandWidth(true)))
+            {
+                int x = int.Parse(resolutionX);
+                int y = int.Parse(resolutionY);
+
+                if(Screen.width != x || Screen.height != y)
+                {
+                    WindowInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
+                    {
+                        var type = Type.GetType("ConfigurationManager.ConfigurationManager, ConfigurationManager");
+                        Traverse.Create(FindObjectOfType(type)).Method("CalculateWindowRect").GetValue(); // update configmanager window size
+                        if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
+                            WindowInterop.MakeBorderless(this);
+                    });
+                }
+            }
         }
 
         private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)

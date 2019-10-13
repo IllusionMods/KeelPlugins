@@ -27,10 +27,6 @@
       <HintPath>..\..\lib\bepinex5\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ConfigurationManager">
-      <HintPath>..\..\lib\kk\ConfigurationManager.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\lib\kk\UnityEngine.dll</HintPath>
@@ -38,6 +34,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationManagerAttributes.cs" />
     <Compile Include="WindowInterop.cs" />
     <Compile Include="GraphicsSettings.cs" />
     <Compile Include="WinAPI.cs" />
