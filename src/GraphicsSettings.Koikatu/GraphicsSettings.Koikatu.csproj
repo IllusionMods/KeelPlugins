@@ -13,6 +13,9 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -42,4 +45,10 @@
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM cd $(ProjectDir)
+REM for /F "usebackq tokens=1" %25%25i in (`powershell -ExecutionPolicy Bypass .\post-build.ps1 -config $(ConfigurationName)`) do set aioutput=%25%25i
+REM mkdir $(%25outputpath%25)
+REM copy /Y "$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)" "$(%25outputpath%25)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
