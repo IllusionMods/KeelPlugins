@@ -14,7 +14,7 @@ namespace KeelPlugins
         public const string Version = "1.0.0";
 
         private const string SECTION_GENERAL = "General";
-        private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
+        private const string SECTION_HOTKEYS = "Keyboard shortcuts";
 
         private static ConfigEntry<float> ViewOffset { get; set; }
         private static ConfigEntry<float> DefaultFov { get; set; }

@@ -24,7 +24,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            HideHotkey = Config.AddSetting("Keyboard Shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
+            HideHotkey = Config.AddSetting("Keyboard shortcuts", "Hide UI", new KeyboardShortcut(KeyCode.Space));
             harmony = HarmonyWrapper.PatchAll();
         }
 
