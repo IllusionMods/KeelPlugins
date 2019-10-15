@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
 
 namespace LockOnPlugin
 {
@@ -13,7 +12,7 @@ namespace LockOnPlugin
         public const string GUID = "keelhauled.lockonplugin";
         public const string Version = "2.6.0";
 
-        private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
+        private const string SECTION_HOTKEYS = "Keyboard shortcuts";
         private const string SECTION_GENERAL = "General";
 
         private const string DESCRIPTION_TRACKSPEED = "The speed at which the target is followed.";

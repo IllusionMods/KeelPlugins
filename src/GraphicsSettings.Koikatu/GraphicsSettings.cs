@@ -12,9 +12,9 @@ namespace KeelPlugins
         public const string GUID = "keelhauled.graphicssettings";
         public const string Version = "1.1.0";
 
+        private const string CATEGORY_GENERAL = "General";
         private const string CATEGORY_RENDER = "Rendering";
         private const string CATEGORY_SHADOW = "Shadows";
-        private const string CATEGORY_GENERAL = "General";
 
         private const string DESCRIPTION_RESOLUTION = "Dummy setting for the custom drawer. Resolution is saved automatically by the game after clicking apply.";
         private const string DESCRIPTION_ANISOFILTER = "Improves distant textures when they are being viewer from indirect angles.";
@@ -60,19 +60,19 @@ namespace KeelPlugins
         private void Awake()
         {
             Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = new Action<ConfigEntryBase>(ResolutionDrawer) }));
-            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "DisplayMode", SettingEnum.DisplayMode.Windowed, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10, DispName = "Display mode" }));
+            DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", SettingEnum.DisplayMode.Windowed, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
             VSync = Config.AddSetting(CATEGORY_RENDER, "VSync", SettingEnum.VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC, null, new ConfigurationManagerAttributes { Order = 8 }));
-            FramerateLimit = Config.AddSetting(CATEGORY_RENDER, "FramerateLimit", -1, new ConfigDescription(DESCRIPTION_FRAMERATELIMIT, null, new ConfigurationManagerAttributes { Order = 7, DispName = "Framerate limit", CustomDrawer = new Action<ConfigEntryBase>(FramerateLimitDrawer), HideDefaultButton = true }));
-            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "AntialiasingMultiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING, new AcceptableValueRange<int>(0, 8), new ConfigurationManagerAttributes { DispName = "Anti-aliasing multiplier" }));
-            AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "AnisotropicFiltering", UnityEngine.AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER, null, new ConfigurationManagerAttributes { DispName = "Anisotropic filtering" }));
-            ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "ShadowQuality", SettingEnum.ShadowQuality.SoftHard, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow quality" }));
-            ShadowResolution = Config.AddSetting(CATEGORY_SHADOW, "ShadowResolution", UnityEngine.ShadowResolution.VeryHigh, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow resolution" }));
-            ShadowProjection = Config.AddSetting(CATEGORY_SHADOW, "ShadowProjection", UnityEngine.ShadowProjection.CloseFit, new ConfigDescription("", null, new ConfigurationManagerAttributes { DispName = "Shadow projection" }));
-            ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "ShadowCascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4), new ConfigurationManagerAttributes { DispName = "Shadow cascades" }));
-            ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "ShadowDistance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f), new ConfigurationManagerAttributes { DispName = "Shadow distance" }));
-            ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "ShadowNearPlaneOffset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f), new ConfigurationManagerAttributes { DispName = "Shadow near plane offset" }));
-            RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "RunInBackground", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Run in background" }));
-            OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "OptimizeInBackground", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND, null, new ConfigurationManagerAttributes { DispName = "Optimize in background" }));
+            FramerateLimit = Config.AddSetting(CATEGORY_RENDER, "Framerate limit", -1, new ConfigDescription(DESCRIPTION_FRAMERATELIMIT, null, new ConfigurationManagerAttributes { Order = 7, HideDefaultButton = true, CustomDrawer = new Action<ConfigEntryBase>(FramerateLimitDrawer) }));
+            AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti-aliasing multiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING, new AcceptableValueRange<int>(0, 8)));
+            AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", UnityEngine.AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
+            ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "Shadow quality", SettingEnum.ShadowQuality.SoftHard);
+            ShadowResolution = Config.AddSetting(CATEGORY_SHADOW, "Shadow resolution", UnityEngine.ShadowResolution.VeryHigh);
+            ShadowProjection = Config.AddSetting(CATEGORY_SHADOW, "Shadow projection", UnityEngine.ShadowProjection.CloseFit);
+            ShadowCascades = Config.AddSetting(CATEGORY_SHADOW, "Shadow cascades", 4, new ConfigDescription(DESCRIPTION_SHADOWCASCADES, new AcceptableValueList<int>(0, 2, 4)));
+            ShadowDistance = Config.AddSetting(CATEGORY_SHADOW, "Shadow distance", 50f, new ConfigDescription(DESCRIPTION_SHADOWDISTANCE, new AcceptableValueRange<float>(0f, 100f)));
+            ShadowNearPlaneOffset = Config.AddSetting(CATEGORY_SHADOW, "Shadow near plane offset", 2f, new ConfigDescription(DESCRIPTION_SHADOWNEARPLANEOFFSET, new AcceptableValueRange<float>(0f, 4f)));
+            RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "Run in background", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
+            OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
 
             InitSetting(DisplayMode, SetDisplayMode);
             InitSetting(VSync, () => QualitySettings.vSyncCount = (int)VSync.Value);

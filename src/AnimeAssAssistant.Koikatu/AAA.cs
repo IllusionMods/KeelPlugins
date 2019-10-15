@@ -20,8 +20,11 @@ namespace KeelPlugins
         public const string Version = "1.0.0";
         internal static new ManualLogSource Logger;
 
-        private const string SECTION_HOTKEY = "Keyboard Shortcuts";
+        private const string SECTION_HOTKEY = "Keyboard shortcuts";
         private const string SECTION_FOLDER = "Folders";
+
+        private const string DESCRIPTION_RYCYCLEBIN = "Moves the current character to the recycle bin";
+        private const string DESCRIPTION_SAVECHARA = "Moves the current character to the save folder";
 
         internal static ConfigEntry<KeyboardShortcut> HotkeyOutfit1 { get; set; }
         internal static ConfigEntry<KeyboardShortcut> HotkeyOutfit2 { get; set; }
@@ -45,10 +48,10 @@ namespace KeelPlugins
         {
             Logger = base.Logger;
 
-            HotkeyNext = Config.AddSetting(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow));
-            HotkeyPrev = Config.AddSetting(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow));
-            HotkeyKill = Config.AddSetting(SECTION_HOTKEY, "Move character to recycle bin", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription("Moves the current character to the recycle bin"));
-            HotkeySave = Config.AddSetting(SECTION_HOTKEY, "Move character to save folder", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription("Moves the current character to the save folder"));
+            HotkeyNext = Config.AddSetting(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
+            HotkeyPrev = Config.AddSetting(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
+            HotkeyKill = Config.AddSetting(SECTION_HOTKEY, "Move character to recycle bin", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription(DESCRIPTION_RYCYCLEBIN, null, new ConfigurationManagerAttributes { Order = 8 }));
+            HotkeySave = Config.AddSetting(SECTION_HOTKEY, "Move character to save folder", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription(DESCRIPTION_SAVECHARA, null, new ConfigurationManagerAttributes { Order = 7 }));
 
             HotkeyOutfit1 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 1", new KeyboardShortcut(KeyCode.Alpha1));
             HotkeyOutfit2 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 2", new KeyboardShortcut(KeyCode.Alpha2));

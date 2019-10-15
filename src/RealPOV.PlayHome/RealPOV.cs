@@ -14,7 +14,7 @@ namespace KeelPlugins
         public const string Version = "1.0.0";
         internal static new ManualLogSource Logger;
 
-        private const string SECTION_HOTKEYS = "Keyboard Shortcuts";
+        private const string SECTION_HOTKEYS = "Keyboard shortcuts";
         private const string SECTION_GENERAL = "General";
         private const string SECTION_OFFSETS = "Offsets";
 
@@ -50,13 +50,13 @@ namespace KeelPlugins
             MouseSensitivity = Config.AddSetting(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
             DefaultNeckMode = Config.AddSetting(SECTION_GENERAL, "Default rotation mode", NeckMode.Both);
 
-            FemaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Female offset X", 0f, new ConfigDescription("", null, "Advanced"));
-            FemaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Female offset Y", 0.0315f, new ConfigDescription("", null, "Advanced"));
-            FemaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Female offset Z", 0f, new ConfigDescription("", null, "Advanced"));
+            FemaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Female offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+            FemaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Female offset Y", 0.0315f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+            FemaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Female offset Z", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
 
-            MaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, "Advanced"));
-            MaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, "Advanced"));
-            MaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, "Advanced"));
+            MaleOffsetX = Config.AddSetting(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+            MaleOffsetY = Config.AddSetting(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+            MaleOffsetZ = Config.AddSetting(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             
             harmony = HarmonyWrapper.PatchAll();
         }

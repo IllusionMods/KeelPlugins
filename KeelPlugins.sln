@@ -141,6 +141,7 @@ Global
 		src\Common.Core.Events\Common.Core.Events.projitems*{2a4067d3-d380-492b-946b-e7f221259439}*SharedItemsImports = 13
 		src\Common.Koikatu\Common.Koikatu.projitems*{2cbe1772-d2a2-40a5-8014-81904aab9781}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{2cbe1772-d2a2-40a5-8014-81904aab9781}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{394bc9b7-db38-4172-9b2c-60918e87b763}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{394bc9b7-db38-4172-9b2c-60918e87b763}*SharedItemsImports = 4
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{3b6cd84f-6327-46b6-91e1-5eb972bc60fe}*SharedItemsImports = 13
 		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{4994d068-6e18-414b-8fbf-a035ec46ccee}*SharedItemsImports = 13
