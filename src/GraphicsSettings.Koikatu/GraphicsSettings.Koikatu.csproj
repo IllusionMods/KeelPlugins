@@ -37,7 +37,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WindowInterop.cs" />
     <Compile Include="GraphicsSettings.cs" />
     <Compile Include="WinAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

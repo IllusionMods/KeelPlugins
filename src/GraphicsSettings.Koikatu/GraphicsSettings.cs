@@ -2,6 +2,9 @@
 using BepInEx.Configuration;
 using HarmonyLib;
 using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace KeelPlugins
@@ -39,6 +42,7 @@ namespace KeelPlugins
 
         private ConfigEntry<string> Resolution { get; set; }
         private ConfigEntry<SettingEnum.DisplayMode> DisplayMode { get; set; }
+        private ConfigEntry<int> SelectedMonitor { get; set; }
         private ConfigEntry<SettingEnum.VSyncType> VSync { get; set; }
         private ConfigEntry<int> FramerateLimit { get; set; }
         private ConfigEntry<int> AntiAliasing { get; set; }
@@ -56,13 +60,17 @@ namespace KeelPlugins
         private string resolutionY = Screen.height.ToString();
         private int focusFrameCounter = 0;
         private bool framerateToggle = false;
+        private WinAPI.WindowStyleFlags backupStandard;
+        private WinAPI.WindowStyleFlags backupExtended;
+        private bool backupDone = false;
 
         private void Awake()
         {
             Resolution = Config.AddSetting(CATEGORY_RENDER, "Resolution", "", new ConfigDescription(DESCRIPTION_RESOLUTION, null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = new Action<ConfigEntryBase>(ResolutionDrawer) }));
             DisplayMode = Config.AddSetting(CATEGORY_RENDER, "Display mode", SettingEnum.DisplayMode.Windowed, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
-            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync", SettingEnum.VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC, null, new ConfigurationManagerAttributes { Order = 8 }));
-            FramerateLimit = Config.AddSetting(CATEGORY_RENDER, "Framerate limit", -1, new ConfigDescription(DESCRIPTION_FRAMERATELIMIT, null, new ConfigurationManagerAttributes { Order = 7, HideDefaultButton = true, CustomDrawer = new Action<ConfigEntryBase>(FramerateLimitDrawer) }));
+            SelectedMonitor = Config.AddSetting(CATEGORY_RENDER, "Selected monitor", 0, new ConfigDescription("", new AcceptableValueList<int>(Enumerable.Range(0, Display.displays.Length).ToArray()), new ConfigurationManagerAttributes { Order = 8 }));
+            VSync = Config.AddSetting(CATEGORY_RENDER, "VSync", SettingEnum.VSyncType.Enabled, new ConfigDescription(DESCRIPTION_VSYNC, null, new ConfigurationManagerAttributes { Order = 7 }));
+            FramerateLimit = Config.AddSetting(CATEGORY_RENDER, "Framerate limit", -1, new ConfigDescription(DESCRIPTION_FRAMERATELIMIT, null, new ConfigurationManagerAttributes { Order = 6, HideDefaultButton = true, CustomDrawer = new Action<ConfigEntryBase>(FramerateLimitDrawer) }));
             AntiAliasing = Config.AddSetting(CATEGORY_RENDER, "Anti-aliasing multiplier", 4, new ConfigDescription(DESCRIPTION_ANTIALIASING, new AcceptableValueRange<int>(0, 8)));
             AnisotropicFiltering = Config.AddSetting(CATEGORY_RENDER, "Anisotropic filtering", UnityEngine.AnisotropicFiltering.ForceEnable, new ConfigDescription(DESCRIPTION_ANISOFILTER));
             ShadowQuality = Config.AddSetting(CATEGORY_SHADOW, "Shadow quality", SettingEnum.ShadowQuality.SoftHard);
@@ -74,7 +82,13 @@ namespace KeelPlugins
             RunInBackground = Config.AddSetting(CATEGORY_GENERAL, "Run in background", SettingEnum.BackgroundRunMode.Yes, new ConfigDescription(DESCRIPTION_RUNINBACKGROUND));
             OptimizeInBackground = Config.AddSetting(CATEGORY_GENERAL, "Optimize in background", true, new ConfigDescription(DESCRIPTION_OPTIMIZEINBACKGROUND));
 
-            InitSetting(DisplayMode, SetDisplayMode);
+            if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
+                StartCoroutine(RemoveBorder());
+
+            DisplayMode.SettingChanged += (sender, args) => SetDisplayMode();
+            SelectedMonitor.SettingChanged += (sender, args) => StartCoroutine(SelectMonitor());
+
+            InitSetting(FramerateLimit, SetFramerateLimit);
             InitSetting(VSync, () => QualitySettings.vSyncCount = (int)VSync.Value);
             InitSetting(AntiAliasing, () => QualitySettings.antiAliasing = AntiAliasing.Value);
             InitSetting(AnisotropicFiltering, () => QualitySettings.anisotropicFiltering = AnisotropicFiltering.Value);
@@ -85,18 +99,40 @@ namespace KeelPlugins
             InitSetting(ShadowDistance, () => QualitySettings.shadowDistance = ShadowDistance.Value);
             InitSetting(ShadowNearPlaneOffset, () => QualitySettings.shadowNearPlaneOffset = ShadowNearPlaneOffset.Value);
             InitSetting(RunInBackground, SetBackgroundRunMode);
+        }
 
-            if(FramerateLimit.Value != -1)
+        private void Update()
+        {
+            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
+                return;
+
+            if(!Manager.Scene.Instance.IsNowLoadingFade)
             {
-                Application.targetFrameRate = FramerateLimit.Value;
-                framerateToggle = true;
+                // Run for a bunch of frames to let the game load anything it's currently loading (scenes, cards, etc)
+                // When loading it sometimes advances a frame at which point it would stop without this
+                if(focusFrameCounter < 100)
+                    focusFrameCounter++;
+                else if(focusFrameCounter == 100)
+                    Application.runInBackground = false;
             }
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if(OptimizeInBackground.Value)
+                QualitySettings.antiAliasing = hasFocus ? AntiAliasing.Value : 0;
+
+            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
+                return;
+
+            Application.runInBackground = true;
+            focusFrameCounter = 0;
         }
 
         private void ResolutionDrawer(ConfigEntryBase configEntry)
         {
-            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(70));
-            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(70));
+            string resX = GUILayout.TextField(resolutionX, GUILayout.Width(80));
+            string resY = GUILayout.TextField(resolutionY, GUILayout.Width(80));
 
             if(resX != resolutionX && int.TryParse(resX, out _)) resolutionX = resX;
             if(resY != resolutionY && int.TryParse(resY, out _)) resolutionY = resY;
@@ -107,15 +143,27 @@ namespace KeelPlugins
                 int y = int.Parse(resolutionY);
 
                 if(Screen.width != x || Screen.height != y)
-                {
-                    WindowInterop.SetResolutionCallback(this, x, y, Screen.fullScreen, () =>
-                    {
-                        var type = Type.GetType("ConfigurationManager.ConfigurationManager, ConfigurationManager");
-                        Traverse.Create(FindObjectOfType(type)).Method("CalculateWindowRect").GetValue(); // update configmanager window size
-                        if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
-                            WindowInterop.MakeBorderless(this);
-                    });
-                }
+                    StartCoroutine(SetResolution(x, y));
+            }
+
+            if(GUILayout.Button("Reset", GUILayout.Width(50)))
+            {
+                var display = Display.displays[SelectedMonitor.Value];
+                if(Screen.width != display.renderingWidth || Screen.height != display.renderingHeight)
+                    StartCoroutine(SetResolution(display.renderingWidth, display.renderingHeight));
+            }
+
+            IEnumerator SetResolution(int width, int height)
+            {
+                Screen.SetResolution(width, height, Screen.fullScreen);
+                yield return null;
+
+                UpdateConfigManagerSize();
+                resolutionX = Screen.width.ToString();
+                resolutionY = Screen.height.ToString();
+
+                if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
+                    StartCoroutine(RemoveBorder());
             }
         }
 
@@ -148,52 +196,18 @@ namespace KeelPlugins
             GUILayout.TextField(FramerateLimit.Value.ToString(), GUILayout.Width(50));
         }
 
-        private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)
-        {
-            setter();
-            configEntry.SettingChanged += (sender, args) => setter();
-        }
-
-        private void Update()
-        {
-            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
-                return;
-
-            if(!Manager.Scene.Instance.IsNowLoadingFade)
-            {
-                // Run for a bunch of frames to let the game load anything it's currently loading (scenes, cards, etc)
-                // When loading it sometimes advances a frame at which point it would stop without this
-                if(focusFrameCounter < 100)
-                    focusFrameCounter++;
-                else if(focusFrameCounter == 100)
-                    Application.runInBackground = false;
-            }
-        }
-
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            if(OptimizeInBackground.Value)
-                QualitySettings.antiAliasing = hasFocus ? AntiAliasing.Value : 0;
-
-            if(RunInBackground.Value != SettingEnum.BackgroundRunMode.Limited)
-                return;
-
-            Application.runInBackground = true;
-            focusFrameCounter = 0;
-        }
-
         private void SetDisplayMode()
         {
             switch(DisplayMode.Value)
             {
                 case SettingEnum.DisplayMode.Windowed:
-                    WindowInterop.MakeWindowed();
+                    MakeWindowed();
                     break;
                 case SettingEnum.DisplayMode.Fullscreen:
-                    WindowInterop.MakeFullscreen();
+                    MakeFullscreen();
                     break;
                 case SettingEnum.DisplayMode.BorderlessFullscreen:
-                    WindowInterop.MakeBorderless(this);
+                    StartCoroutine(RemoveBorder());
                     break;
             }
         }
@@ -205,12 +219,114 @@ namespace KeelPlugins
                 case SettingEnum.BackgroundRunMode.No:
                     Application.runInBackground = false;
                     break;
-
                 case SettingEnum.BackgroundRunMode.Limited:
                 case SettingEnum.BackgroundRunMode.Yes:
                     Application.runInBackground = true;
                     break;
             }
+        }
+
+        private void SetFramerateLimit()
+        {
+            Application.targetFrameRate = FramerateLimit.Value;
+            framerateToggle = FramerateLimit.Value > 0;
+        }
+
+        private IEnumerator SelectMonitor()
+        {
+            // Set the target display and a low resolution.
+            PlayerPrefs.SetInt("UnitySelectMonitor", SelectedMonitor.Value);
+            Screen.SetResolution(800, 600, Screen.fullScreen);
+            yield return null;
+
+            // Restore resolution
+            var targetDisplay = Display.displays[SelectedMonitor.Value];
+            Screen.SetResolution(targetDisplay.renderingWidth, targetDisplay.renderingHeight, Screen.fullScreen);
+            yield return null;
+
+            UpdateConfigManagerSize();
+            resolutionX = Screen.width.ToString();
+            resolutionY = Screen.height.ToString();
+
+            if(DisplayMode.Value == SettingEnum.DisplayMode.BorderlessFullscreen)
+                StartCoroutine(RemoveBorder());
+        }
+
+        private IEnumerator RemoveBorder()
+        {
+            if(Screen.fullScreen)
+            {
+                Screen.SetResolution(Screen.width, Screen.height, false);
+                yield return null;
+            }
+
+            var hwnd = WinAPI.GetActiveWindow();
+
+            if(!backupDone)
+            {
+                backupStandard = WinAPI.GetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.Style);
+                backupExtended = WinAPI.GetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.ExtendedStyle);
+                backupDone = true;
+            }
+
+            var newStandard = backupStandard
+                              & ~(WinAPI.WindowStyleFlags.Caption
+                                 | WinAPI.WindowStyleFlags.ThickFrame
+                                 | WinAPI.WindowStyleFlags.SystemMenu
+                                 | WinAPI.WindowStyleFlags.MaximizeBox // same as TabStop
+                                 | WinAPI.WindowStyleFlags.MinimizeBox // same as Group
+                              );
+
+            var newExtended = backupExtended
+                              & ~(WinAPI.WindowStyleFlags.ExtendedDlgModalFrame
+                                 | WinAPI.WindowStyleFlags.ExtendedComposited
+                                 | WinAPI.WindowStyleFlags.ExtendedWindowEdge
+                                 | WinAPI.WindowStyleFlags.ExtendedClientEdge
+                                 | WinAPI.WindowStyleFlags.ExtendedLayered
+                                 | WinAPI.WindowStyleFlags.ExtendedStaticEdge
+                                 | WinAPI.WindowStyleFlags.ExtendedToolWindow
+                                 | WinAPI.WindowStyleFlags.ExtendedAppWindow
+                              );
+
+            int width = Screen.width, height = Screen.height;
+            WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.Style, newStandard);
+            WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.ExtendedStyle, newExtended);
+            WinAPI.SetWindowPos(hwnd, 0, 0, 0, width, height, WinAPI.SetWindowPosFlags.NoMove);
+        }
+
+        private void MakeWindowed()
+        {
+            RestoreBorder();
+            Screen.SetResolution(Screen.width, Screen.height, false);
+        }
+
+        private void MakeFullscreen()
+        {
+            RestoreBorder();
+            Screen.SetResolution(Screen.width, Screen.height, true);
+        }
+
+
+        private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)
+        {
+            setter();
+            configEntry.SettingChanged += (sender, args) => setter();
+        }
+
+        private void RestoreBorder()
+        {
+            if(backupDone && DisplayMode.Value != SettingEnum.DisplayMode.BorderlessFullscreen)
+            {
+                var hwnd = WinAPI.GetActiveWindow();
+                WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.Style, backupStandard);
+                WinAPI.SetWindowLongPtr(hwnd, WinAPI.WindowLongIndex.ExtendedStyle, backupExtended);
+            }
+        }
+
+        private void UpdateConfigManagerSize()
+        {
+            var type = Type.GetType("ConfigurationManager.ConfigurationManager, ConfigurationManager", false);
+            if(type != null) Traverse.Create(FindObjectOfType(type)).Method("CalculateWindowRect").GetValue();
         }
     }
 }
