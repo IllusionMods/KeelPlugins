@@ -63,6 +63,8 @@ namespace KeelPlugins
         private WinAPI.WindowStyleFlags backupStandard;
         private WinAPI.WindowStyleFlags backupExtended;
         private bool backupDone = false;
+        private UnityEngine.Object configManager;
+        private bool configManagerSearch = false;
 
         private void Awake()
         {
@@ -146,7 +148,8 @@ namespace KeelPlugins
                     StartCoroutine(SetResolution(x, y));
             }
 
-            if(GUILayout.Button("Reset", GUILayout.Width(50)))
+            GUILayout.Space(5);
+            if(GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
             {
                 var display = Display.displays[SelectedMonitor.Value];
                 if(Screen.width != display.renderingWidth || Screen.height != display.renderingHeight)
@@ -193,7 +196,8 @@ namespace KeelPlugins
                     framerateToggle = true;
             }
 
-            GUILayout.TextField(FramerateLimit.Value.ToString(), GUILayout.Width(50));
+            GUILayout.Space(5);
+            GUILayout.TextField(FramerateLimit.Value.ToString(), GUILayout.Width(40));
         }
 
         private void SetDisplayMode()
@@ -306,7 +310,6 @@ namespace KeelPlugins
             Screen.SetResolution(Screen.width, Screen.height, true);
         }
 
-
         private void InitSetting<T>(ConfigEntry<T> configEntry, Action setter)
         {
             setter();
@@ -325,8 +328,16 @@ namespace KeelPlugins
 
         private void UpdateConfigManagerSize()
         {
-            var type = Type.GetType("ConfigurationManager.ConfigurationManager, ConfigurationManager", false);
-            if(type != null) Traverse.Create(FindObjectOfType(type)).Method("CalculateWindowRect").GetValue();
+            if(!configManagerSearch && !configManager)
+            {
+                configManagerSearch = true;
+                var type = Type.GetType("ConfigurationManager.ConfigurationManager, ConfigurationManager", false);
+                if(type != null)
+                    configManager = FindObjectOfType(type);
+            }
+
+            if(configManager)
+                Traverse.Create(configManager).Method("CalculateWindowRect").GetValue();
         }
     }
 }
