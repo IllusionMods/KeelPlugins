@@ -52,8 +52,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultParamEditor.Koikatu"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.Koikatu", "src\ItemLayerEdit.Koikatu\ItemLayerEdit.Koikatu.csproj", "{A9A5B556-B590-4948-9E89-87D38623DAF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsSettings.Koikatu", "src\GraphicsSettings.Koikatu\GraphicsSettings.Koikatu.csproj", "{AE057971-5893-41BE-A377-8CD92DF46D22}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LightManager", "LightManager", "{21652626-F032-4986-B258-C36B4C9115E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MakerBridge", "MakerBridge", "{17FF704B-6D86-4F64-8052-123DC8C2AC0A}"
@@ -171,7 +169,6 @@ Global
 		src\Common.Core\Common.Core.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{ae057971-5893-41be-a377-8cd92df46d22}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{be9297c1-8920-433d-8dcc-1d7c4f7b155d}*SharedItemsImports = 4
 		src\HideAllUI.Core\HideAllUI.Core.projitems*{bef5b8f5-e977-4190-b793-0f8b349dd9ae}*SharedItemsImports = 4
 		src\DragAndDrop.Core\DragAndDrop.Core.projitems*{c1d7de50-a471-425d-a28d-9f360417a991}*SharedItemsImports = 13
@@ -217,10 +214,6 @@ Global
 		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9A5B556-B590-4948-9E89-87D38623DAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE057971-5893-41BE-A377-8CD92DF46D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE057971-5893-41BE-A377-8CD92DF46D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE057971-5893-41BE-A377-8CD92DF46D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE057971-5893-41BE-A377-8CD92DF46D22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9495FFE8-C90D-44E6-AE4F-A21506594AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -308,7 +301,6 @@ Global
 		{F41D7322-8267-4A9A-866D-6517616A5996} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8} = {F41D7322-8267-4A9A-866D-6517616A5996}
 		{A9A5B556-B590-4948-9E89-87D38623DAF1} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{AE057971-5893-41BE-A377-8CD92DF46D22} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{21652626-F032-4986-B258-C36B4C9115E7} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{17FF704B-6D86-4F64-8052-123DC8C2AC0A} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{E462D3D8-0715-45C9-869C-F1FA8CD2F5CD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
