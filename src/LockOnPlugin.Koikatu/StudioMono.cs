@@ -9,6 +9,47 @@ namespace KeelPlugins
 {
     internal partial class StudioMono : LockOnBase
     {
+        protected override float CameraMoveSpeed
+        {
+            get { return camera.moveSpeed; }
+            set { camera.moveSpeed = value; }
+        }
+
+        protected override Vector3 CameraTargetPos
+        {
+            get { return camera.targetPos; }
+            set { camera.targetPos = value; }
+        }
+
+        protected override Vector3 CameraAngle
+        {
+            get { return camera.cameraAngle; }
+            set { camera.cameraAngle = value; }
+        }
+
+        protected override float CameraFov
+        {
+            get { return camera.fieldOfView; }
+            set { camera.fieldOfView = value; }
+        }
+
+        protected override Vector3 CameraDir
+        {
+            get { return cameraData.distance; }
+            set { cameraData.distance = value; }
+        }
+
+        protected override bool CameraTargetTex
+        {
+            set { camera.isConfigTargetTex = value; }
+        }
+
+        protected override float CameraZoomSpeed => defaultCameraSpeed * Studio.Studio.optionSystem.cameraSpeed;
+        protected override Transform CameraTransform => camera.transform;
+        protected override bool AllowTracking => !(guideObjectManager.isOperationTarget && guideObjectManager.mode == 1);
+        protected override bool InputFieldSelected => base.InputFieldSelected || studio.isInputNow || guideObjectManager.isOperationTarget;
+        protected override bool CameraEnabled => camera.enabled;
+
         private Studio.Studio studio = Studio.Studio.Instance;
         private Studio.CameraControl camera = Studio.Studio.Instance.cameraCtrl;
         private TreeNodeCtrl treeNodeCtrl = Studio.Studio.Instance.treeNodeCtrl;
@@ -43,16 +84,12 @@ namespace KeelPlugins
                         currentCharaInfo = ocichar.charInfo;
                         shouldResetLock = true;
 
-                        if(LockOnPlugin.AutoSwitchLock.Value && lockOnTarget)
+                        if(LockOnPluginCore.AutoSwitchLock.Value && lockOnTarget)
                         {
                             if(LockOn(lockOnTarget.name, true, false))
-                            {
                                 shouldResetLock = false;
-                            }
                             else
-                            {
                                 LockOnRelease();
-                            }
                         }
                     }
                     else
@@ -92,7 +129,7 @@ namespace KeelPlugins
 
             if(base.LockOn()) return true;
 
-            var charaNodes = LockOnPlugin.ScrollThroughMalesToo.Value ? GetCharaNodes<OCIChar>() : GetCharaNodes<OCICharFemale>();
+            var charaNodes = LockOnPluginCore.ScrollThroughMalesToo.Value ? GetCharaNodes<OCIChar>() : GetCharaNodes<OCICharFemale>();
             if(charaNodes.Count > 0)
             {
                 studio.treeNodeCtrl.SelectSingle(charaNodes[0]);
@@ -104,7 +141,7 @@ namespace KeelPlugins
 
         protected override void CharaSwitch(bool scrollDown = true)
         {
-            var charaNodes = LockOnPlugin.ScrollThroughMalesToo.Value ? GetCharaNodes<OCIChar>() : GetCharaNodes<OCICharFemale>();
+            var charaNodes = LockOnPluginCore.ScrollThroughMalesToo.Value ? GetCharaNodes<OCIChar>() : GetCharaNodes<OCICharFemale>();
 
             for(int i = 0; i < charaNodes.Count; i++)
             {

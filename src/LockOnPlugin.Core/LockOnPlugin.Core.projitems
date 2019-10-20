@@ -9,6 +9,7 @@
     <Import_RootNamespace>LockOnPlugin.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)LockOnPluginCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TargetData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TargetManager.cs" />
   </ItemGroup>

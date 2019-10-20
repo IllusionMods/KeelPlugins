@@ -54,29 +54,10 @@ namespace KeelPlugins
             set { camera.isConfigTargetTex = value; }
         }
 
-        protected override float CameraZoomSpeed
-        {
-            get { return defaultCameraSpeed; }
-        }
-
-        protected override Transform CameraTransform
-        {
-            get { return camera.transform; }
-        }
-
-        protected override bool AllowTracking
-        {
-            get { return true; }
-        }
-
-        protected override bool InputFieldSelected
-        {
-            get { return base.InputFieldSelected; }
-        }
-
-        protected override bool CameraEnabled
-        {
-            get { return camera.enabled; }
-        }
+        protected override float CameraZoomSpeed => defaultCameraSpeed;
+        protected override Transform CameraTransform => camera.transform;
+        protected override bool AllowTracking => true;
+        protected override bool InputFieldSelected => base.InputFieldSelected;
+        protected override bool CameraEnabled => camera.enabled;
     }
 }

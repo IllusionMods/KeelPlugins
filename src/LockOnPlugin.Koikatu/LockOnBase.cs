@@ -44,9 +44,9 @@ namespace KeelPlugins
         protected virtual void Start()
         {
             defaultCameraSpeed = CameraMoveSpeed;
-            lockOnHotkey = new KeyboardShortcutHotkey(LockOnPlugin.LockOnKey.Value, 0.4f);
-            prevCharaHotkey = new KeyboardShortcutHotkey(LockOnPlugin.PrevCharaKey.Value);
-            nextCharaHotkey = new KeyboardShortcutHotkey(LockOnPlugin.NextCharaKey.Value);
+            lockOnHotkey = new KeyboardShortcutHotkey(LockOnPluginCore.LockOnKey.Value, 0.4f);
+            prevCharaHotkey = new KeyboardShortcutHotkey(LockOnPluginCore.PrevCharaKey.Value);
+            nextCharaHotkey = new KeyboardShortcutHotkey(LockOnPluginCore.NextCharaKey.Value);
         }
 
         protected virtual void OnDestroy()
@@ -58,7 +58,7 @@ namespace KeelPlugins
         {
             if(!lockOnTarget && lockedOn)
             {
-                LockOnPlugin.Logger.LogDebug("Reset LockOnPlugin");
+                LockOnPluginCore.Logger.LogDebug("Reset LockOnPlugin");
                 ResetModState();
             }
 
@@ -154,7 +154,7 @@ namespace KeelPlugins
                     // add this as a setting
                     if(targetOffsetSize.magnitude > 0.00001f)
                     {
-                        float trackingSpeed = CameraTargetManager.IsMovementPoint(lockOnTarget) ? trackingSpeedMax : LockOnPlugin.TrackingSpeedNormal.Value;
+                        float trackingSpeed = CameraTargetManager.IsMovementPoint(lockOnTarget) ? trackingSpeedMax : LockOnPluginCore.TrackingSpeedNormal.Value;
                         targetOffsetSize = Vector3.MoveTowards(targetOffsetSize, new Vector3(), targetOffsetSize.magnitude / (1f / trackingSpeed));
                     }
                     else
@@ -176,8 +176,8 @@ namespace KeelPlugins
                     }
                     else
                     {
-                        trackingSpeed = LockOnPlugin.TrackingSpeedNormal.Value;
-                        leash = LockOnPlugin.LockLeashLength.Value;
+                        trackingSpeed = LockOnPluginCore.TrackingSpeedNormal.Value;
+                        leash = LockOnPluginCore.LockLeashLength.Value;
                     }
 
                     float distance = Vector3.Distance(CameraTargetPos, lastTargetPos.Value);
@@ -192,7 +192,7 @@ namespace KeelPlugins
 
         protected virtual void OnGUI()
         {
-            if(LockOnPlugin.ShowInfoMsg.Value && Guitime.info > 0f)
+            if(LockOnPluginCore.ShowInfoMsg.Value && Guitime.info > 0f)
             {
                 DebugGUI(Guitime.pos.x, Guitime.pos.y, 200f, 45f, Guitime.msg);
                 Guitime.info -= Time.deltaTime;
@@ -320,7 +320,7 @@ namespace KeelPlugins
 
         protected virtual void CharaSwitch(bool scrollDown = true)
         {
-            LockOnPlugin.Logger.Log(LogLevel.Info, "Character switching not implemented in this version");
+            LockOnPluginCore.Logger.Log(LogLevel.Info, "Character switching not implemented in this version");
         }
 
         protected virtual void ResetModState()

@@ -43,13 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HSceneMono.cs" />
-    <Compile Include="HSceneParameters.cs" />
     <Compile Include="LockOnBase.cs" />
     <Compile Include="LockOnPlugin.cs" />
     <Compile Include="MakerMono.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudioMono.cs" />
-    <Compile Include="StudioProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LockOnPluginData.json" />

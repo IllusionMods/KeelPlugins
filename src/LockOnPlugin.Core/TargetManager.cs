@@ -148,12 +148,12 @@ namespace KeelPlugins
                     }
                     else
                     {
-                        LockOnPlugin.Logger.LogInfo($"CustomTarget '{data.target}' failed");
+                        LockOnPluginCore.Logger.LogInfo($"CustomTarget '{data.target}' failed");
                     }
                 }
                 else
                 {
-                    LockOnPlugin.Logger.LogDebug($"CustomTarget '{data.target}' skipped because it is not in use");
+                    LockOnPluginCore.Logger.LogDebug($"CustomTarget '{data.target}' skipped because it is not in use");
                 }
             }
 
