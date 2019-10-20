@@ -57,6 +57,6 @@
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.Core.Events\Common.Core.Events.projitems" Label="Shared" />
+  <Import Project="..\Common.Core.Event\Common.Core.Event.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
