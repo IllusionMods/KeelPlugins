@@ -25,17 +25,17 @@ namespace KeelPlugins
                 {
                     var json = File.ReadAllText(dataPath);
                     data = JSONSerializer.Deserialize<TargetData>(json);
-                    LockOnPlugin.Logger.Log(LogLevel.Info, "Loading custom target data.");
+                    LockOnPluginCore.Logger.Log(LogLevel.Info, "Loading custom target data.");
                 }
                 catch(Exception)
                 {
-                    LockOnPlugin.Logger.Log(LogLevel.Info, "Failed to deserialize custom target data. Loading default target data.");
+                    LockOnPluginCore.Logger.Log(LogLevel.Info, "Failed to deserialize custom target data. Loading default target data.");
                     LoadResourceData();
                 }
             }
             else
             {
-                LockOnPlugin.Logger.Log(LogLevel.Debug, "Loading default target data.");
+                LockOnPluginCore.Logger.Log(LogLevel.Debug, "Loading default target data.");
                 LoadResourceData();
             }
         }
