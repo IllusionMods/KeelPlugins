@@ -31,10 +31,6 @@
       <HintPath>..\..\lib\bepinex5\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="KKAPI">
-      <HintPath>..\..\lib\kk\KKAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="TextMeshPro-1.0.55.56.0b12">
       <HintPath>..\..\lib\kk\TextMeshPro-1.0.55.56.0b12.dll</HintPath>
@@ -53,6 +49,13 @@
     <Compile Include="AAA.cs" />
     <Compile Include="Assistant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj">
+      <Project>{74c2db86-55bb-47b4-9805-51b5b992ef35}</Project>
+      <Name>KKAPI</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
