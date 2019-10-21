@@ -35,10 +35,6 @@
       <HintPath>$(SolutionDir)paket-files\IllusionMods\IllusionLibs\lib\BepInEx\BepInEx.Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="KKAPI">
-      <HintPath>$(SolutionDir)paket-files\IllusionMods\IllusionLibs\lib\Koikatu\KKAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="TextMeshPro-1.0.55.56.0b12">
       <HintPath>$(SolutionDir)paket-files\IllusionMods\IllusionLibs\lib\Koikatu\TextMeshPro-1.0.55.56.0b12.dll</HintPath>
@@ -64,6 +60,11 @@
     <ProjectReference Include="$(SolutionDir)paket-files\IllusionMods\BepisPlugins\src\KK_ExtensibleSaveFormat\KK_ExtensibleSaveFormat.csproj">
       <Project>{8ebe81b9-9ed9-466d-864a-4c644bfd8827}</Project>
       <Name>KK_ExtensibleSaveFormat</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionDir)paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj">
+      <Project>{74c2db86-55bb-47b4-9805-51b5b992ef35}</Project>
+      <Name>KKAPI</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
