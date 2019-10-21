@@ -37,7 +37,7 @@ namespace KeelPlugins
 
         private static bool SetupPrefix(object __instance, ref object datas, ref AssetBundleController abc)
         {
-            string text = FileUtils.CombinePaths(MoreSlotID.ModFolder, "list", abc.assetBundleName, "_list.txt");
+            string text = BepInEx.Utility.CombinePaths(MoreSlotID.ModFolder, "list", abc.assetBundleName, "_list.txt");
             if(File.Exists(text))
             {
                 Console.WriteLine("Load list:" + text);
@@ -85,7 +85,7 @@ namespace KeelPlugins
                 foreach(var modDir in Directory.GetDirectories(MoreSlotID.ModFolder, "*", SearchOption.TopDirectoryOnly))
                 {
                     var abdataDir = Path.Combine(modDir, "abdata");
-                    var listDir = FileUtils.CombinePaths(abdataDir, "list", text);
+                    var listDir = BepInEx.Utility.CombinePaths(abdataDir, "list", text);
 
                     if(Directory.Exists(listDir))
                     {

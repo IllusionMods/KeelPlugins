@@ -61,7 +61,7 @@ namespace KeelPlugins
             {
                 if(MoreSlotID.ThumbList.TryGetValue(assetName, out string abdataDir))
                 {
-                    string text = FileUtils.CombinePaths(abdataDir, "thumnbnail_R", assetName + ".png");
+                    string text = BepInEx.Utility.CombinePaths(abdataDir, "thumnbnail_R", assetName + ".png");
                     if(File.Exists(text))
                     {
                         Console.WriteLine("Load thumb: " + text);

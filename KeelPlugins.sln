@@ -25,7 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{109CAC30-470
 		.gitignore = .gitignore
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
-		.paket\paket.targets = .paket\paket.targets
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -126,6 +125,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HideAllUI.AISyoujyo", "src\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core.Event", "src\Common.Core.Event\Common.Core.Event.shproj", "{2A4067D3-D380-492B-946B-E7F221259439}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKAPI", "paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj", "{74C2DB86-55BB-47B4-9805-51B5B992EF35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK_ExtensibleSaveFormat", "paket-files\IllusionMods\BepisPlugins\src\KK_ExtensibleSaveFormat\KK_ExtensibleSaveFormat.csproj", "{8EBE81B9-9ED9-466D-864A-4C644BFD8827}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -151,10 +156,14 @@ Global
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
 		src\Common.PlayHome\Common.PlayHome.projitems*{624f7c3f-0557-4fa6-a915-c99c5a40a851}*SharedItemsImports = 13
+		paket-files\Keelhauled\KKAPI\Shared.Core\Shared.Core.projitems*{74c2db86-55bb-47b4-9805-51b5b992ef35}*SharedItemsImports = 4
+		paket-files\Keelhauled\KKAPI\Shared.KKalike\Shared.KKalike.projitems*{74c2db86-55bb-47b4-9805-51b5b992ef35}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{7b61e051-ba51-4285-b320-a88e2573f50d}*SharedItemsImports = 4
 		src\HideAllUI.Core\HideAllUI.Core.projitems*{7b61e051-ba51-4285-b320-a88e2573f50d}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
+		paket-files\IllusionMods\BepisPlugins\src\Core_ExtensibleSaveFormat\Core_ExtensibleSaveFormat.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
+		paket-files\IllusionMods\BepisPlugins\src\Shared\Shared.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
@@ -281,6 +290,14 @@ Global
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -333,6 +350,8 @@ Global
 		{DAC82A17-7FE0-478E-932D-4EF293A31A32} = {6867199F-B91A-43D8-B331-36BBA44AD5C2}
 		{BEF5B8F5-E977-4190-B793-0F8B349DD9AE} = {0F9F887B-A79A-40F8-9B3A-199EEC224D47}
 		{2A4067D3-D380-492B-946B-E7F221259439} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{74C2DB86-55BB-47B4-9805-51B5B992EF35} = {CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}
+		{8EBE81B9-9ED9-466D-864A-4C644BFD8827} = {CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
