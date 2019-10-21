@@ -125,7 +125,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HideAllUI.AISyoujyo", "src\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core.Event", "src\Common.Core.Event\Common.Core.Event.shproj", "{2A4067D3-D380-492B-946B-E7F221259439}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paket", "paket", "{CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKAPI", "paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj", "{74C2DB86-55BB-47B4-9805-51B5B992EF35}"
 EndProject
