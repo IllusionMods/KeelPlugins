@@ -17,5 +17,3 @@ if(!(Test-Path ".paket/paket.exe"))
 }
 
 .\.paket\paket.exe restore
-
-cmd /c pause
