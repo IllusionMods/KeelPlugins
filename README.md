@@ -13,7 +13,7 @@ Configuration Manager is recommended to make managing and changing the numerous 
 ## How to compile
 1. Clone/download the repo
 2. Run Paket-Restore.bat to install paket and restore dependencies
-  * On linux you need to [add paket to bash](https://fsprojects.github.io/Paket/installation.html#Installation-on-Linux) and use the [restore command](https://fsprojects.github.io/Paket/paket-restore.html)
+   * On linux you need to [add paket to bash](https://fsprojects.github.io/Paket/installation.html#Installation-on-Linux) and use the [restore command](https://fsprojects.github.io/Paket/paket-restore.html)
 
 ## Plugin descriptions
 
