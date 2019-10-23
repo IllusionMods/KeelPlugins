@@ -5,10 +5,15 @@ Not all of these plugins exist or are even possible to make for all of the games
 
 Configuration Manager is recommended to make managing and changing the numerous hotkeys from these plugins easier. Just press F1 if you have it installed.
 
-## Installation
+## How to install
 1. Install BepInEx 5
 2. Download the latest artifact from the [Appveyor page](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
 3. Put the dll files you want in the `bepinex/plugins` folder
+
+## How to compile
+1. Clone/download the repo
+2. Run Paket-Restore.bat to install paket and restore dependencies
+  * On linux you need to [add paket to bash](https://fsprojects.github.io/Paket/installation.html#Installation-on-Linux) and use the [restore command](https://fsprojects.github.io/Paket/paket-restore.html)
 
 ## Plugin descriptions
 
