@@ -5,16 +5,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace KeelPlugins
 {
     [BepInPlugin(GUID, PluginName, Version)]
     internal class SoundEffects : BaseUnityPlugin
     {
-        public const string GUID = "keelhauled.soundloader";
-        public const string PluginName = "SoundLoader";
-        public const string Version = "1.0.0";
+        public const string GUID = "keelhauled.soundeffects";
+        public const string PluginName = "SoundEffects";
+        public const string Version = "1.0.1";
 
         private Harmony harmony;
         private static List<AudioClip> slaps = new List<AudioClip>();
