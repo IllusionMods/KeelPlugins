@@ -50,8 +50,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HideAllHSceneUI.cs" />
     <Compile Include="HideAllUI.cs" />
     <Compile Include="HideMakerUI.cs" />
+    <Compile Include="HideStudioUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="..\HideAllUI.Core\HideAllUI.Core.projitems" Label="Shared" />
