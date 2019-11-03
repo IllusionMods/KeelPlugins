@@ -50,10 +50,6 @@ Support for each card types depends on the game and the current scene of the gam
 Exposes the game's graphics settings and some other values for editing.  
 The default settings on the plugin may be too heavy for some computers so remember to tweak them.
 
-#### HideAllUI
-Hide the UI with the same, adjustable hotkey in maker, studio and freeh.  
-This plugin combines the old ui hiding plugins into one and requires you to delete them.
-
 #### LockOnPlugin
 A camera helper plugin that lets you forget the annoying camera controls and keeps the action right where it needs to be.  
 It allows you to automatically keep the camera focus on the character.
