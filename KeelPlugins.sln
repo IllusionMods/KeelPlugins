@@ -130,7 +130,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reference", "reference", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKAPI", "paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj", "{74C2DB86-55BB-47B4-9805-51B5B992EF35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK_ExtensibleSaveFormat", "paket-files\IllusionMods\ExtensibleSaveFormat\src\KK_ExtensibleSaveFormat\KK_ExtensibleSaveFormat.csproj", "{8EBE81B9-9ED9-466D-864A-4C644BFD8827}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK_ExtensibleSaveFormat", "paket-files\IllusionMods\BepisPlugins\src\KK_ExtensibleSaveFormat\KK_ExtensibleSaveFormat.csproj", "{8EBE81B9-9ED9-466D-864A-4C644BFD8827}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -164,9 +164,9 @@ Global
 		src\HideAllUI.Core\HideAllUI.Core.projitems*{7b61e051-ba51-4285-b320-a88e2573f50d}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
-		paket-files\IllusionMods\ExtensibleSaveFormat\src\Core_ExtensibleSaveFormat\Core_ExtensibleSaveFormat.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
-		paket-files\IllusionMods\ExtensibleSaveFormat\src\Core_ExtensibleSaveFormat_CharaStudio\Core_ExtensibleSaveFormat_CharaStudio.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
-		paket-files\IllusionMods\ExtensibleSaveFormat\src\Shared\Shared.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
+		paket-files\IllusionMods\BepisPlugins\src\Core_ExtensibleSaveFormat\Core_ExtensibleSaveFormat.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
+		paket-files\IllusionMods\BepisPlugins\src\Core_ExtensibleSaveFormat_CharaStudio\Core_ExtensibleSaveFormat_CharaStudio.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
+		paket-files\IllusionMods\BepisPlugins\src\Shared\Shared.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
