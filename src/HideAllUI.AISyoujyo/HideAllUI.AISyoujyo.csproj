@@ -50,7 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HideAllHSceneUI.cs" />
+    <Compile Include="HideHSceneUI.cs" />
     <Compile Include="HideAllUI.cs" />
     <Compile Include="HideMakerUI.cs" />
     <Compile Include="HideStudioUI.cs" />
