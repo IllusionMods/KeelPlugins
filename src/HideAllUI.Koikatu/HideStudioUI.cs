@@ -6,7 +6,7 @@ namespace KeelPlugins
 {
     internal class HideStudioUI : HideUIAction
     {
-        private string[] targets = new[] { "Canvas", "Canvas Object List", "Canvas Main Menu", "Canvas Frame cap", "Canvas System Menu", "Canvas Guide Input" };
+        private string[] targets = new[] { "Canvas", "Canvas Object List", "Canvas Main Menu", "Canvas Frame cap", "Canvas System Menu", "Canvas Guide Input", "CvsColor" };
         private IEnumerable<Canvas> canvasList;
         private bool visible = true;
 
