@@ -11,7 +11,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
-    <OutputPath>C:\Games\PlayHome\BepInEx\plugins\KeelPluginsPH</OutputPath>
+    <OutputPath>$(SolutionDir)bin\KeelPluginsPH</OutputPath>
     <Optimize>true</Optimize>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>

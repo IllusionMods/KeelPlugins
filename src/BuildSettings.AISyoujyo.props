@@ -11,7 +11,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
-    <OutputPath>C:\Games\AI-Syoujyo\BepInEx\plugins\KeelPluginsAI</OutputPath>
+    <OutputPath>$(SolutionDir)bin\KeelPluginsAI</OutputPath>
     <Optimize>true</Optimize>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
