@@ -1,12 +1,11 @@
 # KeelPlugins [![Build status](https://ci.appveyor.com/api/projects/status/j2aa50y5o9onu8b0/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fail)](https://ci.appveyor.com/project/Keelhauled/keelplugins/branch/master/artifacts)
 
 Various plugins for Illusion's Unity games like Koikatu, Honey Select, PlayHome and AI Syoujyo.  
-Not all of these plugins exist or are even possible to make for all of the games.
-
-Configuration Manager is recommended to make managing and changing the numerous hotkeys from these plugins easier. Just press F1 if you have it installed.
+Not all of these plugins exist or are even possible to make for all of the games.  
+Configuration Manager is recommended to make changing the numerous settings from these plugins easier.
 
 ## How to install
-1. Install BepInEx 5
+1. Install the latest build of [BepInEx](https://builds.bepis.io/projects/bepinex_be)
 2. Download the latest artifact from the [Appveyor page](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
 3. Put the dll files you want in the `bepinex/plugins` folder
 
