@@ -41,10 +41,6 @@ This only affects parameters that make sense to be saved.
 To use, set your preferred settings normally and then save them with the new buttons in the studio menus.  
 Now when loading a character or starting the studio these settings will be used.
 
-#### DragAndDrop
-Adds drag and drop support, making it possible to load characters, outfits, scenes and poses by dragging them into the game window.
-Support for each card types depends on the game and the current scene of the game.
-
 #### GraphicsSettings
 Exposes the game's graphics settings and some other values for editing.  
 The default settings on the plugin may be too heavy for some computers so remember to tweak them.
