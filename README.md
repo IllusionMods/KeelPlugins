@@ -6,7 +6,7 @@ Configuration Manager is recommended to make changing the numerous settings from
 
 ## How to install
 1. Install the latest build of [BepInEx](https://builds.bepis.io/projects/bepinex_be)
-2. Download the latest artifact from the [Appveyor page](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
+2. Download the latest release for your game from [appveyor](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
 3. Put the dll files you want in the `bepinex/plugins` folder
 
 ## How to compile
