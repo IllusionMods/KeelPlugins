@@ -62,7 +62,7 @@
       <Name>KK_ExtensibleSaveFormat</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)paket-files\Keelhauled\KKAPI\KKAPI\KKAPI.csproj">
+    <ProjectReference Include="$(SolutionDir)paket-files\ManlyMarco\IllusionModdingAPI\KKAPI\KKAPI.csproj">
       <Project>{74c2db86-55bb-47b4-9805-51b5b992ef35}</Project>
       <Name>KKAPI</Name>
       <Private>False</Private>
