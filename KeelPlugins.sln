@@ -13,16 +13,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core", "src\Common.C
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Koikatu", "src\Common.Koikatu\Common.Koikatu.shproj", "{5FC98374-508A-40B7-B4E1-EDB3B1D482F6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{109CAC30-4703-427D-BD31-A64B50CBC942}"
-	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
-		.gitignore = .gitignore
-		Paket-Restore.bat = Paket-Restore.bat
-		paket.dependencies = paket.dependencies
-		paket.lock = paket.lock
-		README.md = README.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "archive", "archive", "{AD19F107-FED6-4ABD-B57E-1D584CCF0EC1}"
 	ProjectSection(SolutionItems) = preProject
 		archive\AssetHelper.cs = archive\AssetHelper.cs
@@ -110,12 +100,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreSlotIDBep.PlayHome", "s
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core.Event", "src\Common.Core.Event\Common.Core.Event.shproj", "{2A4067D3-D380-492B-946B-E7F221259439}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reference", "reference", "{CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKAPI", "paket-files\ManlyMarco\IllusionModdingAPI\KKAPI\KKAPI.csproj", "{74C2DB86-55BB-47B4-9805-51B5B992EF35}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK_ExtensibleSaveFormat", "paket-files\IllusionMods\BepisPlugins\src\KK_ExtensibleSaveFormat\KK_ExtensibleSaveFormat.csproj", "{8EBE81B9-9ED9-466D-864A-4C644BFD8827}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleShortcuts.AISyoujyo", "src\TitleShortcuts.AISyoujyo\TitleShortcuts.AISyoujyo.csproj", "{0F9AA09D-DCF3-41DE-8028-61735024FE80}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.AISyoujyo", "src\Common.AISyoujyo\Common.AISyoujyo.shproj", "{5837FDE8-4B7C-431B-9402-3D8019F7BF37}"
@@ -148,14 +132,8 @@ Global
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
 		src\Common.PlayHome\Common.PlayHome.projitems*{624f7c3f-0557-4fa6-a915-c99c5a40a851}*SharedItemsImports = 13
-		paket-files\ManlyMarco\IllusionModdingAPI\Shared.CharaStudio\Shared.CharaStudio.projitems*{74c2db86-55bb-47b4-9805-51b5b992ef35}*SharedItemsImports = 4
-		paket-files\ManlyMarco\IllusionModdingAPI\Shared.Core\Shared.Core.projitems*{74c2db86-55bb-47b4-9805-51b5b992ef35}*SharedItemsImports = 4
-		paket-files\ManlyMarco\IllusionModdingAPI\Shared.KKalike\Shared.KKalike.projitems*{74c2db86-55bb-47b4-9805-51b5b992ef35}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
-		paket-files\IllusionMods\BepisPlugins\src\Core_ExtensibleSaveFormat\Core_ExtensibleSaveFormat.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
-		paket-files\IllusionMods\BepisPlugins\src\Core_ExtensibleSaveFormat_CharaStudio\Core_ExtensibleSaveFormat_CharaStudio.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
-		paket-files\IllusionMods\BepisPlugins\src\Shared\Shared.projitems*{8ebe81b9-9ed9-466d-864a-4c644bfd8827}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
@@ -258,14 +236,6 @@ Global
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74C2DB86-55BB-47B4-9805-51B5B992EF35}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EBE81B9-9ED9-466D-864A-4C644BFD8827}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -314,8 +284,6 @@ Global
 		{394BC9B7-DB38-4172-9B2C-60918E87B763} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{2A4067D3-D380-492B-946B-E7F221259439} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{74C2DB86-55BB-47B4-9805-51B5B992EF35} = {CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}
-		{8EBE81B9-9ED9-466D-864A-4C644BFD8827} = {CB226E64-BD43-4FF2-99E2-4CDB5628CB7C}
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{5837FDE8-4B7C-431B-9402-3D8019F7BF37} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
