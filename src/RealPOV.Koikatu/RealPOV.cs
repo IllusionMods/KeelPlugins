@@ -31,10 +31,10 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            ViewOffset = Config.AddSetting(SECTION_GENERAL, "View offset", 0.03f);
-            DefaultFov = Config.AddSetting(SECTION_GENERAL, "Default FOV", 70f);
-            MouseSens = Config.AddSetting(SECTION_GENERAL, "Mouse sensitivity", 1f);
-            PovHotkey = Config.AddSetting(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
+            ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", 0.03f);
+            DefaultFov = Config.Bind(SECTION_GENERAL, "Default FOV", 70f);
+            MouseSens = Config.Bind(SECTION_GENERAL, "Mouse sensitivity", 1f);
+            PovHotkey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
 
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
 

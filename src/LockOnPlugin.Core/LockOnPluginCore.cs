@@ -41,15 +41,15 @@ namespace KeelPlugins
 
             TargetData.LoadData();
 
-            TrackingSpeedNormal = Config.AddSetting(SECTION_GENERAL, "Tracking speed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f), new ConfigurationManagerAttributes { Order = 10 }));
-            ScrollThroughMalesToo = Config.AddSetting(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES, null, new ConfigurationManagerAttributes { Order = 8 }));
-            ShowInfoMsg = Config.AddSetting(SECTION_GENERAL, "Show info messages", false, new ConfigDescription(DESCRIPTION_SHOWINFOMSG, null, new ConfigurationManagerAttributes { Order = 6 }));
-            LockLeashLength = Config.AddSetting(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f), new ConfigurationManagerAttributes { Order = 9 }));
-            AutoSwitchLock = Config.AddSetting(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK, null, new ConfigurationManagerAttributes { Order = 7 }));
+            TrackingSpeedNormal = Config.Bind(SECTION_GENERAL, "Tracking speed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f), new ConfigurationManagerAttributes { Order = 10 }));
+            ScrollThroughMalesToo = Config.Bind(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES, null, new ConfigurationManagerAttributes { Order = 8 }));
+            ShowInfoMsg = Config.Bind(SECTION_GENERAL, "Show info messages", false, new ConfigDescription(DESCRIPTION_SHOWINFOMSG, null, new ConfigurationManagerAttributes { Order = 6 }));
+            LockLeashLength = Config.Bind(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f), new ConfigurationManagerAttributes { Order = 9 }));
+            AutoSwitchLock = Config.Bind(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK, null, new ConfigurationManagerAttributes { Order = 7 }));
 
-            LockOnKey = Config.AddSetting(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
-            PrevCharaKey = Config.AddSetting(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
-            NextCharaKey = Config.AddSetting(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
+            LockOnKey = Config.Bind(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
+            PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
+            NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
 
             harmony = HarmonyWrapper.PatchAll();
         }

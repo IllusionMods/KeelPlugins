@@ -33,16 +33,16 @@ namespace LockOnPlugin
 
         private void Awake()
         {
-            TrackingSpeedNormal = Config.AddSetting(SECTION_GENERAL, "Tracking speed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
-            ScrollThroughMalesToo = Config.AddSetting(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
-            ShowInfoMsg = Config.AddSetting(SECTION_GENERAL, "Show info messages", false, new ConfigDescription(DESCRIPTION_SHOWINFOMSG));
-            LockLeashLength = Config.AddSetting(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f)));
-            AutoSwitchLock = Config.AddSetting(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK));
+            TrackingSpeedNormal = Config.Bind(SECTION_GENERAL, "Tracking speed", 0.1f, new ConfigDescription(DESCRIPTION_TRACKSPEED, new AcceptableValueRange<float>(0.01f, 0.3f)));
+            ScrollThroughMalesToo = Config.Bind(SECTION_GENERAL, "Scroll through males too", true, new ConfigDescription(DESCRIPTION_SCROLLMALES));
+            ShowInfoMsg = Config.Bind(SECTION_GENERAL, "Show info messages", false, new ConfigDescription(DESCRIPTION_SHOWINFOMSG));
+            LockLeashLength = Config.Bind(SECTION_GENERAL, "Leash length", 0f, new ConfigDescription(DESCRIPTION_LEASHLENGTH, new AcceptableValueRange<float>(0f, 0.5f)));
+            AutoSwitchLock = Config.Bind(SECTION_GENERAL, "Auto switch lock", false, new ConfigDescription(DESCRIPTION_AUTOLOCK));
 
-            LockOnKey = Config.AddSetting(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4));
-            PrevCharaKey = Config.AddSetting(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None));
-            NextCharaKey = Config.AddSetting(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None));
-            GuiHotkey = Config.AddSetting(SECTION_HOTKEYS, "Show gui", new KeyboardShortcut(KeyCode.None));
+            LockOnKey = Config.Bind(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4));
+            PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None));
+            NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None));
+            GuiHotkey = Config.Bind(SECTION_HOTKEYS, "Show gui", new KeyboardShortcut(KeyCode.None));
         }
 
         private void Start()
