@@ -1,14 +1,9 @@
 ﻿using BepInEx;
-using BepInEx.Harmony;
-using HarmonyLib;
+using BepInEx.Configuration;
 using KKAPI.Studio.SaveLoad;
 using Studio;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace KeelPlugins
 {
@@ -19,29 +14,26 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.itemlayeredit";
         public const string Version = "1.0.0";
-        
-        private void Awake()
+
+        private ConfigEntry<KeyboardShortcut> ChangeLayer { get; set; }
+
+        private void Start()
         {
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
+
+            ChangeLayer = Config.Bind("General", "Change layer", new KeyboardShortcut(KeyCode.V), "Toggle the selected objects between character and map layers");
         }
 
-        string guiLayer = "10";
-
-        private void OnGUI()
+        private void Update()
         {
-            var rect = new Rect(300f, 500f, 400f, 400f);
-
-            GUI.Box(rect, "");
-            GUILayout.BeginArea(rect);
-
-            GUILayout.BeginHorizontal();
-            if(GUILayout.Button("Change layer") && int.TryParse(guiLayer, out int layer))
-                SetSelectedObjectLayer(layer);
-
-            guiLayer = GUILayout.TextField(guiLayer);
-            GUILayout.EndHorizontal();
-
-            GUILayout.EndArea();
+            if(ChangeLayer.Value.IsDown())
+            {
+                var layer = GetSelectedObjectLayer();
+                if(layer == 11)
+                    SetSelectedObjectLayer(10);
+                else if(layer == 10)
+                    SetSelectedObjectLayer(11);
+            }
         }
 
         private static void SetSelectedObjectLayer(int layer)
