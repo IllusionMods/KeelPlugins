@@ -4,7 +4,6 @@ using KKAPI.Utilities;
 using MessagePack;
 using Studio;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace KeelPlugins
 {
@@ -26,9 +25,7 @@ namespace KeelPlugins
                     if(loadedItems.TryGetValue(layerData.ObjectId, out var itemInfo) && itemInfo is OCIItem item)
                     {
                         item.objectItem.AddComponent<LayerDataContainer>().DefaultLayer = layerData.DefaultLayer;
-                        item.objectItem.layer = layerData.NewLayer;
-                        foreach(Transform child in item.objectItem.transform)
-                            child.gameObject.layer = layerData.NewLayer;
+                        item.objectItem.SetAllLayers(layerData.NewLayer);
                     }
                 }
             }
