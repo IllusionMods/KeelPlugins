@@ -38,7 +38,7 @@ namespace KeelPlugins
 
         private static void SetSelectedObjectLayer(int layer)
         {
-            var targetObjects = Studio.Studio.GetSelectObjectCtrl().Select(x => (x as OCIItem)?.objectItem);
+            var targetObjects = Studio.Studio.GetSelectObjectCtrl().OfType<OCIItem>().Select(x => x.objectItem);
 
             foreach(var targetObject in targetObjects)
             {
@@ -51,7 +51,8 @@ namespace KeelPlugins
 
         private static int GetSelectedObjectLayer()
         {
-            return Studio.Studio.GetSelectObjectCtrl().Select(x => (x as OCIItem)?.objectItem).First().layer;
+            var targetObject = Studio.Studio.GetSelectObjectCtrl().OfType<OCIItem>().Select(x => x.objectItem).FirstOrDefault();
+            return targetObject != null ? targetObject.layer : -1;
         }
     }
 }
