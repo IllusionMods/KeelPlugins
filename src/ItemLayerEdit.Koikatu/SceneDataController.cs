@@ -4,6 +4,7 @@ using KKAPI.Utilities;
 using MessagePack;
 using Studio;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KeelPlugins
 {
@@ -34,20 +35,17 @@ namespace KeelPlugins
         protected override void OnSceneSave()
         {
             var saveData = new List<LayerSaveData>();
-            foreach(var objectCtrlInfo in Studio.Studio.Instance.dicObjectCtrl.Values)
+            foreach(var item in Studio.Studio.Instance.dicObjectCtrl.Values.OfType<OCIItem>())
             {
-                if(objectCtrlInfo is OCIItem item)
+                var data = item.objectItem.GetComponent<LayerDataContainer>();
+                if(data && data.DefaultLayer != item.objectItem.layer)
                 {
-                    var data = item.objectItem.GetComponent<LayerDataContainer>();
-                    if(data && data.DefaultLayer != item.objectItem.layer)
+                    saveData.Add(new LayerSaveData
                     {
-                        saveData.Add(new LayerSaveData
-                        {
-                            DefaultLayer = data.DefaultLayer,
-                            NewLayer = item.objectItem.layer,
-                            ObjectId = item.objectInfo.dicKey
-                        });
-                    }
+                        DefaultLayer = data.DefaultLayer,
+                        NewLayer = item.objectItem.layer,
+                        ObjectId = item.objectInfo.dicKey
+                    });
                 }
             }
 
