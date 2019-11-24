@@ -59,13 +59,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Code\VS\KeelPlugins\paket-files\ManlyMarco\IllusionModdingAPI\KKAPI\KKAPI.csproj">
-      <Project>{74c2db86-55bb-47b4-9805-51b5b992ef35}</Project>
-      <Name>KKAPI</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
