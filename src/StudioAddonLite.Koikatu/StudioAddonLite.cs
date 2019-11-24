@@ -41,24 +41,24 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            MOVE_RATIO = Config.AddSetting(SECTION_GENERAL, "Move ratio", 2.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 10f)));
-            ROTATE_RATIO = Config.AddSetting(SECTION_GENERAL, "Rotate ratio", 90f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 360f)));
-            SCALE_RATIO = Config.AddSetting(SECTION_GENERAL, "Scaling ratio", 0.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 2f)));
+            MOVE_RATIO = Config.Bind(SECTION_GENERAL, "Move ratio", 2.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 10f)));
+            ROTATE_RATIO = Config.Bind(SECTION_GENERAL, "Rotate ratio", 90f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 360f)));
+            SCALE_RATIO = Config.Bind(SECTION_GENERAL, "Scaling ratio", 0.5f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 2f)));
 
-            KEY_OBJ_MOVE_XZ = Config.AddSetting(SECTION_HOTKEYS, "Move XZ", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_MOVE_Y = Config.AddSetting(SECTION_HOTKEYS, "Move Y", new KeyboardShortcut(KeyCode.H));
+            KEY_OBJ_MOVE_XZ = Config.Bind(SECTION_HOTKEYS, "Move XZ", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_MOVE_Y = Config.Bind(SECTION_HOTKEYS, "Move Y", new KeyboardShortcut(KeyCode.H));
 
-            KEY_OBJ_ROT_X = Config.AddSetting(SECTION_HOTKEYS, "Rotate X (Local)", new KeyboardShortcut(KeyCode.G, KeyCode.LeftShift));
-            KEY_OBJ_ROT_Y = Config.AddSetting(SECTION_HOTKEYS, "Rotate Y (Local)", new KeyboardShortcut(KeyCode.H, KeyCode.LeftShift));
-            KEY_OBJ_ROT_Z = Config.AddSetting(SECTION_HOTKEYS, "Rotate Z (Local)", new KeyboardShortcut(KeyCode.Y, KeyCode.LeftShift));
-            KEY_OBJ_ROT_X_2 = Config.AddSetting(SECTION_HOTKEYS, "Rotate X (World)", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_ROT_Y_2 = Config.AddSetting(SECTION_HOTKEYS, "Rotate Y (World)", new KeyboardShortcut(KeyCode.H));
-            KEY_OBJ_ROT_Z_2 = Config.AddSetting(SECTION_HOTKEYS, "Rotate Z (World)", new KeyboardShortcut(KeyCode.Y));
+            KEY_OBJ_ROT_X = Config.Bind(SECTION_HOTKEYS, "Rotate X (Local)", new KeyboardShortcut(KeyCode.G, KeyCode.LeftShift));
+            KEY_OBJ_ROT_Y = Config.Bind(SECTION_HOTKEYS, "Rotate Y (Local)", new KeyboardShortcut(KeyCode.H, KeyCode.LeftShift));
+            KEY_OBJ_ROT_Z = Config.Bind(SECTION_HOTKEYS, "Rotate Z (Local)", new KeyboardShortcut(KeyCode.Y, KeyCode.LeftShift));
+            KEY_OBJ_ROT_X_2 = Config.Bind(SECTION_HOTKEYS, "Rotate X (World)", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_ROT_Y_2 = Config.Bind(SECTION_HOTKEYS, "Rotate Y (World)", new KeyboardShortcut(KeyCode.H));
+            KEY_OBJ_ROT_Z_2 = Config.Bind(SECTION_HOTKEYS, "Rotate Z (World)", new KeyboardShortcut(KeyCode.Y));
 
-            KEY_OBJ_SCALE_ALL = Config.AddSetting(SECTION_HOTKEYS, "Scale All", new KeyboardShortcut(KeyCode.T));
-            KEY_OBJ_SCALE_X = Config.AddSetting(SECTION_HOTKEYS, "Scale X", new KeyboardShortcut(KeyCode.G));
-            KEY_OBJ_SCALE_Y = Config.AddSetting(SECTION_HOTKEYS, "Scale Y", new KeyboardShortcut(KeyCode.H));
-            KEY_OBJ_SCALE_Z = Config.AddSetting(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
+            KEY_OBJ_SCALE_ALL = Config.Bind(SECTION_HOTKEYS, "Scale All", new KeyboardShortcut(KeyCode.T));
+            KEY_OBJ_SCALE_X = Config.Bind(SECTION_HOTKEYS, "Scale X", new KeyboardShortcut(KeyCode.G));
+            KEY_OBJ_SCALE_Y = Config.Bind(SECTION_HOTKEYS, "Scale Y", new KeyboardShortcut(KeyCode.H));
+            KEY_OBJ_SCALE_Z = Config.Bind(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
 
             bepinex = gameObject;
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));

@@ -25,7 +25,7 @@ namespace KeelPlugins
         private void Awake()
         {
             Logger = base.Logger;
-            SaveFolder = Config.AddSetting("", "Save folder path", "");
+            SaveFolder = Config.Bind("", "Save folder path", "");
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
         }
 

@@ -28,8 +28,8 @@ namespace KeelPlugins
             Logger = base.Logger;
             bepinex = gameObject;
 
-            SendChara = Config.AddSetting("Keyboard shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
-            ShowMessages = Config.AddSetting("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
+            SendChara = Config.Bind("Keyboard shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
+            ShowMessages = Config.Bind("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
 
             var tempFolder = Path.GetTempPath();
             MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");

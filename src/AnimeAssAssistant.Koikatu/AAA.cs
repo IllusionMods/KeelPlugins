@@ -48,21 +48,21 @@ namespace KeelPlugins
         {
             Logger = base.Logger;
 
-            HotkeyNext = Config.AddSetting(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
-            HotkeyPrev = Config.AddSetting(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
-            HotkeyKill = Config.AddSetting(SECTION_HOTKEY, "Move character to recycle bin", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription(DESCRIPTION_RYCYCLEBIN, null, new ConfigurationManagerAttributes { Order = 8 }));
-            HotkeySave = Config.AddSetting(SECTION_HOTKEY, "Move character to save folder", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription(DESCRIPTION_SAVECHARA, null, new ConfigurationManagerAttributes { Order = 7 }));
+            HotkeyNext = Config.Bind(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
+            HotkeyPrev = Config.Bind(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
+            HotkeyKill = Config.Bind(SECTION_HOTKEY, "Move character to recycle bin", new KeyboardShortcut(KeyCode.DownArrow), new ConfigDescription(DESCRIPTION_RYCYCLEBIN, null, new ConfigurationManagerAttributes { Order = 8 }));
+            HotkeySave = Config.Bind(SECTION_HOTKEY, "Move character to save folder", new KeyboardShortcut(KeyCode.UpArrow), new ConfigDescription(DESCRIPTION_SAVECHARA, null, new ConfigurationManagerAttributes { Order = 7 }));
 
-            HotkeyOutfit1 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 1", new KeyboardShortcut(KeyCode.Alpha1));
-            HotkeyOutfit2 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 2", new KeyboardShortcut(KeyCode.Alpha2));
-            HotkeyOutfit3 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 3", new KeyboardShortcut(KeyCode.Alpha3));
-            HotkeyOutfit4 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 4", new KeyboardShortcut(KeyCode.Alpha4));
-            HotkeyOutfit5 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 5", new KeyboardShortcut(KeyCode.Alpha5));
-            HotkeyOutfit6 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 6", new KeyboardShortcut(KeyCode.Alpha6));
-            HotkeyOutfit7 = Config.AddSetting(SECTION_HOTKEY, "Select outfit 7", new KeyboardShortcut(KeyCode.Alpha7));
+            HotkeyOutfit1 = Config.Bind(SECTION_HOTKEY, "Select outfit 1", new KeyboardShortcut(KeyCode.Alpha1));
+            HotkeyOutfit2 = Config.Bind(SECTION_HOTKEY, "Select outfit 2", new KeyboardShortcut(KeyCode.Alpha2));
+            HotkeyOutfit3 = Config.Bind(SECTION_HOTKEY, "Select outfit 3", new KeyboardShortcut(KeyCode.Alpha3));
+            HotkeyOutfit4 = Config.Bind(SECTION_HOTKEY, "Select outfit 4", new KeyboardShortcut(KeyCode.Alpha4));
+            HotkeyOutfit5 = Config.Bind(SECTION_HOTKEY, "Select outfit 5", new KeyboardShortcut(KeyCode.Alpha5));
+            HotkeyOutfit6 = Config.Bind(SECTION_HOTKEY, "Select outfit 6", new KeyboardShortcut(KeyCode.Alpha6));
+            HotkeyOutfit7 = Config.Bind(SECTION_HOTKEY, "Select outfit 7", new KeyboardShortcut(KeyCode.Alpha7));
 
-            SearchFolder = Config.AddSetting(SECTION_FOLDER, "Search folder path", "", new ConfigDescription("The folder where the plugin draws characters from"));
-            SaveFolder = Config.AddSetting(SECTION_FOLDER, "Save folder path", "", new ConfigDescription("The folder where characters are saved to when pressing the save hotkey"));
+            SearchFolder = Config.Bind(SECTION_FOLDER, "Search folder path", "", new ConfigDescription("The folder where the plugin draws characters from"));
+            SaveFolder = Config.Bind(SECTION_FOLDER, "Save folder path", "", new ConfigDescription("The folder where characters are saved to when pressing the save hotkey"));
         }
 
         private void Start()

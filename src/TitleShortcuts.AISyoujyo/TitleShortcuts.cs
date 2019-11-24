@@ -27,11 +27,11 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            AutoStart = Config.AddSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
-            StartFemaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
-            StartMaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
-            StartUploader = Config.AddSetting(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
-            StartDownloader = Config.AddSetting(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
+            AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
+            StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
+            StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
+            StartUploader = Config.Bind(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
+            StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
 
             SceneManager.sceneLoaded += StartInput;
         }

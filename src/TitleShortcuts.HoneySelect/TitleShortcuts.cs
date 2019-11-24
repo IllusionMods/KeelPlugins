@@ -25,9 +25,9 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            AutoStart = Config.AddSetting(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
-            StartFemaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
-            StartMaleMaker = Config.AddSetting(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
+            AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
+            StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
+            StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
         }
 
         private void OnLevelWasLoaded(int level)
