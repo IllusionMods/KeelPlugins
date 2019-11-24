@@ -19,103 +19,35 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.itemlayeredit";
         public const string Version = "1.0.0";
-
-        private static Harmony harmony;
-        private static List<GameObject> targetObjects = new List<GameObject>();
-        private static GameObject panel;
-        private static Slider layerSliderComponent;
-        private static TMP_InputField layerInputComponent;
-        private static bool pluginSetup = false;
-
+        
         private void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
         }
 
-#if DEBUG
-        private void OnDestroy()
+        string guiLayer = "10";
+
+        private void OnGUI()
         {
-            harmony.UnpatchAll();
-            DestroyImmediate(panel);
+            var rect = new Rect(300f, 500f, 400f, 400f);
 
-            var studio = Studio.Studio.Instance;
-            studio.treeNodeCtrl.onSelect -= OnSelect;
-            studio.treeNodeCtrl.onSelectMultiple -= OnSelectMultiple;
-            studio.treeNodeCtrl.onDeselect -= OnDeselect;
-            studio.treeNodeCtrl.onDelete -= OnDelete;
-        }
-#endif
+            GUI.Box(rect, "");
+            GUILayout.BeginArea(rect);
 
-        private static void OnSelect(TreeNodeObject node) => UpdateTargetObjects();
-        private static void OnSelectMultiple() => UpdateTargetObjects();
-        private static void OnDeselect(TreeNodeObject node) => UpdateTargetObjects();
-        private static void OnDelete(TreeNodeObject node) => UpdateTargetObjects();
+            GUILayout.BeginHorizontal();
+            if(GUILayout.Button("Change layer") && int.TryParse(guiLayer, out int layer))
+                SetSelectedObjectLayer(layer);
 
-        private static void SetupStudio()
-        {
-            if(pluginSetup)
-                return;
+            guiLayer = GUILayout.TextField(guiLayer);
+            GUILayout.EndHorizontal();
 
-            var studio = Studio.Studio.Instance;
-            studio.treeNodeCtrl.onSelect += OnSelect;
-            studio.treeNodeCtrl.onSelectMultiple += OnSelectMultiple;
-            studio.treeNodeCtrl.onDeselect += OnDeselect;
-            studio.treeNodeCtrl.onDelete += OnDelete;
-
-            panel = LayerUIBackend.CreatePanel();
-            LayerUIBackend.CreateText(panel.transform);
-            layerSliderComponent = LayerUIBackend.CreateSlider(panel.transform);
-            layerInputComponent = LayerUIBackend.CreateInputfield(panel.transform);
-            var layerDefButtonComponent = LayerUIBackend.CreateButton(panel.transform);
-
-            layerDefButtonComponent.onClick.AddListener(() =>
-            {
-                SetTargetObjectLayersDefault();
-
-                var defaultLayer = targetObjects.First().layer;
-                layerInputComponent.text = defaultLayer.ToString();
-                layerSliderComponent.value = defaultLayer;
-            });
-
-            layerSliderComponent.onValueChanged.AddListener((x) =>
-            {
-                SetTargetObjectLayers((int)x);
-                layerInputComponent.text = x.ToString();
-            });
-
-            layerInputComponent.onValueChanged.AddListener((x) =>
-            {
-                if(int.TryParse(x, out int result))
-                {
-                    SetTargetObjectLayers(result);
-                    layerSliderComponent.value = result;
-                }
-            });
-
-            UpdateTargetObjects();
-            pluginSetup = true;
+            GUILayout.EndArea();
         }
 
-        private static void UpdateTargetObjects()
+        private static void SetSelectedObjectLayer(int layer)
         {
-            targetObjects.Clear();
+            var targetObjects = Studio.Studio.GetSelectObjectCtrl().Select(x => (x as OCIItem)?.objectItem);
 
-            foreach(var objectCtrl in Studio.Studio.GetSelectObjectCtrl())
-            {
-                if(objectCtrl is OCIItem item)
-                    targetObjects.Add(item.objectItem);
-            }
-
-            if(targetObjects.Count > 0)
-            {
-                layerSliderComponent.value = targetObjects[0].layer;
-                layerInputComponent.text = targetObjects[0].layer.ToString();
-            }
-        }
-
-        private static void SetTargetObjectLayers(int layer)
-        {
             foreach(var targetObject in targetObjects)
             {
                 if(targetObject.AddComponentIfNotExist<LayerDataContainer>(out var data))
@@ -125,30 +57,9 @@ namespace KeelPlugins
             }
         }
 
-        private static void SetTargetObjectLayersDefault()
+        private static int GetSelectedObjectLayer()
         {
-            foreach(var targetObject in targetObjects)
-            {
-                var data = targetObject.GetComponent<LayerDataContainer>();
-                if(data && targetObject.layer != data.DefaultLayer)
-                    targetObject.SetAllLayers(data.DefaultLayer);
-            }
-        }
-
-        private class Hooks
-        {
-            [HarmonyPostfix, HarmonyPatch(typeof(ManipulatePanelCtrl), "SetActive")]
-            public static void ActivatePanel(ManipulatePanelCtrl __instance)
-            {
-                var traverse = Traverse.Create(__instance);
-                if(traverse.Field("kinds").GetValue<int[]>().Contains(1))
-                {
-                    var rootPanel = traverse.Property("rootPanel").GetValue<IList>();
-                    var rootObject = Traverse.Create(rootPanel[1]).Field("root").GetValue<GameObject>();
-                    rootObject.SetActive(true);
-                    SetupStudio();
-                }
-            }
+            return Studio.Studio.GetSelectObjectCtrl().Select(x => (x as OCIItem)?.objectItem).First().layer;
         }
     }
 }
