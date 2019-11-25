@@ -14,7 +14,7 @@ namespace KeelPlugins
     public class PosePng : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.posepng";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private static ConfigEntry<string> SaveFolder { get; set; }

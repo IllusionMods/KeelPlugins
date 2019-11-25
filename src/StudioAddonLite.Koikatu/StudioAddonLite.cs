@@ -11,7 +11,7 @@ namespace KeelPlugins
     public class StudioAddonLite : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.studioaddonlite";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
 
         private const string SECTION_GENERAL = "General";
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";
@@ -36,7 +36,6 @@ namespace KeelPlugins
         internal static ConfigEntry<KeyboardShortcut> KEY_OBJ_SCALE_Y { get; set; }
         internal static ConfigEntry<KeyboardShortcut> KEY_OBJ_SCALE_Z { get; set; }
 
-        private Harmony harmony;
         private static GameObject bepinex;
 
         private void Awake()
@@ -61,23 +60,13 @@ namespace KeelPlugins
             KEY_OBJ_SCALE_Z = Config.Bind(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
 
             bepinex = gameObject;
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
+            HarmonyWrapper.PatchAll(GetType());
         }
 
-#if DEBUG
-        private void OnDestroy()
+        [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+        private static void StudioEntrypoint()
         {
-            harmony.UnpatchAll();
-        }
-#endif
-
-        private class Hooks
-        {
-            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
-            public static void StudioEntrypoint()
-            {
-                bepinex.GetOrAddComponent<ObjMoveRotAssistMgr>();
-            }
+            bepinex.GetOrAddComponent<ObjMoveRotAssistMgr>();
         }
     }
 }

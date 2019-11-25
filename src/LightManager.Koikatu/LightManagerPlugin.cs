@@ -12,7 +12,7 @@ namespace KeelPlugins
     public class LightManagerPlugin : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.lightmanager";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
 
         private Harmony harmony;
         private static GameObject bepinex;

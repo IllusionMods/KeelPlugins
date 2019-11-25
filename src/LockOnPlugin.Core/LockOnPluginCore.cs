@@ -11,6 +11,7 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.lockonplugin";
         public const string PluginName = "LockOnPlugin";
+        public const string Version = "2.6.0." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";

@@ -6,8 +6,6 @@ namespace KeelPlugins
     [BepInPlugin(GUID, "LockOnPlugin", Version)]
     public class LockOnPlugin : LockOnPluginCore
     {
-        public const string Version = "1.0.0";
-
         private class Entrypoints
         {
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]

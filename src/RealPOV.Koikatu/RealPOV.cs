@@ -11,7 +11,7 @@ namespace KeelPlugins
     public class RealPOV : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.realpov";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
 
         private const string SECTION_GENERAL = "General";
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";

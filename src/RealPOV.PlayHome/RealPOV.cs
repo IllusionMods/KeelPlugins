@@ -11,7 +11,7 @@ namespace KeelPlugins
     public class RealPOV : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.togglepov";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";
