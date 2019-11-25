@@ -5,7 +5,7 @@ Not all of these plugins exist or are even possible to make for all of the games
 Configuration Manager is recommended to make changing the numerous settings from these plugins easier.
 
 ## How to install
-1. Install the latest build of [BepInEx](https://builds.bepis.io/projects/bepinex_be)
+1. Install the latest build of [BepInEx](https://github.com/BepInEx/BepInEx/releases)
 2. Download the latest release for your game from [appveyor](https://ci.appveyor.com/project/Keelhauled/keelplugins/build/artifacts)
 3. Put the dll files you want in the `bepinex/plugins` folder
 
@@ -39,9 +39,17 @@ Now when loading a character or starting the studio these settings will be used.
 Exposes the game's graphics settings and some other values for editing.  
 The default settings on the plugin may be too heavy for some computers so remember to tweak them.
 
+#### ItemLayerEdit
+Adds a hotkey that switches the currently selected objects layer between the character layer and the map layer.  
+This allows for more in-depth editing of lighting in studio.
+
+#### LightManager
+Make studio spotlights automatically track characters.  
+First select the lights you want to edit then add the character you want to track to the selection and hit apply in the light settings. You cannot select a character first because the light menu has to be open to edit the settings.
+
 #### LockOnPlugin
 A camera helper plugin that lets you forget the annoying camera controls and keeps the action right where it needs to be.  
-It allows you to automatically keep the camera focus on the character.
+Select a character and press the hotkey to automatically keep the camera focus on the character.
 
 #### MakerBridge
 Press the hotkey to send the selected character from maker to studio and vice versa.  
@@ -52,3 +60,7 @@ Title menu keyboard shortcuts to open different modes.
 For example, press F to open the female editor.  
 Also has a setting to start certain modes automatically during startup.  
 Hold esc just before the title screen to cancel automatic startup.
+
+#### StudioAddonLite
+A lite version of the StudioAddon for HS.  
+Currently only has the object manipulation hotkeys for studio.
