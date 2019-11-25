@@ -46,5 +46,6 @@
   </ItemGroup>
   <Import Project="..\Common.HoneySelect\Common.HoneySelect.projitems" Label="Shared" />
   <Import Project="..\TitleShortcuts.Core\TitleShortcuts.Core.projitems" Label="Shared" />
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

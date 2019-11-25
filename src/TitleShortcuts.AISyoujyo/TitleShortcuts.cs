@@ -13,8 +13,6 @@ namespace KeelPlugins
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.1.1";
-
         private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
