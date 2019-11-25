@@ -16,7 +16,7 @@ namespace KeelPlugins
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.1.0";
+        public const string Version = "1.1.0." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private static string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");

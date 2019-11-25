@@ -10,7 +10,7 @@ namespace KeelPlugins
     public class MoreSlotID : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.phmoreslotidbep";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
 
         internal static string ModFolder = Path.Combine(Paths.GameRootPath, "mods");
         internal static Dictionary<string, string> AssetList = new Dictionary<string, string>();

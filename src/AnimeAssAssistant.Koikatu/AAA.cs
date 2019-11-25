@@ -17,7 +17,7 @@ namespace KeelPlugins
     public class AAA : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.animeassassistant";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private const string SECTION_HOTKEY = "Keyboard shortcuts";
