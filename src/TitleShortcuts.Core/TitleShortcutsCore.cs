@@ -6,6 +6,7 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.titleshortcuts";
         public const string PluginName = "Title shortcuts";
+        public const string Version = "1.1.1." + BuildNumber.Version;
 
         protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
         protected const string SECTION_GENERAL = "General";

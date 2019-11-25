@@ -112,6 +112,7 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{124a215f-69b4-4310-98de-209fafe16d44}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{124a215f-69b4-4310-98de-209fafe16d44}*SharedItemsImports = 4
@@ -128,6 +129,7 @@ Global
 		src\Common.Core\Common.Core.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
 		src\Common.PlayHome\Common.PlayHome.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{5837fde8-4b7c-431b-9402-3d8019f7bf37}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
@@ -149,6 +151,7 @@ Global
 		src\UIUtility\UIUtility.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{be9297c1-8920-433d-8dcc-1d7c4f7b155d}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\Common.Core.Event\Common.Core.Event.projitems*{d27ad499-3292-48cb-ac8b-45fdd49f9e21}*SharedItemsImports = 4
