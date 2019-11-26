@@ -25,7 +25,8 @@ namespace KeelPlugins
 
         public static bool GetIsUpdateInfo(object __instance)
         {
-            return Traverse.Create(__instance).Property("isUpdateInfo").GetValue<bool>();
+            var propInfo = AccessTools.Property(__instance.GetType(), "isUpdateInfo");
+            return (bool)propInfo.GetValue(__instance, null);
         }
     }
 }
