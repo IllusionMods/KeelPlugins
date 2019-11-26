@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    public class MakerBridgeCore : BaseUnityPlugin
+    public abstract class MakerBridgeCore : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.makerbridge";
         public const string PluginName = "MakerBridge";

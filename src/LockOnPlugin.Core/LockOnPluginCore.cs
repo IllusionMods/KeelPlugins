@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    public class LockOnPluginCore : BaseUnityPlugin
+    public abstract class LockOnPluginCore : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.lockonplugin";
         public const string PluginName = "LockOnPlugin";
