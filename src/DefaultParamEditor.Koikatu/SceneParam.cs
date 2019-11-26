@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Studio;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace KeelPlugins
 {
@@ -23,7 +24,10 @@ namespace KeelPlugins
             {
                 _sceneData.aceNo = sceneInfo.aceNo;
                 _sceneData.aceBlend = sceneInfo.aceBlend;
-                _sceneData.enableAOE = Traverse.Create(systemButtonCtrl).Field("amplifyOcculusionEffectInfo").Property("aoe").Property("enabled").GetValue<bool>();
+
+                var aoe = Traverse.Create(systemButtonCtrl).Field("amplifyOcculusionEffectInfo").Property("aoe").GetValue<AmplifyOcclusionEffect>();
+                _sceneData.enableAOE = (bool)aoe.GetType().GetProperty("enabled").GetValue(aoe, null);
+
                 _sceneData.aoeColor = sceneInfo.aoeColor;
                 _sceneData.aoeRadius = sceneInfo.aoeRadius;
                 _sceneData.enableBloom = sceneInfo.enableBloom;
@@ -41,7 +45,10 @@ namespace KeelPlugins
                 _sceneData.enableSunShafts = sceneInfo.enableSunShafts;
                 _sceneData.sunThresholdColor = sceneInfo.sunThresholdColor;
                 _sceneData.sunColor = sceneInfo.sunColor;
-                _sceneData.enableShadow = Traverse.Create(systemButtonCtrl).Field("selfShadowInfo").Field("toggleEnable").Property("isOn").GetValue<bool>();
+
+                var toggleEnable = Traverse.Create(systemButtonCtrl).Field("selfShadowInfo").Field("toggleEnable").GetValue<Toggle>();
+                _sceneData.enableShadow = (bool)toggleEnable.GetType().GetProperty("isOn").GetValue(toggleEnable, null);
+
                 _sceneData.rampG = sceneInfo.rampG;
                 _sceneData.ambientShadowG = sceneInfo.ambientShadowG;
                 _sceneData.lineWidthG = sceneInfo.lineWidthG;
