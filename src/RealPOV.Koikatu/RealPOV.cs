@@ -118,11 +118,11 @@ namespace KeelPlugins
                 return true;
             }
 
-            [HarmonyPrefix, HarmonyPatch(typeof(CameraControl_Ver2), "LateUpdate")]
-            public static bool StopNormalCameraData(CameraControl_Ver2 __instance)
-            {
-                return !povEnabled;
-            }
+            //[HarmonyPrefix, HarmonyPatch(typeof(CameraControl_Ver2), "LateUpdate")]
+            //public static bool StopNormalCameraData(CameraControl_Ver2 __instance)
+            //{
+            //    return !povEnabled;
+            //}
         }
     }
 }
