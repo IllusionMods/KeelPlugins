@@ -7,11 +7,13 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
+    [BepInProcess(KoikatuConstants.MainGameProcessName)]
+    [BepInProcess(KoikatuConstants.MainGameProcessNameSteam)]
     [BepInPlugin(GUID, "RealPov", Version)]
     public class RealPOV : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.realpov";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private const string SECTION_GENERAL = "General";
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";
@@ -37,12 +39,6 @@ namespace KeelPlugins
             PovHotkey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
 
             harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
-
-            currentChara = FindObjectOfType<ChaControl>();
-            currentFov = DefaultFov.Value;
-
-            foreach(var item in currentChara.neckLookCtrl.neckLookScript.aBones)
-                item.neckBone.rotation = new Quaternion();
         }
 
         private void Update()
@@ -76,17 +72,20 @@ namespace KeelPlugins
 
         private void TogglePov()
         {
-            if(povEnabled)
+            if(currentChara != null)
             {
-                Camera.main.fieldOfView = backupFov;
-                Camera.main.transform.position = backupPos;
-                povEnabled = false;
-            }
-            else
-            {
-                backupFov = Camera.main.fieldOfView;
-                backupPos = Camera.main.transform.position;
-                povEnabled = true;
+                if(povEnabled)
+                {
+                    Camera.main.fieldOfView = backupFov;
+                    Camera.main.transform.position = backupPos;
+                    povEnabled = false;
+                }
+                else
+                {
+                    backupFov = Camera.main.fieldOfView;
+                    backupPos = Camera.main.transform.position;
+                    povEnabled = true;
+                } 
             }
         }
 
@@ -123,6 +122,22 @@ namespace KeelPlugins
             //{
             //    return !povEnabled;
             //}
+
+            [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "SetShortcutKey")]
+            private static void HSceneStart()
+            {
+                currentChara = FindObjectOfType<ChaControl>();
+                currentFov = DefaultFov.Value;
+
+                foreach(var item in currentChara.neckLookCtrl.neckLookScript.aBones)
+                    item.neckBone.rotation = new Quaternion();
+            }
+
+            [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
+            private static void HSceneEnd()
+            {
+                currentChara = null;
+            }
         }
     }
 }
