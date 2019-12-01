@@ -61,6 +61,9 @@ For example, press F to open the female editor.
 Also has a setting to start certain modes automatically during startup.  
 Hold esc just before the title screen to cancel automatic startup.
 
+#### RealPOV
+First person mode for H scenes.
+
 #### StudioAddonLite
 A lite version of the StudioAddon for HS.  
 Currently only has the object manipulation hotkeys for studio.
