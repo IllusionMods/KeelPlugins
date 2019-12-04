@@ -43,14 +43,29 @@ namespace UILib
         public static DefaultControls.Resources resources;
 
         private static bool _initCalled = false;
-
-        public static void Init()
+        
+        /// <summary>Initialize UIUtility for Koikatu</summary>
+        /// <param name="callingAssembly">Use typeof(Type).Assembly to get this</param>
+        public static void InitKOI(Assembly callingAssembly)
         {
-            if(_initCalled)
-                return;
+            Init(callingAssembly, $"{callingAssembly.GetName().Name}.Resources.DefaultResourcesKOI.unity3d");
+        }
+
+        /// <summary>Initialize UIUtility for Honey Select</summary>
+        /// <param name="callingAssembly">Use typeof(Type).Assembly to get this</param>
+        public static void InitHS(Assembly callingAssembly)
+        {
+            Init(callingAssembly, $"{callingAssembly.GetName().Name}.Resources.DefaultResourcesHS.unity3d");
+        }
+
+        private static void Init(Assembly callingAssembly, string resourceName)
+        {
+            if(_initCalled) return;
             _initCalled = true;
-            Resource.Namespace = Assembly.GetExecutingAssembly().GetName().Name;
-            AssetBundle bundle = AssetBundle.LoadFromMemory(Resource.DefaultResourceKOI);
+
+            var resource = Resource.LoadEmbeddedResource(callingAssembly, resourceName);
+            AssetBundle bundle = AssetBundle.LoadFromMemory(resource);
+
             foreach(Sprite sprite in bundle.LoadAllAssets<Sprite>())
             {
                 switch(sprite.name)
@@ -78,6 +93,7 @@ namespace UILib
                         break;
                 }
             }
+
             defaultFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
             resources = new DefaultControls.Resources { background = backgroundSprite, checkmark = checkMark, dropdown = dropdownArrow, inputField = inputFieldBackground, knob = knob, mask = mask, standard = standardSprite };
             defaultFontSize = 16;
@@ -333,7 +349,7 @@ namespace UILib
             i.type = Image.Type.Sliced;
             i.fillCenter = true;
             i.color = whiteColor;
-            i.sprite = sprite == null ? backgroundSprite : sprite;
+            i.sprite = sprite ?? backgroundSprite;
             return i;
         }
 

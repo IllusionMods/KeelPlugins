@@ -6,16 +6,11 @@ namespace UILib
 {
     internal static class Resource
     {
-        public static string Namespace { get; set; }
-        public static byte[] DefaultResourceHS => LoadEmbeddedResource($"{Namespace}.Resources.DefaultResourcesHS.unity3d");
-        public static byte[] DefaultResourceKOI => LoadEmbeddedResource($"{Namespace}.Resources.DefaultResourcesKOI.unity3d");
-
-        public static byte[] LoadEmbeddedResource(string resourceName)
+        public static byte[] LoadEmbeddedResource(Assembly callingAssembly, string resourceName)
         {
             try
             {
-                var ass = Assembly.GetExecutingAssembly();
-                using(var stream = ass.GetManifestResourceStream(resourceName))
+                using(var stream = callingAssembly.GetManifestResourceStream(resourceName))
                 {
                     byte[] buffer = new byte[16 * 1024];
                     return ReadFully(stream);
