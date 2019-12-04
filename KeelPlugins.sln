@@ -122,6 +122,7 @@ Global
 		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{4994d068-6e18-414b-8fbf-a035ec46ccee}*SharedItemsImports = 13
 		src\Common.Core.Event\Common.Core.Event.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 4
+		src\RealPOV.Core\RealPOV.Core.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{4d175c74-23cc-45db-8225-537db7e33142}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
 		src\Common.PlayHome\Common.PlayHome.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
@@ -161,6 +162,7 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
+		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

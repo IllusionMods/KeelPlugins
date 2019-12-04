@@ -52,5 +52,6 @@
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core.Event\Common.Core.Event.projitems" Label="Shared" />
+  <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

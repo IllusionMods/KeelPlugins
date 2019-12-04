@@ -1,21 +1,14 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Harmony;
-using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
 namespace KeelPlugins
 {
     [BepInPlugin(GUID, "RealPOV", Version)]
-    public class RealPOV : BaseUnityPlugin
+    public class RealPOV : RealPOVCore
     {
-        public const string GUID = "keelhauled.togglepov";
-        public const string Version = "1.0.0." + BuildNumber.Version;
-        internal static new ManualLogSource Logger;
-
-        private const string SECTION_HOTKEYS = "Keyboard shortcuts";
-        private const string SECTION_GENERAL = "General";
         private const string SECTION_OFFSETS = "Offsets";
 
         private const string DESCRIPTION_POVHOTKEY = "This hotkey enables the POV mode and then switches between different rotation modes. Hold the key to disable POV mode.";
@@ -39,10 +32,9 @@ namespace KeelPlugins
         private Harmony harmony;
         private static GameObject bepinex;
 
-        private void Awake()
+        protected override void Awake()
         {
-            Logger = base.Logger;
-            bepinex = gameObject;
+            base.Awake();
 
             POVKey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace), new ConfigDescription(DESCRIPTION_POVHOTKEY));
             POVHotkey = new KeyboardShortcutHotkey(POVKey.Value, 0.3f);
@@ -57,7 +49,8 @@ namespace KeelPlugins
             MaleOffsetX = Config.Bind(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetY = Config.Bind(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetZ = Config.Bind(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
-            
+
+            bepinex = gameObject;
             harmony = HarmonyWrapper.PatchAll();
         }
 
@@ -68,19 +61,16 @@ namespace KeelPlugins
         } 
 #endif
 
-        private class Hooks
+        [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]
+        private static void HSceneInit()
         {
-            [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]
-            public static void HSceneInit()
-            {
-                bepinex.GetOrAddComponent<PointOfView>();
-            }
+            bepinex.GetOrAddComponent<PointOfView>();
+        }
 
-            [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "OnDestroy")]
-            public static void HSceneDestroy()
-            {
-                Destroy(bepinex.GetComponent<PointOfView>());
-            }
+        [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "OnDestroy")]
+        private static void HSceneDestroy()
+        {
+            Destroy(bepinex.GetComponent<PointOfView>());
         }
     }
 }
