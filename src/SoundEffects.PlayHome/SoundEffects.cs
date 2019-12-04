@@ -3,7 +3,7 @@ using BepInEx.Harmony;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using UnityEngine;
 
 namespace KeelPlugins
@@ -20,15 +20,9 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
-
-            var ass = Assembly.GetExecutingAssembly();
-            var soundDir = Path.Combine(Path.GetDirectoryName(ass.Location), PluginName);
-            foreach(var filePath in Directory.GetFiles(soundDir))
-            {
-                var clip = ExternalAudioClip.Load(filePath);
-                slaps.Add(clip);
-            }
+            harmony = HarmonyWrapper.PatchAll(GetType());
+            var soundDir = Path.Combine(Path.GetDirectoryName(Info.Location), PluginName);
+            slaps = Directory.GetFiles(soundDir, "*.wav").Select(ExternalAudioClip.Load).ToList();
         }
 
 #if DEBUG
@@ -38,21 +32,18 @@ namespace KeelPlugins
         }
 #endif
 
-        private class Hooks
+        [HarmonyPrefix, HarmonyPatch(typeof(H_SE), nameof(H_SE.Play_Piston))]
+        private static bool CustomSound(H_SE __instance, Female female)
         {
-            [HarmonyPrefix, HarmonyPatch(typeof(H_SE), nameof(H_SE.Play_Piston))]
-            public static bool CustomSound(H_SE __instance, Female female)
+            if(slaps.Count > 0)
             {
-                if(slaps.Count > 0)
-                {
-                    var random = Random.Range(0, slaps.Count - 1);
-                    var gameCtrl = Traverse.Create(__instance).Field("gameCtrl").GetValue<GameControl>();
-                    gameCtrl.audioCtrl.Play3DSE(slaps[random], female.CrotchTrans.position);
-                    return false;
-                }
-
-                return true;
+                var random = Random.Range(0, slaps.Count - 1);
+                var gameCtrl = Traverse.Create(__instance).Field("gameCtrl").GetValue<GameControl>();
+                gameCtrl.audioCtrl.Play3DSE(slaps[random], female.CrotchTrans.position);
+                return false;
             }
+
+            return true;
         }
     }
 }

@@ -6,19 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 namespace KeelPlugins
 {
     internal class BlendSets
     {
-        private const string resourceFile = "BlendSets.json";
-
         public static BlendSets LoadBlendSetData()
         {
-            string resourceName = $"{nameof(BlendShaper)}.{resourceFile}";
-            using(var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            string resourceName = $"{nameof(BlendShaper)}.BlendSets.json";
+            using(var stream = typeof(BlendShaper).Assembly.GetManifestResourceStream(resourceName))
             {
                 using(var reader = new StreamReader(stream))
                 {

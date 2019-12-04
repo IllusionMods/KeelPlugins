@@ -37,7 +37,7 @@ namespace KeelPlugins
 
         private void Start()
         {
-            UIUtility.Init();
+            UIUtility.InitKOI(GetType().Assembly);
 
             var panel = CreateUIBase(400f, 400f);
             categoryList = CreateList(panel.transform, 0f, 0f, 0.25f, 1f);
