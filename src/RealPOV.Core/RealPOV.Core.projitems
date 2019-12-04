@@ -9,5 +9,6 @@
     <Import_RootNamespace>RealPOV.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)RealPOVCore.cs" />
   </ItemGroup>
 </Project>
