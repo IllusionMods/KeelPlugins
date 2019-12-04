@@ -42,7 +42,7 @@ namespace KeelPlugins
 
         private static void LoadResourceData()
         {
-            var ass = Assembly.GetExecutingAssembly();
+            var ass = typeof(LockOnPluginCore).Assembly;
             var resourceName = $"{ass.GetName().Name}.{dataFileName}";
 
             using(var stream = ass.GetManifestResourceStream(resourceName))
