@@ -3,13 +3,12 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>5fc98374-508a-40b7-b4e1-edb3b1d482f6</SharedGUID>
+    <SharedGUID>0f7d10b7-1180-4537-8804-14545f514c49</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.Koikatu</Import_RootNamespace>
+    <Import_RootNamespace>CameraTargetFix.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)KoikatuConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraTargetFixCore.cs" />
   </ItemGroup>
 </Project>
