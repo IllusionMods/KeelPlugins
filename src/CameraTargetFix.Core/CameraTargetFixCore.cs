@@ -14,11 +14,12 @@ namespace KeelPlugins
         public const string Version = "1.0.0." + BuildNumber.Version;
 
         protected static new ManualLogSource Logger;
-        protected static Harmony Harmony = new Harmony($"{GUID}.harmony");
+        protected static Harmony Harmony;
 
         protected virtual void Awake()
         {
-
+            Logger = base.Logger;
+            Harmony = new Harmony($"{GUID}.harmony");
         }
 
 #if DEBUG

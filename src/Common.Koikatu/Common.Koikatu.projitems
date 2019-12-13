@@ -10,6 +10,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)KoikatuConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneHelper.cs" />
   </ItemGroup>
 </Project>
