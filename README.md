@@ -18,7 +18,12 @@ There is also some added randomization to make the pose changing feel more natur
 
 #### AnimeAssAssistant
 An assistant to help you manage your huge card collections.  
-It provides a few shortcuts that let you go through your cards quickly while deciding which cards to keep.
+It provides a few shortcuts in maker that let you go through your cards quickly while deciding which cards to keep.  
+Enable the plugin in the maker sidebar for the hotkeys to work.
+
+#### CameraTargetFix
+Hides the mouse when dragging even if the camera target has been disabled in studio.  
+Also AI girl maker now correctly loads the camera target setting.
 
 #### CharaStateX
 Allows editing the state of multiple studio characters simultaneously.  
