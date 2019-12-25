@@ -120,7 +120,7 @@ namespace KeelPlugins
             [HarmonyPrefix, HarmonyPatch(typeof(H_Members), "SetH_Pos")]
             public static bool StopMovement()
             {
-                return Input.GetKey(KeyCode.LeftShift) ? true : false;
+                return !Input.GetKey(KeyCode.LeftShift);
             }
 
             [HarmonyPrefix, HarmonyPatch(typeof(HStyleChangeUI), "StyleCheck")]
