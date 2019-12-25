@@ -108,6 +108,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.Koikatu", "
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CameraTargetFix.Core", "src\CameraTargetFix.Core\CameraTargetFix.Core.shproj", "{0F7D10B7-1180-4537-8804-14545F514C49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AISyoujyo", "src\Testing.AISyoujyo\Testing.AISyoujyo.csproj", "{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -166,6 +168,8 @@ Global
 		src\Common.Core\Common.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
+		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
@@ -261,6 +265,10 @@ Global
 		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -309,6 +317,7 @@ Global
 		{FF853689-DB4D-4109-9A32-F76A7E85D15B} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{7494803F-2D68-4B75-9E89-9F1B22B13759} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{0F7D10B7-1180-4537-8804-14545F514C49} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
+		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
