@@ -110,6 +110,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CameraTargetFix.Core", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AISyoujyo", "src\Testing.AISyoujyo\Testing.AISyoujyo.csproj", "{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.PlayHome", "src\CameraTargetFix.PlayHome\CameraTargetFix.PlayHome.csproj", "{D77FA629-BC45-4FFA-BDFF-A930089E88F1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -171,6 +173,9 @@ Global
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
+		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
+		src\Common.PlayHome\Common.PlayHome.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
 		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
@@ -269,6 +274,10 @@ Global
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -318,6 +327,7 @@ Global
 		{7494803F-2D68-4B75-9E89-9F1B22B13759} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{0F7D10B7-1180-4537-8804-14545F514C49} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{D77FA629-BC45-4FFA-BDFF-A930089E88F1} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
