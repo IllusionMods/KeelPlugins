@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CameraTargetFix.AISyoujyo")]
+[assembly: AssemblyTitle("CameraTargetFix.PlayHome")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CameraTargetFix.AISyoujyo")]
+[assembly: AssemblyProduct("CameraTargetFix.PlayHome")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d9e1e987-0253-48c9-8e2c-9ccda33f6581")]
+[assembly: Guid("d77fa629-bc45-4ffa-bdff-a930089e88f1")]
 
 // Version information for an assembly consists of the following four values:
 //
