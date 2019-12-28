@@ -58,7 +58,7 @@ namespace KeelPlugins
         private void OnDestroy()
         {
             harmony.UnpatchAll();
-        } 
+        }
 #endif
 
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]
