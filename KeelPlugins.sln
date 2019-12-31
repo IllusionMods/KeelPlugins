@@ -112,6 +112,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AISyoujyo", "src\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.PlayHome", "src\CameraTargetFix.PlayHome\CameraTargetFix.PlayHome.csproj", "{D77FA629-BC45-4FFA-BDFF-A930089E88F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModLoader.PlayHome", "src\ModLoader.PlayHome\ModLoader.PlayHome.csproj", "{9F4A6B41-3465-4086-A1E2-023699B3F2EE}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -159,6 +161,8 @@ Global
 		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{9f4a6b41-3465-4086-a1e2-023699b3f2ee}*SharedItemsImports = 4
+		src\Common.PlayHome\Common.PlayHome.projitems*{9f4a6b41-3465-4086-a1e2-023699b3f2ee}*SharedItemsImports = 4
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{a19f5b25-6318-4323-93c8-b27f0343e582}*SharedItemsImports = 13
 		src\RealPOV.Core\RealPOV.Core.projitems*{a52280cd-3cc4-452a-8c11-67e440e0262f}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
@@ -278,6 +282,10 @@ Global
 		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -328,6 +336,7 @@ Global
 		{0F7D10B7-1180-4537-8804-14545F514C49} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{D77FA629-BC45-4FFA-BDFF-A930089E88F1} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
+		{9F4A6B41-3465-4086-A1E2-023699B3F2EE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
