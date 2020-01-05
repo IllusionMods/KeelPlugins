@@ -100,17 +100,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleShortcuts.AISyoujyo", 
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.AISyoujyo", "src\Common.AISyoujyo\Common.AISyoujyo.shproj", "{5837FDE8-4B7C-431B-9402-3D8019F7BF37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.AISyoujyo", "src\CameraTargetFix.AISyoujyo\CameraTargetFix.AISyoujyo.csproj", "{D9E1E987-0253-48C9-8E2C-9CCDA33F6581}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CameraTargetFix", "CameraTargetFix", "{FF853689-DB4D-4109-9A32-F76A7E85D15B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.Koikatu", "src\CameraTargetFix.Koikatu\CameraTargetFix.Koikatu.csproj", "{7494803F-2D68-4B75-9E89-9F1B22B13759}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CameraTargetFix.Core", "src\CameraTargetFix.Core\CameraTargetFix.Core.shproj", "{0F7D10B7-1180-4537-8804-14545F514C49}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AISyoujyo", "src\Testing.AISyoujyo\Testing.AISyoujyo.csproj", "{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraTargetFix.PlayHome", "src\CameraTargetFix.PlayHome\CameraTargetFix.PlayHome.csproj", "{D77FA629-BC45-4FFA-BDFF-A930089E88F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModLoader.PlayHome", "src\ModLoader.PlayHome\ModLoader.PlayHome.csproj", "{9F4A6B41-3465-4086-A1E2-023699B3F2EE}"
 EndProject
@@ -121,7 +111,6 @@ Global
 		src\Common.Core\Common.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 4
-		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{0f7d10b7-1180-4537-8804-14545f514c49}*SharedItemsImports = 13
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 4
@@ -147,9 +136,6 @@ Global
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{5fc98374-508a-40b7-b4e1-edb3b1d482f6}*SharedItemsImports = 13
 		src\Common.PlayHome\Common.PlayHome.projitems*{624f7c3f-0557-4fa6-a915-c99c5a40a851}*SharedItemsImports = 13
-		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{7494803f-2d68-4b75-9e89-9f1b22b13759}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{7494803f-2d68-4b75-9e89-9f1b22b13759}*SharedItemsImports = 4
-		src\Common.Koikatu\Common.Koikatu.projitems*{7494803f-2d68-4b75-9e89-9f1b22b13759}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
@@ -177,12 +163,6 @@ Global
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
-		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
-		src\Common.PlayHome\Common.PlayHome.projitems*{d77fa629-bc45-4ffa-bdff-a930089e88f1}*SharedItemsImports = 4
-		src\CameraTargetFix.Core\CameraTargetFix.Core.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
-		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{d9e1e987-0253-48c9-8e2c-9ccda33f6581}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
 		src\CharaStateX.Core\CharaStateX.Core.projitems*{e6fc0727-cf45-4f39-80c6-8816dba8d060}*SharedItemsImports = 13
 		src\Common.Core.Event\Common.Core.Event.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
@@ -266,26 +246,12 @@ Global
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9E1E987-0253-48C9-8E2C-9CCDA33F6581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9E1E987-0253-48C9-8E2C-9CCDA33F6581}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9E1E987-0253-48C9-8E2C-9CCDA33F6581}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9E1E987-0253-48C9-8E2C-9CCDA33F6581}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7494803F-2D68-4B75-9E89-9F1B22B13759}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D77FA629-BC45-4FFA-BDFF-A930089E88F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -330,12 +296,7 @@ Global
 		{2A4067D3-D380-492B-946B-E7F221259439} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{5837FDE8-4B7C-431B-9402-3D8019F7BF37} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{D9E1E987-0253-48C9-8E2C-9CCDA33F6581} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
-		{FF853689-DB4D-4109-9A32-F76A7E85D15B} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{7494803F-2D68-4B75-9E89-9F1B22B13759} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
-		{0F7D10B7-1180-4537-8804-14545F514C49} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{D77FA629-BC45-4FFA-BDFF-A930089E88F1} = {FF853689-DB4D-4109-9A32-F76A7E85D15B}
 		{9F4A6B41-3465-4086-A1E2-023699B3F2EE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
