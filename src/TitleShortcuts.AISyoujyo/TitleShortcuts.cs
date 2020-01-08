@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace KeelPlugins {
+namespace KeelPlugins 
+{
     [BepInProcess(AISyoujyoConstants.MainGameProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore 
