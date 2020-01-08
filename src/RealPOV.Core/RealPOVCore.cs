@@ -7,7 +7,7 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.realpov";
         public const string PluginName = "RealPOV";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         internal const string SECTION_GENERAL = "General";
         internal const string SECTION_HOTKEYS = "Keyboard shortcuts";
