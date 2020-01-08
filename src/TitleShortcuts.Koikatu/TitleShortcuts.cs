@@ -26,10 +26,10 @@ namespace KeelPlugins
 
         private bool checkInput = false;
         private bool cancelAuto = false;
-        private TitleScene titleScene;    
-     
+        private TitleScene titleScene;
 
-        public override string[] GameArgs { get { return new string[] { "-femalemaker", "-malemaker", "-freeh", "-live" }; } }
+        protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker", "-freeh", "-live" };
+
         private void Awake()
         {
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
@@ -39,9 +39,8 @@ namespace KeelPlugins
             StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
             StartFreeH = Config.Bind(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.Bind(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
-            
+
             CheckArgument();
-           
             SceneManager.sceneLoaded += StartInput;
         }
 
@@ -62,7 +61,7 @@ namespace KeelPlugins
             {
                 checkInput = false;
             }
-        }        
+        }
 
         private IEnumerator InputCheck()
         {

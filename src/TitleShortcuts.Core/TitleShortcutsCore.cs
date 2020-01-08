@@ -17,14 +17,13 @@ namespace KeelPlugins
                                                        "Hold esc or F1 during startup to cancel automatic behaviour or hold another shortcut to use that instead.";
 
         protected string Argument = "none";
-
-        public abstract string[] GameArgs { get; }
+        protected virtual string[] PossibleArguments { get; }
 
         protected void CheckArgument()
         {
             string[] args = Environment.GetCommandLineArgs();
             if (args == null || args.Length == 0) return;
-            Argument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => GameArgs.Contains(x));
+            Argument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => PossibleArguments.Contains(x));
         }
     }
 }
