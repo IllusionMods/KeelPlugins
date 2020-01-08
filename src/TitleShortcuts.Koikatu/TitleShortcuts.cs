@@ -40,7 +40,6 @@ namespace KeelPlugins
             StartFreeH = Config.Bind(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.Bind(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
 
-            CheckArgument();
             SceneManager.sceneLoaded += StartInput;
         }
 
@@ -75,11 +74,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || Argument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || Argument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
@@ -93,11 +92,11 @@ namespace KeelPlugins
                         StartMode(titleScene.OnDownloader, "Starting downloader");
                     }
 
-                    else if(StartFreeH.Value.IsPressed() || Argument == "-freeh")
+                    else if(StartFreeH.Value.IsPressed() || StartupArgument == "-freeh")
                     {
                         StartMode(titleScene.OnOtherFreeH, "Starting free H");
                     }
-                    else if(StartLiveShow.Value.IsPressed() || Argument == "-live")
+                    else if(StartLiveShow.Value.IsPressed() || StartupArgument == "-live")
                     {
                         StartMode(titleScene.OnOtherIdolLive, "Starting live show");
                     }
