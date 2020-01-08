@@ -33,7 +33,6 @@ namespace KeelPlugins
             StartUploader = Config.Bind(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
             StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
 
-            CheckArgument();
             SceneManager.sceneLoaded += StartInput;
         }
 
@@ -69,11 +68,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || Argument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || Argument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
