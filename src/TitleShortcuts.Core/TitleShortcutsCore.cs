@@ -1,4 +1,6 @@
 ﻿using BepInEx;
+using System;
+using System.Linq;
 
 namespace KeelPlugins
 {
@@ -13,5 +15,16 @@ namespace KeelPlugins
 
         protected const string DESCRIPTION_AUTOSTART = "Choose which mode to start automatically when launching the game.\n" +
                                                        "Hold esc or F1 during startup to cancel automatic behaviour or hold another shortcut to use that instead.";
+
+        protected string Argument = "none";
+
+        public abstract string[] GameArgs { get; }
+
+        protected void CheckArgument()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args == null || args.Length == 0) return;
+            Argument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => GameArgs.Contains(x));
+        }
     }
 }

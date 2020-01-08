@@ -7,17 +7,19 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace KeelPlugins
+namespace KeelPlugins 
 {
     [BepInProcess(AISyoujyoConstants.MainGameProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
-    public class TitleShortcuts : TitleShortcutsCore
+    public class TitleShortcuts : TitleShortcutsCore 
     {
         private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartUploader { get; set; }
         private ConfigEntry<KeyboardShortcut> StartDownloader { get; set; }
+
+        public override string[] GameArgs  {get {return new string[]{"-femalemaker","-malemaker"}; }}
 
         private bool checkInput = false;
         private bool cancelAuto = false;
@@ -30,7 +32,9 @@ namespace KeelPlugins
             StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
             StartUploader = Config.Bind(SECTION_HOTKEYS, "Open uploader", new KeyboardShortcut(KeyCode.U));
             StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
-
+            
+            CheckArgument();
+            
             SceneManager.sceneLoaded += StartInput;
         }
 
@@ -66,11 +70,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed())
+                    if(StartFemaleMaker.Value.IsPressed() || Argument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed())
+                    else if(StartMaleMaker.Value.IsPressed() || Argument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
