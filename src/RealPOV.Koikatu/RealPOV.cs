@@ -124,6 +124,7 @@ namespace KeelPlugins
         [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
         private static void HSceneEnd()
         {
+            povEnabled = false;
             currentChara = null;
         }
     }
