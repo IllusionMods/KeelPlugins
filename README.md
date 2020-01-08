@@ -21,10 +21,6 @@ An assistant to help you manage your huge card collections.
 It provides a few shortcuts in maker that let you go through your cards quickly while deciding which cards to keep.  
 Enable the plugin in the maker sidebar for the hotkeys to work.
 
-#### CameraTargetFix
-Hides the mouse when dragging even if the camera target has been disabled in studio.  
-Also AI girl maker now correctly loads the camera target setting.
-
 #### CharaStateX
 Allows editing the state of multiple studio characters simultaneously.  
 Normally only a few parameters such as animation speed/pattern can be edited for multiple characters at once,
@@ -63,8 +59,11 @@ To put it plainly, a temporary character card is created by the sending program 
 #### TitleShortcuts
 Title menu keyboard shortcuts to open different modes.  
 For example, press F to open the female editor.  
-Also has a setting to start certain modes automatically during startup.  
-Hold esc just before the title screen to cancel automatic startup.
+Also has a setting and commandline arguments to start certain modes automatically during startup.  
+Hold esc just before the title screen to cancel automatic startup.  
+
+Koikatu accepts arguments `-femalemaker, -malemaker, -freeh, -live`.  
+Honey Select and AI Girl accept arguments `-femalemaker, -malemaker`.
 
 #### RealPOV
 First person mode for H scenes.
