@@ -21,14 +21,14 @@ namespace KeelPlugins
         private bool cancelAuto = false;
         private TitleScene titleScene;
 
-        public override string[] GameArgs { get { return new string[] { "-femalemaker", "-malemaker" }; } }
+        protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker" };
 
         private void Awake()
         {
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
-            
+
             CheckArgument();
         }
 
