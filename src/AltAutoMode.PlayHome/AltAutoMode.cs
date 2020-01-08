@@ -19,7 +19,7 @@ namespace KeelPlugins
     public class AltAutoMode : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.altautomode";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private Harmony harmony;
 
