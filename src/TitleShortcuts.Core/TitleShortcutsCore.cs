@@ -17,7 +17,7 @@ namespace KeelPlugins
                                                        "Hold esc or F1 during startup to cancel automatic behaviour or hold another shortcut to use that instead.";
 
         protected string Argument = "none";
-        protected virtual string[] PossibleArguments { get; }
+        protected virtual string[] PossibleArguments { get; } = new string[] { };
 
         protected void CheckArgument()
         {
