@@ -74,11 +74,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
@@ -92,11 +92,11 @@ namespace KeelPlugins
                         StartMode(titleScene.OnDownloader, "Starting downloader");
                     }
 
-                    else if(StartFreeH.Value.IsPressed() || StartupArgument == "-freeh")
+                    else if(StartFreeH.Value.IsPressed() || firstLaunch && StartupArgument == "-freeh")
                     {
                         StartMode(titleScene.OnOtherFreeH, "Starting free H");
                     }
-                    else if(StartLiveShow.Value.IsPressed() || StartupArgument == "-live")
+                    else if(StartLiveShow.Value.IsPressed() || firstLaunch && StartupArgument == "-live")
                     {
                         StartMode(titleScene.OnOtherIdolLive, "Starting live show");
                     }
@@ -131,7 +131,8 @@ namespace KeelPlugins
         }
 
         private void StartMode(UnityAction action, string msg)
-        {
+        {   
+            firstLaunch = false;
             if(!FindObjectOfType<ConfigScene>())
             {
                 Logger.LogMessage(msg);

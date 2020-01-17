@@ -18,6 +18,8 @@ namespace KeelPlugins
 
         protected virtual string[] PossibleArguments { get; }
 
+        protected bool firstLaunch = true;
+
         private string startupArgument;
         protected string StartupArgument
         {
