@@ -26,10 +26,10 @@ namespace KeelPlugins
 
         private bool checkInput = false;
         private bool cancelAuto = false;
-        private TitleScene titleScene;    
-     
+        private TitleScene titleScene;
 
-        public override string[] GameArgs { get { return new string[] { "-femalemaker", "-malemaker", "-freeh", "-live" }; } }
+        protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker", "-freeh", "-live" };
+
         private void Awake()
         {
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
@@ -39,9 +39,7 @@ namespace KeelPlugins
             StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
             StartFreeH = Config.Bind(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.Bind(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
-            
-            CheckArgument();
-           
+
             SceneManager.sceneLoaded += StartInput;
         }
 
@@ -62,7 +60,7 @@ namespace KeelPlugins
             {
                 checkInput = false;
             }
-        }        
+        }
 
         private IEnumerator InputCheck()
         {
@@ -76,11 +74,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || Argument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || Argument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
@@ -94,11 +92,11 @@ namespace KeelPlugins
                         StartMode(titleScene.OnDownloader, "Starting downloader");
                     }
 
-                    else if(StartFreeH.Value.IsPressed() || Argument == "-freeh")
+                    else if(StartFreeH.Value.IsPressed() || StartupArgument == "-freeh")
                     {
                         StartMode(titleScene.OnOtherFreeH, "Starting free H");
                     }
-                    else if(StartLiveShow.Value.IsPressed() || Argument == "-live")
+                    else if(StartLiveShow.Value.IsPressed() || StartupArgument == "-live")
                     {
                         StartMode(titleScene.OnOtherIdolLive, "Starting live show");
                     }

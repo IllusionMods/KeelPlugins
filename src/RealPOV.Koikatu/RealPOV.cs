@@ -24,6 +24,7 @@ namespace KeelPlugins
         private static float currentFov;
         private static float backupFov;
         private static Vector3 backupPos;
+        private static int backupLayer;
 
         protected override void Awake()
         {
@@ -74,12 +75,15 @@ namespace KeelPlugins
                 {
                     Camera.main.fieldOfView = backupFov;
                     Camera.main.transform.position = backupPos;
+                    Camera.main.gameObject.layer = backupLayer;
                     povEnabled = false;
                 }
                 else
                 {
                     backupFov = Camera.main.fieldOfView;
                     backupPos = Camera.main.transform.position;
+                    backupLayer = Camera.main.gameObject.layer;
+                    Camera.main.gameObject.layer = 0;
                     povEnabled = true;
                 }
             }
@@ -124,6 +128,7 @@ namespace KeelPlugins
         [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
         private static void HSceneEnd()
         {
+            povEnabled = false;
             currentChara = null;
         }
     }

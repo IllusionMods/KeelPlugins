@@ -21,15 +21,13 @@ namespace KeelPlugins
         private bool cancelAuto = false;
         private TitleScene titleScene;
 
-        public override string[] GameArgs { get { return new string[] { "-femalemaker", "-malemaker" }; } }
+        protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker" };
 
         private void Awake()
         {
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
-            
-            CheckArgument();
         }
 
         private void OnLevelWasLoaded(int level)
@@ -63,11 +61,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || Argument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || Argument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
