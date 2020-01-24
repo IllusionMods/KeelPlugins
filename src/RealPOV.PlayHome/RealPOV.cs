@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using BepInEx.Harmony;
 using HarmonyLib;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    [BepInPlugin(GUID, "RealPOV", Version)]
+    [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore
     {
         private const string SECTION_OFFSETS = "Offsets";
@@ -29,9 +30,6 @@ namespace KeelPlugins
         internal static ConfigEntry<float> MaleOffsetY { get; set; }
         internal static ConfigEntry<float> MaleOffsetZ { get; set; }
 
-        private Harmony harmony;
-        private static GameObject bepinex;
-
         protected override void Awake()
         {
             base.Awake();
@@ -49,28 +47,18 @@ namespace KeelPlugins
             MaleOffsetX = Config.Bind(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetY = Config.Bind(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetZ = Config.Bind(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
-
-            bepinex = gameObject;
-            harmony = HarmonyWrapper.PatchAll();
         }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll();
-        }
-#endif
 
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]
         private static void HSceneInit()
         {
-            bepinex.GetOrAddComponent<PointOfView>();
+            Chainloader.ManagerObject.GetOrAddComponent<PointOfView>();
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "OnDestroy")]
         private static void HSceneDestroy()
         {
-            Destroy(bepinex.GetComponent<PointOfView>());
+            Destroy(Chainloader.ManagerObject.GetComponent<PointOfView>());
         }
     }
 }
