@@ -61,11 +61,11 @@ namespace KeelPlugins
 
                 if(!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    if(StartFemaleMaker.Value.IsPressed() || StartupArgument == "-femalemaker")
+                    if(StartFemaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-femalemaker")
                     {
                         StartMode(titleScene.OnCustomFemale, "Starting female maker");
                     }
-                    else if(StartMaleMaker.Value.IsPressed() || StartupArgument == "-malemaker")
+                    else if(StartMaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-malemaker")
                     {
                         StartMode(titleScene.OnCustomMale, "Starting male maker");
                     }
@@ -93,7 +93,8 @@ namespace KeelPlugins
 
         private void StartMode(Action action, string msg)
         {
-            if(!FindObjectOfType<ConfigScene>())
+            firstLaunch = false;
+            if (!FindObjectOfType<ConfigScene>())
             {
                 Logger.LogMessage(msg);
                 checkInput = false;
