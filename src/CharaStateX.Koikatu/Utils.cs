@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using Studio;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace KeelPlugins
 
         public static OCIChar GetMainChara(object __instance)
         {
-            return Traverse.Create(__instance).Property("ociChar").GetValue<OCIChar>();
+            if (__instance == null) throw new ArgumentNullException(nameof(__instance));
+            var property = __instance.GetType().GetProperty("ociChar", AccessTools.all);
+            if (property == null) throw new ArgumentException("Could not find property ociChar");
+            return (OCIChar)property.GetValue(__instance, null);
         }
 
         public static bool GetIsUpdateInfo(object __instance)
