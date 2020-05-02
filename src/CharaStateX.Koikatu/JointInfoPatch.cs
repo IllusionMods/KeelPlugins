@@ -48,28 +48,59 @@ namespace KeelPlugins
 
             _crotchCorrectionToggle.onValueChanged.AddListener((x) =>
             {
-                foreach(var chara in Utils.GetSelectedCharacters())
+                try
                 {
-                    var poseTarget = chara.charInfo.gameObject.GetComponent("PoseController");
-                    Traverse.Create(poseTarget).Property("crotchJointCorrection").SetValue(x);
+                    foreach (var chara in Utils.GetSelectedCharacters())
+                    {
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
+                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var propertyCrotch = AccessTools.Property(poseTarget.GetType(), "crotchJointCorrection")
+                                             ?? throw new ArgumentNullException("Could not find property CharaPoseController.crotchJointCorrection");
+                        propertyCrotch.SetValue(poseTarget, x, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    UnityEngine.Debug.LogError(ex);
                 }
             });
 
             _leftFootCorrectionToggle.onValueChanged.AddListener((x) =>
             {
-                foreach(var chara in Utils.GetSelectedCharacters())
+                try
                 {
-                    var poseTarget = chara.charInfo.gameObject.GetComponent("PoseController");
-                    Traverse.Create(poseTarget).Property("leftFootJointCorrection").SetValue(x);
+                    foreach (var chara in Utils.GetSelectedCharacters())
+                    {
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
+                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var propertyLeft = AccessTools.Property(poseTarget.GetType(), "leftFootJointCorrection")
+                                           ?? throw new ArgumentNullException("Could not find property CharaPoseController.leftFootJointCorrection");
+                        propertyLeft.SetValue(poseTarget, x, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    UnityEngine.Debug.LogError(ex);
                 }
             });
 
             _rightFootCorrectionToggle.onValueChanged.AddListener((x) =>
             {
-                foreach(var chara in Utils.GetSelectedCharacters())
+                try
                 {
-                    var poseTarget = chara.charInfo.gameObject.GetComponent("PoseController");
-                    Traverse.Create(poseTarget).Property("rightFootJointCorrection").SetValue(x);
+                    foreach (var chara in Utils.GetSelectedCharacters())
+                    {
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
+                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var propertyRight = AccessTools.Property(poseTarget.GetType(), "rightFootJointCorrection")
+                                            ?? throw new ArgumentNullException(
+                                                "Could not find property CharaPoseController.rightFootJointCorrection");
+                        propertyRight.SetValue(poseTarget, x, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    UnityEngine.Debug.LogError(ex);
                 }
             });
         }
