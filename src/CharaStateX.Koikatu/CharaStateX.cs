@@ -9,7 +9,7 @@ namespace KeelPlugins
     public class CharaStateX : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.charastatex";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         private void Awake()
         {
