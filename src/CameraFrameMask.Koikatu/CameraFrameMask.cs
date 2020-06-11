@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BepInEx;
 using BepInEx.Harmony;
+using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
@@ -19,10 +20,12 @@ namespace KeelPlugins
 
         private static Harmony harmony;
         private static MaskComponent maskComponent;
+        private static new ManualLogSource Logger;
 
         public void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll();
+            Logger = base.Logger;
+            harmony = HarmonyWrapper.PatchAll(GetType());
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
@@ -47,6 +50,14 @@ namespace KeelPlugins
         private void OnDestroy()
         {
             harmony.UnpatchAll();
+        }
+
+        public static void MaskFrames(int count)
+        {
+            if(maskComponent != null)
+                maskComponent.MaskFrames(count);
+            else
+                Logger.LogWarning("MaskComponent null");
         }
     }
 }
