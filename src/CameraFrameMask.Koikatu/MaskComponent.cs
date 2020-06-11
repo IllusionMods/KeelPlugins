@@ -15,14 +15,8 @@ namespace KeelPlugins
 
         private void OnRenderImage(RenderTexture src, RenderTexture dest)
         {
-            if(count > 0)
+            if(count > 0 && displayFrame != null)
             {
-                if(displayFrame == null)
-                {
-                    displayFrame = RenderTexture.GetTemporary(src.width, src.height);
-                    Graphics.Blit(src, displayFrame);
-                }
-
                 Graphics.Blit(displayFrame, dest);
                 count--;
             }
@@ -33,6 +27,9 @@ namespace KeelPlugins
                     RenderTexture.ReleaseTemporary(displayFrame);
                     displayFrame = null;
                 }
+
+                displayFrame = RenderTexture.GetTemporary(src.width, src.height);
+                Graphics.Blit(src, displayFrame);
 
                 Graphics.Blit(src, dest);
             }
