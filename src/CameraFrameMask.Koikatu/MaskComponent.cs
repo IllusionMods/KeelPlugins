@@ -18,7 +18,10 @@ namespace KeelPlugins
             if(count > 0)
             {
                 if(displayFrame == null)
-                    displayFrame = src;
+                {
+                    displayFrame = RenderTexture.GetTemporary(src.width, src.height);
+                    Graphics.Blit(src, displayFrame);
+                }
 
                 Graphics.Blit(displayFrame, dest);
                 count--;
@@ -26,7 +29,10 @@ namespace KeelPlugins
             else
             {
                 if(displayFrame != null)
+                {
+                    RenderTexture.ReleaseTemporary(displayFrame);
                     displayFrame = null;
+                }
 
                 Graphics.Blit(src, dest);
             }
