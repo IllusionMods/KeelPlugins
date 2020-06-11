@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.MainGameProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class CameraFrameMask : BaseUnityPlugin
     {
@@ -19,45 +18,35 @@ namespace KeelPlugins
         public const string Version = "1.0.0" + BuildNumber.Version;
 
         private static Harmony harmony;
-        private static MaskComponent maskComponent;
         private static new ManualLogSource Logger;
+        private static MaskComponent maskComponent;
 
-        public void Awake()
+        private void Awake()
         {
             Logger = base.Logger;
             harmony = HarmonyWrapper.PatchAll(GetType());
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
-        public static void MakerEntrypoint()
-        {
-            maskComponent = Camera.main.GetOrAddComponent<MaskComponent>();
-        }
-
+        private static void MakerEntrypoint() => maskComponent = Camera.main.GetOrAddComponent<MaskComponent>();
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
-        public static void MakerEnd()
-        {
-            maskComponent = null;
-            Destroy(Camera.main.GetComponent<MaskComponent>());
-        }
+        private static void MakerEnd() => maskComponent = null;
+        [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+        private static void StudioEntrypoint() => maskComponent = Camera.main.GetOrAddComponent<MaskComponent>();
+        [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "SetShortcutKey")]
+        private static void HSceneEntrypoint() => maskComponent = Camera.main.GetOrAddComponent<MaskComponent>();
+        [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
+        private static void HSceneEnd() => maskComponent = null;
 
-        public void Update()
+        [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
+        private static void ChangeCoordinateTypePrefix()
         {
-            if(Input.GetKeyDown(KeyCode.B))
-                maskComponent?.MaskFrames(60);
-        }
-
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll();
+            MaskFrames(1);
         }
 
         public static void MaskFrames(int count)
         {
-            if(maskComponent != null)
-                maskComponent.MaskFrames(count);
-            else
-                Logger.LogWarning("MaskComponent null");
+            maskComponent?.MaskFrames(count);
         }
     }
 }
