@@ -9,37 +9,37 @@ namespace KeelPlugins
 
         protected override float CameraMoveSpeed
         {
-            get { return camera.moveSpeed; }
-            set { camera.moveSpeed = value; }
+            get => camera.moveSpeed;
+            set => camera.moveSpeed = value;
         }
 
         protected override Vector3 CameraTargetPos
         {
-            get { return camera.TargetPos; }
-            set { camera.TargetPos = value; }
+            get => camera.TargetPos;
+            set => camera.TargetPos = value;
         }
 
         protected override Vector3 CameraAngle
         {
-            get { return camera.CameraAngle; }
-            set { camera.CameraAngle = value; }
+            get => camera.CameraAngle;
+            set => camera.CameraAngle = value;
         }
 
         protected override float CameraFov
         {
-            get { return camera.CameraFov; }
-            set { camera.CameraFov = value; }
+            get => camera.CameraFov;
+            set => camera.CameraFov = value;
         }
 
         protected override Vector3 CameraDir
         {
-            get { return camera.CameraDir; }
-            set { camera.CameraDir = value; }
+            get => camera.CameraDir;
+            set => camera.CameraDir = value;
         }
 
         protected override bool CameraTargetTex
         {
-            set { camera.isConfigTargetTex = value; }
+            set => camera.isConfigTargetTex = value;
         }
 
         protected override float CameraZoomSpeed => defaultCameraSpeed;

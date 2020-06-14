@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Harmony;
 using HarmonyLib;
-using BepInEx.Logging;
-using UnityEngine;
 
 namespace KeelPlugins
 {

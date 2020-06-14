@@ -34,7 +34,7 @@ namespace KeelPlugins
                 released = false;
             }
         }
-        
+
         /// <summary>
         /// This always needs at least KeyUpAction(null) after it.
         /// </summary>

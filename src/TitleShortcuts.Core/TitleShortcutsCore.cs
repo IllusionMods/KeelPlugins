@@ -31,7 +31,7 @@ namespace KeelPlugins
                     {
                         var args = Environment.GetCommandLineArgs();
                         if(args != null && args.Length > 0)
-                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => PossibleArguments.Contains(x)); 
+                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => PossibleArguments.Contains(x));
                     }
 
                     if(startupArgument == null)

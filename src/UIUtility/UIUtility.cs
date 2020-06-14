@@ -43,7 +43,7 @@ namespace UILib
         public static DefaultControls.Resources resources;
 
         private static bool _initCalled = false;
-        
+
         /// <summary>Initialize UIUtility for Koikatu</summary>
         /// <param name="callingAssembly">Use typeof(Type).Assembly to get this</param>
         public static void InitKOI(Assembly callingAssembly)
