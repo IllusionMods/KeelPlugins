@@ -50,7 +50,7 @@ namespace KeelPlugins
             {
                 try
                 {
-                    foreach (var chara in Utils.GetSelectedCharacters())
+                    foreach(var chara in Utils.GetSelectedCharacters())
                     {
                         var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
                                          ?? throw new ArgumentNullException("Could not find CharaPoseController");
@@ -59,7 +59,7 @@ namespace KeelPlugins
                         propertyCrotch.SetValue(poseTarget, x, null);
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     UnityEngine.Debug.LogError(ex);
                 }
@@ -69,7 +69,7 @@ namespace KeelPlugins
             {
                 try
                 {
-                    foreach (var chara in Utils.GetSelectedCharacters())
+                    foreach(var chara in Utils.GetSelectedCharacters())
                     {
                         var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
                                          ?? throw new ArgumentNullException("Could not find CharaPoseController");
@@ -78,7 +78,7 @@ namespace KeelPlugins
                         propertyLeft.SetValue(poseTarget, x, null);
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     UnityEngine.Debug.LogError(ex);
                 }
@@ -88,7 +88,7 @@ namespace KeelPlugins
             {
                 try
                 {
-                    foreach (var chara in Utils.GetSelectedCharacters())
+                    foreach(var chara in Utils.GetSelectedCharacters())
                     {
                         var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
                                          ?? throw new ArgumentNullException("Could not find CharaPoseController");
@@ -98,7 +98,7 @@ namespace KeelPlugins
                         propertyRight.SetValue(poseTarget, x, null);
                     }
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     UnityEngine.Debug.LogError(ex);
                 }

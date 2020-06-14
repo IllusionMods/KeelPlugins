@@ -94,7 +94,7 @@ namespace KeelPlugins
         private void StartMode(Action action, string msg)
         {
             firstLaunch = false;
-            if (!FindObjectOfType<ConfigScene>())
+            if(!FindObjectOfType<ConfigScene>())
             {
                 Logger.LogMessage(msg);
                 checkInput = false;

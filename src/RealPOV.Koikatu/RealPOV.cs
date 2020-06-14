@@ -25,7 +25,7 @@ namespace KeelPlugins
             {
                 var cameraTarget = GameObject.Find("HScene/CameraBase/Camera/CameraTarget");
                 if(cameraTarget)
-                    currentChara = FindObjectsOfType<ChaControl>().OrderBy(x => Vector3.Distance(cameraTarget.transform.position, x.neckLookCtrl.transform.position)).First(); 
+                    currentChara = FindObjectsOfType<ChaControl>().OrderBy(x => Vector3.Distance(cameraTarget.transform.position, x.neckLookCtrl.transform.position)).First();
             }
 
             if(currentChara)

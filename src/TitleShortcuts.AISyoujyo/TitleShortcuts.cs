@@ -110,7 +110,7 @@ namespace KeelPlugins
         private void StartMode(UnityAction action, string msg)
         {
             firstLaunch = false;
-            if (!FindObjectOfType<ConfigScene.ConfigWindow>())
+            if(!FindObjectOfType<ConfigScene.ConfigWindow>())
             {
                 Logger.LogMessage(msg);
                 checkInput = false;

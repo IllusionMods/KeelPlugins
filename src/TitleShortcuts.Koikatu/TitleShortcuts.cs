@@ -131,7 +131,7 @@ namespace KeelPlugins
         }
 
         private void StartMode(UnityAction action, string msg)
-        {   
+        {
             firstLaunch = false;
             if(!FindObjectOfType<ConfigScene>())
             {

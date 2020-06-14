@@ -1,9 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
-using UnityEngine;
-using HarmonyLib;
 using BepInEx.Harmony;
+using BepInEx.Logging;
+using HarmonyLib;
+using UnityEngine;
 
 namespace KeelPlugins
 {

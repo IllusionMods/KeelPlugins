@@ -211,7 +211,7 @@ namespace KeelPlugins
             }
         }
 
-        static bool DebugGUI(float screenWidthMult, float screenHeightMult, float width, float height, string msg)
+        private static bool DebugGUI(float screenWidthMult, float screenHeightMult, float width, float height, string msg)
         {
             float xpos = Screen.width * screenWidthMult - width / 2f;
             float ypos = Screen.height * screenHeightMult - height / 2f;
