@@ -92,8 +92,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoreSlotIDBep.PlayHome", "src\MoreSlotIDBep.PlayHome\MoreSlotIDBep.PlayHome.csproj", "{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Core.Event", "src\Common.Core.Event\Common.Core.Event.shproj", "{2A4067D3-D380-492B-946B-E7F221259439}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleShortcuts.AISyoujyo", "src\TitleShortcuts.AISyoujyo\TitleShortcuts.AISyoujyo.csproj", "{0F9AA09D-DCF3-41DE-8028-61735024FE80}"
@@ -101,8 +99,6 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.AISyoujyo", "src\Common.AISyoujyo\Common.AISyoujyo.shproj", "{5837FDE8-4B7C-431B-9402-3D8019F7BF37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.AISyoujyo", "src\Testing.AISyoujyo\Testing.AISyoujyo.csproj", "{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModLoader.PlayHome", "src\ModLoader.PlayHome\ModLoader.PlayHome.csproj", "{9F4A6B41-3465-4086-A1E2-023699B3F2EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraFrameMask.Koikatu", "src\CameraFrameMask.Koikatu\CameraFrameMask.Koikatu.csproj", "{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C}"
 EndProject
@@ -159,14 +155,11 @@ Global
 		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{9f4a6b41-3465-4086-a1e2-023699b3f2ee}*SharedItemsImports = 4
-		src\Common.PlayHome\Common.PlayHome.projitems*{9f4a6b41-3465-4086-a1e2-023699b3f2ee}*SharedItemsImports = 4
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{a19f5b25-6318-4323-93c8-b27f0343e582}*SharedItemsImports = 13
 		src\RealPOV.Core\RealPOV.Core.projitems*{a52280cd-3cc4-452a-8c11-67e440e0262f}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{be9297c1-8920-433d-8dcc-1d7c4f7b155d}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
@@ -251,9 +244,6 @@ Global
 		{394BC9B7-DB38-4172-9B2C-60918E87B763}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{394BC9B7-DB38-4172-9B2C-60918E87B763}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{394BC9B7-DB38-4172-9B2C-60918E87B763}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -261,9 +251,6 @@ Global
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F4A6B41-3465-4086-A1E2-023699B3F2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -315,12 +302,10 @@ Global
 		{5A7AE896-F7D0-4300-831B-CDD21A770E21} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{4D175C74-23CC-45DB-8225-537DB7E33142} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{394BC9B7-DB38-4172-9B2C-60918E87B763} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{BE9297C1-8920-433D-8DCC-1D7C4F7B155D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{2A4067D3-D380-492B-946B-E7F221259439} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{5837FDE8-4B7C-431B-9402-3D8019F7BF37} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{D2625C46-77D9-4D75-BDCD-EA7D402D33F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{9F4A6B41-3465-4086-A1E2-023699B3F2EE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{6D058450-09B2-4D25-903F-9AE3A75DF066} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}

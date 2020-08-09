@@ -25,8 +25,8 @@ namespace KeelPlugins
             var category = new MakerCategory(irisCategory.CategoryName, "eyelookeditor", irisCategory.Position, "EyeLookEditor");
             e.AddSubCategory(category);
 
-            var stringToValue = new Func<string, float>((txt) => float.Parse(txt));
-            var valueToString = new Func<float, string>((f) => f.ToString("0.#"));
+            var stringToValue = new Func<string, float>(txt => float.Parse(txt));
+            var valueToString = new Func<float, string>(f => f.ToString("0.#"));
 
             var slider_thresholdAngleDifference = e.AddControl(new MakerSlider(category, "thresholdAngleDifference", -10f, 10f, DefaultValue.ThresholdAngleDifference, this) { StringToValue = stringToValue, ValueToString = valueToString });
             var slider_bendingMultiplier = e.AddControl(new MakerSlider(category, "bendingMultiplier", 0f, 10f, DefaultValue.BendingMultiplier, this) { StringToValue = stringToValue, ValueToString = valueToString });
