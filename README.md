@@ -21,6 +21,9 @@ An assistant to help you manage your huge card collections.
 It provides a few shortcuts in maker that let you go through your cards quickly while deciding which cards to keep.  
 Enable the plugin in the maker sidebar for the hotkeys to work.
 
+#### CameraFrameMask
+Mask certain ugly frames caused by other plugins during character loading.
+
 #### CharaStateX
 Allows editing the state of multiple studio characters simultaneously.  
 Normally only a few parameters such as animation speed/pattern can be edited for multiple characters at once,
@@ -36,9 +39,8 @@ This only affects parameters that make sense to be saved.
 To use, set your preferred settings normally and then save them with the new buttons in the studio menus.  
 Now when loading a character or starting the studio these settings will be used.
 
-#### GraphicsSettings
-Exposes the game's graphics settings and some other values for editing.  
-The default settings on the plugin may be too heavy for some computers so remember to tweak them.
+#### DefaultStudioScene
+Load the scene specified in the config automatically when starting studio.
 
 #### ItemLayerEdit
 Adds a hotkey that switches the currently selected objects layer between the character layer and the map layer.  
