@@ -6,16 +6,6 @@ namespace KeelPlugins
     {
         private int count = 0;
         private RenderTexture lastFrame = null;
-        
-        private void Start()
-        {
-            lastFrame = RenderTexture.GetTemporary(src.width, src.height);
-        }
-        
-        private void OnDestroy()
-        {
-            RenderTexture.ReleaseTemporary(lastFrame);
-        }
 
         public void MaskFrames(int count)
         {
@@ -33,7 +23,10 @@ namespace KeelPlugins
             }
             else
             {
-                // Need to keep a copy of the last frame since we don't know when MaskFrames will be used
+                // Reroll the texture just in case the screen resolution changes
+                RenderTexture.ReleaseTemporary(lastFrame);
+                lastFrame = RenderTexture.GetTemporary(src.width, src.height);
+                // Need to keep a copy of the last frame since it is not known when MaskFrames will be used
                 Graphics.Blit(src, lastFrame);
 
                 Graphics.Blit(src, dest);
