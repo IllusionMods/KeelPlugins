@@ -6,10 +6,14 @@ namespace KeelPlugins
     {
         private int count = 0;
         private RenderTexture lastFrame = null;
-        
+        private int lastWidth;
+        private int lastHeight;
+
         private void Start()
         {
-            lastFrame = RenderTexture.GetTemporary(Screen.width, Screen.height);
+            lastWidth = Screen.width;
+            lastHeight = Screen.height;
+            lastFrame = RenderTexture.GetTemporary(lastWidth, lastHeight);
         }
         
         private void OnDestroy()
@@ -33,6 +37,18 @@ namespace KeelPlugins
             }
             else
             {
+                var newWidth = Screen.width;
+                var newHeight = Screen.height;
+
+                if(lastWidth != newWidth || lastHeight != newHeight)
+                {
+                    RenderTexture.ReleaseTemporary(lastFrame);
+                    lastFrame = RenderTexture.GetTemporary(newWidth, newHeight);
+
+                    lastWidth = newWidth;
+                    lastHeight = newHeight;
+                }
+
                 // Need to keep a copy of the last frame since we don't know when MaskFrames will be used
                 Graphics.Blit(src, lastFrame);
 
