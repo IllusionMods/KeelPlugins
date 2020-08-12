@@ -15,7 +15,7 @@ namespace KeelPlugins
             lastHeight = Screen.height;
             lastFrame = RenderTexture.GetTemporary(lastWidth, lastHeight);
         }
-        
+
         private void OnDestroy()
         {
             RenderTexture.ReleaseTemporary(lastFrame);
