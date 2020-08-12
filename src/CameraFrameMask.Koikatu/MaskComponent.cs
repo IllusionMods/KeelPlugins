@@ -11,6 +11,11 @@ namespace KeelPlugins
         {
             lastFrame = RenderTexture.GetTemporary(src.width, src.height);
         }
+        
+        private void OnDestroy()
+        {
+            RenderTexture.ReleaseTemporary(lastFrame);
+        }
 
         public void MaskFrames(int count)
         {
