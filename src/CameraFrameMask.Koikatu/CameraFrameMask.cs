@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Harmony;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -20,6 +16,7 @@ namespace KeelPlugins
         private static Harmony harmony;
         private static new ManualLogSource Logger;
         private static MaskComponent maskComponent;
+        private static bool inStudio = Paths.ProcessName == "CharaStudio";
 
         private void Awake()
         {
@@ -41,7 +38,7 @@ namespace KeelPlugins
         [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
         private static void ChangeCoordinateTypePrefix()
         {
-            MaskFrames(3);
+            MaskFrames(inStudio ? 3 : 1);
         }
 
         public static void MaskFrames(int count)
