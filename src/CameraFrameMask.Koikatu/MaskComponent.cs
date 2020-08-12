@@ -18,7 +18,7 @@ namespace KeelPlugins
             if(count > 0)
             {
                 // Display the last frame again to hide the actual screen
-                Graphics.Blit(lastFrame, dest);
+                if(lastFrame) Graphics.Blit(lastFrame, dest);
                 count--;
             }
             else
