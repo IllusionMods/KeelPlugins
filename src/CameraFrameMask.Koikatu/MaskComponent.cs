@@ -1,11 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace KeelPlugins
 {
     public class MaskComponent : MonoBehaviour
     {
         private int count = 0;
-        private RenderTexture displayFrame = null;
+        private RenderTexture lastFrame = null;
+        
+        private void Start()
+        {
+            lastFrame = RenderTexture.GetTemporary(Screen.width, Screen.height);
+        }
+        
+        private void OnDestroy()
+        {
+            RenderTexture.ReleaseTemporary(lastFrame);
+        }
 
         public void MaskFrames(int count)
         {
@@ -15,21 +25,16 @@ namespace KeelPlugins
 
         private void OnRenderImage(RenderTexture src, RenderTexture dest)
         {
-            if(count > 0 && displayFrame != null)
+            if(count > 0)
             {
-                Graphics.Blit(displayFrame, dest);
+                // Display the last frame again to hide the actual screen
+                Graphics.Blit(lastFrame, dest);
                 count--;
             }
             else
             {
-                if(displayFrame != null)
-                {
-                    RenderTexture.ReleaseTemporary(displayFrame);
-                    displayFrame = null;
-                }
-
-                displayFrame = RenderTexture.GetTemporary(src.width, src.height);
-                Graphics.Blit(src, displayFrame);
+                // Need to keep a copy of the last frame since we don't know when MaskFrames will be used
+                Graphics.Blit(src, lastFrame);
 
                 Graphics.Blit(src, dest);
             }
