@@ -9,7 +9,7 @@ namespace KeelPlugins
         
         private void Start()
         {
-            lastFrame = RenderTexture.GetTemporary(src.width, src.height);
+            lastFrame = RenderTexture.GetTemporary(Screen.width, Screen.height);
         }
         
         private void OnDestroy()
