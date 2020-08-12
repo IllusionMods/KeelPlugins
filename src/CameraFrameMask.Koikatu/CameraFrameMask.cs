@@ -41,7 +41,7 @@ namespace KeelPlugins
         [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
         private static void ChangeCoordinateTypePrefix()
         {
-            MaskFrames(1);
+            MaskFrames(3);
         }
 
         public static void MaskFrames(int count)
