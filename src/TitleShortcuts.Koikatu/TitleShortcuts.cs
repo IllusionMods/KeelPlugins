@@ -48,7 +48,7 @@ namespace KeelPlugins
         private static void TitleSceneStart(TitleScene __instance)
         {
             titleScene = __instance;
-            plugin.StartCoroutine(InputCheck());
+            Plugin.StartCoroutine(TitleSceneInput());
         }
 
         [HarmonyPrefix]
@@ -75,7 +75,7 @@ namespace KeelPlugins
             return false;
         }
 
-        private static IEnumerator InputCheck()
+        private static IEnumerator TitleSceneInput()
         {
             while(titleScene != null)
             {

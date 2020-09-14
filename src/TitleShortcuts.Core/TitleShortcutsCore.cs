@@ -12,15 +12,19 @@ namespace KeelPlugins
         public const string Version = "1.1.2." + BuildNumber.Version;
 
         protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
+        protected const string SECTION_GENERAL = "General";
+
+        protected const string DESCRIPTION_AUTOSTART = "Choose which mode to start automatically when launching the game.\n" +
+                                                       "Hold esc or F1 during startup to cancel automatic behaviour or hold another shortcut to use that instead.";
 
         protected virtual string[] PossibleArguments { get; }
 
-        protected static TitleShortcutsCore plugin;
+        protected static TitleShortcutsCore Plugin;
         protected static new ManualLogSource Logger;
 
         protected virtual void Awake()
         {
-            plugin = this;
+            Plugin = this;
             Logger = base.Logger;
         }
 
@@ -31,11 +35,11 @@ namespace KeelPlugins
             {
                 if(startupArgument == null)
                 {
-                    if(plugin.PossibleArguments != null)
+                    if(Plugin.PossibleArguments != null)
                     {
                         var args = Environment.GetCommandLineArgs();
                         if(args != null && args.Length > 0)
-                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => plugin.PossibleArguments.Contains(x));
+                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => Plugin.PossibleArguments.Contains(x));
                     }
 
                     if(startupArgument == null)
