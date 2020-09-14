@@ -19,11 +19,12 @@ namespace KeelPlugins
 
         private bool checkInput = false;
         private bool cancelAuto = false;
+        private bool firstLaunch = true;
         private TitleScene titleScene;
 
         protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker" };
 
-        private void Awake()
+        protected override void Awake()
         {
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
