@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using System;
 using System.Linq;
 
@@ -18,20 +19,27 @@ namespace KeelPlugins
 
         protected virtual string[] PossibleArguments { get; }
 
-        protected bool firstLaunch = true;
+        protected static TitleShortcutsCore Plugin;
+        protected static new ManualLogSource Logger;
 
-        private string startupArgument;
-        protected string StartupArgument
+        protected virtual void Awake()
+        {
+            Plugin = this;
+            Logger = base.Logger;
+        }
+
+        private static string startupArgument;
+        protected static string StartupArgument
         {
             get
             {
                 if(startupArgument == null)
                 {
-                    if(PossibleArguments != null)
+                    if(Plugin.PossibleArguments != null)
                     {
                         var args = Environment.GetCommandLineArgs();
                         if(args != null && args.Length > 0)
-                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => PossibleArguments.Contains(x));
+                            startupArgument = args.Select(x => x.Trim().ToLower()).FirstOrDefault(x => Plugin.PossibleArguments.Contains(x));
                     }
 
                     if(startupArgument == null)
