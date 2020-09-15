@@ -8,7 +8,7 @@ namespace KeelPlugins
     public abstract class TitleShortcutsCore : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.titleshortcuts";
-        public const string PluginName = "Title shortcuts";
+        public const string PluginName = "Title Shortcuts";
         public const string Version = "1.2.0." + BuildNumber.Version;
 
         protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
