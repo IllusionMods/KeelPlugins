@@ -77,6 +77,8 @@ namespace KeelPlugins
 
         private static IEnumerator TitleSceneInput()
         {
+            yield return null;
+
             while(titleScene != null)
             {
                 if(StartFemaleMaker.Value.IsDown() || !autostartFinished && StartupArgument == ArgumentFemaleMaker)
