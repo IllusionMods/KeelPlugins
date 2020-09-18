@@ -21,7 +21,7 @@ namespace KeelPlugins
 
         private const string ArgumentFemaleMaker = "-femalemaker";
         private const string ArgumentMaleMaker = "-malemaker";
-        private const string ArgumentFreeH= "-freeh";
+        private const string ArgumentFreeH = "-freeh";
         private const string ArgumentLive = "-live";
 
         private static bool autostartFinished = false;
