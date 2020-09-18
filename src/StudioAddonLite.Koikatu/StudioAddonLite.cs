@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Harmony;
 using HarmonyLib;
 using UnityEngine;
 
@@ -60,7 +59,7 @@ namespace KeelPlugins
             KEY_OBJ_SCALE_Z = Config.Bind(SECTION_HOTKEYS, "Scale Z", new KeyboardShortcut(KeyCode.Y));
 
             bepinex = gameObject;
-            HarmonyWrapper.PatchAll(GetType());
+            Harmony.CreateAndPatchAll(GetType());
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]

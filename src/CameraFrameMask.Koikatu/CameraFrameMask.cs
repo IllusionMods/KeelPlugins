@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Harmony;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
@@ -13,7 +12,6 @@ namespace KeelPlugins
         public const string PluginName = "CameraFrameMask";
         public const string Version = "1.0.0" + BuildNumber.Version;
 
-        private static Harmony harmony;
         private static new ManualLogSource Logger;
         private static MaskComponent maskComponent;
         private static bool inStudio = Paths.ProcessName == "CharaStudio";
@@ -21,7 +19,7 @@ namespace KeelPlugins
         private void Awake()
         {
             Logger = base.Logger;
-            harmony = HarmonyWrapper.PatchAll(GetType());
+            Harmony.CreateAndPatchAll(GetType());
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
