@@ -41,7 +41,7 @@ namespace KeelPlugins
             MouseSens = Config.Bind(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
             ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", 0.03f);
 
-            Harmony = HarmonyWrapper.PatchAll();
+            Harmony = Harmony.CreateAndPatchAll(GetType().Assembly);
         }
 
 #if DEBUG
