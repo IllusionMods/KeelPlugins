@@ -106,6 +106,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeLookEditor.Koikatu", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.Koikatu", "src\DefaultStudioScene.Koikatu\DefaultStudioScene.Koikatu.csproj", "{80C73B5C-D95E-4706-A7D8-48C79937283C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepinexUnityLogFilter", "src\BepinexUnityLogFilter\BepinexUnityLogFilter.csproj", "{C8DE4A42-1B6C-4E58-985E-76972009A8BF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -262,6 +264,10 @@ Global
 		{80C73B5C-D95E-4706-A7D8-48C79937283C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C73B5C-D95E-4706-A7D8-48C79937283C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C73B5C-D95E-4706-A7D8-48C79937283C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -309,6 +315,7 @@ Global
 		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{6D058450-09B2-4D25-903F-9AE3A75DF066} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{C8DE4A42-1B6C-4E58-985E-76972009A8BF} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
