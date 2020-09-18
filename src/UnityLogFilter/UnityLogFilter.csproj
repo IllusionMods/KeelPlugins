@@ -7,8 +7,8 @@
     <ProjectGuid>{C8DE4A42-1B6C-4E58-985E-76972009A8BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BepinexUnityLogFilter</RootNamespace>
-    <AssemblyName>BepinexUnityLogFilter</AssemblyName>
+    <RootNamespace>UnityLogFilter</RootNamespace>
+    <AssemblyName>UnityLogFilter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -17,10 +17,6 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IllusionLibs.BepInEx.Harmony.2.0.6\lib\net35\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27\lib\net35\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -48,6 +44,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2\lib\net35\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnityLogFilter.cs" />
@@ -56,5 +56,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF EXIST "$(SolutionDir)PostBuild.ps1" powershell "$(SolutionDir)PostBuild.ps1" "$(TargetPath)" GENERICPATCHER</PostBuildEvent>
+  </PropertyGroup>
 </Project>
