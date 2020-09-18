@@ -85,6 +85,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0FD-465F-93F2-D73BD193AC86}"
 	ProjectSection(SolutionItems) = preProject
 		src\BuildSettings.AISyoujyo.props = src\BuildSettings.AISyoujyo.props
+		src\BuildSettings.Common.props = src\BuildSettings.Common.props
 		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
