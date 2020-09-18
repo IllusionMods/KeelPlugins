@@ -25,7 +25,7 @@ namespace KeelPlugins
         private void Awake()
         {
             Logger = base.Logger;
-            HarmonyWrapper.PatchAll();
+            Harmony.CreateAndPatchAll(GetType().Assembly);
 
             if(File.Exists(savePath))
             {

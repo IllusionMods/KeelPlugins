@@ -25,7 +25,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
+            harmony = Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
 #if DEBUG

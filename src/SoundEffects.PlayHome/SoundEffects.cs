@@ -20,7 +20,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll(GetType());
+            harmony = Harmony.CreateAndPatchAll(GetType());
             var soundDir = Path.Combine(Path.GetDirectoryName(Info.Location), PluginName);
             slaps = Directory.GetFiles(soundDir, "*.wav").Select(ExternalAudioClip.Load).ToList();
         }

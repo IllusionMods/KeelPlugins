@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Harmony;
 using HarmonyLib;
 
 namespace KeelPlugins
@@ -11,7 +10,7 @@ namespace KeelPlugins
 
         private void Awake()
         {
-            harmony = HarmonyWrapper.PatchAll(GetType());
+            harmony = Harmony.CreateAndPatchAll(GetType());
         }
 
         private void OnDestroy()

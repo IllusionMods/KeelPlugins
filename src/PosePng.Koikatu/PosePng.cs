@@ -26,7 +26,7 @@ namespace KeelPlugins
         {
             Logger = base.Logger;
             SaveFolder = Config.Bind("", "Save folder path", "");
-            harmony = HarmonyWrapper.PatchAll(typeof(Hooks));
+            harmony = Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
 #if DEBUG

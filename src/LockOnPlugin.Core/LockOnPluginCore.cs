@@ -52,7 +52,7 @@ namespace KeelPlugins
             PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
             NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
 
-            harmony = HarmonyWrapper.PatchAll();
+            harmony = Harmony.CreateAndPatchAll(GetType().Assembly);
         }
 
 #if DEBUG
