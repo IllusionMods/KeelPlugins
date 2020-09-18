@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using HarmonyLib;
-using BepInEx.Bootstrap;
 using Mono.Cecil;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace KeelPlugins
