@@ -10,7 +10,7 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.cameraframemask";
         public const string PluginName = "CameraFrameMask";
-        public const string Version = "1.0.0" + BuildNumber.Version;
+        public const string Version = "1.0.0." + BuildNumber.Version;
 
         private static new ManualLogSource Logger;
         private static MaskComponent maskComponent;
