@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Harmony;
 using HarmonyLib;
 
 namespace KeelPlugins
@@ -14,7 +13,7 @@ namespace KeelPlugins
         private void Awake()
         {
             var harmony = new Harmony("keelhauled.charastatex.harmony");
-            HarmonyWrapper.PatchAll(typeof(AnimationPatch), harmony);
+            harmony.PatchAll(typeof(AnimationPatch));
             StateInfoPatch.Patch(harmony);
             NeckLookPatch.Patch(harmony);
             EtcInfoPatch.Patch(harmony);
