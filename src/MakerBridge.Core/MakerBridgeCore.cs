@@ -1,9 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Harmony;
 using BepInEx.Logging;
 using System.IO;
 using UnityEngine;
+using HarmonyLib;
 
 namespace KeelPlugins
 {
@@ -35,7 +35,7 @@ namespace KeelPlugins
             MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");
             OtherCardPath = Path.Combine(tempFolder, "makerbridge2.png");
 
-            HarmonyWrapper.PatchAll();
+            Harmony.CreateAndPatchAll(GetType().Assembly);
         }
 
         internal static void Log(object data)
