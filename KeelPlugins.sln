@@ -112,6 +112,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLogFilter", "src\Unity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextMenu", "src\ContextMenu\ContextMenu.csproj", "{5A1F1414-9957-44ED-8966-1919D664B93A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.Koikatu", "src\BetterSceneLoader.Koikatu\BetterSceneLoader.Koikatu.csproj", "{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BetterSceneLoader", "BetterSceneLoader", "{8C9D88EC-5F03-43EF-8954-B54144A5089C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -149,6 +153,9 @@ Global
 		src\Common.PlayHome\Common.PlayHome.projitems*{624f7c3f-0557-4fa6-a915-c99c5a40a851}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{6d058450-09b2-4d25-903f-9ae3a75df066}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{6d058450-09b2-4d25-903f-9ae3a75df066}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 4
+		src\UIUtility\UIUtility.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 4
@@ -277,7 +284,9 @@ Global
 		{5A1F1414-9957-44ED-8966-1919D664B93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A1F1414-9957-44ED-8966-1919D664B93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1F1414-9957-44ED-8966-1919D664B93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A1F1414-9957-44ED-8966-1919D664B93A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -327,6 +336,8 @@ Global
 		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{5A1F1414-9957-44ED-8966-1919D664B93A} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
+		{8C9D88EC-5F03-43EF-8954-B54144A5089C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
