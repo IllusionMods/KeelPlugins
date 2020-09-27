@@ -4,6 +4,7 @@ using HarmonyLib;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Manager;
 
 namespace KeelPlugins
 {
@@ -45,26 +46,21 @@ namespace KeelPlugins
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TitleScene), "Start")]
-        private static void TitleSceneStart(TitleScene __instance)
+        private static void TitleStart(TitleScene __instance)
         {
             titleScene = __instance;
-            Plugin.StartCoroutine(TitleSceneInput());
-        }
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(Manager.Scene.Data), nameof(Manager.Scene.Data.isFade), MethodType.Setter)]
-        private static bool DisableFadeout()
-        {
-            return autostartFinished;
+            Plugin.StartCoroutine(TitleInput());
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(LogoScene), "Start")]
-        private static bool DisableIntro(ref IEnumerator __result)
+        private static bool DisableLogo(ref IEnumerator __result)
         {
+            Singleton<Scene>.Instance.sceneFade._Time = 0.1f;
+
             IEnumerator LoadTitle()
             {
-                Singleton<Manager.Scene>.Instance.LoadReserve(new Manager.Scene.Data
+                Singleton<Scene>.Instance.LoadReserve(new Scene.Data
                 {
                     levelName = "Title",
                     isFade = false
@@ -75,7 +71,7 @@ namespace KeelPlugins
             return false;
         }
 
-        private static IEnumerator TitleSceneInput()
+        private static IEnumerator TitleInput()
         {
             yield return null;
 
