@@ -1,14 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using UILib;
+﻿using UILib;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace BetterSceneLoader.Koikatu
 {
-    static class Utils
+    internal static class Utils
     {
         public static void AddCloseSymbol(Button button)
         {

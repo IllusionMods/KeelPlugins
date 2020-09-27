@@ -1,16 +1,16 @@
-﻿using System;
+﻿using BepInEx;
+using BepInEx.Configuration;
+using HarmonyLib;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using UILib;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
-using UILib;
-using System.IO;
-using System.Collections;
-using System.Diagnostics;
-using BepInEx;
-using HarmonyLib;
-using BepInEx.Configuration;
 
 // imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
@@ -105,7 +105,7 @@ namespace BetterSceneLoader.Koikatu
                 if(SmallWindow.Value)
                     mainPanel.transform.SetRect(0.5f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
                 else
-                    mainPanel.transform.SetRect(0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin); 
+                    mainPanel.transform.SetRect(0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
             }
         }
 
@@ -133,7 +133,7 @@ namespace BetterSceneLoader.Koikatu
             close.transform.SetRect(1f, 0f, 1f, 1f, -buttonSize * 2f);
             close.onClick.AddListener(() => UISystem.gameObject.SetActive(false));
             Utils.AddCloseSymbol(close);
-            
+
             category = UIUtility.CreateDropdown("Dropdown", drag.transform, "Categories");
             category.transform.SetRect(0f, 0f, 0f, 1f, 0f, 0f, 100f);
             category.captionText.transform.SetRect(0f, 0f, 1f, 1f, 0f, 2f, -15f, -2f);
@@ -229,7 +229,7 @@ namespace BetterSceneLoader.Koikatu
                 order = new string[0];
                 File.Create(orderPath);
             }
-            
+
             var sorted = folders.Select(x => Path.GetFileName(x)).OrderBy(x => order.Contains(x) ? Array.IndexOf(order, x) : order.Length);
             return sorted.Select(x => new Dropdown.OptionData(x)).ToList();
         }
@@ -350,7 +350,7 @@ namespace BetterSceneLoader.Koikatu
 
                 confirmpanel.gameObject.SetActive(false);
             });
-            
+
             var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             button.gameObject.GetComponent<Image>().sprite = sprite;
 

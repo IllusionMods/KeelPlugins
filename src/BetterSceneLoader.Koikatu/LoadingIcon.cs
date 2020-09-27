@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,19 +16,18 @@ namespace BetterSceneLoader.Koikatu
         }
 
         public static Dictionary<string, bool> loadingState = new Dictionary<string, bool>();
-        bool rotate = false;
-        bool prevState = false;
+        private bool rotate = false;
+        private bool prevState = false;
+        private Image image;
+        private float speed;
 
-        Image image;
-        float speed;
-
-        void Start()
+        private void Start()
         {
             image.enabled = false;
             StartCoroutine(LoadingIndicator());
         }
 
-        IEnumerator LoadingIndicator()
+        private IEnumerator LoadingIndicator()
         {
             while(true)
             {
@@ -55,7 +53,7 @@ namespace BetterSceneLoader.Koikatu
             }
         }
 
-        void Update()
+        private void Update()
         {
             if(rotate)
             {
