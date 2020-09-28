@@ -87,6 +87,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 		src\BuildSettings.AISyoujyo.props = src\BuildSettings.AISyoujyo.props
 		src\BuildSettings.Common.props = src\BuildSettings.Common.props
 		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
+		src\BuildSettings.HoneySelect2.props = src\BuildSettings.HoneySelect2.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
 		PostBuild.ps1 = PostBuild.ps1
@@ -119,6 +120,10 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BetterSceneLoader.Core", "src\BetterSceneLoader.Core\BetterSceneLoader.Core.shproj", "{65D1DEFC-6733-47F3-84F8-1609C596FA5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.HoneySelect", "src\BetterSceneLoader.HoneySelect\BetterSceneLoader.HoneySelect.csproj", "{10906E95-5D65-476F-AFB3-5DB81DF04C27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.HoneySelect2", "src\BetterSceneLoader.HoneySelect2\BetterSceneLoader.HoneySelect2.csproj", "{8B9E7744-8345-46E9-96B7-13B0269819CC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.HoneySelect2", "src\Common.HoneySelect2\Common.HoneySelect2.shproj", "{F452236D-9FF5-4897-8EE8-DA0C1D49974D}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -171,6 +176,10 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 4
+		src\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 4
+		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 4
+		src\UIUtility\UIUtility.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
@@ -198,6 +207,7 @@ Global
 		src\Common.Core.Event\Common.Core.Event.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
+		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{f452236d-9ff5-4897-8ee8-da0c1d49974d}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
@@ -301,6 +311,10 @@ Global
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -354,6 +368,8 @@ Global
 		{8C9D88EC-5F03-43EF-8954-B54144A5089C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{65D1DEFC-6733-47F3-84F8-1609C596FA5B} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
+		{8B9E7744-8345-46E9-96B7-13B0269819CC} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
+		{F452236D-9FF5-4897-8EE8-DA0C1D49974D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
