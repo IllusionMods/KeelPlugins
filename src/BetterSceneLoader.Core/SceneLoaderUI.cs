@@ -17,7 +17,7 @@ namespace KeelPlugins
 {
     public class SceneLoaderUI
     {
-        private static string scenePath = Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene");
+        private static string scenePath = BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene");
 
         private float buttonSize = 10f;
         private float marginSize = 5f;
@@ -286,7 +286,9 @@ namespace KeelPlugins
             {
                 LoadingIcon.loadingState[currentCategoryFolder] = true;
 
+                #pragma warning disable CS0618 // Type or member is obsolete
                 using(var www = new WWW("file:///" + scene.Value))
+                #pragma warning restore CS0618
                 {
                     yield return www;
 
