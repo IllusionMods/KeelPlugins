@@ -69,5 +69,15 @@ namespace BetterSceneLoader.Koikatu.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pluginicon {
+            get {
+                object obj = ResourceManager.GetObject("pluginicon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

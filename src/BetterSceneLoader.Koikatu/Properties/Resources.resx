@@ -121,4 +121,7 @@
   <data name="loadicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loadicon;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="pluginicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pluginicon;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
