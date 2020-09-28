@@ -125,6 +125,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.HoneySele
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.HoneySelect2", "src\Common.HoneySelect2\Common.HoneySelect2.shproj", "{F452236D-9FF5-4897-8EE8-DA0C1D49974D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-47DA-426C-96D0-2BB0978765E2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -307,6 +315,7 @@ Global
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -314,7 +323,6 @@ Global
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
