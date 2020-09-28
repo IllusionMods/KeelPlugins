@@ -5,11 +5,12 @@ using UILib;
 
 namespace KeelPlugins
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(HoneySelectConstants.StudioNeoProcessName32bit)]
+    [BepInProcess(HoneySelectConstants.StudioNeoProcessName64bit)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BetterSceneLoaderCore
     {
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.2.0." + BuildNumber.Version;
 
         protected override void Awake()
         {
@@ -26,7 +27,7 @@ namespace KeelPlugins
 
         protected override void LoadScene(string path)
         {
-            Studio.Studio.Instance.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
+            Studio.Studio.Instance.LoadScene(path);
         }
 
         protected override void SaveScene(string path)
