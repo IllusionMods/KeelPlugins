@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using System.IO;
 
 namespace KeelPlugins
 {
@@ -36,7 +37,11 @@ namespace KeelPlugins
 
         protected abstract void LoadScene(string path);
         protected abstract void SaveScene(string path);
-        protected abstract void DeleteScene(string path);
         protected abstract void ImportScene(string path);
+
+        protected void DeleteScene(string path)
+        {
+            File.Delete(path);
+        }
     }
 }
