@@ -58,15 +58,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\loadicon" />
+    <None Include="Resources\pluginicon" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>KeelPlugins</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pluginicon" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />

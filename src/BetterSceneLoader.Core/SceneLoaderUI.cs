@@ -1,20 +1,19 @@
 ﻿using BepInEx;
 using KKAPI.Studio.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UILib;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using UnityEngine.UI.Extensions;
-using System.Collections;
+using UnityEngine.UI;
 
 // imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
 
-namespace BetterSceneLoader.Core
+namespace KeelPlugins
 {
     public class SceneLoaderUI
     {
@@ -39,7 +38,7 @@ namespace BetterSceneLoader.Core
         private Button yesbutton;
         private Button nobutton;
         private Text nametext;
-        public ToolbarToggle toolbarToggle;
+        private ToolbarToggle toolbarToggle;
 
         private Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
         private Button currentButton;
@@ -53,9 +52,10 @@ namespace BetterSceneLoader.Core
         public UnityAction<string> OnImportButtonClick;
         public UnityAction<string> OnFolderButtonClick;
 
-        public void Show(bool flag)
+        public void ShowWindow(bool flag)
         {
             UISystem.gameObject.SetActive(flag);
+            toolbarToggle?.SetValue(flag);
         }
 
         public void UpdateWindow()
@@ -88,7 +88,7 @@ namespace BetterSceneLoader.Core
         {
             UISystem = UIUtility.CreateNewUISystem("BetterSceneLoaderCanvas");
             UISystem.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f / UIScale, 1080f / UIScale);
-            UISystem.gameObject.SetActive(false);
+            ShowWindow(false);
 
             mainPanel = UIUtility.CreatePanel("Panel", UISystem.transform);
             mainPanel.color = backgroundColor;
@@ -105,7 +105,7 @@ namespace BetterSceneLoader.Core
 
             var close = UIUtility.CreateButton("CloseButton", drag.transform, "");
             close.transform.SetRect(1f, 0f, 1f, 1f, -buttonSize * 2f);
-            close.onClick.AddListener(() => toolbarToggle.SetValue(false));
+            close.onClick.AddListener(() => ShowWindow(false));
 
             var x1 = UIUtility.CreatePanel("x1", close.transform);
             x1.transform.SetRect(0f, 0f, 1f, 1f, 8f, 0f, -8f);
@@ -153,7 +153,7 @@ namespace BetterSceneLoader.Core
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
-            var texture = PngAssist.ChangeTextureFromByte(Koikatu.Properties.Resources.loadicon);
+            var texture = PngAssist.ChangeTextureFromByte(Resources.loadicon);
             loadingIcon.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             LoadingIcon.Init(loadingIcon, -5f);
 
@@ -188,7 +188,7 @@ namespace BetterSceneLoader.Core
                 optionspanel.gameObject.SetActive(false);
                 OnLoadButtonClick(currentPath);
                 if(BetterSceneLoaderCore.AutoClose.Value)
-                    UISystem.gameObject.SetActive(false);
+                    ShowWindow(false);
             });
 
             var importbutton = UIUtility.CreateButton("ImportButton", optionspanel.transform, "Import");
@@ -209,6 +209,8 @@ namespace BetterSceneLoader.Core
                 confirmpanel.gameObject.SetActive(false);
                 optionspanel.gameObject.SetActive(false);
             });
+
+            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(PngAssist.ChangeTextureFromByte(Resources.pluginicon), false, x => ShowWindow(x));
 
             UpdateWindow();
             PopulateGrid();
