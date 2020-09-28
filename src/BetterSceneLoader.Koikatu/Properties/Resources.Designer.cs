@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BetterSceneLoader.Koikatu.Properties {
+namespace KeelPlugins {
     using System;
     
     

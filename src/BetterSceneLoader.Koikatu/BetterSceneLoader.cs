@@ -1,23 +1,13 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
 using HarmonyLib;
-using KeelPlugins;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UILib;
-using UnityEngine;
-using UnityEngine.UI;
-using KKAPI.Studio.UI;
-using BetterSceneLoader.Core;
 
-namespace BetterSceneLoader.Koikatu
+namespace KeelPlugins
 {
     [BepInProcess(KoikatuConstants.StudioProcessName)]
-    [BepInPlugin("keelhauled.bettersceneloader", "BetterSceneLoader", Version)]
+    [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BetterSceneLoaderCore
     {
         public const string Version = "1.0.0";
@@ -25,20 +15,19 @@ namespace BetterSceneLoader.Koikatu
         protected override void Awake()
         {
             base.Awake();
-            Harmony.CreateAndPatchAll(GetType());
+            Harmony.CreateAndPatchAll(typeof(BetterSceneLoader));
             UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
         public static void StudioEntrypoint()
         {
-            sceneLoaderUI.CreateUI();
-            sceneLoaderUI.toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(PngAssist.ChangeTextureFromByte(Properties.Resources.pluginicon), false, x => sceneLoaderUI.Show(x));
+            SceneLoaderUI.CreateUI();
         }
 
         protected override void LoadScene(string path)
         {
-            Plugin.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
+            Studio.Studio.Instance.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
         }
 
         protected override void SaveScene(string path)

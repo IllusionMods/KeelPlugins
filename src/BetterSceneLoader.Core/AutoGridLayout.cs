@@ -1,4 +1,7 @@
-﻿namespace UnityEngine.UI.Extensions
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace KeelPlugins
 {
     public class AutoGridLayout : GridLayoutGroup
     {
