@@ -56,8 +56,6 @@ namespace KeelPlugins
         [HarmonyPatch(typeof(LogoScene), "Start")]
         private static bool DisableLogo(ref IEnumerator __result)
         {
-            Singleton<Scene>.Instance.sceneFade._Time = 0.1f;
-
             IEnumerator LoadTitle()
             {
                 Singleton<Scene>.Instance.LoadReserve(new Scene.Data
