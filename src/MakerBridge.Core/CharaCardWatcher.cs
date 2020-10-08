@@ -15,14 +15,14 @@ namespace KeelPlugins
                 Filter = $"{Path.GetFileNameWithoutExtension(filePath)}*{Path.GetExtension(filePath)}"
             };
 
-            FileSystemEventHandler handler = (sender, e) => FileChanged(sender, e, fileChangeCompleted);
+            void handler(object sender, FileSystemEventArgs e) => FileChanged(e, fileChangeCompleted);
             watcher.Created += handler;
             watcher.Changed += handler;
 
             return watcher;
         }
 
-        private static void FileChanged(object sender, FileSystemEventArgs e, Action<string> fileChangeCompleted)
+        private static void FileChanged(FileSystemEventArgs e, Action<string> fileChangeCompleted)
         {
             bool fileIsBusy = true;
             while(fileIsBusy)

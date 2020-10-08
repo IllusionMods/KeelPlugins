@@ -47,7 +47,7 @@ namespace KeelPlugins
                 if(objectCtrlInfo is OCILight light)
                 {
                     var tracker = light.light.gameObject.GetComponent<TrackTransform>();
-                    if(tracker && studio.dicObjectCtrl.TryGetValue(tracker.targetKey, out ObjectCtrlInfo info))
+                    if(tracker && studio.dicObjectCtrl.TryGetValue(tracker.targetKey, out ObjectCtrlInfo _))
                     {
                         savedLights.Add(new SavedLight
                         {

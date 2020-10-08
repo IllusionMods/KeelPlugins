@@ -41,7 +41,8 @@ namespace KeelPlugins
 
         public static void MaskFrames(int count)
         {
-            maskComponent?.MaskFrames(count);
+            if(maskComponent)
+                maskComponent.MaskFrames(count);
         }
     }
 }

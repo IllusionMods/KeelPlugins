@@ -349,7 +349,7 @@ namespace UILib
             i.type = Image.Type.Sliced;
             i.fillCenter = true;
             i.color = whiteColor;
-            i.sprite = sprite ?? backgroundSprite;
+            i.sprite = sprite != null ? sprite : backgroundSprite;
             return i;
         }
 
