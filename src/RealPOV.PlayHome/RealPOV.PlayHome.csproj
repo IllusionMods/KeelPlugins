@@ -49,6 +49,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.Unity.Analyzers.1.8.2\analyzers\dotnet\cs\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core.Event\Common.Core.Event.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />

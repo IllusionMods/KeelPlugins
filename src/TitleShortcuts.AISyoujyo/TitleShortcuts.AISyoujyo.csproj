@@ -43,6 +43,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.Unity.Analyzers.1.8.2\analyzers\dotnet\cs\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\TitleShortcuts.Core\TitleShortcuts.Core.projitems" Label="Shared" />
   <Import Project="..\Common.AISyoujyo\Common.AISyoujyo.projitems" Label="Shared" />
