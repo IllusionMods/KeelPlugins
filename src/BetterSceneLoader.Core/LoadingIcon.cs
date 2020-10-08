@@ -35,7 +35,7 @@ namespace KeelPlugins
                 if(state != prevState)
                 {
                     prevState = state;
-                    rotate = state ? true : false;
+                    rotate = state;
 
                     if(state)
                     {

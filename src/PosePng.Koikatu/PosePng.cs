@@ -40,7 +40,7 @@ namespace KeelPlugins
             [HarmonyPrefix, HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.Save))]
             public static bool PoseSavePatch(OCIChar _ociChar, ref string _name)
             {
-                var filename = $"{_name}_{DateTime.Now.ToString("yyyy_MMdd_HHmm_ss_fff")}{PngExt}";
+                var filename = $"{_name}_{DateTime.Now:yyyy_MMdd_HHmm_ss_fff}{PngExt}";
                 var path = Path.Combine(SaveFolder.Value, filename);
                 var fileInfo = new PauseCtrl.FileInfo(_ociChar);
 

@@ -12,8 +12,8 @@ namespace KeelPlugins
         public override void CalculateLayoutInputHorizontal()
         {
             base.CalculateLayoutInputHorizontal();
-            float iColumn = -1;
-            float iRow = -1;
+            float iColumn;
+            float iRow;
             if(m_IsColumn)
             {
                 iColumn = m_Column;
@@ -21,7 +21,6 @@ namespace KeelPlugins
                 {
                     iColumn = 1;
                 }
-                iRow = Mathf.CeilToInt(transform.childCount / iColumn);
                 float fWidth = (rectTransform.rect.width - ((iColumn - 1) * (spacing.x))) - ((padding.right + padding.left));
                 float width = fWidth / iColumn;
                 cellSize = new Vector2(width, width / aspectRatio);
@@ -33,7 +32,6 @@ namespace KeelPlugins
                 {
                     iRow = 1;
                 }
-                iColumn = Mathf.CeilToInt(transform.childCount / iRow);
                 float fHeight = (rectTransform.rect.height - ((iRow - 1) * (spacing.y))) - ((padding.top + padding.bottom));
                 float height = fHeight / iRow;
                 cellSize = new Vector2(height * aspectRatio, height);
