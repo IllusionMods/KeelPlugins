@@ -90,7 +90,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 		src\BuildSettings.HoneySelect2.props = src\BuildSettings.HoneySelect2.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
-		PostBuild.ps1 = PostBuild.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
@@ -128,6 +127,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-4
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		nuget.config = nuget.config
+		PostBuild.ps1 = PostBuild.ps1
 		README.md = README.md
 	EndProjectSection
 EndProject
