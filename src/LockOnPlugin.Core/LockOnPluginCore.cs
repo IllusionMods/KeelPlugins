@@ -31,10 +31,9 @@ namespace KeelPlugins
         internal static ConfigEntry<KeyboardShortcut> PrevCharaKey { get; set; }
         internal static ConfigEntry<KeyboardShortcut> NextCharaKey { get; set; }
 
-        private static Harmony harmony;
         internal static GameObject bepinex;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             bepinex = gameObject;
             Logger = base.Logger;
@@ -50,15 +49,6 @@ namespace KeelPlugins
             LockOnKey = Config.Bind(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
             PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
             NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
-
-            harmony = Harmony.CreateAndPatchAll(GetType().Assembly);
         }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll();
-        }
-#endif
     }
 }

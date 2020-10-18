@@ -6,6 +6,13 @@ namespace KeelPlugins
     [BepInPlugin(GUID, "LockOnPlugin", Version)]
     public class LockOnPlugin : LockOnPluginCore
     {
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Harmony.CreateAndPatchAll(typeof(Entrypoints));
+        }
+
         private class Entrypoints
         {
             [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
