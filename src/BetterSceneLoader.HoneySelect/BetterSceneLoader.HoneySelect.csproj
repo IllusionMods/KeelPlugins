@@ -71,4 +71,7 @@
   <Import Project="..\Common.HoneySelect\Common.HoneySelect.projitems" Label="Shared" />
   <Import Project="..\UIUtility\UIUtility.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF EXIST "$(SolutionDir)PostBuild.ps1" powershell "$(SolutionDir)PostBuild.ps1" "HS" "$(TargetPath)" "$(ProjectPath)" "$(ConfigurationName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
