@@ -111,8 +111,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.Koikatu"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLogFilter", "src\UnityLogFilter\UnityLogFilter.csproj", "{C8DE4A42-1B6C-4E58-985E-76972009A8BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextMenu", "src\ContextMenu\ContextMenu.csproj", "{5A1F1414-9957-44ED-8966-1919D664B93A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.Koikatu", "src\BetterSceneLoader.Koikatu\BetterSceneLoader.Koikatu.csproj", "{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BetterSceneLoader", "BetterSceneLoader", "{8C9D88EC-5F03-43EF-8954-B54144A5089C}"
@@ -166,7 +164,6 @@ Global
 		src\Common.Core\Common.Core.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
 		src\Common.PlayHome\Common.PlayHome.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{5837fde8-4b7c-431b-9402-3d8019f7bf37}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{5a1f1414-9957-44ed-8966-1919d664b93a}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 4
@@ -309,9 +306,6 @@ Global
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A1F1414-9957-44ED-8966-1919D664B93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A1F1414-9957-44ED-8966-1919D664B93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A1F1414-9957-44ED-8966-1919D664B93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -369,7 +363,6 @@ Global
 		{6D058450-09B2-4D25-903F-9AE3A75DF066} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{5A1F1414-9957-44ED-8966-1919D664B93A} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{8C9D88EC-5F03-43EF-8954-B54144A5089C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{65D1DEFC-6733-47F3-84F8-1609C596FA5B} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
