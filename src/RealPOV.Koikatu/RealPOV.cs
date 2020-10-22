@@ -9,9 +9,17 @@ namespace KeelPlugins
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore
     {
+        public const string Version = "1.0.3." + BuildNumber.Version;
+
         private static int backupLayer;
         private static ChaControl currentChara;
         private bool isStudio = Paths.ProcessName == "CharaStudio";
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Harmony.CreateAndPatchAll(GetType());
+        }
 
         internal override void EnablePOV()
         {

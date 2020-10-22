@@ -8,6 +8,8 @@ namespace KeelPlugins
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore
     {
+        public const string Version = "1.0.3." + BuildNumber.Version;
+
         private const string SECTION_OFFSETS = "Offsets";
 
         internal static ConfigEntry<float> FemaleOffsetX { get; set; }
@@ -28,6 +30,8 @@ namespace KeelPlugins
             MaleOffsetX = Config.Bind(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetY = Config.Bind(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetZ = Config.Bind(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+
+            Harmony.CreateAndPatchAll(GetType());
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]

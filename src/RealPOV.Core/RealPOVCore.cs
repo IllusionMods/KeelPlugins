@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using HarmonyLib;
 using UnityEngine;
 
 namespace KeelPlugins
@@ -10,13 +9,11 @@ namespace KeelPlugins
     {
         public const string GUID = "keelhauled.realpov";
         public const string PluginName = "RealPOV";
-        public const string Version = "1.0.2." + BuildNumber.Version;
 
         internal const string SECTION_GENERAL = "General";
         internal const string SECTION_HOTKEYS = "Keyboard shortcuts";
 
         internal static new ManualLogSource Logger;
-        internal static Harmony Harmony;
 
         internal static ConfigEntry<float> ViewOffset { get; set; }
         internal static ConfigEntry<float> DefaultFOV { get; set; }
@@ -39,16 +36,7 @@ namespace KeelPlugins
             DefaultFOV = Config.Bind(SECTION_GENERAL, "Default FOV", 70f, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
             MouseSens = Config.Bind(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
             ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", 0.03f);
-
-            Harmony = Harmony.CreateAndPatchAll(GetType().Assembly);
         }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            Harmony.UnpatchAll();
-        }
-#endif
 
         private void Update()
         {

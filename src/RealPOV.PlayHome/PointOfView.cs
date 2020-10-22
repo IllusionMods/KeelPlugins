@@ -24,8 +24,17 @@ namespace KeelPlugins
 
         private static Vector3 rotation = new Vector3();
 
+        private Harmony harmony;
+
+        private void Awake()
+        {
+            harmony = Harmony.CreateAndPatchAll(GetType());
+        }
+
         private void OnDestroy()
         {
+            harmony.UnpatchAll();
+
             if(lockNormalCamera)
                 Restore();
         }

@@ -15,7 +15,7 @@ namespace KeelPlugins
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.1.0." + BuildNumber.Version;
+        public const string Version = "1.1.1." + BuildNumber.Version;
         internal static new ManualLogSource Logger;
 
         private static string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
@@ -24,7 +24,7 @@ namespace KeelPlugins
         private void Awake()
         {
             Logger = base.Logger;
-            Harmony.CreateAndPatchAll(GetType().Assembly);
+            Harmony.CreateAndPatchAll(typeof(Hooks));
 
             if(File.Exists(savePath))
             {

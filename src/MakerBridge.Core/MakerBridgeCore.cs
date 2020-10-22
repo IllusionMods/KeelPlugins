@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using HarmonyLib;
 using System.IO;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace KeelPlugins
         internal static ConfigEntry<KeyboardShortcut> SendChara { get; set; }
         internal static ConfigEntry<bool> ShowMessages { get; set; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Logger = base.Logger;
             bepinex = gameObject;
@@ -34,8 +33,6 @@ namespace KeelPlugins
             var tempFolder = Path.GetTempPath();
             MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");
             OtherCardPath = Path.Combine(tempFolder, "makerbridge2.png");
-
-            Harmony.CreateAndPatchAll(GetType().Assembly);
         }
 
         internal static void Log(object data)

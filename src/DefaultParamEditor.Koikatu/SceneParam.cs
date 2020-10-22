@@ -13,6 +13,7 @@ namespace KeelPlugins
         public static void Init(ParamData.SceneData data)
         {
             _sceneData = data;
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
         public static void Save()

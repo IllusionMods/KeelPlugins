@@ -6,7 +6,13 @@ namespace KeelPlugins
     [BepInPlugin(GUID, PluginName, Version)]
     public class MakerBridge : MakerBridgeCore
     {
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Harmony.CreateAndPatchAll(typeof(Hooks));
+        }
 
         private class Hooks
         {

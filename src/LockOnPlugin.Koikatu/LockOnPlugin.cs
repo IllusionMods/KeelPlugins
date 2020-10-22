@@ -3,9 +3,11 @@ using HarmonyLib;
 
 namespace KeelPlugins
 {
-    [BepInPlugin(GUID, "LockOnPlugin", Version)]
+    [BepInPlugin(GUID, PluginName, Version)]
     public class LockOnPlugin : LockOnPluginCore
     {
+        public const string Version = "2.6.1." + BuildNumber.Version;
+
         protected override void Awake()
         {
             base.Awake();
