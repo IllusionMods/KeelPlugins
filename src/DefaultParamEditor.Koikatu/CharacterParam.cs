@@ -12,6 +12,7 @@ namespace KeelPlugins
         public static void Init(ParamData.CharaData data)
         {
             _charaData = data;
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
         public static void Save()
