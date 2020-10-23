@@ -24,10 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "archive", "archive", "{AD19
 		archive\Unlocker.cs = archive\Unlocker.cs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CharaStateX", "CharaStateX", "{E88E800F-6D94-450F-B756-66B3960E4795}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CharaStateX.Core", "src\CharaStateX.Core\CharaStateX.Core.shproj", "{E6FC0727-CF45-4F39-80C6-8816DBA8D060}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharaStateX.Koikatu", "src\CharaStateX.Koikatu\CharaStateX.Koikatu.csproj", "{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultParamEditor.Koikatu", "src\DefaultParamEditor.Koikatu\DefaultParamEditor.Koikatu.csproj", "{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8}"
@@ -203,7 +199,6 @@ Global
 		src\Common.Core\Common.Core.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
-		src\CharaStateX.Core\CharaStateX.Core.projitems*{e6fc0727-cf45-4f39-80c6-8816dba8d060}*SharedItemsImports = 13
 		src\Common.Core.Event\Common.Core.Event.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 4
@@ -320,9 +315,7 @@ Global
 		{0902BF3D-81D2-4AEE-AB32-EF238F15052E} = {FAF05F03-1080-46D3-AB9B-C67556251D3A}
 		{DD7D6945-54A6-4190-8F49-46A189EE32CD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{5FC98374-508A-40B7-B4E1-EDB3B1D482F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{E88E800F-6D94-450F-B756-66B3960E4795} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{E6FC0727-CF45-4F39-80C6-8816DBA8D060} = {E88E800F-6D94-450F-B756-66B3960E4795}
-		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220} = {E88E800F-6D94-450F-B756-66B3960E4795}
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{A9A5B556-B590-4948-9E89-87D38623DAF1} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{21652626-F032-4986-B258-C36B4C9115E7} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
