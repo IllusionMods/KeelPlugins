@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 namespace KeelPlugins
 {
     [BepInProcess(AISyoujyoConstants.MainGameProcessName)]
+    [BepInProcess(AISyoujyoConstants.SteamGameProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
@@ -28,6 +29,8 @@ namespace KeelPlugins
 
         protected override void Awake()
         {
+            base.Awake();
+            
             AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
             StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Open female maker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Open male maker", new KeyboardShortcut(KeyCode.M));
