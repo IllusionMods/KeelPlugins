@@ -30,8 +30,15 @@ namespace KeelPlugins
 
             if(File.Exists(FilterFile))
             {
-                filters = File.ReadAllLines(FilterFile).Where(VerifyRegex).Select(x => new Regex(x)).ToList();
-                Logger.LogInfo($"Loaded {filters.Count} filter{(filters.Count == 1 ? "" : "")}");
+                foreach(var line in File.ReadAllLines(FilterFile))
+                {
+                    if(VerifyRegex(line))
+                        filters.Add(new Regex(line));
+                    else
+                        Logger.LogWarning($"'{line}' is not a valid regex pattern");
+                }
+
+                Logger.LogInfo($"Loaded {filters.Count} filter{(filters.Count == 1 ? "" : "s")}");
             }
             else
             {
