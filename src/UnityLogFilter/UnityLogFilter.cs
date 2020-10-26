@@ -21,16 +21,16 @@ namespace KeelPlugins
         private static ManualLogSource Logger;
 
         private static List<Regex> filters = new List<Regex>();
-        private static string FilterFile = Path.Combine(BepInEx.Paths.ConfigPath, "UnityLogFilter.txt");
+        private static string filterFilePath = Path.Combine(BepInEx.Paths.ConfigPath, "UnityLogFilter.txt");
 
         public static void Finish()
         {
             Harmony = new Harmony(nameof(UnityLogFilter));
             Logger = BepInEx.Logging.Logger.CreateLogSource(nameof(UnityLogFilter));
 
-            if(File.Exists(FilterFile))
+            if(File.Exists(filterFilePath))
             {
-                foreach(var line in File.ReadAllLines(FilterFile))
+                foreach(var line in File.ReadAllLines(filterFilePath))
                 {
                     if(VerifyRegex(line))
                         filters.Add(new Regex(line));
@@ -42,12 +42,12 @@ namespace KeelPlugins
             }
             else
             {
-                File.Create(FilterFile);
-                Logger.LogInfo($"{FilterFile} created, add regular expressions to it.");
+                File.Create(filterFilePath);
+                Logger.LogInfo($"{filterFilePath} created, add regular expressions to it.");
             }
 
             Harmony.Patch(AccessTools.Method(typeof(Chainloader), nameof(Chainloader.Initialize)),
-                              postfix: new HarmonyMethod(AccessTools.Method(typeof(UnityLogFilter), nameof(ChainloaderHook))));
+                          postfix: new HarmonyMethod(AccessTools.Method(typeof(UnityLogFilter), nameof(ChainloaderHook))));
         }
 
         public static void ChainloaderHook()
