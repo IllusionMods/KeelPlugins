@@ -9,7 +9,7 @@ Configuration Manager is recommended to make changing the numerous settings from
 2. Download the latest release for your game from [the releases page](../../releases)
 3. Put the dll files you want in the `bepinex/plugins` folder
 
-## Plugin descriptions
+## Plugins
 
 #### AltAutoMode
 An alternative auto mode for H scenes.  
@@ -75,5 +75,11 @@ Honey Select and AI Girl accept arguments `-femalemaker, -malemaker`.
 First person mode for H scenes.
 
 #### StudioAddonLite
-A lite version of the StudioAddon for HS.  
+A lite version of the StudioAddon from HS.  
 Currently only has the object manipulation hotkeys for studio.
+
+## Patchers
+
+#### UnityLogFilter
+A filter for Unitys own log messages.  
+On first run the patcher will create `UnityLogFilter.txt` in the config folder and you can add your regexes there.
