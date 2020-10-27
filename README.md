@@ -7,7 +7,7 @@ Configuration Manager is recommended to make changing the numerous settings from
 ## How to install
 1. Install the latest build of [BepInEx](https://github.com/BepInEx/BepInEx/releases)
 2. Download the latest release for your game from [the releases page](../../releases)
-3. Plugins dlls go to `bepinex/plugins` and patchers to `bepinex/patchers`
+3. Plugin dlls go to `bepinex/plugins` and patchers to `bepinex/patchers`
 
 ## Plugins
 
