@@ -123,6 +123,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-4
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothingStateMenuX.Koikatu", "src\ClothingStateMenuX.Koikatu\ClothingStateMenuX.Koikatu.csproj", "{F927C67B-778F-4144-92E4-2AE745790893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Koikatu", "src\Testing.Koikatu\Testing.Koikatu.csproj", "{CE200AAD-BA47-439E-8C14-8D523306ABEE}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -195,6 +199,7 @@ Global
 		src\Common.Core\Common.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 4
+		src\UIUtility\UIUtility.projitems*{ce200aad-ba47-439e-8c14-8d523306abee}*SharedItemsImports = 4
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{d2625c46-77d9-4d75-bdcd-ea7d402d33f6}*SharedItemsImports = 4
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
@@ -206,6 +211,8 @@ Global
 		src\Common.Core\Common.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
 		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 4
+		src\Common.Koikatu\Common.Koikatu.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -305,6 +312,12 @@ Global
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9E7744-8345-46E9-96B7-13B0269819CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F927C67B-778F-4144-92E4-2AE745790893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F927C67B-778F-4144-92E4-2AE745790893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F927C67B-778F-4144-92E4-2AE745790893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE200AAD-BA47-439E-8C14-8D523306ABEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE200AAD-BA47-439E-8C14-8D523306ABEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE200AAD-BA47-439E-8C14-8D523306ABEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -355,6 +368,8 @@ Global
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{8B9E7744-8345-46E9-96B7-13B0269819CC} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{F452236D-9FF5-4897-8EE8-DA0C1D49974D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{F927C67B-778F-4144-92E4-2AE745790893} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{CE200AAD-BA47-439E-8C14-8D523306ABEE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
