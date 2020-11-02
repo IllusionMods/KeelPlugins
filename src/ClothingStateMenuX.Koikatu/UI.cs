@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ChaCustom;
-using HarmonyLib;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,30 +31,30 @@ namespace ClothingStateMenuX.Koikatu
 
             buttons[VanillaUI.OutfitDropDown.value].GetComponent<Button>().SetColorMultiplier(0.7f);
 
-            VanillaUI.OutfitDropDown.onValueChanged.AddListener(x =>
+            VanillaUI.OutfitDropDown.onValueChanged.AddListener(SetMultipliers);
+            ClothingStateMenu.delete.Add(() => VanillaUI.OutfitDropDown.onValueChanged.RemoveListener(SetMultipliers));
+
+            void SetMultipliers(int x)
             {
                 foreach(var button in buttons)
-                    button.GetComponent<Button>()?.SetColorMultiplier(1f);
+                    button.GetComponent<Button>().SetColorMultiplier(1f);
 
-                buttons[x].GetComponent<Button>()?.SetColorMultiplier(0.7f);
-            });
+                buttons[x].GetComponent<Button>().SetColorMultiplier(0.7f);
+            }
         }
 
         public static void CreateClothingOptions(int index)
         {
             int counter = 0;
 
-            var delete = new List<GameObject>
-            {
-                CreateClothingStateButtons("Top", ChaFileDefine.ClothesKind.top, 3),
-                CreateClothingStateButtons("Bottom", ChaFileDefine.ClothesKind.bot, 3),
-                CreateClothingStateButtons("Bra", ChaFileDefine.ClothesKind.bra, 3),
-                CreateClothingStateButtons("Underwear", ChaFileDefine.ClothesKind.shorts, 4),
-                CreateClothingStateButtons("Pantyhose", ChaFileDefine.ClothesKind.panst, 3),
-                CreateClothingStateButtons("Gloves", ChaFileDefine.ClothesKind.gloves, 2),
-                CreateClothingStateButtons("Legwear", ChaFileDefine.ClothesKind.socks, 2),
-                CreateClothingStateButtons("Shoes", ChaFileDefine.ClothesKind.shoes_inner, 2)
-            };
+            CreateClothingStateButtons("Top", ChaFileDefine.ClothesKind.top, 3);
+            CreateClothingStateButtons("Bottom", ChaFileDefine.ClothesKind.bot, 3);
+            CreateClothingStateButtons("Bra", ChaFileDefine.ClothesKind.bra, 3);
+            CreateClothingStateButtons("Underwear", ChaFileDefine.ClothesKind.shorts, 4);
+            CreateClothingStateButtons("Pantyhose", ChaFileDefine.ClothesKind.panst, 3);
+            CreateClothingStateButtons("Gloves", ChaFileDefine.ClothesKind.gloves, 2);
+            CreateClothingStateButtons("Legwear", ChaFileDefine.ClothesKind.socks, 2);
+            CreateClothingStateButtons("Shoes", ChaFileDefine.ClothesKind.shoes_inner, 2);
 
             GameObject CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind, int buttons)
             {

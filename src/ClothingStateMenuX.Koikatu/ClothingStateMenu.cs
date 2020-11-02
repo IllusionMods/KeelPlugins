@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BepInEx;
-using HarmonyLib;
-using UnityEngine;
-using System.Diagnostics;
+﻿using BepInEx;
 using BepInEx.Logging;
-using UnityEngine.UI;
+using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ClothingStateMenuX.Koikatu
 {
