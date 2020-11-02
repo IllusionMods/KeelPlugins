@@ -24,8 +24,11 @@ namespace ClothingStateMenuX.Koikatu
         private void Awake()
         {
             Logger = base.Logger;
-            //Harmony.CreateAndPatchAll(GetType());
+#if DEBUG
             MakerEntrypoint();
+#else
+            Harmony.CreateAndPatchAll(GetType());
+#endif
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
@@ -46,10 +49,12 @@ namespace ClothingStateMenuX.Koikatu
             Logger.LogInfo(watch.Elapsed);
         }
 
+#if DEBUG
         private void OnDestroy()
         {
             foreach(var item in delete)
                 DestroyImmediate(item);
         }
+#endif
     }
 }
