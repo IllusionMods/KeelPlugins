@@ -95,6 +95,17 @@ namespace ClothingStateMenuX.Koikatu
             }
         }
 
+        private static GameObject _buttonContainerTemplate;
+        public static GameObject ButtonContainerTemplate
+        {
+            get
+            {
+                if(_buttonContainerTemplate == null)
+                    _buttonContainerTemplate = Sidebar.transform.Find("btnLightingInitialize").gameObject;
+                return _buttonContainerTemplate;
+            }
+        }
+
         private static GameObject _separatorTemplate;
         public static GameObject SeparatorTemplate
         {

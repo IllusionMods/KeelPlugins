@@ -6,6 +6,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Diagnostics;
 using BepInEx.Logging;
+using UnityEngine.UI;
 
 namespace ClothingStateMenuX.Koikatu
 {
@@ -36,11 +37,10 @@ namespace ClothingStateMenuX.Koikatu
             var go1 = UI.CreateTitle("Clothing Sets", 0);
             var go2 = UI.CreateClothingSets(1);
             var go3 = UI.CreateSeparator(2);
+            var go4 = UI.CreateClothingOptions(VanillaUI.ClothingStateToggles.transform.GetSiblingIndex() + 1);
 
-            var go4 = UI.CreateClothingOptions();
-            var go5 = UI.CreateAccessories();
-
-            delete = new List<GameObject> { go1, go2, go3, go4, go5 };
+            delete = new List<GameObject> { go1, go2, go3 };
+            delete.AddRange(go4);
 
             watch.Stop();
             Logger.LogInfo(watch.Elapsed);
