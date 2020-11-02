@@ -7,6 +7,17 @@ namespace ClothingStateMenuX.Koikatu
 {
     public static class VanillaUI
     {
+        private static ChaControl _character;
+        public static ChaControl Character
+        {
+            get
+            {
+                if(_character == null)
+                    _character = GameObject.FindObjectOfType<ChaControl>();
+                return _character;
+            }
+        }
+
         private static GameObject _sidebar;
         public static GameObject Sidebar
         {

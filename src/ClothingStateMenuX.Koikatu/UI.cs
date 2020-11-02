@@ -13,7 +13,7 @@ namespace ClothingStateMenuX.Koikatu
 {
     public static class UI
     {
-        public static void CreateClothingSets(int index)
+        public static GameObject CreateClothingSets(int index)
         {
             var container = CreateContainer("ClothingSetsContainer", 28, index);
 
@@ -34,12 +34,14 @@ namespace ClothingStateMenuX.Koikatu
             btn5.transform.SetRect(pos, 0f, pos += step, 1f);
             btn6.transform.SetRect(pos, 0f, pos += step, 1f);
             btn7.transform.SetRect(pos, 0f, pos += step, 1f);
+
+            return container;
         }
 
-        public static void CreateClothingOptions(int index)
+        public static GameObject CreateClothingOptions()
         {
-            var container = CreateContainer("ClothingOptionsContainer", 25 * 8, index);
-            var chara = GameObject.FindObjectOfType<ChaControl>();
+            var container = CreateContainer("ClothingOptionsContainer", 175, index);
+            container.AddComponent<VerticalLayoutGroup>();
 
             CreateClothingStateButtons("Top", ChaFileDefine.ClothesKind.top);
             CreateClothingStateButtons("Bottom", ChaFileDefine.ClothesKind.shorts);
@@ -50,33 +52,34 @@ namespace ClothingStateMenuX.Koikatu
             CreateClothingStateButtons("Legwear", ChaFileDefine.ClothesKind.socks);
             CreateClothingStateButtons("Shoes", ChaFileDefine.ClothesKind.shoes_inner);
 
+            return container;
+
             void CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind)
             {
                 var pos = 0.3f;
                 var step = (1f - pos) / 4f;
 
                 var containerX = CreateContainer(text, 25, container.transform);
-                containerX.AddComponent<VerticalLayoutGroup>();
                 var textElem = CreateText(containerX.transform, text);
                 textElem.transform.SetRect(0f, 0f, pos, 1f);
 
-                var buttonOn = CreateButton(containerX.transform, "On", () => chara.SetClothesState((int)kind, 0));
+                var buttonOn = CreateButton(containerX.transform, "On", () => VanillaUI.Character.SetClothesState((int)kind, 0));
                 buttonOn.transform.SetRect(pos, 0f, pos += step, 1f);
 
-                var buttonHalf1 = CreateButton(containerX.transform, "1/2", () => chara.SetClothesState((int)kind, 1));
+                var buttonHalf1 = CreateButton(containerX.transform, "½", () => VanillaUI.Character.SetClothesState((int)kind, 1));
                 buttonHalf1.transform.SetRect(pos, 0f, pos += step, 1f);
 
-                var buttonHalf2 = CreateButton(containerX.transform, "1/2", () => chara.SetClothesState((int)kind, 2));
+                var buttonHalf2 = CreateButton(containerX.transform, "½", () => VanillaUI.Character.SetClothesState((int)kind, 2));
                 buttonHalf2.transform.SetRect(pos, 0f, pos += step, 1f);
 
-                var buttonOff = CreateButton(containerX.transform, "Off", () => chara.SetClothesState((int)kind, 3));
+                var buttonOff = CreateButton(containerX.transform, "Off", () => VanillaUI.Character.SetClothesState((int)kind, 3));
                 buttonOff.transform.SetRect(pos, 0f, pos += step, 1f);
             }
         }
 
-        public static void CreateAccessories(int index)
+        public static GameObject CreateAccessories()
         {
-            var container = CreateContainer("AccessoriesContainer", 100, index);
+            return new GameObject();
         }
 
         public static GameObject CreateTitle(string text, int index)
