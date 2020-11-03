@@ -31,16 +31,7 @@ namespace ClothingStateMenuX.Koikatu
         [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
         private static void MakerEntrypoint()
         {
-            var watch = new Stopwatch();
-            watch.Start();
-
-            UI.CreateTitle("Clothing Sets", 0);
-            UI.CreateClothingSets(1);
-            UI.CreateSeparator(2);
-            UI.CreateClothingOptions(VanillaUI.ClothingStateToggles.transform.GetSiblingIndex() + 1);
-
-            watch.Stop();
-            Logger.LogInfo(watch.Elapsed);
+            UI.CreateUI();
         }
 
 #if DEBUG

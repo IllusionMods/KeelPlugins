@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
+using UILib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -8,6 +9,53 @@ namespace ClothingStateMenuX.Koikatu
 {
     public static class UI
     {
+        private static string ID = "(CSMX)";
+
+        public static void CreateUI()
+        {
+            CreateTitle("Clothing Sets", 0);
+            CreateClothingSets(1);
+            CreateSeparator(2);
+            CreateClothingOptions(VanillaUI.ClothingStateToggles.transform.GetSiblingIndex() + 1);
+            MakeSidebarScroll();
+        }
+
+        public static void MakeSidebarScroll()
+        {
+            var parent = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top").transform;
+
+            var elements = new List<Transform>();
+            foreach(Transform t in parent.transform)
+            {
+                if(t.gameObject.name != "SidebarScroll")
+                    elements.Add(t);
+            }
+
+            var scroll = UIUtility.CreateScrollView("SidebarScroll", parent);
+            scroll.horizontal = false;
+            scroll.scrollSensitivity = 18f;
+            scroll.transform.SetRect();
+            scroll.horizontalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+            scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
+            GameObject.DestroyImmediate(scroll.GetComponent<Image>());
+            GameObject.DestroyImmediate(scroll.horizontalScrollbar.gameObject);
+            GameObject.DestroyImmediate(scroll.verticalScrollbar.gameObject);
+
+            var layout = scroll.gameObject.AddComponent<LayoutElement>();
+            layout.minHeight = 9999;
+
+            var vlg = scroll.content.gameObject.AddComponent<VerticalLayoutGroup>();
+            vlg.childControlWidth = true;
+            vlg.childControlHeight = true;
+            vlg.childForceExpandWidth = true;
+            vlg.childForceExpandHeight = false;
+
+            scroll.content.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            foreach(var item in elements)
+                item.SetParent(scroll.content);
+        }
+
         public static void CreateClothingSets(int index)
         {
             var container = CreateContainer(25, index);
@@ -87,22 +135,23 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateTitle(string text, int index)
         {
-            var copyTxt = GameObject.Instantiate(VanillaUI.TitleTextTemplate, VanillaUI.Sidebar.transform);
-            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copyTxt));
-            copyTxt.transform.SetSiblingIndex(index);
-            copyTxt.GetComponentInChildren<TextMeshProUGUI>().text = text;
-            return copyTxt;
+            var copy = GameObject.Instantiate(VanillaUI.TitleTextTemplate, VanillaUI.Sidebar.transform);
+            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
+            copy.name += ID;
+            copy.transform.SetSiblingIndex(index);
+            copy.GetComponentInChildren<TextMeshProUGUI>().text = text;
+            return copy;
         }
 
         public static GameObject CreateText(string text, float fontSize, Transform parent)
         {
             var copy = GameObject.Instantiate(VanillaUI.NormalTextTemplate, parent);
+            copy.name += ID;
 
             var textMesh = copy.GetComponentInChildren<TextMeshProUGUI>();
             textMesh.text = text;
             textMesh.enableAutoSizing = false;
             textMesh.fontSize = fontSize;
-            textMesh.margin = new Vector4(0, 0);
             textMesh.transform.SetRect();
             textMesh.alignment = TextAlignmentOptions.Center;
 
@@ -113,6 +162,7 @@ namespace ClothingStateMenuX.Koikatu
         {
             var copy = GameObject.Instantiate(VanillaUI.SeparatorTemplate, VanillaUI.Sidebar.transform);
             ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
+            copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             return copy;
         }
@@ -121,17 +171,17 @@ namespace ClothingStateMenuX.Koikatu
         {
             var copy = GameObject.Instantiate(VanillaUI.ButtonTemplate, parent);
             ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
+            copy.name += ID;
 
             var textMesh = copy.GetComponentInChildren<TextMeshProUGUI>();
             textMesh.text = text;
             textMesh.enableAutoSizing = false;
             textMesh.fontSize = fontSize;
-            textMesh.margin = new Vector4(0, 0);
             textMesh.transform.SetRect();
 
-            var btnComp = copy.GetComponent<Button>();
-            btnComp.onClick.RemoveAllListeners();
-            btnComp.onClick.AddListener(onClick);
+            var button = copy.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(onClick);
 
             return copy;
         }
@@ -140,6 +190,7 @@ namespace ClothingStateMenuX.Koikatu
         {
             var copy = GameObject.Instantiate(VanillaUI.ButtonContainerTemplate, VanillaUI.Sidebar.transform);
             ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
+            copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             copy.GetComponent<LayoutElement>().minHeight = minHeight;
 
@@ -147,15 +198,6 @@ namespace ClothingStateMenuX.Koikatu
                 GameObject.DestroyImmediate(t.gameObject);
 
             return copy;
-        }
-
-        public static void SetRect(this Transform self, float anchorLeft = 0f, float anchorBottom = 0f, float anchorRight = 1f, float anchorTop = 1f, float offsetLeft = 0f, float offsetBottom = 0f, float offsetRight = 0f, float offsetTop = 0f)
-        {
-            RectTransform rt = self as RectTransform;
-            rt.anchorMin = new Vector2(anchorLeft, anchorBottom);
-            rt.anchorMax = new Vector2(anchorRight, anchorTop);
-            rt.offsetMin = new Vector2(offsetLeft, offsetBottom);
-            rt.offsetMax = new Vector2(offsetRight, offsetTop);
         }
 
         public static void SetColorMultiplier(this Button button, float value)
