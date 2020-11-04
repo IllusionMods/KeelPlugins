@@ -52,8 +52,9 @@ namespace KeelPlugins
                 {
                     foreach(var chara in Utils.GetSelectedCharacters())
                     {
-                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
-                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController");
+                        if(poseTarget == null) throw new ArgumentNullException("Could not find CharaPoseController");
+
                         var propertyCrotch = AccessTools.Property(poseTarget.GetType(), "crotchJointCorrection")
                                              ?? throw new ArgumentNullException("Could not find property CharaPoseController.crotchJointCorrection");
                         propertyCrotch.SetValue(poseTarget, x, null);
@@ -71,8 +72,9 @@ namespace KeelPlugins
                 {
                     foreach(var chara in Utils.GetSelectedCharacters())
                     {
-                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
-                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController");
+                        if(poseTarget == null) throw new ArgumentNullException("Could not find CharaPoseController");
+
                         var propertyLeft = AccessTools.Property(poseTarget.GetType(), "leftFootJointCorrection")
                                            ?? throw new ArgumentNullException("Could not find property CharaPoseController.leftFootJointCorrection");
                         propertyLeft.SetValue(poseTarget, x, null);
@@ -90,11 +92,11 @@ namespace KeelPlugins
                 {
                     foreach(var chara in Utils.GetSelectedCharacters())
                     {
-                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController")
-                                         ?? throw new ArgumentNullException("Could not find CharaPoseController");
+                        var poseTarget = chara.charInfo.gameObject.GetComponent("CharaPoseController");
+                        if(poseTarget == null) throw new ArgumentNullException("Could not find CharaPoseController");
+
                         var propertyRight = AccessTools.Property(poseTarget.GetType(), "rightFootJointCorrection")
-                                            ?? throw new ArgumentNullException(
-                                                "Could not find property CharaPoseController.rightFootJointCorrection");
+                                            ?? throw new ArgumentNullException("Could not find property CharaPoseController.rightFootJointCorrection");
                         propertyRight.SetValue(poseTarget, x, null);
                     }
                 }

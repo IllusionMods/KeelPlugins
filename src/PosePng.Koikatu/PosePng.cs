@@ -19,7 +19,9 @@ namespace KeelPlugins
         private static ConfigEntry<string> SaveFolder { get; set; }
 
         private const string PngExt = ".png";
+#pragma warning disable IDE0052 // Remove unread private members
         private Harmony harmony;
+#pragma warning restore IDE0052 // Remove unread private members
 
         private void Awake()
         {

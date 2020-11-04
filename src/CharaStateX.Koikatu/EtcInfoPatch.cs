@@ -31,6 +31,7 @@ namespace KeelPlugins
             harmony.Patch(target, null, new HarmonyMethod(patch));
         }
 
+#pragma warning disable IDE0051 // Remove unused private members
         private static void Patch_ChangeEyebrowsPtn(object __instance, ref int _no)
         {
             if(Utils.GetIsUpdateInfo(__instance)) return;
@@ -102,5 +103,6 @@ namespace KeelPlugins
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
                 chara.ChangeLipSync(_value);
         }
+#pragma warning restore IDE0051 // Remove unused private members
     }
 }

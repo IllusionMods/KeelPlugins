@@ -9,8 +9,6 @@ namespace KeelPlugins
         private const string MOVEMENTPOINT_NAME = "MovementPoint";
         private const string CENTERPOINT_NAME = "CenterPoint";
 
-        private ChaInfo chara;
-
         private List<GameObject> quickTargets = new List<GameObject>();
         private List<CustomTarget> customTargets = new List<CustomTarget>();
         private CenterPoint centerPoint;
@@ -22,7 +20,6 @@ namespace KeelPlugins
             {
                 targetManager = chara.gameObject.AddComponent<CameraTargetManager>();
                 targetManager.UpdateAllTargets(chara);
-                targetManager.chara = chara;
             }
 
             return targetManager;

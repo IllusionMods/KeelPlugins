@@ -13,7 +13,9 @@ namespace KeelPlugins
         public const string GUID = "keelhauled.lightmanager";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
+#pragma warning disable IDE0052 // Remove unread private members
         private Harmony harmony;
+#pragma warning restore IDE0052 // Remove unread private members
         private static GameObject bepinex;
 
         private void Awake()

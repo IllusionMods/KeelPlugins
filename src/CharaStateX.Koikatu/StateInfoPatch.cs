@@ -33,6 +33,7 @@ namespace KeelPlugins
             harmony.Patch(target, null, new HarmonyMethod(patch));
         }
 
+#pragma warning disable IDE0051 // Remove unused private members
         private static void Patch_OnClickCosType(object __instance, ref int _value)
         {
             if(Utils.GetIsUpdateInfo(__instance)) return;
@@ -120,5 +121,6 @@ namespace KeelPlugins
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
                 chara.SetSonLength(_value);
         }
+#pragma warning restore IDE0051 // Remove unused private members
     }
 }
