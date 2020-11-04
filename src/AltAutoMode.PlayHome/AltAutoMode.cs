@@ -20,19 +20,10 @@ namespace KeelPlugins
         public const string GUID = "keelhauled.altautomode";
         public const string Version = "1.0.1." + BuildNumber.Version;
 
-        private Harmony harmony;
-
         private void Awake()
         {
-            harmony = Harmony.CreateAndPatchAll(typeof(Hooks));
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll();
-        }
-#endif
 
         private class Hooks
         {

@@ -395,12 +395,12 @@ namespace KeelPlugins
             }
         }
 
-        private void FinishRotate2()
-        {
-            var posChangeAmountInfo = (from v in targets select new GuideCommand.EqualsInfo { dicKey = v.Key, oldValue = oldPos[v.Key], newValue = v.Value.changeAmount.pos }).ToArray();
-            var rotChangeAmountInfo = (from v in targets select new GuideCommand.EqualsInfo { dicKey = v.Key, oldValue = oldRot[v.Key], newValue = v.Value.changeAmount.rot }).ToArray();
-            UndoRedoManager.Instance.Push(new MoveRotEqualsCommand(posChangeAmountInfo, rotChangeAmountInfo));
-        }
+        //private void FinishRotate2()
+        //{
+        //    var posChangeAmountInfo = (from v in targets select new GuideCommand.EqualsInfo { dicKey = v.Key, oldValue = oldPos[v.Key], newValue = v.Value.changeAmount.pos }).ToArray();
+        //    var rotChangeAmountInfo = (from v in targets select new GuideCommand.EqualsInfo { dicKey = v.Key, oldValue = oldRot[v.Key], newValue = v.Value.changeAmount.rot }).ToArray();
+        //    UndoRedoManager.Instance.Push(new MoveRotEqualsCommand(posChangeAmountInfo, rotChangeAmountInfo));
+        //}
 
         private void Scale(Vector3 scaleDelta)
         {

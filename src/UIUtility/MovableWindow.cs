@@ -12,9 +12,9 @@ namespace UILib
         private BaseCameraControl _cameraControl;
         private BaseCameraControl.NoCtrlFunc _noControlFunctionCached;
 
-        public event Action<PointerEventData> onPointerDown;
-        public event Action<PointerEventData> onDrag;
-        public event Action<PointerEventData> onPointerUp;
+        public event Action<PointerEventData> PointerDown;
+        public event Action<PointerEventData> Drag;
+        public event Action<PointerEventData> PointerUp;
 
         public RectTransform toDrag;
         public bool preventCameraControl;
@@ -35,7 +35,7 @@ namespace UILib
             _pointerDownCalled = true;
             _cachedDragPosition = toDrag.position;
             _cachedMousePosition = Input.mousePosition;
-            onPointerDown?.Invoke(eventData);
+            PointerDown?.Invoke(eventData);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -43,7 +43,7 @@ namespace UILib
             if(_pointerDownCalled == false)
                 return;
             toDrag.position = _cachedDragPosition + ((Vector2)Input.mousePosition - _cachedMousePosition);
-            onDrag?.Invoke(eventData);
+            Drag?.Invoke(eventData);
         }
 
         public void OnPointerUp(PointerEventData eventData)
@@ -53,7 +53,7 @@ namespace UILib
             if(preventCameraControl && _cameraControl)
                 _cameraControl.NoCtrlCondition = _noControlFunctionCached;
             _pointerDownCalled = false;
-            onPointerUp?.Invoke(eventData);
+            PointerUp?.Invoke(eventData);
         }
     }
 }
