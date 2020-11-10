@@ -17,43 +17,6 @@ namespace ClothingStateMenuX.Koikatu
             CreateClothingSets(1);
             CreateSeparator(2);
             CreateClothingOptions(VanillaUI.ClothingStateToggles.transform.GetSiblingIndex() + 1);
-            MakeSidebarScroll();
-        }
-
-        public static void MakeSidebarScroll()
-        {
-            var parent = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top").transform;
-
-            var elements = new List<Transform>();
-            foreach(Transform t in parent.transform)
-            {
-                if(t.gameObject.name != "SidebarScroll")
-                    elements.Add(t);
-            }
-
-            var scroll = UIUtility.CreateScrollView("SidebarScroll", parent);
-            scroll.horizontal = false;
-            scroll.scrollSensitivity = 18f;
-            scroll.transform.SetRect();
-            scroll.horizontalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
-            scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
-            GameObject.DestroyImmediate(scroll.GetComponent<Image>());
-            GameObject.DestroyImmediate(scroll.horizontalScrollbar.gameObject);
-            GameObject.DestroyImmediate(scroll.verticalScrollbar.gameObject);
-
-            var layout = scroll.gameObject.AddComponent<LayoutElement>();
-            layout.minHeight = 9999;
-
-            var vlg = scroll.content.gameObject.AddComponent<VerticalLayoutGroup>();
-            vlg.childControlWidth = true;
-            vlg.childControlHeight = true;
-            vlg.childForceExpandWidth = true;
-            vlg.childForceExpandHeight = false;
-
-            scroll.content.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-            foreach(var item in elements)
-                item.SetParent(scroll.content);
         }
 
         public static void CreateClothingSets(int index)
@@ -80,7 +43,6 @@ namespace ClothingStateMenuX.Koikatu
             buttons[VanillaUI.OutfitDropDown.value].GetComponent<Button>().SetColorMultiplier(0.7f);
 
             VanillaUI.OutfitDropDown.onValueChanged.AddListener(SetMultipliers);
-            ClothingStateMenu.delete.Add(() => VanillaUI.OutfitDropDown.onValueChanged.RemoveListener(SetMultipliers));
 
             void SetMultipliers(int x)
             {
@@ -136,7 +98,6 @@ namespace ClothingStateMenuX.Koikatu
         public static GameObject CreateTitle(string text, int index)
         {
             var copy = GameObject.Instantiate(VanillaUI.TitleTextTemplate, VanillaUI.Sidebar.transform);
-            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             copy.GetComponentInChildren<TextMeshProUGUI>().text = text;
@@ -161,7 +122,6 @@ namespace ClothingStateMenuX.Koikatu
         public static GameObject CreateSeparator(int index)
         {
             var copy = GameObject.Instantiate(VanillaUI.SeparatorTemplate, VanillaUI.Sidebar.transform);
-            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             return copy;
@@ -170,7 +130,6 @@ namespace ClothingStateMenuX.Koikatu
         public static GameObject CreateButton(string text, float fontSize, UnityAction onClick, Transform parent)
         {
             var copy = GameObject.Instantiate(VanillaUI.ButtonTemplate, parent);
-            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
             copy.name += ID;
 
             var textMesh = copy.GetComponentInChildren<TextMeshProUGUI>();
@@ -189,7 +148,6 @@ namespace ClothingStateMenuX.Koikatu
         public static GameObject CreateContainer(float minHeight, int index)
         {
             var copy = GameObject.Instantiate(VanillaUI.ButtonContainerTemplate, VanillaUI.Sidebar.transform);
-            ClothingStateMenu.delete.Add(() => GameObject.DestroyImmediate(copy));
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             copy.GetComponent<LayoutElement>().minHeight = minHeight;
