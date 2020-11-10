@@ -55,7 +55,7 @@
     <Compile Include="ClothingStateMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI.cs" />
-    <Compile Include="VanillaUI.cs" />
+    <Compile Include="Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
