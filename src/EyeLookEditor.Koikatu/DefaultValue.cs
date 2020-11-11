@@ -1,4 +1,4 @@
-﻿namespace KeelPlugins
+﻿namespace EyeLookEditor.Koikatu
 {
     public static class DefaultValue
     {

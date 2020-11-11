@@ -1,6 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using KeelPlugins.Core.Event;
+using KeelPlugins.Koikatu;
 using ParadoxNotion.Serialization;
 using System;
 using System.IO;
@@ -8,9 +10,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace DefaultParamEditor.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "DefaultParamEditor", Version)]
     public class DefaultParamEditor : BaseUnityPlugin
     {

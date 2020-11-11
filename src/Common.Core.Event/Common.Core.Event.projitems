@@ -6,10 +6,9 @@
     <SharedGUID>2a4067d3-d380-492b-946b-e7f221259439</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.Core.Event</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.Core.Event</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)KeyboardShortcutHotkey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnityEventExtensions.cs" />
   </ItemGroup>
 </Project>

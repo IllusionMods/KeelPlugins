@@ -4,7 +4,7 @@ using KKAPI.Maker;
 using KKAPI.Maker.UI;
 using System;
 
-namespace KeelPlugins
+namespace EyeLookEditor.Koikatu
 {
     [BepInPlugin(GUID, "EyeLookEditor", Version)]
     public class EyeLookEditor : BaseUnityPlugin

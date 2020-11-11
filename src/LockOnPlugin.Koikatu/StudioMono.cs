@@ -1,11 +1,12 @@
 ﻿using HarmonyLib;
+using LockOnPlugin.Core;
 using Studio;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Koikatu
 {
     internal partial class StudioMono : LockOnBase
     {

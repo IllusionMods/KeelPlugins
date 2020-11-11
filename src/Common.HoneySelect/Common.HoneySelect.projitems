@@ -6,9 +6,9 @@
     <SharedGUID>a19f5b25-6318-4323-93c8-b27f0343e582</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.HoneySelect</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.HoneySelect</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)HoneySelectConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
   </ItemGroup>
 </Project>

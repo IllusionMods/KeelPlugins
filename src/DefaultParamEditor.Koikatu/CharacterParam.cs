@@ -3,7 +3,7 @@ using Studio;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace DefaultParamEditor.Koikatu
 {
     internal class CharacterParam
     {

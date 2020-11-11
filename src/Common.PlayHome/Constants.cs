@@ -1,6 +1,6 @@
-﻿namespace KeelPlugins
+﻿namespace KeelPlugins.PlayHome
 {
-    internal static class PlayHomeConstants
+    internal static class Constants
     {
         public const string MainGameProcessName64bit = "PlayHome64bit";
         public const string MainGameProcessName32bit = "PlayHome32bit";

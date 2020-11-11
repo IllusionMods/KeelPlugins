@@ -1,11 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using KeelPlugins.Koikatu;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace StudioAddonLite.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "StudioAddonLite", Version)]
     public class StudioAddonLite : BaseUnityPlugin
     {

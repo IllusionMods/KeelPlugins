@@ -2,7 +2,7 @@
 using BepInEx.Configuration;
 using System.IO;
 
-namespace KeelPlugins
+namespace BetterSceneLoader.Core
 {
     public abstract class BetterSceneLoaderCore : BaseUnityPlugin
     {

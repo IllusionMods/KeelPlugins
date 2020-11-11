@@ -6,7 +6,7 @@
     <SharedGUID>7f30866a-1b8b-40f1-8960-0e203eede225</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>UIUtility</Import_RootNamespace>
+    <Import_RootNamespace>UILib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\DefaultResourcesHS.unity3d" />

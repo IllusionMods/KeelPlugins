@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Core
 {
     internal class KeyboardShortcutHotkey
     {

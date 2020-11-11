@@ -3,7 +3,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace RealPOV.Core
 {
     public abstract class RealPOVCore : BaseUnityPlugin
     {

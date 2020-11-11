@@ -2,7 +2,7 @@
 using Studio;
 using System;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
     internal static class StateInfoPatch
     {

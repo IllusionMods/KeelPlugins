@@ -1,10 +1,11 @@
-﻿using Studio;
+﻿using LightManager.Core;
+using Studio;
 using System.Collections.Generic;
 using UILib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace LightManager.Koikatu
 {
     internal class LightManager : MonoBehaviour
     {

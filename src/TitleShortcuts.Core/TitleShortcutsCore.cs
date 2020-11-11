@@ -3,13 +3,12 @@ using BepInEx.Logging;
 using System;
 using System.Linq;
 
-namespace KeelPlugins
+namespace TitleShortcuts.Core
 {
     public abstract class TitleShortcutsCore : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.titleshortcuts";
         public const string PluginName = "Title Shortcuts";
-        public const string Version = "1.2.1." + BuildNumber.Version;
 
         protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
         protected const string SECTION_GENERAL = "General";

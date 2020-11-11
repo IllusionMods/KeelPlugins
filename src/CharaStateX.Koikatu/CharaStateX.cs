@@ -1,9 +1,10 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using KeelPlugins.Koikatu;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "CharaStateX", Version)]
     public class CharaStateX : BaseUnityPlugin
     {

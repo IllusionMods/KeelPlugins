@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KeelPlugins
+namespace LightManager.Core
 {
     internal class TrackTransform : MonoBehaviour
     {

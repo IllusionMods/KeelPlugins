@@ -2,13 +2,14 @@
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using KeelPlugins.Koikatu;
 using Studio;
 using System;
 using System.IO;
 
-namespace KeelPlugins
+namespace PosePng.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "PosePng", Version)]
     public class PosePng : BaseUnityPlugin
     {

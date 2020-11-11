@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace MakerBridge.Core
 {
     internal class HandlerCore : MonoBehaviour
     {

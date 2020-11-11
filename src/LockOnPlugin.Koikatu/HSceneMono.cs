@@ -1,7 +1,8 @@
 ﻿using IllusionUtility.GetUtility;
+using LockOnPlugin.Core;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Koikatu
 {
     internal partial class HSceneMono : LockOnBase
     {

@@ -13,7 +13,7 @@ using UnityEngine.UI;
 // imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
 
-namespace KeelPlugins
+namespace BetterSceneLoader.Core
 {
     public class SceneLoaderUI
     {
@@ -153,7 +153,7 @@ namespace KeelPlugins
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
-            var texture = PngAssist.ChangeTextureFromByte(Resources.loadicon);
+            var texture = PngAssist.ChangeTextureFromByte(KeelPlugins.Resources.loadicon);
             loadingIcon.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             LoadingIcon.Init(loadingIcon, -5f);
 
@@ -210,7 +210,7 @@ namespace KeelPlugins
                 optionspanel.gameObject.SetActive(false);
             });
 
-            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(PngAssist.ChangeTextureFromByte(Resources.pluginicon), false, x => ShowWindow(x));
+            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(PngAssist.ChangeTextureFromByte(KeelPlugins.Resources.pluginicon), false, x => ShowWindow(x));
 
             UpdateWindow();
             PopulateGrid();

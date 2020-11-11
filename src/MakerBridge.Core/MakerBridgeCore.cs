@@ -4,7 +4,7 @@ using BepInEx.Logging;
 using System.IO;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace MakerBridge.Core
 {
     public abstract class MakerBridgeCore : BaseUnityPlugin
     {

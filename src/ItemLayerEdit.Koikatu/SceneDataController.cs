@@ -6,7 +6,7 @@ using Studio;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeelPlugins
+namespace ItemLayerEdit.Koikatu
 {
     internal class SceneDataController : SceneCustomFunctionController
     {

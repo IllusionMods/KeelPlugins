@@ -3,7 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace CameraFrameMask.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]
     public class CameraFrameMask : BaseUnityPlugin

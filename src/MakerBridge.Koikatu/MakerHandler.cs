@@ -1,9 +1,10 @@
 ﻿using ChaCustom;
+using MakerBridge.Core;
 using System;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace MakerBridge.Koikatu
 {
     internal class MakerHandler : HandlerCore
     {

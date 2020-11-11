@@ -1,11 +1,13 @@
 ﻿using BepInEx;
+using BetterSceneLoader.Core;
 using HarmonyLib;
+using KeelPlugins.Koikatu;
 using System.Linq;
 using UILib;
 
-namespace KeelPlugins
+namespace BetterSceneLoader.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BetterSceneLoaderCore
     {
