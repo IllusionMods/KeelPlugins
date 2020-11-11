@@ -6,9 +6,9 @@
     <SharedGUID>DC98C2A1-07F7-4F11-B78B-5FF885FA0E35</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.AISyoujyo</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.AISyoujyo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AISyoujyoConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
   </ItemGroup>
 </Project>

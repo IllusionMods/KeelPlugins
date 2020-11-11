@@ -1,13 +1,10 @@
-﻿#pragma warning disable 649 // disable never assigned warning
-
-using BepInEx;
-using BepInEx.Logging;
+﻿using BepInEx;
 using ParadoxNotion.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Core
 {
     internal class TargetData
     {
@@ -24,17 +21,17 @@ namespace KeelPlugins
                 {
                     var json = File.ReadAllText(dataPath);
                     data = JSONSerializer.Deserialize<TargetData>(json);
-                    LockOnPluginCore.Logger.Log(LogLevel.Info, "Loading custom target data.");
+                    LockOnPluginCore.Logger.LogInfo("Loading custom target data.");
                 }
                 catch(Exception)
                 {
-                    LockOnPluginCore.Logger.Log(LogLevel.Info, "Failed to deserialize custom target data. Loading default target data.");
+                    LockOnPluginCore.Logger.LogInfo("Failed to deserialize custom target data. Loading default target data.");
                     LoadResourceData();
                 }
             }
             else
             {
-                LockOnPluginCore.Logger.Log(LogLevel.Debug, "Loading default target data.");
+                LockOnPluginCore.Logger.LogInfo("Loading default target data.");
                 LoadResourceData();
             }
         }
@@ -54,6 +51,7 @@ namespace KeelPlugins
             }
         }
 
+#pragma warning disable 649 // disable never assigned warning
         public List<string> quickTargets;
         public List<CustomTarget> customTargets;
         public List<CenterWeigth> centerWeigths;
@@ -72,5 +70,6 @@ namespace KeelPlugins
             public string bone;
             public float weigth;
         }
+#pragma warning restore 649
     }
 }

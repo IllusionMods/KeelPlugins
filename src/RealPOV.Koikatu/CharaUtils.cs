@@ -1,4 +1,4 @@
-﻿namespace KeelPlugins
+﻿namespace RealPOV.Koikatu
 {
     internal static class CharaUtils
     {

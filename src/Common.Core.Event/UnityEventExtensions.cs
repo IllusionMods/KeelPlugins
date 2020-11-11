@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-namespace KeelPlugins
+namespace KeelPlugins.Core.Event
 {
     internal static class UnityEventExtensions
     {

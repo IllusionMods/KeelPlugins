@@ -1,7 +1,7 @@
 ﻿using MessagePack;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace ItemLayerEdit.Koikatu
 {
     internal class LayerDataContainer : MonoBehaviour
     {

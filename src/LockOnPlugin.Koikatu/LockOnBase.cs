@@ -1,9 +1,10 @@
 ﻿using BepInEx.Logging;
+using LockOnPlugin.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Koikatu
 {
     internal abstract class LockOnBase : MonoBehaviour
     {

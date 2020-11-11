@@ -1,6 +1,6 @@
-﻿namespace KeelPlugins
+﻿namespace KeelPlugins.AISyoujyo
 {
-    internal static class AISyoujyoConstants
+    internal static class Constants
     {
         public const string MainGameProcessName = "AI-Syoujyo";
         public const string SteamGameProcessName = "AI-Shoujo";

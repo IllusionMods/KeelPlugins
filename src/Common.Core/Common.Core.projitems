@@ -6,12 +6,15 @@
     <SharedGUID>dd7d6945-54a6-4190-8f49-46a189ee32cd</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.Core</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BuildNumber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurationManagerAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tuple.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnityExtensions.cs" />
   </ItemGroup>
 </Project>

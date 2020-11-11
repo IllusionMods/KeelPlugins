@@ -1,7 +1,8 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using MakerBridge.Core;
 
-namespace KeelPlugins
+namespace MakerBridge.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]
     public class MakerBridge : MakerBridgeCore

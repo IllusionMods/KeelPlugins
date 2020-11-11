@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace SoundEffects.PlayHome
 {
     [BepInPlugin(GUID, PluginName, Version)]
     internal class SoundEffects : BaseUnityPlugin

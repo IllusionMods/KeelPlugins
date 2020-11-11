@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
     internal static class JointInfoPatch
     {

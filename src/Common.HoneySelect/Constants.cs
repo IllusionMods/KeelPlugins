@@ -1,6 +1,6 @@
-﻿namespace KeelPlugins
+﻿namespace KeelPlugins.HoneySelect
 {
-    internal static class HoneySelectConstants
+    internal static class Constants
     {
         public const string MainGameProcessName64bit = "HoneySelect_64";
         public const string MainGameProcessName32bit = "HoneySelect_32";

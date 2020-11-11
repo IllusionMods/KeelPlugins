@@ -5,14 +5,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Manager;
+using KeelPlugins.Koikatu;
+using TitleShortcuts.Core;
 
-namespace KeelPlugins
+namespace TitleShortcuts.Koikatu
 {
-    [BepInProcess(KoikatuConstants.MainGameProcessName)]
-    [BepInProcess(KoikatuConstants.MainGameProcessNameSteam)]
+    [BepInProcess(Constants.MainGameProcessName)]
+    [BepInProcess(Constants.MainGameProcessNameSteam)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
+        public const string Version = "1.2.1." + BuildNumber.Version;
+
         private static ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartUploader { get; set; }

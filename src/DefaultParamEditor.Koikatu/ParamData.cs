@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace KeelPlugins
+namespace DefaultParamEditor.Koikatu
 {
     internal class ParamData
     {

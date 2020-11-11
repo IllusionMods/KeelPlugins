@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Studio;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
     internal static class NeckLookPatch
     {

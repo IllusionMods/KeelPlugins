@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
     internal static class Utils
     {

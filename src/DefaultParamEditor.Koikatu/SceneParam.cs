@@ -4,7 +4,7 @@ using Studio;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KeelPlugins
+namespace DefaultParamEditor.Koikatu
 {
     internal class SceneParam
     {

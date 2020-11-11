@@ -1,10 +1,12 @@
 ﻿using BepInEx;
+using BetterSceneLoader.Core;
 using HarmonyLib;
+using KeelPlugins.HoneySelect2;
 using UILib;
 
-namespace KeelPlugins
+namespace BetterSceneLoader.HoneySelect2
 {
-    [BepInProcess(HoneySelect2Constants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BetterSceneLoaderCore
     {

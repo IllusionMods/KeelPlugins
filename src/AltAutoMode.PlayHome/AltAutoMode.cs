@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using H;
 using HarmonyLib;
+using KeelPlugins.PlayHome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace KeelPlugins
+namespace AltAutoMode.PlayHome
 {
-    [BepInProcess(PlayHomeConstants.MainGameProcessName32bit)]
-    [BepInProcess(PlayHomeConstants.MainGameProcessName64bit)]
+    [BepInProcess(Constants.MainGameProcessName32bit)]
+    [BepInProcess(Constants.MainGameProcessName64bit)]
     [BepInPlugin(GUID, "Alternative Automode", Version)]
     public class AltAutoMode : BaseUnityPlugin
     {

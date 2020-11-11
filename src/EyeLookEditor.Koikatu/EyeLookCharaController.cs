@@ -2,7 +2,7 @@
 using KKAPI;
 using KKAPI.Chara;
 
-namespace KeelPlugins
+namespace EyeLookEditor.Koikatu
 {
     public class EyeLookCharaController : CharaCustomFunctionController
     {

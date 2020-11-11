@@ -1,10 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using HarmonyLib;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Core
 {
     public abstract class LockOnPluginCore : BaseUnityPlugin
     {

@@ -2,8 +2,9 @@
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using HarmonyLib;
+using RealPOV.Core;
 
-namespace KeelPlugins
+namespace RealPOV.PlayHome
 {
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore

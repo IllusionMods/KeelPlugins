@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Threading;
 
-namespace KeelPlugins
+namespace MakerBridge.Core
 {
     internal static class CharaCardWatcher
     {

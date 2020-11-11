@@ -1,19 +1,23 @@
 ﻿using AIProject;
 using BepInEx;
 using BepInEx.Configuration;
+using KeelPlugins.AISyoujyo;
 using System.Collections;
 using System.ComponentModel;
+using TitleShortcuts.Core;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace KeelPlugins
+namespace TitleShortcuts.AISyoujyo
 {
-    [BepInProcess(AISyoujyoConstants.MainGameProcessName)]
-    [BepInProcess(AISyoujyoConstants.SteamGameProcessName)]
+    [BepInProcess(Constants.MainGameProcessName)]
+    [BepInProcess(Constants.SteamGameProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
+        public const string Version = "1.2.1." + BuildNumber.Version;
+
         private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }

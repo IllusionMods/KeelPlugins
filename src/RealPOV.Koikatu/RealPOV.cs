@@ -1,10 +1,11 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using RealPOV.Core;
 using Studio;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace RealPOV.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore

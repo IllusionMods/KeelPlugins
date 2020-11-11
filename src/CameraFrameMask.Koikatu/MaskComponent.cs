@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace KeelPlugins
+namespace CameraFrameMask.Koikatu
 {
     public class MaskComponent : MonoBehaviour
     {

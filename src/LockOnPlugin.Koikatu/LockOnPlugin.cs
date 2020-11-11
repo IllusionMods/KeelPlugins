@@ -1,7 +1,8 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using LockOnPlugin.Core;
 
-namespace KeelPlugins
+namespace LockOnPlugin.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]
     public class LockOnPlugin : LockOnPluginCore

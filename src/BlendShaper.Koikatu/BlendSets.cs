@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace BlendShaper.Koikatu
 {
     internal class BlendSets
     {

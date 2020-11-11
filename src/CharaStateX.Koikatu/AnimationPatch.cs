@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace CharaStateX.Koikatu
 {
     internal static class AnimationPatch
     {

@@ -1,14 +1,16 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using KeelPlugins.Koikatu;
+using KeelPlugins.Core;
 using KKAPI.Studio.SaveLoad;
 using Studio;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace ItemLayerEdit.Koikatu
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "Item Layer Edit", Version)]
     public class ItemLayerEdit : BaseUnityPlugin
     {

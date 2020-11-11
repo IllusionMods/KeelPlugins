@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="ItemLayerEdit.cs" />
     <Compile Include="LayerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

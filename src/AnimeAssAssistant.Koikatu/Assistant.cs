@@ -9,7 +9,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace AnimeAssAssistant.Koikatu
 {
     internal class Assistant : MonoBehaviour
     {

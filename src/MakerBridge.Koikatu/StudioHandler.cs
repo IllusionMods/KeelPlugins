@@ -1,11 +1,12 @@
 ﻿using HarmonyLib;
+using MakerBridge.Core;
 using Studio;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace MakerBridge.Koikatu
 {
     internal class StudioHandler : HandlerCore
     {

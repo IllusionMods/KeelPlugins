@@ -5,7 +5,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace DefaultStudioScene.Koikatu
 {
     [BepInPlugin(GUID, "DefaultStudioScene", Version)]
     public class DefaultStudioScene : BaseUnityPlugin

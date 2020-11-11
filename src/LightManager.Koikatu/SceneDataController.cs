@@ -1,11 +1,12 @@
 ﻿using ExtensibleSaveFormat;
 using KKAPI.Studio.SaveLoad;
 using KKAPI.Utilities;
+using LightManager.Core;
 using MessagePack;
 using Studio;
 using System.Collections.Generic;
 
-namespace KeelPlugins
+namespace LightManager.Koikatu
 {
     internal class SceneDataController : SceneCustomFunctionController
     {

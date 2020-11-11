@@ -1,18 +1,22 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using KeelPlugins.HoneySelect;
 using System;
 using System.Collections;
 using System.ComponentModel;
+using TitleShortcuts.Core;
 using UnityEngine;
 
-namespace KeelPlugins
+namespace TitleShortcuts.HoneySelect
 {
-    [BepInProcess(HoneySelectConstants.MainGameProcessName64bit)]
-    [BepInProcess(HoneySelectConstants.MainGameProcessName32bit)]
+    [BepInProcess(Constants.MainGameProcessName64bit)]
+    [BepInProcess(Constants.MainGameProcessName32bit)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
+        public const string Version = "1.2.1." + BuildNumber.Version;
+
         private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }

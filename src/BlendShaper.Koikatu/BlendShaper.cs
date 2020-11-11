@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using KeelPlugins.Koikatu;
 using Studio;
 using System.Collections.Generic;
 using UILib;
@@ -19,9 +20,9 @@ using UnityEngine.UI;
 //cf_Ohitomi_R
 //o_tang
 
-namespace KeelPlugins
+namespace BlendShaper.Koikatu
 {
-    [BepInProcess(KoikatuConstants.StudioProcessName)]
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "BlendShaper", Version)]
     public class BlendShaper : BaseUnityPlugin
     {

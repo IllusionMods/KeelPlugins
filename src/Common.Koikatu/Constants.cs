@@ -1,6 +1,6 @@
-﻿namespace KeelPlugins
+﻿namespace KeelPlugins.Koikatu
 {
-    internal static class KoikatuConstants
+    internal static class Constants
     {
         public const string MainGameProcessName = "Koikatu";
         public const string MainGameProcessNameSteam = "Koikatsu Party";

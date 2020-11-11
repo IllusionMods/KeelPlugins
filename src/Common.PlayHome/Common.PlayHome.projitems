@@ -6,9 +6,9 @@
     <SharedGUID>624f7c3f-0557-4fa6-a915-c99c5a40a851</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.PlayHome</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.PlayHome</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)PlayHomeConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
   </ItemGroup>
 </Project>

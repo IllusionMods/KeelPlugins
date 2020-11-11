@@ -1,9 +1,10 @@
 using HarmonyLib;
+using RealPOV.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace KeelPlugins
+namespace RealPOV.PlayHome
 {
     internal class PointOfView : MonoBehaviour
     {

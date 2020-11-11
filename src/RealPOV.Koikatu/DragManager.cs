@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace KeelPlugins
+namespace RealPOV.Koikatu
 {
     internal class DragManager : MonoBehaviour
     {
