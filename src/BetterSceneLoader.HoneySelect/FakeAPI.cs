@@ -15,7 +15,7 @@ namespace KKAPI.Studio.UI
     {
         public void SetValue(bool newValue)
         {
-            
+
         }
     }
 }

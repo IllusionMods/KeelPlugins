@@ -1,15 +1,6 @@
-﻿using System;
+﻿using BepInEx;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BepInEx;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using UILib;
-using UnityEngine.Events;
-using HarmonyLib;
-using ChaCustom;
 
 namespace Testing.Koikatu
 {
@@ -20,11 +11,11 @@ namespace Testing.Koikatu
 
         private void Awake()
         {
-            
+
 
             delete.Add(() =>
             {
-                
+
             });
         }
 

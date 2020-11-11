@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using KeelPlugins.Koikatu;
 using KeelPlugins.Core;
+using KeelPlugins.Koikatu;
 using KKAPI.Studio.SaveLoad;
 using Studio;
 using System.Linq;

@@ -286,9 +286,9 @@ namespace BetterSceneLoader.Core
             {
                 LoadingIcon.loadingState[currentCategoryFolder] = true;
 
-                #pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
                 using(var www = new WWW("file:///" + scene.Value))
-                #pragma warning restore CS0618
+#pragma warning restore CS0618
                 {
                     yield return www;
 
