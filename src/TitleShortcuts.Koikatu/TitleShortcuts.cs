@@ -1,12 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
+using KeelPlugins.Koikatu;
+using Manager;
 using System.Collections;
+using TitleShortcuts.Core;
 using UnityEngine;
 using UnityEngine.Events;
-using Manager;
-using KeelPlugins.Koikatu;
-using TitleShortcuts.Core;
 
 namespace TitleShortcuts.Koikatu
 {

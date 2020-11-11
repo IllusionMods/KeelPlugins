@@ -26,17 +26,17 @@ namespace BetterSceneLoader.HoneySelect2
 
         protected override void LoadScene(string path)
         {
-            
+
         }
 
         protected override void SaveScene(string path)
         {
-            
+
         }
 
         protected override void ImportScene(string path)
         {
-            
+
         }
     }
 }
