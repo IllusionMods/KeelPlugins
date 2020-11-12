@@ -11,10 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BuildNumber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurationManagerAttributes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
+    <None Include="$(MSBuildThisFileDirectory)Logger.cs" />
+    <None Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tuple.cs" />
+    <None Include="$(MSBuildThisFileDirectory)Tuple.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnityExtensions.cs" />
   </ItemGroup>
 </Project>
