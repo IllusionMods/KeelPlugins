@@ -1,11 +1,13 @@
 ﻿using BepInEx;
 using KeelPlugins.Koikatu;
+using KKAPI;
 using KKAPI.Maker;
 
 namespace ClothingStateMenuX.Koikatu
 {
     [BepInProcess(Constants.MainGameProcessName)]
     [BepInProcess(Constants.MainGameProcessNameSteam)]
+    [BepInDependency(KoikatuAPI.GUID)]
     [BepInPlugin("keelhauled.clothingstatemenux", "ClothingStateMenuX", Version)]
     public class ClothingStateMenu : BaseUnityPlugin
     {
