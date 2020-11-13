@@ -10,8 +10,6 @@ namespace LockOnPlugin.Core
         public const string GUID = "keelhauled.lockonplugin";
         public const string PluginName = "LockOnPlugin";
 
-        internal static new ManualLogSource Logger;
-
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";
         private const string SECTION_GENERAL = "General";
 
@@ -35,7 +33,7 @@ namespace LockOnPlugin.Core
         protected virtual void Awake()
         {
             bepinex = gameObject;
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
 
             TargetData.LoadData();
 

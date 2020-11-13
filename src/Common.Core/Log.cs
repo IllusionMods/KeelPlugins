@@ -15,4 +15,5 @@ public static class Log
     public static void Fatal(object data) => _logSource.LogFatal(data);
     public static void Message(object data) => _logSource.LogMessage(data);
     public static void Warning(object data) => _logSource.LogWarning(data);
+    public static void Level(BepInEx.Logging.LogLevel level, object data) => _logSource.Log(level, data);
 }

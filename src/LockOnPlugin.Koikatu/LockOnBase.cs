@@ -59,7 +59,7 @@ namespace LockOnPlugin.Koikatu
         {
             if(!lockOnTarget && lockedOn)
             {
-                LockOnPluginCore.Logger.LogDebug("Reset LockOnPlugin");
+                Log.Debug("Reset LockOnPlugin");
                 ResetModState();
             }
 
@@ -321,7 +321,7 @@ namespace LockOnPlugin.Koikatu
 
         protected virtual void CharaSwitch(bool scrollDown = true)
         {
-            LockOnPluginCore.Logger.Log(LogLevel.Info, "Character switching not implemented in this version");
+            Log.Info("Character switching not implemented in this version");
         }
 
         protected virtual void ResetModState()

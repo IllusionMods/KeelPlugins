@@ -116,6 +116,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.HoneySelect2", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-47DA-426C-96D0-2BB0978765E2}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		nuget.config = nuget.config

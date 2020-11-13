@@ -40,7 +40,7 @@ namespace MakerBridge.Koikatu
             }
             else
             {
-                MakerBridgeCore.Log("Select a character to send to maker");
+                MakerBridgeCore.LogMsg("Select a character to send to maker");
             }
         }
 
@@ -49,7 +49,7 @@ namespace MakerBridge.Koikatu
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)
             {
-                MakerBridgeCore.Log("Character received");
+                MakerBridgeCore.LogMsg("Character received");
 
                 foreach(var chara in characters)
                     chara.ChangeChara(path);
@@ -58,7 +58,7 @@ namespace MakerBridge.Koikatu
             }
             else
             {
-                MakerBridgeCore.Log("Select a character before replacing it");
+                MakerBridgeCore.LogMsg("Select a character before replacing it");
             }
         }
 

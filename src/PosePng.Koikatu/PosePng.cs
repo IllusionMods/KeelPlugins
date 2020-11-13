@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
 using Studio;
@@ -15,28 +14,17 @@ namespace PosePng.Koikatu
     {
         public const string GUID = "keelhauled.posepng";
         public const string Version = "1.0.0." + BuildNumber.Version;
-        internal static new ManualLogSource Logger;
 
         private static ConfigEntry<string> SaveFolder { get; set; }
 
         private const string PngExt = ".png";
-#pragma warning disable IDE0052 // Remove unread private members
-        private Harmony harmony;
-#pragma warning restore IDE0052 // Remove unread private members
 
         private void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
             SaveFolder = Config.Bind("", "Save folder path", "");
-            harmony = Harmony.CreateAndPatchAll(typeof(Hooks));
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
-
-#if DEBUG
-        private void OnDestroy()
-        {
-            harmony.UnpatchAll();
-        }
-#endif
 
         private class Hooks
         {
@@ -63,8 +51,8 @@ namespace PosePng.Koikatu
                 }
                 catch(Exception ex)
                 {
-                    Logger.LogMessage("Save path has not been set properly");
-                    Logger.LogError(ex);
+                    Log.Message("Save path has not been set properly");
+                    Log.Error(ex);
                 }
 
                 return false;

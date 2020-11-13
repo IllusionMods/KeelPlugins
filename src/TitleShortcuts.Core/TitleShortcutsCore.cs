@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Logging;
 using System;
 using System.Linq;
 
@@ -19,12 +18,11 @@ namespace TitleShortcuts.Core
         protected virtual string[] PossibleArguments { get; }
 
         protected static TitleShortcutsCore Plugin;
-        protected static new ManualLogSource Logger;
 
         protected virtual void Awake()
         {
             Plugin = this;
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
         }
 
         private static string startupArgument;
