@@ -23,7 +23,7 @@ namespace RealPOV.Core
         internal static bool POVEnabled = false;
         internal static float CurrentFOV = -1;
         internal static Vector3 LookRotation = new Vector3();
-        internal static Camera GameCamera;
+        internal static Camera GameCamera { get; set; }
 
         private static float backupFOV;
         private static float backupNearClip;

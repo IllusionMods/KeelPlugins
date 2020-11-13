@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
 using KeelPlugins.Koikatu;
 using KKAPI.Maker;
 using KKAPI.Maker.UI.Sidebar;
@@ -19,7 +18,6 @@ namespace AnimeAssAssistant.Koikatu
     {
         public const string GUID = "keelhauled.animeassassistant";
         public const string Version = "1.0.0." + BuildNumber.Version;
-        internal static new ManualLogSource Logger;
 
         private const string SECTION_HOTKEY = "Keyboard shortcuts";
         private const string SECTION_FOLDER = "Folders";
@@ -47,7 +45,7 @@ namespace AnimeAssAssistant.Koikatu
 
         private void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
 
             HotkeyNext = Config.Bind(SECTION_HOTKEY, "Select next character", new KeyboardShortcut(KeyCode.RightArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
             HotkeyPrev = Config.Bind(SECTION_HOTKEY, "Select previous character", new KeyboardShortcut(KeyCode.LeftArrow), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));

@@ -23,6 +23,8 @@ namespace CameraFrameMask.Koikatu
 
         public void MaskFrames(int count)
         {
+            Log.Debug($"Masking {count} frames");
+
             if(this.count < count)
                 this.count = count;
         }

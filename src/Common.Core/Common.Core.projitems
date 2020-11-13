@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BuildNumber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurationManagerAttributes.cs" />
-    <None Include="$(MSBuildThisFileDirectory)Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Log.cs" />
     <None Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />

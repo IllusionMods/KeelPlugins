@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Logging;
 using HarmonyLib;
 using KeelPlugins.Core.Event;
 using KeelPlugins.Koikatu;
@@ -18,14 +17,13 @@ namespace DefaultParamEditor.Koikatu
     {
         public const string GUID = "keelhauled.defaultparameditor";
         public const string Version = "1.1.1." + BuildNumber.Version;
-        internal static new ManualLogSource Logger;
 
         private static string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();
 
         private void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
             Harmony.CreateAndPatchAll(typeof(Hooks));
 
             if(File.Exists(savePath))
@@ -37,7 +35,7 @@ namespace DefaultParamEditor.Koikatu
                 }
                 catch(Exception ex)
                 {
-                    Logger.Log(LogLevel.Error, $"[DefaultParamEditor] Failed to load settings from {savePath} with error: " + ex);
+                    Log.Error($"Failed to load settings from {savePath} with error: " + ex);
                     data = new ParamData();
                 }
             }
