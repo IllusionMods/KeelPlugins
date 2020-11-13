@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
@@ -12,13 +11,12 @@ namespace CameraFrameMask.Koikatu
         public const string PluginName = "CameraFrameMask";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
-        private static new ManualLogSource Logger;
         private static MaskComponent maskComponent;
         private static bool inStudio = Paths.ProcessName == "CharaStudio";
 
         private void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
             Harmony.CreateAndPatchAll(GetType());
         }
 

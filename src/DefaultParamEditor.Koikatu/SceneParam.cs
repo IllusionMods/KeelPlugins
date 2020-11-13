@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Studio;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,7 +58,7 @@ namespace DefaultParamEditor.Koikatu
                 _sceneData.fov = Studio.Studio.Instance.cameraCtrl.fieldOfView;
 
                 _sceneData.saved = true;
-                DefaultParamEditor.Logger.Log(LogLevel.Message, "Default scene settings saved");
+                Log.Message("Default scene settings saved");
             }
         }
 
@@ -72,7 +71,7 @@ namespace DefaultParamEditor.Koikatu
         {
             if(_sceneData.saved && Studio.Studio.Instance)
             {
-                DefaultParamEditor.Logger.Log(LogLevel.Info, "Loading scene defaults");
+                Log.Info("Loading scene defaults");
                 SetSceneInfoValues(Studio.Studio.Instance.sceneInfo);
                 Studio.Studio.Instance.systemButtonCtrl.UpdateInfo();
             }
@@ -115,7 +114,7 @@ namespace DefaultParamEditor.Koikatu
             {
                 if(_sceneData.saved)
                 {
-                    DefaultParamEditor.Logger.Log(LogLevel.Debug, "Loading defaults for a new scene");
+                    Log.Debug("Loading defaults for a new scene");
                     SetSceneInfoValues(__instance);
                     Camera.main.nearClipPlane = _sceneData.cameraNearClip;
                     Studio.Studio.Instance.cameraCtrl.fieldOfView = _sceneData.fov;

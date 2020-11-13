@@ -56,14 +56,14 @@ namespace AnimeAssAssistant.Koikatu
         {
             if(string.IsNullOrEmpty(AAA.SearchFolder.Value))
             {
-                AAA.Logger.LogMessage("Search folder has not been set, please set it in ConfigManager");
+                Log.Message("Search folder has not been set, please set it in ConfigManager");
                 return;
             }
 
             var files = Directory.GetFiles(AAA.SearchFolder.Value, "*.png");
             if(files.Length == 0)
             {
-                AAA.Logger.LogMessage("Search folder is empty");
+                Log.Message("Search folder is empty");
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace AnimeAssAssistant.Koikatu
             {
                 RecycleBinUtil.MoveToRecycleBin(currentCharacter);
                 loadedCharacters.Remove(currentCharacter);
-                AAA.Logger.LogInfo($"{currentCharacter} moved to the recycle bin.");
+                Log.Info($"{currentCharacter} moved to the recycle bin.");
                 LoadRandomChara();
             }
         }
@@ -87,7 +87,7 @@ namespace AnimeAssAssistant.Koikatu
         {
             if(string.IsNullOrEmpty(AAA.SaveFolder.Value))
             {
-                AAA.Logger.LogMessage("Save folder has not been set, please set it in ConfigManager");
+                Log.Message("Save folder has not been set, please set it in ConfigManager");
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace AnimeAssAssistant.Koikatu
                 var dest = Path.Combine(AAA.SaveFolder.Value, Path.GetFileName(currentCharacter));
                 File.Move(currentCharacter, dest);
                 loadedCharacters.Remove(currentCharacter);
-                AAA.Logger.LogInfo($"{currentCharacter} moved to save folder.");
+                Log.Info($"{currentCharacter} moved to save folder.");
                 LoadRandomChara();
             }
         }
@@ -147,7 +147,7 @@ namespace AnimeAssAssistant.Koikatu
             if(chaCtrl.chaFile.parameter.sex != originalSex)
             {
                 chaCtrl.chaFile.parameter.sex = originalSex;
-                AAA.Logger.LogMessage("Warning: The character's sex has been changed to match the editor mode.");
+                Log.Message("Warning: The character's sex has been changed to match the editor mode.");
             }
 
             chaCtrl.ChangeCoordinateType(true);
