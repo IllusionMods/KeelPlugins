@@ -21,17 +21,17 @@ namespace LockOnPlugin.Core
                 {
                     var json = File.ReadAllText(dataPath);
                     data = JSONSerializer.Deserialize<TargetData>(json);
-                    LockOnPluginCore.Logger.LogInfo("Loading custom target data.");
+                    Log.Info("Loading custom target data.");
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
-                    LockOnPluginCore.Logger.LogInfo("Failed to deserialize custom target data. Loading default target data.");
+                    Log.Info($"Failed to deserialize custom target data. Loading default target data.\n{ex}");
                     LoadResourceData();
                 }
             }
             else
             {
-                LockOnPluginCore.Logger.LogInfo("Loading default target data.");
+                Log.Debug("Loading default target data.");
                 LoadResourceData();
             }
         }

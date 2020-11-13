@@ -65,14 +65,14 @@ namespace MakerBridge.Koikatu
             if(chaCtrl.chaFile.parameter.sex != originalSex)
             {
                 chaCtrl.chaFile.parameter.sex = originalSex;
-                MakerBridgeCore.Log("Warning: The character's sex has been changed to match the editor mode.");
+                MakerBridgeCore.LogMsg("Warning: The character's sex has been changed to match the editor mode.");
             }
 
             chaCtrl.ChangeCoordinateType(true);
             chaCtrl.Reload(!loadCoord, !loadFace && !loadCoord, !loadHair, !loadBody);
             CustomBase.Instance.updateCustomUI = true;
 
-            MakerBridgeCore.Log("Character received");
+            MakerBridgeCore.LogMsg("Character received");
         }
     }
 }

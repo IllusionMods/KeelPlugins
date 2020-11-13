@@ -10,7 +10,6 @@ namespace MakerBridge.Core
     {
         public const string GUID = "keelhauled.makerbridge";
         public const string PluginName = "MakerBridge";
-        internal static new ManualLogSource Logger;
 
         private const string DESCRIPTION_SENDCHARA = "Sends the selected character to the other open koikatu application.";
         private const string DESCRIPTION_SHOWMSG = "Show on screen messages about things the plugin is doing.";
@@ -24,7 +23,7 @@ namespace MakerBridge.Core
 
         protected virtual void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
             bepinex = gameObject;
 
             SendChara = Config.Bind("Keyboard shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
@@ -35,9 +34,9 @@ namespace MakerBridge.Core
             OtherCardPath = Path.Combine(tempFolder, "makerbridge2.png");
         }
 
-        internal static void Log(object data)
+        internal static void LogMsg(object data)
         {
-            Logger.Log(ShowMessages.Value ? LogLevel.Message : LogLevel.Info, data);
+            Log.Level(ShowMessages.Value ? LogLevel.Message : LogLevel.Info, data);
         }
     }
 }

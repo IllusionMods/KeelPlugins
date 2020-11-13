@@ -114,7 +114,7 @@ namespace TitleShortcuts.Koikatu
         {
             if(!FindObjectOfType<ConfigScene>())
             {
-                Logger.LogMessage(msg);
+                Log.Message(msg);
                 titleScene = null;
                 action();
                 autostartFinished = true;

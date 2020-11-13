@@ -145,12 +145,12 @@ namespace LockOnPlugin.Core
                     }
                     else
                     {
-                        LockOnPluginCore.Logger.LogInfo($"CustomTarget '{data.target}' failed");
+                        Log.Info($"CustomTarget '{data.target}' failed");
                     }
                 }
                 else
                 {
-                    LockOnPluginCore.Logger.LogDebug($"CustomTarget '{data.target}' skipped because it is not in use");
+                    Log.Debug($"CustomTarget '{data.target}' skipped because it is not in use");
                 }
             }
 

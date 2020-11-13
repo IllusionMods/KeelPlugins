@@ -18,15 +18,13 @@ namespace UnityLogFilter
         public static void Patch(AssemblyDefinition ass) { }
 
         private static Harmony Harmony;
-        private static ManualLogSource Logger;
-
         private static List<Regex> filters = new List<Regex>();
         private static string filterFilePath = Path.Combine(BepInEx.Paths.ConfigPath, "UnityLogFilter.txt");
 
         public static void Finish()
         {
             Harmony = new Harmony(nameof(UnityLogFilter));
-            Logger = BepInEx.Logging.Logger.CreateLogSource(nameof(UnityLogFilter));
+            Log.SetLogSource(Logger.CreateLogSource(nameof(UnityLogFilter)));
 
             if(File.Exists(filterFilePath))
             {
@@ -35,15 +33,15 @@ namespace UnityLogFilter
                     if(VerifyRegex(line))
                         filters.Add(new Regex(line));
                     else
-                        Logger.LogWarning($"'{line}' is not a valid regex pattern");
+                        Log.Warning($"'{line}' is not a valid regex pattern");
                 }
 
-                Logger.LogInfo($"Loaded {filters.Count} filter{(filters.Count == 1 ? "" : "s")}");
+                Log.Info($"Loaded {filters.Count} filter{(filters.Count == 1 ? "" : "s")}");
             }
             else
             {
                 File.Create(filterFilePath);
-                Logger.LogInfo($"{filterFilePath} created, add regular expressions to it.");
+                Log.Info($"{filterFilePath} created, add regular expressions to it.");
             }
 
             Harmony.Patch(AccessTools.Method(typeof(Chainloader), nameof(Chainloader.Initialize)),
