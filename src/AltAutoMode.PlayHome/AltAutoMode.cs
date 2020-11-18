@@ -5,11 +5,13 @@ using KeelPlugins.PlayHome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
+
+[assembly: AssemblyFileVersion(AltAutoMode.PlayHome.AltAutoMode.Version)]
 
 namespace AltAutoMode.PlayHome
 {
@@ -47,12 +49,12 @@ namespace AltAutoMode.PlayHome
                     if(speed == 0.1f)
                     {
                         autoChangeSpeed.SetValue(0.7f);
-                        random = Random.Range(2f, 2.5f);
+                        random = UnityEngine.Random.Range(2f, 2.5f);
                     }
                     else
                     {
                         autoChangeSpeed.SetValue(0.1f);
-                        random = Random.Range(1f, 10f);
+                        random = UnityEngine.Random.Range(1f, 10f);
                     }
                 }
 

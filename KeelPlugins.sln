@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleShortcuts.Koikatu", "s
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UIUtility", "src\UIUtility\UIUtility.shproj", "{7F30866A-1B8B-40F1-8960-0E203EEDE225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltAutoMode.PlayHome", "src\AltAutoMode.PlayHome\AltAutoMode.PlayHome.csproj", "{97B9EDBF-3152-47DB-8240-69818972E177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AltAutoMode.PlayHome", "src\AltAutoMode.PlayHome\AltAutoMode.PlayHome.csproj", "{97B9EDBF-3152-47DB-8240-69818972E177}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.PlayHome", "src\Common.PlayHome\Common.PlayHome.shproj", "{624F7C3F-0557-4FA6-A915-C99C5A40A851}"
 EndProject
@@ -187,8 +187,8 @@ Global
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\UIUtility\UIUtility.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 4
 		src\Common.Harmony\Common.Harmony.projitems*{963ebc59-aeaa-46b8-bb30-2a893e742caa}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 4
-		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 5
+		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
 		src\Common.Koikatu\Common.Koikatu.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 4
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{a19f5b25-6318-4323-93c8-b27f0343e582}*SharedItemsImports = 13
