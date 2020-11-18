@@ -4,6 +4,8 @@ using HarmonyLib;
 using KeelPlugins.Koikatu;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(StudioAddonLite.Koikatu.StudioAddonLite.Version)]
+
 namespace StudioAddonLite.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]

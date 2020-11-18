@@ -5,6 +5,8 @@ using KeelPlugins.HoneySelect;
 using System.Linq;
 using UILib;
 
+[assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.HoneySelect.BetterSceneLoader.Version)]
+
 namespace BetterSceneLoader.HoneySelect
 {
     [BepInProcess(Constants.StudioNeoProcessName32bit)]

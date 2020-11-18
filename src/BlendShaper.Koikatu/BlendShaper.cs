@@ -6,6 +6,8 @@ using UILib;
 using UnityEngine;
 using UnityEngine.UI;
 
+[assembly: System.Reflection.AssemblyFileVersion(BlendShaper.Koikatu.BlendShaper.Version)]
+
 //cf_O_canine
 //cf_O_face
 //cf_O_mayuge

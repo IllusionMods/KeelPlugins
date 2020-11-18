@@ -5,6 +5,8 @@ using KeelPlugins.Koikatu;
 using System.Linq;
 using UILib;
 
+[assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.Koikatu.BetterSceneLoader.Version)]
+
 namespace BetterSceneLoader.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]

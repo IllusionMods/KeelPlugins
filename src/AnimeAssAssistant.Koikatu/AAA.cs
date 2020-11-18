@@ -6,6 +6,8 @@ using KKAPI.Maker.UI.Sidebar;
 using UniRx;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(AnimeAssAssistant.Koikatu.AAA.Version)]
+
 namespace AnimeAssAssistant.Koikatu
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]

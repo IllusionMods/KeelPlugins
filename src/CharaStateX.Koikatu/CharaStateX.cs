@@ -2,6 +2,8 @@
 using HarmonyLib;
 using KeelPlugins.Koikatu;
 
+[assembly: System.Reflection.AssemblyFileVersion(CharaStateX.Koikatu.CharaStateX.Version)]
+
 namespace CharaStateX.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]

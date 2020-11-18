@@ -4,6 +4,8 @@ using HarmonyLib;
 using KeelPlugins.HoneySelect2;
 using UILib;
 
+[assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.HoneySelect2.BetterSceneLoader.Version)]
+
 namespace BetterSceneLoader.HoneySelect2
 {
     [BepInProcess(Constants.StudioProcessName)]

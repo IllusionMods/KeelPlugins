@@ -4,6 +4,8 @@ using KKAPI.Maker;
 using KKAPI.Maker.UI;
 using System;
 
+[assembly: System.Reflection.AssemblyFileVersion(EyeLookEditor.Koikatu.EyeLookEditor.Version)]
+
 namespace EyeLookEditor.Koikatu
 {
     [BepInPlugin(GUID, "EyeLookEditor", Version)]

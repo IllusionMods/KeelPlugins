@@ -16,6 +16,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />
     <None Include="$(MSBuildThisFileDirectory)Tuple.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UnityExtensions.cs" />
   </ItemGroup>
 </Project>

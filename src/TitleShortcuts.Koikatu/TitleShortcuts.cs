@@ -8,6 +8,8 @@ using TitleShortcuts.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
+[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.Koikatu.TitleShortcuts.Version)]
+
 namespace TitleShortcuts.Koikatu
 {
     [BepInProcess(Constants.MainGameProcessName)]

@@ -4,6 +4,8 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using RealPOV.Core;
 
+[assembly: System.Reflection.AssemblyFileVersion(RealPOV.PlayHome.RealPOV.Version)]
+
 namespace RealPOV.PlayHome
 {
     [BepInPlugin(GUID, PluginName, Version)]

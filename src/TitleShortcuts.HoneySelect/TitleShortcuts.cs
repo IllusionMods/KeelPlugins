@@ -8,6 +8,8 @@ using System.ComponentModel;
 using TitleShortcuts.Core;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.HoneySelect.TitleShortcuts.Version)]
+
 namespace TitleShortcuts.HoneySelect
 {
     [BepInProcess(Constants.MainGameProcessName64bit)]

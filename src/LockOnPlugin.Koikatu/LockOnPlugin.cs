@@ -2,6 +2,8 @@
 using HarmonyLib;
 using LockOnPlugin.Core;
 
+[assembly: System.Reflection.AssemblyFileVersion(LockOnPlugin.Koikatu.LockOnPlugin.Version)]
+
 namespace LockOnPlugin.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]

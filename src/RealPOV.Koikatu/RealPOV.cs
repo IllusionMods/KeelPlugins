@@ -5,6 +5,8 @@ using Studio;
 using System.Linq;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(RealPOV.Koikatu.RealPOV.Version)]
+
 namespace RealPOV.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]

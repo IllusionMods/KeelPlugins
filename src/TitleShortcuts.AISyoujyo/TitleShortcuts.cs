@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.AISyoujyo.TitleShortcuts.Version)]
+
 namespace TitleShortcuts.AISyoujyo
 {
     [BepInProcess(Constants.MainGameProcessName)]

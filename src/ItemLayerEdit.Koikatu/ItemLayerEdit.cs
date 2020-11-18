@@ -7,6 +7,8 @@ using Studio;
 using System.Linq;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(ItemLayerEdit.Koikatu.ItemLayerEdit.Version)]
+
 namespace ItemLayerEdit.Koikatu
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]

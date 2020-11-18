@@ -2,6 +2,8 @@
 using HarmonyLib;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(CameraFrameMask.Koikatu.CameraFrameMask.Version)]
+
 namespace CameraFrameMask.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]
