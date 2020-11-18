@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
@@ -20,7 +22,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27\lib\net35\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\lib\net35\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -35,8 +37,8 @@
       <HintPath>..\..\packages\ExtensibleSaveFormat.Koikatu.16.0.0\lib\net35\ExtensibleSaveFormat.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="KKAPI, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionModdingAPI.KKAPI.1.13.1\lib\net35\KKAPI.dll</HintPath>
+    <Reference Include="KKAPI, Version=1.13.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IllusionModdingAPI.KKAPI.1.13.4\lib\net35\KKAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -46,7 +48,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2\lib\net35\UnityEngine.dll</HintPath>
+      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\lib\net35\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -70,4 +72,13 @@
   <PropertyGroup>
     <PostBuildEvent>IF EXIST "$(SolutionDir)PostBuild.ps1" powershell "$(SolutionDir)PostBuild.ps1" "KK" "$(TargetPath)" "$(ProjectPath)" "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets'))" />
+    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" />
 </Project>

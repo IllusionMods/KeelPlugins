@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <Import Project="..\BuildSettings.Common.props" />
   <ItemGroup>
@@ -45,7 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2\lib\net35\UnityEngine.dll</HintPath>
+      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\lib\net35\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -61,4 +63,11 @@
   <PropertyGroup>
     <PostBuildEvent>IF EXIST "$(SolutionDir)PostBuild.ps1" powershell "$(SolutionDir)PostBuild.ps1" "GENERICPATCHER" "$(TargetPath)" "$(ProjectPath)" "$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets'))" />
+  </Target>
 </Project>
