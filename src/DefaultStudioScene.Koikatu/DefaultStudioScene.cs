@@ -5,6 +5,8 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(DefaultStudioScene.Koikatu.DefaultStudioScene.Version)]
+
 namespace DefaultStudioScene.Koikatu
 {
     [BepInPlugin(GUID, "DefaultStudioScene", Version)]

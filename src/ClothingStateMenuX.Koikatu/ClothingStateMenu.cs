@@ -3,6 +3,8 @@ using KeelPlugins.Koikatu;
 using KKAPI;
 using KKAPI.Maker;
 
+[assembly: System.Reflection.AssemblyFileVersion(ClothingStateMenuX.Koikatu.ClothingStateMenu.Version)]
+
 namespace ClothingStateMenuX.Koikatu
 {
     [BepInProcess(Constants.MainGameProcessName)]

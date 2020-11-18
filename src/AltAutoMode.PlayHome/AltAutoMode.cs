@@ -5,13 +5,12 @@ using KeelPlugins.PlayHome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[assembly: AssemblyFileVersion(AltAutoMode.PlayHome.AltAutoMode.Version)]
+[assembly: System.Reflection.AssemblyFileVersion(AltAutoMode.PlayHome.AltAutoMode.Version)]
 
 namespace AltAutoMode.PlayHome
 {

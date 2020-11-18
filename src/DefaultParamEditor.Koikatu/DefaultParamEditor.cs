@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[assembly: System.Reflection.AssemblyFileVersion(DefaultParamEditor.Koikatu.DefaultParamEditor.Version)]
+
 namespace DefaultParamEditor.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]

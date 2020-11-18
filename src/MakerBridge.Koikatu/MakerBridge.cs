@@ -2,6 +2,8 @@
 using HarmonyLib;
 using MakerBridge.Core;
 
+[assembly: System.Reflection.AssemblyFileVersion(MakerBridge.Koikatu.MakerBridge.Version)]
+
 namespace MakerBridge.Koikatu
 {
     [BepInPlugin(GUID, PluginName, Version)]

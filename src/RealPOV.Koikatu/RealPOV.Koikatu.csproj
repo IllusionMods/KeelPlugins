@@ -1,78 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6C012F1-F0BC-4B65-999D-8939DA4B2DD5}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealPOV.Koikatu</RootNamespace>
-    <AssemblyName>RealPOV.Koikatu</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net35</TargetFramework>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
-  <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.BepInEx.Harmony.2.0.6\lib\net35\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\lib\net35\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="BepInEx, Version=5.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.BepInEx.5.3.0\lib\net35\BepInEx.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="BepInEx.Harmony, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.BepInEx.Harmony.2.0.6\lib\net35\BepInEx.Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\lib\net35\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2.2\lib\net35\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CharaUtils.cs" />
-    <Compile Include="DragManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RealPOV.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\BepInEx.Analyzers.1.0.3\analyzers\dotnet\cs\BepInEx.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\..\packages\BepInEx.Analyzers.1.0.3\analyzers\dotnet\cs\BepInEx.Analyzers.dll" />
-    <Analyzer Include="..\..\packages\Microsoft.Unity.Analyzers.1.8.2\analyzers\dotnet\cs\Microsoft.Unity.Analyzers.dll" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
+    <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
+    <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" version="2019.4.27.2" />
+    <PackageReference Include="IllusionLibs.Koikatu.UnityEngine" version="5.6.2.2" />
+    <PackageReference Include="IllusionLibs.Koikatu.UnityEngine.UI" version="5.6.2.2" />
+    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.8.2" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>IF EXIST "$(SolutionDir)PostBuild.ps1" powershell "$(SolutionDir)PostBuild.ps1" "KK" "$(TargetPath)" "$(ProjectPath)" "$(ConfigurationName)"</PostBuildEvent>
-  </PropertyGroup>
-  <Import Project="..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.Assembly-CSharp.2019.4.27.2\build\IllusionLibs.Koikatu.Assembly-CSharp.targets'))" />
-    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets'))" />
-    <Error Condition="!Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.UI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.UI.targets'))" />
-  </Target>
-  <Import Project="..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.targets')" />
-  <Import Project="..\..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.UI.targets" Condition="Exists('..\..\packages\IllusionLibs.Koikatu.UnityEngine.UI.5.6.2.2\build\IllusionLibs.Koikatu.UnityEngine.UI.targets')" />
 </Project>

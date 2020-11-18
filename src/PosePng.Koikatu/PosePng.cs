@@ -6,6 +6,8 @@ using Studio;
 using System;
 using System.IO;
 
+[assembly: System.Reflection.AssemblyFileVersion(PosePng.Koikatu.PosePng.Version)]
+
 namespace PosePng.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]

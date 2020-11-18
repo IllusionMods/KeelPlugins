@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(SoundEffects.PlayHome.SoundEffects.Version)]
+
 namespace SoundEffects.PlayHome
 {
     [BepInPlugin(GUID, PluginName, Version)]
