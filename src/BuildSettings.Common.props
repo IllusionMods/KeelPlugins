@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <DebugType>embedded</DebugType>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+</Project>

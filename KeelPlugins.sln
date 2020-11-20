@@ -75,6 +75,15 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TitleShortcuts.Core", "src\TitleShortcuts.Core\TitleShortcuts.Core.shproj", "{4D175C74-23CC-45DB-8225-537DB7E33142}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0FD-465F-93F2-D73BD193AC86}"
+	ProjectSection(SolutionItems) = preProject
+		src\BuildSettings.AiSyoujyo.props = src\BuildSettings.AiSyoujyo.props
+		src\BuildSettings.Common.props = src\BuildSettings.Common.props
+		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
+		src\BuildSettings.HoneySelect2.props = src\BuildSettings.HoneySelect2.props
+		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
+		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
+		src\SkipAllRefs.targets = src\SkipAllRefs.targets
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
 EndProject
