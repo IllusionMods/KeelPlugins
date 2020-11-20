@@ -75,9 +75,6 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TitleShortcuts.Core", "src\TitleShortcuts.Core\TitleShortcuts.Core.shproj", "{4D175C74-23CC-45DB-8225-537DB7E33142}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0FD-465F-93F2-D73BD193AC86}"
-	ProjectSection(SolutionItems) = preProject
-		src\SkipRefs.targets = src\SkipRefs.targets
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
 EndProject
@@ -116,8 +113,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-4
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothingStateMenuX.Koikatu", "src\ClothingStateMenuX.Koikatu\ClothingStateMenuX.Koikatu.csproj", "{F927C67B-778F-4144-92E4-2AE745790893}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Harmony", "src\Common.Harmony\Common.Harmony.shproj", "{963EBC59-AEAA-46B8-BB30-2A893E742CAA}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Unity", "src\Common.Unity\Common.Unity.shproj", "{50994AF9-8369-47A9-A33A-37650E4B454E}"
 EndProject
@@ -184,7 +179,6 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
-		src\Common.Harmony\Common.Harmony.projitems*{963ebc59-aeaa-46b8-bb30-2a893e742caa}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 5
 		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 5
@@ -364,7 +358,6 @@ Global
 		{8B9E7744-8345-46E9-96B7-13B0269819CC} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{F452236D-9FF5-4897-8EE8-DA0C1D49974D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{F927C67B-778F-4144-92E4-2AE745790893} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{963EBC59-AEAA-46B8-BB30-2A893E742CAA} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{50994AF9-8369-47A9-A33A-37650E4B454E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{AFC4EE66-2891-439A-925A-BAF22553E1BA} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
