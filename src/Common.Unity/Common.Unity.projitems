@@ -6,9 +6,10 @@
     <SharedGUID>50994af9-8369-47a9-a33a-37650e4b454e</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Common.Unity</Import_RootNamespace>
+    <Import_RootNamespace>KeelPlugins.Unity</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)UnityEventExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnityExtensions.cs" />
   </ItemGroup>
 </Project>

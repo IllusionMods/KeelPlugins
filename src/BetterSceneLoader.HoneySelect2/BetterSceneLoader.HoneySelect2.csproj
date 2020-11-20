@@ -21,4 +21,5 @@
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\UIUtility\UIUtility.projitems" Label="Shared" />
   <Import Project="..\Common.HoneySelect2\Common.HoneySelect2.projitems" Label="Shared" />
+  <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
 </Project>

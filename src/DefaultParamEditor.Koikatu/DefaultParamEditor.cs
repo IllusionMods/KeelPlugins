@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using KeelPlugins.Core.Event;
 using KeelPlugins.Koikatu;
 using ParadoxNotion.Serialization;
 using System;

@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
+using KeelPlugins.Utils;
 using UnityEngine;
 
 namespace LockOnPlugin.Core

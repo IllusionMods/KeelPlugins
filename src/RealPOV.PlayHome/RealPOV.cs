@@ -2,6 +2,7 @@
 using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using HarmonyLib;
+using KeelPlugins.Utils;
 using RealPOV.Core;
 
 [assembly: System.Reflection.AssemblyFileVersion(RealPOV.PlayHome.RealPOV.Version)]

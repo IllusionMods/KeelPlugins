@@ -10,11 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BuildNumber.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConfigurationManagerAttributes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Log.cs" />
-    <None Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />
-    <None Include="$(MSBuildThisFileDirectory)Tuple.cs" />
   </ItemGroup>
 </Project>
