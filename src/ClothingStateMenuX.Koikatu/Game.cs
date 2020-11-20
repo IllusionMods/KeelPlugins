@@ -1,6 +1,6 @@
 ﻿using ChaCustom;
 using HarmonyLib;
-using KeelPlugins.Core;
+using KeelPlugins.Utils;
 using TMPro;
 using UnityEngine;
 

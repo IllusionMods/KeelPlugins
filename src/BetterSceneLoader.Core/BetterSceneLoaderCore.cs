@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using KeelPlugins.Utils;
 using System.IO;
 
 namespace BetterSceneLoader.Core

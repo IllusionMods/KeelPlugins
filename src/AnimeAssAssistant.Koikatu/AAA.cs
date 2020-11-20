@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using KeelPlugins.Koikatu;
+using KeelPlugins.Utils;
 using KKAPI.Maker;
 using KKAPI.Maker.UI.Sidebar;
 using UniRx;

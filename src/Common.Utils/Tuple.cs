@@ -1,4 +1,4 @@
-﻿namespace KeelPlugins.Core
+﻿namespace KeelPlugins.Utils
 {
     public struct Tuple<T1, T2>
     {

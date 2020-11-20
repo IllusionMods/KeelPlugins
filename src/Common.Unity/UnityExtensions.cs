@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace KeelPlugins.Core
+﻿namespace UnityEngine
 {
     internal static class UnityExtensions
     {

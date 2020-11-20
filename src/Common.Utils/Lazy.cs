@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeelPlugins.Core
+namespace KeelPlugins.Utils
 {
     public class Lazy<T>
     {

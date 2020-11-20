@@ -14,5 +14,5 @@
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.Core.Event\Common.Core.Event.projitems" Label="Shared" />
+  <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
 </Project>

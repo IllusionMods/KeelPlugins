@@ -3,7 +3,7 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace KeelPlugins.Core
+namespace KeelPlugins.Utils
 {
     public class EventFactory
     {

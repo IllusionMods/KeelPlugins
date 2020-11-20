@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace KeelPlugins.Core
+namespace KeelPlugins.Utils
 {
     /// <summary>
     /// Multi-Key Dictionary Class
