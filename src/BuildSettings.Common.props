@@ -3,5 +3,6 @@
     <DebugType>embedded</DebugType>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
 </Project>
