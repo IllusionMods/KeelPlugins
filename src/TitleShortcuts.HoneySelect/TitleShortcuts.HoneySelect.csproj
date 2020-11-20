@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net35</TargetFramework>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+  <Import Project="..\BuildSettings.Common.props" />
+  <Import Project="..\BuildSettings.HoneySelect.props" />
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
     <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
