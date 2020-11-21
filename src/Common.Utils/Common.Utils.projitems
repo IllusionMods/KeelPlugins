@@ -9,7 +9,6 @@
     <Import_RootNamespace>KeelPlugins.Utils</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
     <None Include="$(MSBuildThisFileDirectory)Tuple.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -127,6 +127,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Unity", "src\Common.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Utils", "src\Common.Utils\Common.Utils.shproj", "{AFC4EE66-2891-439A-925A-BAF22553E1BA}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Harmony", "src\Common.Harmony\Common.Harmony.shproj", "{81E73402-3A7E-4ED3-B990-33C1B31FC205}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -177,6 +179,7 @@ Global
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
+		src\Common.Harmony\Common.Harmony.projitems*{81e73402-3a7e-4ed3-b990-33c1b31fc205}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 5
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 5
 		src\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
@@ -369,6 +372,7 @@ Global
 		{F927C67B-778F-4144-92E4-2AE745790893} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{50994AF9-8369-47A9-A33A-37650E4B454E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{AFC4EE66-2891-439A-925A-BAF22553E1BA} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{81E73402-3A7E-4ED3-B990-33C1B31FC205} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
