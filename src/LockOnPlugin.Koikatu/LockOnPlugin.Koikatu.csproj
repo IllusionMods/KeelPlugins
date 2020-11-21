@@ -2,6 +2,12 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
+    <None Remove="LockOnPluginData.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LockOnPluginData.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
     <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
     <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" version="2019.4.27.2" />
