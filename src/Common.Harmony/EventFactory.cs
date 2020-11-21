@@ -3,24 +3,24 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace KeelPlugins.Utils
+namespace KeelPlugins.Harmony
 {
-    public class EventFactory
+    public static class EventFactory
     {
         private static Harmony harmony = new Harmony("KeelPlugins.EventFactory");
         private static MultiKeyDictionary<Type, string, MethodInfo> methods = new MultiKeyDictionary<Type, string, MethodInfo>();
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void AddAccessor(Action @event, Action value, Type type, string name, MethodInfo patch)
+        public static void AddAccessor(Action e, Action value, Type type, string name, MethodInfo patch)
         {
             LazyPatch(type, name, patch);
-            @event += value;
+            e += value;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void RemoveAccessor(Action @event, Action value)
+        public static void RemoveAccessor(Action e, Action value)
         {
-            @event -= value;
+            e -= value;
         }
 
         private static void LazyPatch(Type type, string name, MethodInfo patch)
