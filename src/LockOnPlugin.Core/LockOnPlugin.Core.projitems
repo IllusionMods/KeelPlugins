@@ -14,7 +14,4 @@
     <Compile Include="$(MSBuildThisFileDirectory)TargetData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TargetManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)LockOnPluginData.json" />
-  </ItemGroup>
 </Project>
