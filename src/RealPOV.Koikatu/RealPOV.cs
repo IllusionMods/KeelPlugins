@@ -17,6 +17,7 @@ namespace RealPOV.Koikatu
         private static int backupLayer;
         private static ChaControl currentChara;
         private bool isStudio = Paths.ProcessName == "CharaStudio";
+        private bool enteringMessageShown = false;
 
         protected override void Awake()
         {
@@ -31,12 +32,28 @@ namespace RealPOV.Koikatu
                 var selectedCharas = GuideObjectManager.Instance.selectObjectKey.Select(x => Studio.Studio.GetCtrlInfo(x) as OCIChar).Where(x => x != null).ToList();
                 if(selectedCharas.Count > 0)
                     currentChara = selectedCharas.First().charInfo;
+                else
+                    Logger.LogMessage("Select a character in workspace to enter its POV");
             }
             else
             {
                 var cameraTarget = GameObject.Find("HScene/CameraBase/Camera/CameraTarget");
                 if(cameraTarget)
+                {
                     currentChara = FindObjectsOfType<ChaControl>().OrderBy(x => Vector3.Distance(cameraTarget.transform.position, x.neckLookCtrl.transform.position)).First();
+                    if (currentChara)
+                    {
+                        if(!enteringMessageShown)
+                        {
+                            Logger.LogMessage("Entering POV of character closest to camera center. Move camera to select other characters.");
+                            enteringMessageShown = true;
+                        }
+                    }
+                    else
+                    {
+                        Logger.LogMessage("No characters found. Move camera center close to a character to enter its POV.");
+                    }
+                }
             }
 
             if(currentChara)
