@@ -18,7 +18,7 @@ namespace TitleShortcuts.AISyoujyo
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.2.1." + BuildNumber.Version;
+        public const string Version = "1.2.2." + BuildNumber.Version;
 
         private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }

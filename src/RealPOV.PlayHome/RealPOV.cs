@@ -12,7 +12,7 @@ namespace RealPOV.PlayHome
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.0.3." + BuildNumber.Version;
+        public const string Version = "1.0.4." + BuildNumber.Version;
 
         private const string SECTION_OFFSETS = "Offsets";
 

@@ -14,7 +14,7 @@ namespace LightManager.Koikatu
     public class LightManagerPlugin : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.lightmanager";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private static GameObject bepinex;
 

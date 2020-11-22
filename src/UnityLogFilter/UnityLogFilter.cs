@@ -14,7 +14,7 @@ namespace UnityLogFilter
 {
     public class UnityLogFilter
     {
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         public static IEnumerable<string> TargetDLLs { get; } = new string[0];
         public static void Patch(AssemblyDefinition ass) { }

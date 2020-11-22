@@ -15,7 +15,7 @@ namespace PosePng.Koikatu
     public class PosePng : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.posepng";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private static ConfigEntry<string> SaveFolder { get; set; }
 

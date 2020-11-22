@@ -13,7 +13,7 @@ namespace StudioAddonLite.Koikatu
     public class StudioAddonLite : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.studioaddonlite";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private const string SECTION_GENERAL = "General";
         private const string SECTION_HOTKEYS = "Keyboard shortcuts";
