@@ -21,9 +21,11 @@ An assistant to help you manage your huge card collections.
 It provides a few shortcuts in maker that let you go through your cards quickly while deciding which cards to keep.  
 Enable the plugin in the maker sidebar for the hotkeys to work.
 
+<!--
 #### BetterSceneLoader
 An alternative scene loader for Studio.  
 The subfolders of the scene folder will act as categories for your scenes.
+-->
 
 #### CameraFrameMask
 Mask certain ugly frames caused by other plugins during character loading.
