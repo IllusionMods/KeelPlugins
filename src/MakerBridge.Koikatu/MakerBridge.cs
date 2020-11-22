@@ -9,7 +9,7 @@ namespace MakerBridge.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class MakerBridge : MakerBridgeCore
     {
-        public const string Version = "1.0.2." + BuildNumber.Version;
+        public const string Version = "1.0.3." + BuildNumber.Version;
 
         protected override void Awake()
         {

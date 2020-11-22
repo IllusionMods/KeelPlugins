@@ -20,7 +20,7 @@ namespace AltAutoMode.PlayHome
     public class AltAutoMode : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.altautomode";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         private void Awake()
         {

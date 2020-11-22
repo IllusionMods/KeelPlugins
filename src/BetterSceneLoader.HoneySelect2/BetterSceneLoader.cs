@@ -12,7 +12,7 @@ namespace BetterSceneLoader.HoneySelect2
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BetterSceneLoaderCore
     {
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         protected override void Awake()
         {
