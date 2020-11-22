@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 
 namespace KeelPlugins.Utils
@@ -8,28 +7,30 @@ namespace KeelPlugins.Utils
     {
         public static byte[] GetResourceAsBytes(Assembly assembly, string resourceName)
         {
-            var resourcePath = $"{assembly.GetName().Name}.{resourceName}";
-
-            using(var res = assembly.GetManifestResourceStream(resourcePath))
+            using(var stream = GetManifestResourceStream(assembly, resourceName))
+            using(var mem = new MemoryStream())
             {
-                if(res == null)
-                    throw new FileNotFoundException(resourcePath);
-
-                using(var mem = new MemoryStream())
-                {
-                    CopyTo(res, mem);
-                    return mem.ToArray();
-                }
+                CopyTo(stream, mem);
+                return mem.ToArray();
             }
         }
 
         public static string GetResourceAsString(Assembly assembly, string resourceName)
         {
-            var resourcePath = $"{assembly.GetName().Name}.{resourceName}";
-
-            using(var stream = assembly.GetManifestResourceStream(resourcePath))
+            using(var stream = GetManifestResourceStream(assembly, resourceName))
             using(var reader = new StreamReader(stream))
                 return reader.ReadToEnd();
+        }
+
+        private static Stream GetManifestResourceStream(Assembly assembly, string resourceName)
+        {
+            var resourcePath = $"{assembly.GetName().Name}.{resourceName}";
+            var res = assembly.GetManifestResourceStream(resourcePath);
+
+            if(res == null)
+                throw new FileNotFoundException(resourcePath);
+
+            return res;
         }
 
         private static void CopyTo(Stream input, Stream outputStream)
