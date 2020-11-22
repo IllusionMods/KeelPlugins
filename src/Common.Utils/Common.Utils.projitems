@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurationManagerAttributes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lazy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MultiKeyDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resource.cs" />
   </ItemGroup>
 </Project>

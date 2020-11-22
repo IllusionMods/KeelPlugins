@@ -9,6 +9,7 @@ using UILib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using KeelPlugins.Utils;
 
 // imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
@@ -153,8 +154,8 @@ namespace BetterSceneLoader.Core
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
-            var texture = PngAssist.ChangeTextureFromByte(KeelPlugins.Resources.loadicon);
-            loadingIcon.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            var loadiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.loadicon"));
+            loadingIcon.sprite = Sprite.Create(loadiconTex, new Rect(0, 0, loadiconTex.width, loadiconTex.height), new Vector2(0.5f, 0.5f));
             LoadingIcon.Init(loadingIcon, -5f);
 
             imagelist = UIUtility.CreateScrollView("Imagelist", mainPanel.transform);
@@ -210,7 +211,8 @@ namespace BetterSceneLoader.Core
                 optionspanel.gameObject.SetActive(false);
             });
 
-            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(PngAssist.ChangeTextureFromByte(KeelPlugins.Resources.pluginicon), false, x => ShowWindow(x));
+            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.pluginicon"));
+            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, x => ShowWindow(x));
 
             UpdateWindow();
             PopulateGrid();

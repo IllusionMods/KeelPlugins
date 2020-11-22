@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using KeelPlugins.Utils;
 using ParadoxNotion.Serialization;
 using System;
 using System.Collections.Generic;
@@ -38,17 +39,8 @@ namespace LockOnPlugin.Core
 
         private static void LoadResourceData()
         {
-            var ass = typeof(LockOnPluginCore).Assembly;
-            var resourceName = $"{ass.GetName().Name}.{dataFileName}";
-
-            using(var stream = ass.GetManifestResourceStream(resourceName))
-            {
-                using(var reader = new StreamReader(stream))
-                {
-                    string json = reader.ReadToEnd();
-                    data = JSONSerializer.Deserialize<TargetData>(json);
-                }
-            }
+            var json = Resource.GetResourceAsString(typeof(LockOnPluginCore).Assembly, dataFileName);
+            data = JSONSerializer.Deserialize<TargetData>(json);
         }
 
 #pragma warning disable 649 // disable never assigned warning
