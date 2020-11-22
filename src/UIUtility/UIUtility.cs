@@ -63,7 +63,7 @@ namespace UILib
             if(_initCalled) return;
             _initCalled = true;
 
-            var resource = Resource.LoadEmbeddedResource(callingAssembly, resourceName);
+            var resource = UILibResource.LoadEmbeddedResource(callingAssembly, resourceName);
             AssetBundle bundle = AssetBundle.LoadFromMemory(resource);
 
             foreach(Sprite sprite in bundle.LoadAllAssets<Sprite>())

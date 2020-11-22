@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MovableWindow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneTimeHorizontalLayoutGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OneTimeVerticalLayoutGroup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UILibResource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UIUtility.cs" />
   </ItemGroup>
 </Project>

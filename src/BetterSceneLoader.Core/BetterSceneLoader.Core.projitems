@@ -14,4 +14,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)LoadingIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneLoaderUI.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\loadicon" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\pluginicon" />
+  </ItemGroup>
 </Project>

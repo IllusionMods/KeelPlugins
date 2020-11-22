@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace UILib
 {
-    internal static class Resource
+    internal static class UILibResource
     {
         public static byte[] LoadEmbeddedResource(Assembly callingAssembly, string resourceName)
         {
@@ -12,7 +12,6 @@ namespace UILib
             {
                 using(var stream = callingAssembly.GetManifestResourceStream(resourceName))
                 {
-                    byte[] buffer = new byte[16 * 1024];
                     return ReadFully(stream);
                 }
             }
