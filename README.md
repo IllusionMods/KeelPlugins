@@ -36,6 +36,10 @@ but with this you can very easily load poses, change blinking state, switch anim
 Another feature in this plugin is H animation matching.  
 By selecting a male and a female, and then clicking on an H anim in the list while holding the ctrl key, the plugin will automatically choose the right H animation based on their sex.
 
+#### ClothingStateMenuX
+Adds options to edit chara clothing states and current outfit to the maker sidebar.  
+Accessories might come later.
+
 #### DefaultParamEditor
 Allows editing default settings for character/scene parameters such as eye blinking or shadow density.  
 This only affects parameters that make sense to be saved.
@@ -72,7 +76,8 @@ Koikatu accepts arguments `-femalemaker, -malemaker, -freeh, -live`.
 Honey Select and AI Girl accept arguments `-femalemaker, -malemaker`.
 
 #### RealPOV
-First person mode for H scenes.
+First person mode for studio and H scenes.  
+Select a chara in studio or place the camera target close to the chara in H and press the hotkey to change view.
 
 #### StudioAddonLite
 A lite version of the StudioAddon from HS.  
