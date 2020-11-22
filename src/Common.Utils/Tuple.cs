@@ -1,6 +1,6 @@
 ﻿namespace KeelPlugins.Utils
 {
-    public struct Tuple<T1, T2>
+    internal struct Tuple<T1, T2>
     {
         public readonly T1 Item1;
         public readonly T2 Item2;

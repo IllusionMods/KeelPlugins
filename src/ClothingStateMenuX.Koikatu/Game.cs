@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ClothingStateMenuX.Koikatu
 {
-    public static class Game
+    internal static class Game
     {
         public static Lazy<ChaControl> Character = new Lazy<ChaControl>(() => GameObject.FindObjectOfType<ChaControl>());
         public static Lazy<TMP_Dropdown> OutfitDropDown = new Lazy<TMP_Dropdown>(() => Traverse.Create(Singleton<CustomControl>.Instance).Field("ddCoordinate").GetValue<TMP_Dropdown>());

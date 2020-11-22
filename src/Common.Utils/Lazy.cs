@@ -2,7 +2,7 @@
 
 namespace KeelPlugins.Utils
 {
-    public class Lazy<T>
+    internal class Lazy<T>
     {
         private readonly Func<T> initializer;
         private T value;

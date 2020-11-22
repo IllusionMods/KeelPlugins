@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace KeelPlugins.Harmony
 {
-    public static class EventFactory
+    internal static class EventFactory
     {
         private static Harmony harmony = new Harmony("KeelPlugins.EventFactory");
         private static MultiKeyDictionary<Type, string, MethodInfo> methods = new MultiKeyDictionary<Type, string, MethodInfo>();

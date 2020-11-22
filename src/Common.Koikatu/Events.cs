@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace KeelPlugins.Koikatu
 {
-    public class Maker
+    internal class Maker
     {
         private static void Start() => EventFactory.InvokeEvent(_OnStart);
         private static MethodInfo StartMethod = AccessTools.Method(typeof(Maker), nameof(Start));

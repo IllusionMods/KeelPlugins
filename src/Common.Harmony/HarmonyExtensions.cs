@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KeelPlugins.Harmony
 {
-    public static class HarmonyExtensions
+    internal static class HarmonyExtensions
     {
         private static readonly Dictionary<int, Delegate> DelegateCache = new Dictionary<int, Delegate>();
         private static readonly Dictionary<Delegate, MethodInfo> MethodCache = new Dictionary<Delegate, MethodInfo>();
