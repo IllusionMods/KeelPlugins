@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace KeelPlugins.Utils
 {
-    public static class Resource
+    internal static class Resource
     {
         public static byte[] GetResourceAsBytes(Assembly assembly, string resourceName)
         {

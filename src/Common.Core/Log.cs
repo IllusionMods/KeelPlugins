@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 
-public static class Log
+internal static class Log
 {
     private static ManualLogSource _logSource;
 
