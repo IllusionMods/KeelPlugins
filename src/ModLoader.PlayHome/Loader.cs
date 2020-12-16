@@ -1,8 +1,9 @@
 ﻿using BepInEx;
-using System;
-using System.IO;
 using HarmonyLib;
+using KeelPlugins.Harmony;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -20,24 +21,10 @@ namespace ModLoader.PlayHome
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            var harmony = Harmony.CreateAndPatchAll(typeof(Loader));
-
-            {
-                var type = typeof(PrefabData);
-                var targetType = type.Assembly.GetType($"CustomDataSetupLoader`1[{type.Name}]");
-                var dicType = typeof(Dictionary<,>).MakeGenericType(new[] { typeof(int), type });
-                var targetMethod = AccessTools.Method(targetType, "Setup_Search", new[] { dicType, typeof(string) });
-                var patchMethod = AccessTools.Method(typeof(Loader), nameof(LoadMods));
-                harmony.Patch(targetMethod, new HarmonyMethod(patchMethod));
-            }
-
-            {
-                var targetMethod = AccessTools.Method(typeof(AssetBundleController), nameof(AssetBundleController.LoadAsset)).MakeGenericMethod(typeof(UnityEngine.Object));
-                var patchMethod = AccessTools.Method(typeof(Loader), nameof(LoadThumbs));
-                harmony.Patch(targetMethod, new HarmonyMethod(patchMethod));
-            }
+            HarmonyExtensions.CreateAndPatchAll(typeof(Loader));
         }
 
+        [HarmonyPatchExt(typeof(AssetBundleController), nameof(AssetBundleController.LoadAsset), null, new[] { typeof(UnityEngine.Object) })]
         private static bool LoadThumbs(ref object __result, ref string assetName, AssetBundleController __instance)
         {
             if(__instance.assetBundleName.Contains("thumnbnail/thumbnail_") || __instance.assetBundleName.Contains("thumnbnail/thumnbs_"))
@@ -47,6 +34,7 @@ namespace ModLoader.PlayHome
                     var path = BepInEx.Utility.CombinePaths(modAbdataDir, "thumnbnail_R", assetName + ".png");
                     if(File.Exists(path))
                     {
+                        Log.Debug($"Loading thumbnail ({path})");
                         __result = LoadPNG(path);
                         return false;
                     } 
@@ -83,6 +71,7 @@ namespace ModLoader.PlayHome
             ___id = id > 999999 && id < 1000000000 ? id : id % 1000;
         }
 
+        [HarmonyPatchExt("CustomDataSetupLoader`1[PrefabData], Assembly-CSharp", "Setup_Search", new[] { typeof(Dictionary<int, PrefabData>), typeof(string) })]
         private static void LoadMods(Dictionary<int, object> datas, ref string search, Action<Dictionary<int, object>, AssetBundleController, CustomDataListLoader> ___action)
         {
             var dir = "";

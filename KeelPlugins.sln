@@ -179,6 +179,7 @@ Global
 		src\Common.Utils\Common.Utils.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
+		src\Common.Harmony\Common.Harmony.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\Common.PlayHome\Common.PlayHome.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5

@@ -13,5 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)HarmonyExtensions.cs" />
+    <None Include="$(MSBuildThisFileDirectory)HarmonyDelegatePatchingExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatchExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReflectionExtensions.cs" />
   </ItemGroup>
 </Project>
