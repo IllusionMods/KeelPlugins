@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using XUnity.ResourceRedirector;
 
 namespace ModLoader.PlayHome
 {
@@ -15,13 +16,34 @@ namespace ModLoader.PlayHome
         public const string GUID = "keelhauled.modloader";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
-        private static string ModFolder = Path.Combine(Paths.GameRootPath, "mods");
-        private static Dictionary<string, string> AssetAbdata = new Dictionary<string, string>();
+        private static string modFolder = Path.Combine(Paths.GameRootPath, "mods");
+        private static string[] modFolders;
+        private static Dictionary<string, string> modFiles = new Dictionary<string, string>();
+        private static Dictionary<string, string> assetAbdata = new Dictionary<string, string>();
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
             HarmonyExtensions.CreateAndPatchAll(typeof(Loader));
+
+            modFolders = Directory.GetDirectories(modFolder, "*", SearchOption.TopDirectoryOnly);
+            modFiles = modFolders.SelectMany(x => Directory.GetFiles(Path.Combine(x, "abdata"), "*", SearchOption.AllDirectories)).ToDictionary(x => x.Substring(@"abdata\"), x => x);
+            ResourceRedirection.RegisterAsyncAndSyncAssetBundleLoadingHook(0, Hook);
+        }
+
+        private void Hook(IAssetBundleLoadingContext context)
+        {
+            var normalized = context.GetNormalizedPath();
+
+            if(normalized.Contains(@"abdata\"))
+            {
+                var path = normalized.Substring(@"abdata\");
+
+                if(!context.Parameters.Path.Contains(modFolder) && modFiles.TryGetValue(path, out var newPath))
+                {
+                    context.Parameters.Path = newPath;
+                } 
+            }
         }
 
         [HarmonyPatchExt(typeof(AssetBundleController), nameof(AssetBundleController.LoadAsset), null, new[] { typeof(UnityEngine.Object) })]
@@ -29,7 +51,7 @@ namespace ModLoader.PlayHome
         {
             if(__instance.assetBundleName.Contains("thumnbnail/thumbnail_") || __instance.assetBundleName.Contains("thumnbnail/thumnbs_"))
             {
-                if(AssetAbdata.TryGetValue(assetName, out var modAbdataDir))
+                if(assetAbdata.TryGetValue(assetName, out var modAbdataDir))
                 {
                     var path = BepInEx.Utility.CombinePaths(modAbdataDir, "thumnbnail_R", assetName + ".png");
                     if(File.Exists(path))
@@ -37,7 +59,7 @@ namespace ModLoader.PlayHome
                         Log.Debug($"Loading thumbnail ({path})");
                         __result = LoadPNG(path);
                         return false;
-                    } 
+                    }
                 }
             }
 
@@ -84,7 +106,7 @@ namespace ModLoader.PlayHome
                 filter = search.Remove(0, lastSlash + 1);
             }
 
-            foreach(var folder in Directory.GetDirectories(ModFolder))
+            foreach(var folder in modFolders)
             {
                 var abdataDir = Path.Combine(folder, "abdata");
                 var listDir = BepInEx.Utility.CombinePaths(abdataDir, "list", dir);
@@ -117,7 +139,7 @@ namespace ModLoader.PlayHome
                     }
 
                     foreach(var thumbPath in Directory.GetFiles(Path.Combine(abdataDir, "thumnbnail_R"), "*.png"))
-                        AssetAbdata[Path.GetFileNameWithoutExtension(thumbPath)] = abdataDir;
+                        assetAbdata[Path.GetFileNameWithoutExtension(thumbPath)] = abdataDir;
                 }
             }
         }
