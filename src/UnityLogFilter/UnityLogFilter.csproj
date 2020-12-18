@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
-    <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.8.2" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

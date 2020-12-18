@@ -3,7 +3,7 @@
   <Import Project="..\BuildSettings.PlayHome.props" />
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
-    <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
     <PackageReference Include="IllusionLibs.PlayHome.Assembly-CSharp" Version="2018.3.11.2" />
     <PackageReference Include="IllusionLibs.PlayHome.UnityEngine" Version="5.5.5.2" />
     <PackageReference Include="IllusionLibs.PlayHome.UnityEngine.UI" Version="5.5.5.2" />

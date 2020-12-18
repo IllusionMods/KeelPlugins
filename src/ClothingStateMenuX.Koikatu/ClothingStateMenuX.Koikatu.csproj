@@ -3,7 +3,7 @@
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
-    <PackageReference Include="BepInEx.Core" Version="5.3.0.4" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
     <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" Version="2019.4.27.2" />
     <PackageReference Include="IllusionLibs.Koikatu.MoreAccessories" Version="1.0.7" />
     <PackageReference Include="IllusionLibs.Koikatu.TextMeshPro" Version="2019.4.27.2" />
