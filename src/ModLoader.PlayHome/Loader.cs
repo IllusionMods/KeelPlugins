@@ -16,42 +16,77 @@ namespace ModLoader.PlayHome
         public const string GUID = "keelhauled.modloader";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
-        private static string modFolder = Path.Combine(Paths.GameRootPath, "mods");
+        private static string modFolder;
         private static string[] modFolders;
-        private static Dictionary<string, string> modFiles = new Dictionary<string, string>();
-        private static Dictionary<string, string> assetAbdata = new Dictionary<string, string>();
+        private static Dictionary<string, string> bundleAbdata = new Dictionary<string, string>();
+        private static Dictionary<string, string> thumbAbdata = new Dictionary<string, string>();
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            HarmonyExtensions.CreateAndPatchAll(typeof(Loader));
+            GatherData();
 
-            modFolders = Directory.GetDirectories(modFolder, "*", SearchOption.TopDirectoryOnly);
-            modFiles = modFolders.SelectMany(x => Directory.GetFiles(Path.Combine(x, "abdata"), "*", SearchOption.AllDirectories)).ToDictionary(x => x.Substring(@"abdata\"), x => x);
-            ResourceRedirection.RegisterAsyncAndSyncAssetBundleLoadingHook(0, Hook);
+            HarmonyExtensions.CreateAndPatchAll(typeof(Loader));
+            ResourceRedirection.RegisterAsyncAndSyncAssetBundleLoadingHook(0, AssetBundleLoadingHook);
+            //ResourceRedirection.RegisterResourceLoadedHook(HookBehaviour.OneCallbackPerResourceLoaded, ResourceLoadedHook);
         }
 
-        private void Hook(IAssetBundleLoadingContext context)
+        private void GatherData()
         {
-            var normalized = context.GetNormalizedPath();
+            modFolder = Path.Combine(Paths.GameRootPath, "mods");
+            modFolders = Directory.GetDirectories(modFolder).Where(x => Directory.Exists(Path.Combine(x, "abdata"))).ToArray();
 
-            if(normalized.Contains(@"abdata\"))
+            foreach(var folder in modFolders)
             {
-                var path = normalized.Substring(@"abdata\");
+                var abdataDir = Path.Combine(folder, "abdata");
+                var thumbDir = Path.Combine(abdataDir, "thumnbnail_R");
+                var bundles = Directory.GetFiles(abdataDir, "*", SearchOption.AllDirectories).Where(x => !x.Contains("abdata\\list") && !x.Contains("abdata\\thumnbnail")).ToList();
 
-                if(!context.Parameters.Path.Contains(modFolder) && modFiles.TryGetValue(path, out var newPath))
+                foreach(var bundle in bundles)
                 {
-                    context.Parameters.Path = newPath;
-                } 
+                    var key = bundle.Substring(@"abdata\");
+
+                    if(bundleAbdata.TryGetValue(key, out var value))
+                        Log.Warning($"Duplicate assetbundle {key}");
+                    else
+                        bundleAbdata.Add(key, abdataDir);
+                }
+
+                if(Directory.Exists(thumbDir))
+                {
+                    foreach(var thumbPath in Directory.GetFiles(thumbDir, "*.png"))
+                        thumbAbdata[Path.GetFileNameWithoutExtension(thumbPath)] = abdataDir; 
+                }
             }
         }
+
+        private void AssetBundleLoadingHook(IAssetBundleLoadingContext context)
+        {
+            var normalized = context.GetNormalizedPath();
+            if(normalized.Contains(@"abdata\"))
+            {
+                if(!context.Parameters.Path.Contains(modFolder) && bundleAbdata.TryGetValue(normalized.Substring(@"abdata\"), out var newPath))
+                    context.Parameters.Path = newPath;
+            }
+        }
+
+        //private static void ResourceLoadedHook(ResourceLoadedContext context)
+        //{
+        //    if(context.Parameters.Path == "FemaleBody")
+        //    {
+        //        var path = Path.Combine(modFolder, "uncensor/resources.unity3d");
+        //        var ab = AssetBundle.LoadFromFile(path);
+        //        var asset = ab.LoadAsset<Female>("FemaleBody");
+        //        context.Asset = asset;
+        //    }
+        //}
 
         [HarmonyPatchExt(typeof(AssetBundleController), nameof(AssetBundleController.LoadAsset), null, new[] { typeof(UnityEngine.Object) })]
         private static bool LoadThumbs(ref object __result, ref string assetName, AssetBundleController __instance)
         {
             if(__instance.assetBundleName.Contains("thumnbnail/thumbnail_") || __instance.assetBundleName.Contains("thumnbnail/thumnbs_"))
             {
-                if(assetAbdata.TryGetValue(assetName, out var modAbdataDir))
+                if(thumbAbdata.TryGetValue(assetName, out var modAbdataDir))
                 {
                     var path = BepInEx.Utility.CombinePaths(modAbdataDir, "thumnbnail_R", assetName + ".png");
                     if(File.Exists(path))
@@ -93,7 +128,7 @@ namespace ModLoader.PlayHome
             ___id = id > 999999 && id < 1000000000 ? id : id % 1000;
         }
 
-        [HarmonyPatchExt("CustomDataSetupLoader`1[PrefabData], Assembly-CSharp", "Setup_Search", new[] { typeof(Dictionary<int, PrefabData>), typeof(string) })]
+        [HarmonyPatchExt("CustomDataSetupLoader`1[ItemDataBase], Assembly-CSharp", "Setup_Search", new[] { typeof(Dictionary<int, ItemDataBase>), typeof(string) })]
         private static void LoadMods(Dictionary<int, object> datas, ref string search, Action<Dictionary<int, object>, AssetBundleController, CustomDataListLoader> ___action)
         {
             var dir = "";
@@ -130,16 +165,13 @@ namespace ModLoader.PlayHome
                             ___action(datas, abc, listLoader);
                             for(int i = count; i < datas.Count; i++)
                             {
-                                var prefabData = (PrefabData)datas.Values.ElementAt(i);
+                                var prefabData = (ItemDataBase)datas.Values.ElementAt(i);
                                 prefabData.assetbundleDir = abdataDir;
                             }
 
                             abc.Close(false);
                         }
                     }
-
-                    foreach(var thumbPath in Directory.GetFiles(Path.Combine(abdataDir, "thumnbnail_R"), "*.png"))
-                        assetAbdata[Path.GetFileNameWithoutExtension(thumbPath)] = abdataDir;
                 }
             }
         }
