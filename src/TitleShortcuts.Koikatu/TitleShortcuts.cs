@@ -2,7 +2,6 @@
 using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
-using Manager;
 using System.Collections;
 using TitleShortcuts.Core;
 using UnityEngine;
@@ -26,16 +25,6 @@ namespace TitleShortcuts.Koikatu
         private static ConfigEntry<KeyboardShortcut> StartFreeH { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartLiveShow { get; set; }
 
-        private const string ArgumentFemaleMaker = "-femalemaker";
-        private const string ArgumentMaleMaker = "-malemaker";
-        private const string ArgumentFreeH = "-freeh";
-        private const string ArgumentLive = "-live";
-
-        private static bool autostartFinished = false;
-        private static TitleScene titleScene;
-
-        protected override string[] PossibleArguments => new[] { ArgumentFemaleMaker, ArgumentMaleMaker, ArgumentFreeH, ArgumentLive };
-
         protected override void Awake()
         {
             base.Awake();
@@ -54,72 +43,32 @@ namespace TitleShortcuts.Koikatu
         [HarmonyPatch(typeof(TitleScene), "Start")]
         private static void TitleStart(TitleScene __instance)
         {
-            titleScene = __instance;
-            Plugin.StartCoroutine(TitleInput());
+            Plugin.StartCoroutine(TitleInput(__instance));
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(LogoScene), "Start")]
-        private static bool DisableLogo(ref IEnumerator __result)
+        private static IEnumerator TitleInput(TitleScene titleScene)
         {
-            IEnumerator LoadTitle()
+            do
             {
-                Singleton<Scene>.Instance.LoadReserve(new Scene.Data
-                {
-                    levelName = "Title",
-                    isFade = false
-                }, false);
-                yield break;
-            }
-            __result = LoadTitle();
-            return false;
-        }
-
-        private static IEnumerator TitleInput()
-        {
-            yield return null;
-
-            while(titleScene != null)
-            {
-                if(StartFemaleMaker.Value.IsDown() || !autostartFinished && StartupArgument == ArgumentFemaleMaker)
-                {
-                    StartMode(titleScene.OnCustomFemale, "Starting female maker");
-                }
-                else if(StartMaleMaker.Value.IsDown() || !autostartFinished && StartupArgument == ArgumentMaleMaker)
-                {
-                    StartMode(titleScene.OnCustomMale, "Starting male maker");
-                }
-
-                else if(StartUploader.Value.IsDown())
-                {
-                    StartMode(titleScene.OnUploader, "Starting uploader");
-                }
-                else if(StartDownloader.Value.IsDown())
-                {
-                    StartMode(titleScene.OnDownloader, "Starting downloader");
-                }
-
-                else if(StartFreeH.Value.IsDown() || !autostartFinished && StartupArgument == ArgumentFreeH)
-                {
-                    StartMode(titleScene.OnOtherFreeH, "Starting free H");
-                }
-                else if(StartLiveShow.Value.IsDown() || !autostartFinished && StartupArgument == ArgumentLive)
-                {
-                    StartMode(titleScene.OnOtherIdolLive, "Starting live show");
-                }
-
                 yield return null;
-            }
-        }
 
-        private static void StartMode(UnityAction action, string msg)
-        {
-            if(!FindObjectOfType<ConfigScene>())
+                if (StartFemaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomFemale, "Starting female maker");
+                else if (StartMaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomMale, "Starting male maker");
+                else if (StartUploader.Value.IsDown()) StartMode(titleScene.OnUploader, "Starting uploader");
+                else if (StartDownloader.Value.IsDown()) StartMode(titleScene.OnDownloader, "Starting downloader");
+                else if (StartFreeH.Value.IsDown()) StartMode(titleScene.OnOtherFreeH, "Starting free H");
+                else if (StartLiveShow.Value.IsDown()) StartMode(titleScene.OnOtherIdolLive, "Starting live show");
+            }
+            while (titleScene);
+
+            void StartMode(UnityAction action, string msg)
             {
-                Log.Message(msg);
-                titleScene = null;
-                action();
-                autostartFinished = true;
+                if (titleScene && !FindObjectOfType<ConfigScene>())
+                {
+                    Log.Message(msg);
+                    action();
+                    titleScene = null;
+                }
             }
         }
     }

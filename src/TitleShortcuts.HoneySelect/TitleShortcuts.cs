@@ -1,10 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
 using KeelPlugins.HoneySelect;
 using System;
 using System.Collections;
-using System.ComponentModel;
 using TitleShortcuts.Core;
 using UnityEngine;
 
@@ -19,103 +17,50 @@ namespace TitleShortcuts.HoneySelect
     {
         public const string Version = "1.2.2." + BuildNumber.Version;
 
-        private ConfigEntry<AutoStartOption> AutoStart { get; set; }
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
 
-        private bool checkInput = false;
-        private bool cancelAuto = false;
-        private bool firstLaunch = true;
         private TitleScene titleScene;
-
-        protected override string[] PossibleArguments => new[] { "-femalemaker", "-malemaker" };
 
         protected override void Awake()
         {
-            AutoStart = Config.Bind(SECTION_GENERAL, "Automatic start mode", AutoStartOption.Disabled, new ConfigDescription(DESCRIPTION_AUTOSTART));
+            base.Awake();
+
             StartFemaleMaker = Config.Bind(SECTION_HOTKEYS, "Female maker", new KeyboardShortcut(KeyCode.F));
             StartMaleMaker = Config.Bind(SECTION_HOTKEYS, "Male maker", new KeyboardShortcut(KeyCode.M));
         }
 
         private void OnLevelWasLoaded(int level)
         {
-            var title = FindObjectOfType<TitleScene>();
+            StopAllCoroutines();
 
-            if(title)
-            {
-                if(!checkInput)
-                {
-                    titleScene = title;
-                    checkInput = true;
-                    StartCoroutine(InputCheck());
-                }
-            }
-            else
-            {
-                checkInput = false;
-            }
+            titleScene = FindObjectOfType<TitleScene>();
+
+            if (titleScene) StartCoroutine(InputCheck());
         }
 
         private IEnumerator InputCheck()
         {
-            while(checkInput)
+            while (titleScene)
             {
-                if(!cancelAuto && AutoStart.Value != AutoStartOption.Disabled && (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.F1)))
+                if (!Manager.Scene.Instance.IsNowLoadingFade)
                 {
-                    Logger.Log(LogLevel.Message, "Automatic start cancelled");
-                    cancelAuto = true;
-                }
-
-                if(!Manager.Scene.Instance.IsNowLoadingFade)
-                {
-                    if(StartFemaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-femalemaker")
-                    {
-                        StartMode(titleScene.OnCustomFemale, "Starting female maker");
-                    }
-                    else if(StartMaleMaker.Value.IsPressed() || firstLaunch && StartupArgument == "-malemaker")
-                    {
-                        StartMode(titleScene.OnCustomMale, "Starting male maker");
-                    }
-
-                    else if(!cancelAuto && AutoStart.Value != AutoStartOption.Disabled)
-                    {
-                        switch(AutoStart.Value)
-                        {
-                            case AutoStartOption.FemaleMaker:
-                                StartMode(titleScene.OnCustomFemale, "Automatically starting female maker");
-                                break;
-
-                            case AutoStartOption.MaleMaker:
-                                StartMode(titleScene.OnCustomMale, "Automatically starting male maker");
-                                break;
-                        }
-                    }
-
-                    cancelAuto = true;
+                    if (StartFemaleMaker.Value.IsPressed()) StartMode(titleScene.OnCustomFemale, "Starting female maker");
+                    else if (StartMaleMaker.Value.IsPressed()) StartMode(titleScene.OnCustomMale, "Starting male maker");
                 }
 
                 yield return null;
             }
-        }
 
-        private void StartMode(Action action, string msg)
-        {
-            firstLaunch = false;
-            if(!FindObjectOfType<ConfigScene>())
+            void StartMode(Action action, string msg)
             {
-                Logger.LogMessage(msg);
-                checkInput = false;
-                action();
+                if (!FindObjectOfType<ConfigScene>())
+                {
+                    Log.Message(msg);
+                    action();
+                    titleScene = null;
+                }
             }
-        }
-
-        private enum AutoStartOption
-        {
-            Disabled,
-            [Description("Female maker")]
-            FemaleMaker,
-            [Description("Male maker")]
-            MaleMaker
         }
     }
 }
