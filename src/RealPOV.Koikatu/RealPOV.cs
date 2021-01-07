@@ -1,7 +1,8 @@
-﻿using BepInEx;
+using BepInEx;
 using HarmonyLib;
 using RealPOV.Core;
 using Studio;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ namespace RealPOV.Koikatu
 
         private static int backupLayer;
         private static ChaControl currentChara;
+        private static Queue<ChaControl> charaQueue;
         private bool isStudio = Paths.ProcessName == "CharaStudio";
-        private bool enteringMessageShown = false;
 
         protected override void Awake()
         {
@@ -37,22 +38,18 @@ namespace RealPOV.Koikatu
             }
             else
             {
-                var cameraTarget = GameObject.Find("HScene/CameraBase/Camera/CameraTarget");
-                if(cameraTarget)
+                if(charaQueue == null)
                 {
-                    currentChara = FindObjectsOfType<ChaControl>().OrderBy(x => Vector3.Distance(cameraTarget.transform.position, x.neckLookCtrl.transform.position)).First();
-                    if (currentChara)
-                    {
-                        if(!enteringMessageShown)
-                        {
-                            Logger.LogMessage("Entering POV of character closest to camera center. Move camera to select other characters.");
-                            enteringMessageShown = true;
-                        }
-                    }
-                    else
-                    {
-                        Logger.LogMessage("No characters found. Move camera center close to a character to enter its POV.");
-                    }
+                    charaQueue = new Queue<ChaControl>();
+                    foreach (ChaControl chara in FindObjectsOfType<ChaControl>())
+                        charaQueue.Enqueue(chara);
+                    currentChara = charaQueue.Dequeue();
+                    charaQueue.Enqueue(currentChara);
+                }
+                else
+                {
+                    currentChara = charaQueue.Dequeue();
+                    charaQueue.Enqueue(currentChara);
                 }
             }
 
