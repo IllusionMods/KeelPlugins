@@ -5,6 +5,7 @@ using Studio;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [assembly: System.Reflection.AssemblyFileVersion(RealPOV.Koikatu.RealPOV.Version)]
 
@@ -24,10 +25,13 @@ namespace RealPOV.Koikatu
         {
             base.Awake();
             Harmony.CreateAndPatchAll(GetType());
+
+            SceneManager.activeSceneChanged += (arg0, scene) => charaQueue = null;
         }
 
         internal override void EnablePOV()
         {
+
             if(isStudio)
             {
                 var selectedCharas = GuideObjectManager.Instance.selectObjectKey.Select(x => Studio.Studio.GetCtrlInfo(x) as OCIChar).Where(x => x != null).ToList();
@@ -38,18 +42,31 @@ namespace RealPOV.Koikatu
             }
             else
             {
-                if(charaQueue == null)
+                void CreateQueue()
                 {
                     charaQueue = new Queue<ChaControl>();
                     foreach (ChaControl chara in FindObjectsOfType<ChaControl>())
                         charaQueue.Enqueue(chara);
-                    currentChara = charaQueue.Dequeue();
-                    charaQueue.Enqueue(currentChara);
+                    if (charaQueue.Count > 0)
+                    {
+                        currentChara = charaQueue.Dequeue();
+                        charaQueue.Enqueue(currentChara);
+                    }
+                }
+
+                currentChara = null;
+                if(charaQueue == null)
+                {
+                    CreateQueue();
                 }
                 else
                 {
-                    currentChara = charaQueue.Dequeue();
-                    charaQueue.Enqueue(currentChara);
+                    while (charaQueue.Count > 0 && (currentChara = charaQueue.Dequeue()) == null) {}
+
+                    if (currentChara != null)
+                        charaQueue.Enqueue(currentChara);
+                    else
+                        CreateQueue();
                 }
             }
 
