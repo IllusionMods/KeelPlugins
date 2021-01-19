@@ -5,5 +5,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.4" />
+    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.9.1" />
+  </ItemGroup>
   <Import Project="SkipAllRefs.targets" />
 </Project>
