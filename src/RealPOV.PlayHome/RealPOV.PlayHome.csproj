@@ -2,12 +2,10 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.PlayHome.props" />
   <ItemGroup>
-    <PackageReference Include="BepInEx.Analyzers" Version="1.0.3" />
     <PackageReference Include="BepInEx.Core" Version="5.4.4" />
     <PackageReference Include="IllusionLibs.PlayHome.Assembly-CSharp" version="2018.3.11.2" />
     <PackageReference Include="IllusionLibs.PlayHome.UnityEngine" version="5.5.5.2" />
     <PackageReference Include="IllusionLibs.PlayHome.UnityEngine.UI" version="5.5.5.2" />
-    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.8.2" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
