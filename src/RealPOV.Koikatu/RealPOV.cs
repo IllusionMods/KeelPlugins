@@ -15,7 +15,7 @@ namespace RealPOV.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.0.4." + BuildNumber.Version;
+        public const string Version = "1.1.0." + BuildNumber.Version;
 
         internal ConfigEntry<bool> HideHead { get; set; }
 
