@@ -92,6 +92,10 @@ namespace RealPOV.Koikatu
                 if (HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
 
                 GameCamera = Camera.main;
+                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
+                if (cc) cc.enabled = false;
+
+                LookRotation = currentChara.objHeadBone.transform.rotation.eulerAngles;
 
                 base.EnablePOV();
 
@@ -103,6 +107,9 @@ namespace RealPOV.Koikatu
         internal override void DisablePOV()
         {
             currentChara.fileStatus.visibleHeadAlways = prevVisibleHeadAlways;
+
+            var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
+            if (cc) cc.enabled = true;
 
             base.DisablePOV();
 
