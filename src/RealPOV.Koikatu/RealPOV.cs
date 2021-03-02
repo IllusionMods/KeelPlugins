@@ -4,6 +4,7 @@ using RealPOV.Core;
 using Studio;
 using System.Collections.Generic;
 using System.Linq;
+using BepInEx.Configuration;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,15 +17,22 @@ namespace RealPOV.Koikatu
     {
         public const string Version = "1.0.4." + BuildNumber.Version;
 
+        internal ConfigEntry<bool> HideHead { get; set; }
+
         private static int backupLayer;
         private static ChaControl currentChara;
         private static Queue<ChaControl> charaQueue;
-        private bool isStudio = Paths.ProcessName == "CharaStudio";
+        private readonly bool isStudio = Paths.ProcessName == "CharaStudio";
         private bool prevVisibleHeadAlways;
 
         protected override void Awake()
         {
+            defaultFov = 90;
+            defaultViewOffset = 0.001f;
             base.Awake();
+
+            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", true, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
+
             Harmony.CreateAndPatchAll(GetType());
 
             SceneManager.sceneLoaded += (arg0, scene) => charaQueue = null;
@@ -33,7 +41,6 @@ namespace RealPOV.Koikatu
 
         internal override void EnablePOV()
         {
-
             if (isStudio)
             {
                 var selectedCharas = GuideObjectManager.Instance.selectObjectKey.Select(x => Studio.Studio.GetCtrlInfo(x) as OCIChar).Where(x => x != null).ToList();
@@ -82,7 +89,7 @@ namespace RealPOV.Koikatu
                 //    bone.neckBone.rotation = new Quaternion();
 
                 prevVisibleHeadAlways = currentChara.fileStatus.visibleHeadAlways;
-                currentChara.fileStatus.visibleHeadAlways = false;
+                if (HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
 
                 GameCamera = Camera.main;
 
