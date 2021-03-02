@@ -24,6 +24,7 @@ namespace RealPOV.Koikatu
         private static Queue<ChaControl> charaQueue;
         private readonly bool isStudio = Paths.ProcessName == "CharaStudio";
         private bool prevVisibleHeadAlways;
+        private HFlag hFlag;
 
         protected override void Awake()
         {
@@ -35,7 +36,11 @@ namespace RealPOV.Koikatu
 
             Harmony.CreateAndPatchAll(GetType());
 
-            SceneManager.sceneLoaded += (arg0, scene) => charaQueue = null;
+            SceneManager.sceneLoaded += (arg0, scene) =>
+            {
+                hFlag = FindObjectOfType<HFlag>();
+                charaQueue = null;
+            };
             SceneManager.sceneUnloaded += arg0 => charaQueue = null;
         }
 
@@ -67,6 +72,7 @@ namespace RealPOV.Koikatu
 
                         // Rotate the queue
                         charaQueue.Enqueue(chaControl);
+                        if (chaControl.sex == 0 && hFlag != null && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
                         // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
                         if (chaControl.objTop.activeInHierarchy) return chaControl;
                     }
