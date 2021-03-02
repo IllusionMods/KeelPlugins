@@ -28,14 +28,17 @@ namespace RealPOV.Core
         private static float backupFOV;
         private static float backupNearClip;
 
+        protected static float defaultViewOffset = 0.03f;
+        protected static float defaultFov = 70f;
+
         protected virtual void Awake()
         {
             Logger = base.Logger;
 
             POVHotkey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
-            DefaultFOV = Config.Bind(SECTION_GENERAL, "Default FOV", 70f, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
+            DefaultFOV = Config.Bind(SECTION_GENERAL, "Default FOV", defaultFov, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
             MouseSens = Config.Bind(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
-            ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", 0.03f);
+            ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", defaultViewOffset);
         }
 
         private void Update()
