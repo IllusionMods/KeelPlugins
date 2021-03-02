@@ -20,60 +20,69 @@ namespace RealPOV.Koikatu
         private static ChaControl currentChara;
         private static Queue<ChaControl> charaQueue;
         private bool isStudio = Paths.ProcessName == "CharaStudio";
+        private bool prevVisibleHeadAlways;
 
         protected override void Awake()
         {
             base.Awake();
             Harmony.CreateAndPatchAll(GetType());
 
-            SceneManager.activeSceneChanged += (arg0, scene) => charaQueue = null;
+            SceneManager.sceneLoaded += (arg0, scene) => charaQueue = null;
+            SceneManager.sceneUnloaded += arg0 => charaQueue = null;
         }
 
         internal override void EnablePOV()
         {
 
-            if(isStudio)
+            if (isStudio)
             {
                 var selectedCharas = GuideObjectManager.Instance.selectObjectKey.Select(x => Studio.Studio.GetCtrlInfo(x) as OCIChar).Where(x => x != null).ToList();
-                if(selectedCharas.Count > 0)
+                if (selectedCharas.Count > 0)
                     currentChara = selectedCharas.First().charInfo;
                 else
                     Logger.LogMessage("Select a character in workspace to enter its POV");
             }
             else
             {
-                void CreateQueue()
+                Queue<ChaControl> CreateQueue()
                 {
-                    charaQueue = new Queue<ChaControl>();
-                    foreach (ChaControl chara in FindObjectsOfType<ChaControl>())
-                        charaQueue.Enqueue(chara);
-                    if (charaQueue.Count > 0)
+                    return new Queue<ChaControl>(FindObjectsOfType<ChaControl>());
+                }
+                ChaControl GetCurrentChara()
+                {
+                    for (int i = 0; i < charaQueue.Count; i++)
                     {
-                        currentChara = charaQueue.Dequeue();
-                        charaQueue.Enqueue(currentChara);
+                        var chaControl = charaQueue.Dequeue();
+
+                        // Remove destroyed
+                        if (chaControl == null)
+                            continue;
+
+                        // Rotate the queue
+                        charaQueue.Enqueue(chaControl);
+                        // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
+                        if (chaControl.objTop.activeInHierarchy) return chaControl;
                     }
+                    return null;
                 }
 
-                currentChara = null;
-                if(charaQueue == null)
-                {
-                    CreateQueue();
-                }
-                else
-                {
-                    while (charaQueue.Count > 0 && (currentChara = charaQueue.Dequeue()) == null) {}
+                if (charaQueue == null) charaQueue = CreateQueue();
 
-                    if (currentChara != null)
-                        charaQueue.Enqueue(currentChara);
-                    else
-                        CreateQueue();
+                currentChara = GetCurrentChara();
+                if (currentChara == null)
+                {
+                    charaQueue = CreateQueue();
+                    currentChara = GetCurrentChara();
                 }
             }
 
-            if(currentChara)
+            if (currentChara)
             {
                 //foreach(var bone in currentChara.neckLookCtrl.neckLookScript.aBones)
                 //    bone.neckBone.rotation = new Quaternion();
+
+                prevVisibleHeadAlways = currentChara.fileStatus.visibleHeadAlways;
+                currentChara.fileStatus.visibleHeadAlways = false;
 
                 GameCamera = Camera.main;
 
@@ -86,16 +95,19 @@ namespace RealPOV.Koikatu
 
         internal override void DisablePOV()
         {
+            currentChara.fileStatus.visibleHeadAlways = prevVisibleHeadAlways;
+
             base.DisablePOV();
+
             GameCamera.gameObject.layer = backupLayer;
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), "LateUpdate")]
         private static bool ApplyRotation(NeckLookControllerVer2 __instance)
         {
-            if(POVEnabled)
+            if (POVEnabled)
             {
-                if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
+                if (__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
                 {
                     __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
                     __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
