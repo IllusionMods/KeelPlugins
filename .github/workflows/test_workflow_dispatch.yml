@@ -16,3 +16,6 @@ jobs:
     steps:
       - name: Fetch Latest Release
         uses: thebritican/fetch-latest-release@v2.0.0
+        id: release
+        
+      - run: echo steps.release.outputs.body
