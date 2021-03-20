@@ -17,7 +17,7 @@ namespace RealPOV.Koikatu
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.1.0." + BuildNumber.Version;
+        public const string Version = "1.2.0." + BuildNumber.Version;
 
         private ConfigEntry<bool> HideHead { get; set; }
 
@@ -27,13 +27,13 @@ namespace RealPOV.Koikatu
         private readonly bool isStudio = Paths.ProcessName == "CharaStudio";
         private bool prevVisibleHeadAlways;
         private HFlag hFlag;
-        internal static int currentCharaID = -1;
+        private static int currentCharaId = -1;
         private static RealPOV plugin;
 
         protected override void Awake()
         {
             plugin = this;
-            defaultFov = 90;
+            defaultFov = 90f;
             defaultViewOffset = 0.001f;
             base.Awake();
 
@@ -50,20 +50,32 @@ namespace RealPOV.Koikatu
             SceneManager.sceneUnloaded += arg0 => charaQueue = null;
         }
 
-        public static void EnablePov(SceneDataController.PovData povData)
+        public static void EnablePov(ScenePovData povData)
         {
             if(Studio.Studio.Instance.dicObjectCtrl.TryGetValue(povData.CharaId, out var chara))
             {
-                var ociChar = (OCIChar)chara;
-                currentChara = ociChar.charInfo;
-                currentCharaID = ociChar.objectInfo.dicKey;
+                currentChara = ((OCIChar)chara).charInfo;
+                currentCharaId = chara.objectInfo.dicKey;
                 LookRotation = povData.Rotation;
                 CurrentFOV = povData.Fov;
-                plugin.EnablePOV();
+                plugin.EnablePov();
             }
         }
 
-        internal override void EnablePOV()
+        public static ScenePovData GetPovData()
+        {
+            if(currentCharaId == -1)
+                return null;
+            
+            return new ScenePovData
+            {
+                CharaId = currentCharaId,
+                Fov = CurrentFOV.Value,
+                Rotation = LookRotation
+            };
+        }
+
+        protected override void EnablePov()
         {
             if(!currentChara)
             {
@@ -74,7 +86,7 @@ namespace RealPOV.Koikatu
                     {
                         var ociChar = selectedCharas.First();
                         currentChara = ociChar.charInfo;
-                        currentCharaID = ociChar.objectInfo.dicKey;
+                        currentCharaId = ociChar.objectInfo.dicKey;
                     }
                     else
                     {
@@ -133,23 +145,23 @@ namespace RealPOV.Koikatu
 
                 //LookRotation = currentChara.objHeadBone.transform.rotation.eulerAngles;
 
-                base.EnablePOV();
+                base.EnablePov();
 
                 backupLayer = GameCamera.gameObject.layer;
                 GameCamera.gameObject.layer = 0;
             }
         }
 
-        internal override void DisablePOV()
+        protected override void DisablePov()
         {
             currentChara.fileStatus.visibleHeadAlways = prevVisibleHeadAlways;
             currentChara = null;
-            currentCharaID = -1;
+            currentCharaId = -1;
 
             var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
             if(cc) cc.enabled = true;
 
-            base.DisablePOV();
+            base.DisablePov();
 
             GameCamera.gameObject.layer = backupLayer;
         }
@@ -175,13 +187,12 @@ namespace RealPOV.Koikatu
                     GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
                     GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
                     GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
-                    GameCamera.fieldOfView = CurrentFOV;
+                    GameCamera.fieldOfView = CurrentFOV.Value;
 
                     return false;
                 }
             }
 
-            //__instance.target = POVEnabled ? currentChara.eyeLookCtrl.transform : Camera.main.transform;
             return true;
         }
     }

@@ -1,7 +1,9 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Illusion;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RealPOV.Core
 {
@@ -18,16 +20,18 @@ namespace RealPOV.Core
         internal static ConfigEntry<float> MouseSens { get; set; }
         internal static ConfigEntry<KeyboardShortcut> POVHotkey { get; set; }
 
-        internal static bool POVEnabled;
-        internal static float CurrentFOV = -1;
-        internal static Vector3 LookRotation;
-        internal static Camera GameCamera;
+        protected static bool POVEnabled;
+        protected static float? CurrentFOV;
+        protected static Vector3 LookRotation;
+        protected static Camera GameCamera;
+        protected static float defaultViewOffset = 0.03f;
+        protected static float defaultFov = 70f;
 
         private static float backupFOV;
         private static float backupNearClip;
-
-        protected static float defaultViewOffset = 0.03f;
-        protected static float defaultFov = 70f;
+        private static bool allowCamera;
+        private bool mouseButtonDown0;
+        private bool mouseButtonDown1;
 
         protected virtual void Awake()
         {
@@ -44,41 +48,86 @@ namespace RealPOV.Core
             if(POVHotkey.Value.IsDown())
             {
                 if(POVEnabled)
-                    DisablePOV();
+                    DisablePov();
                 else
-                    EnablePOV();
+                    EnablePov();
             }
-
+        }
+        
+        private void LateUpdate()
+        {
             if(POVEnabled)
             {
-                if(Input.GetMouseButton(0))
+                if(!allowCamera)
                 {
-                    var x = Input.GetAxis("Mouse X") * MouseSens.Value;
-                    var y = -Input.GetAxis("Mouse Y") * MouseSens.Value;
-                    LookRotation += new Vector3(y, x, 0f);
+                    if(GUIUtility.hotControl == 0 && !EventSystem.current.IsPointerOverGameObject())
+                    {
+                        if(Input.GetMouseButtonDown(0))
+                        {
+                            mouseButtonDown0 = true;
+                            allowCamera = true;
+                            GameCursor.Instance.SetCursorLock(true);
+                        }
+
+                        if(Input.GetMouseButtonDown(1))
+                        {
+                            mouseButtonDown1 = true;
+                            allowCamera = true;
+                            GameCursor.Instance.SetCursorLock(true);
+                        }
+                    }
                 }
-                else if(Input.GetMouseButton(1))
+
+                if(allowCamera)
                 {
-                    CurrentFOV += Input.GetAxis("Mouse X");
+                    bool mouseUp0 = Input.GetMouseButtonUp(0);
+                    bool mouseUp1 = Input.GetMouseButtonUp(1);
+
+                    if((mouseButtonDown0 || mouseButtonDown1) && (mouseUp0 || mouseUp1))
+                    {
+                        if(mouseUp0) mouseButtonDown0 = false;
+                        if(mouseUp1) mouseButtonDown1 = false;
+
+                        if(!mouseButtonDown0 && !mouseButtonDown1)
+                        {
+                            allowCamera = false;
+                            GameCursor.Instance.SetCursorLock(false);
+                        }
+                    }
+                }
+
+                if(allowCamera)
+                {
+                    if(mouseButtonDown0)
+                    {
+                        var x = Input.GetAxis("Mouse X") * MouseSens.Value;
+                        var y = -Input.GetAxis("Mouse Y") * MouseSens.Value;
+                        LookRotation += new Vector3(y, x, 0f);
+                    }
+                    else if(mouseButtonDown1)
+                    {
+                        CurrentFOV += Input.GetAxis("Mouse X");
+                    }
                 }
             }
         }
 
-        internal virtual void EnablePOV()
+        protected virtual void EnablePov()
         {
             POVEnabled = true;
             backupFOV = GameCamera.fieldOfView;
             backupNearClip = GameCamera.nearClipPlane;
 
-            if(CurrentFOV == -1)
+            if(CurrentFOV == null)
                 CurrentFOV = DefaultFOV.Value;
         }
 
-        internal virtual void DisablePOV()
+        protected virtual void DisablePov()
         {
             POVEnabled = false;
             GameCamera.fieldOfView = backupFOV;
             GameCamera.nearClipPlane = backupNearClip;
+            GameCursor.Instance.SetCursorLock(false);
         }
     }
 }
