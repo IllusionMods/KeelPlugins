@@ -19,35 +19,26 @@ namespace RealPOV.Koikatu
                 return;
             
             if(operation == SceneOperationKind.Load && extData.data.TryGetValue(DictID, out var povRawData))
-            {
-                var povData = MessagePackSerializer.Deserialize<PovData>((byte[])povRawData);
-                RealPOV.EnablePov(povData);
-            }
+                RealPOV.EnablePov(MessagePackSerializer.Deserialize<ScenePovData>((byte[])povRawData));
         }
 
         protected override void OnSceneSave()
         {
-            if(RealPOV.currentCharaID != -1)
+            var povData = RealPOV.GetPovData();
+            if(povData != null)
             {
-                var povData = new PovData
-                {
-                    CharaId = RealPOV.currentCharaID,
-                    Fov = RealPOVCore.CurrentFOV,
-                    Rotation = RealPOVCore.LookRotation
-                };
-                
                 var pluginData = new PluginData();
                 pluginData.data.Add(DictID, MessagePackSerializer.Serialize(povData));
                 SetExtendedData(pluginData);
             }
         }
-
-        [MessagePackObject(true)]
-        public class PovData
-        {
-            public Vector3 Rotation;
-            public int CharaId;
-            public float Fov;
-        }
+    }
+    
+    [MessagePackObject(true)]
+    public class ScenePovData
+    {
+        public Vector3 Rotation;
+        public int CharaId;
+        public float Fov;
     }
 }
