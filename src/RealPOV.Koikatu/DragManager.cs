@@ -5,9 +5,9 @@ namespace RealPOV.Koikatu
 {
     internal class DragManager : MonoBehaviour
     {
-        public static bool allowCamera = false;
-        private bool mouseButtonDown0 = false;
-        private bool mouseButtonDown1 = false;
+        public static bool allowCamera;
+        private bool mouseButtonDown0;
+        private bool mouseButtonDown1;
 
         private void Update()
         {

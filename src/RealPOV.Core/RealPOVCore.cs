@@ -10,20 +10,18 @@ namespace RealPOV.Core
         public const string GUID = "keelhauled.realpov";
         public const string PluginName = "RealPOV";
 
-        internal const string SECTION_GENERAL = "General";
-        internal const string SECTION_HOTKEYS = "Keyboard shortcuts";
-
-        internal static new ManualLogSource Logger;
+        protected const string SECTION_GENERAL = "General";
+        protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
 
         internal static ConfigEntry<float> ViewOffset { get; set; }
         internal static ConfigEntry<float> DefaultFOV { get; set; }
         internal static ConfigEntry<float> MouseSens { get; set; }
         internal static ConfigEntry<KeyboardShortcut> POVHotkey { get; set; }
 
-        internal static bool POVEnabled = false;
+        internal static bool POVEnabled;
         internal static float CurrentFOV = -1;
-        internal static Vector3 LookRotation = new Vector3();
-        internal static Camera GameCamera { get; set; }
+        internal static Vector3 LookRotation;
+        internal static Camera GameCamera;
 
         private static float backupFOV;
         private static float backupNearClip;
@@ -33,7 +31,7 @@ namespace RealPOV.Core
 
         protected virtual void Awake()
         {
-            Logger = base.Logger;
+            Log.SetLogSource(Logger);
 
             POVHotkey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
             DefaultFOV = Config.Bind(SECTION_GENERAL, "Default FOV", defaultFov, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
