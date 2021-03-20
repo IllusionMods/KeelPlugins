@@ -48,7 +48,7 @@ namespace LightManager.Koikatu
                 if(objectCtrlInfo is OCILight light)
                 {
                     var tracker = light.light.gameObject.GetComponent<TrackTransform>();
-                    if(tracker && studio.dicObjectCtrl.TryGetValue(tracker.targetKey, out ObjectCtrlInfo _))
+                    if(tracker && studio.dicObjectCtrl.TryGetValue(tracker.targetKey, out _))
                     {
                         savedLights.Add(new SavedLight
                         {
