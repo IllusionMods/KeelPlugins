@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using ChaCustom;
+using HarmonyLib;
 using TMPro;
 using UILib;
 using UnityEngine;
@@ -9,14 +11,35 @@ namespace ClothingStateMenuX.Koikatu
 {
     public static class UI
     {
-        private static string ID = "(CSMX)";
+        private const string ID = "(CSMX)";
+        private static ChaControl character;
+        private static TMP_Dropdown outfitDropDown;
+        private static GameObject sidebar;
+        //private static GameObject accessoryToggles;
+        private static GameObject clothingStateToggles;
+        private static GameObject titleTextTemplate;
+        private static GameObject normalTextTemplate;
+        private static GameObject buttonTemplate;
+        private static GameObject buttonContainerTemplate;
+        private static GameObject separatorTemplate;
 
         public static void CreateUI()
         {
+            character = GameObject.FindObjectOfType<ChaControl>();
+            outfitDropDown = Traverse.Create(Singleton<CustomControl>.Instance).Field("ddCoordinate").GetValue<TMP_Dropdown>();
+            sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top");
+            //accessoryToggles = sidebar.transform.Find("tglAcsGrp").gameObject;
+            clothingStateToggles = sidebar.transform.Find("rbClothesState").gameObject;
+            titleTextTemplate = sidebar.transform.Find("txtClothesState").gameObject;
+            normalTextTemplate = sidebar.transform.Find("rbClothesState/imgRbCol00/textRbSelect").gameObject;
+            buttonTemplate = sidebar.transform.Find("btnLightingInitialize/btnSelect").gameObject;
+            buttonContainerTemplate = sidebar.transform.Find("btnLightingInitialize").gameObject;
+            separatorTemplate = sidebar.transform.Find("Separate").gameObject;
+            
             CreateTitle("Clothing Sets", 0);
             CreateClothingSets(1);
             CreateSeparator(2);
-            CreateClothingOptions(Game.ClothingStateToggles.Value.transform.GetSiblingIndex() + 1);
+            CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
         }
 
         public static void CreateClothingSets(int index)
@@ -25,13 +48,13 @@ namespace ClothingStateMenuX.Koikatu
 
             var buttons = new List<GameObject>
             {
-                CreateButton("1", 14, () => Game.OutfitDropDown.Value.value = 0, container.transform),
-                CreateButton("2", 14, () => Game.OutfitDropDown.Value.value = 1, container.transform),
-                CreateButton("3", 14, () => Game.OutfitDropDown.Value.value = 2, container.transform),
-                CreateButton("4", 14, () => Game.OutfitDropDown.Value.value = 3, container.transform),
-                CreateButton("5", 14, () => Game.OutfitDropDown.Value.value = 4, container.transform),
-                CreateButton("6", 14, () => Game.OutfitDropDown.Value.value = 5, container.transform),
-                CreateButton("7", 14, () => Game.OutfitDropDown.Value.value = 6, container.transform),
+                CreateButton("1", 14, () => outfitDropDown.value = 0, container.transform),
+                CreateButton("2", 14, () => outfitDropDown.value = 1, container.transform),
+                CreateButton("3", 14, () => outfitDropDown.value = 2, container.transform),
+                CreateButton("4", 14, () => outfitDropDown.value = 3, container.transform),
+                CreateButton("5", 14, () => outfitDropDown.value = 4, container.transform),
+                CreateButton("6", 14, () => outfitDropDown.value = 5, container.transform),
+                CreateButton("7", 14, () => outfitDropDown.value = 6, container.transform),
             };
 
             var pos = 0.03f;
@@ -40,9 +63,9 @@ namespace ClothingStateMenuX.Koikatu
             foreach(var button in buttons)
                 button.transform.SetRect(pos, 0f, pos += step, 1f);
 
-            buttons[Game.OutfitDropDown.Value.value].GetComponent<Button>().SetColorMultiplier(0.7f);
+            buttons[outfitDropDown.value].GetComponent<Button>().SetColorMultiplier(0.7f);
 
-            Game.OutfitDropDown.Value.onValueChanged.AddListener(SetMultipliers);
+            outfitDropDown.onValueChanged.AddListener(SetMultipliers);
 
             void SetMultipliers(int x)
             {
@@ -70,25 +93,25 @@ namespace ClothingStateMenuX.Koikatu
             {
                 var container = CreateContainer(22, index + counter++);
 
-                var margin = 0.03f;
+                const float margin = 0.03f;
                 var pos = 0.4f;
                 var step = (1f - pos - margin) / 4f;
 
                 var textElem = CreateText(text, 12, container.transform);
                 textElem.transform.SetRect(margin, 0f, pos, 1f);
 
-                var buttonOn = CreateButton("On", 10, () => Game.Character.Value.SetClothesState((int)kind, 0), container.transform);
+                var buttonOn = CreateButton("On", 10, () => character.SetClothesState((int)kind, 0), container.transform);
                 buttonOn.transform.SetRect(pos, 0f, pos += step, 1f);
 
-                var buttonHalf1 = CreateButton("½", 10, () => Game.Character.Value.SetClothesState((int)kind, 1), container.transform);
+                var buttonHalf1 = CreateButton("½", 10, () => character.SetClothesState((int)kind, 1), container.transform);
                 buttonHalf1.transform.SetRect(pos, 0f, pos += step, 1f);
                 if(buttons < 3) buttonHalf1.GetComponent<Button>().interactable = false;
 
-                var buttonHalf2 = CreateButton("½", 10, () => Game.Character.Value.SetClothesState((int)kind, 2), container.transform);
+                var buttonHalf2 = CreateButton("½", 10, () => character.SetClothesState((int)kind, 2), container.transform);
                 buttonHalf2.transform.SetRect(pos, 0f, pos += step, 1f);
                 if(buttons < 4) buttonHalf2.GetComponent<Button>().interactable = false;
 
-                var buttonOff = CreateButton("Off", 10, () => Game.Character.Value.SetClothesState((int)kind, 3), container.transform);
+                var buttonOff = CreateButton("Off", 10, () => character.SetClothesState((int)kind, 3), container.transform);
                 buttonOff.transform.SetRect(pos, 0f, pos += step, 1f);
 
                 return container;
@@ -97,7 +120,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateTitle(string text, int index)
         {
-            var copy = GameObject.Instantiate(Game.TitleTextTemplate.Value, Game.Sidebar.Value.transform);
+            var copy = GameObject.Instantiate(titleTextTemplate, sidebar.transform);
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             copy.GetComponentInChildren<TextMeshProUGUI>().text = text;
@@ -106,7 +129,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateText(string text, float fontSize, Transform parent)
         {
-            var copy = GameObject.Instantiate(Game.NormalTextTemplate.Value, parent);
+            var copy = GameObject.Instantiate(normalTextTemplate, parent);
             copy.name += ID;
 
             var textMesh = copy.GetComponentInChildren<TextMeshProUGUI>();
@@ -121,7 +144,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateSeparator(int index)
         {
-            var copy = GameObject.Instantiate(Game.SeparatorTemplate.Value, Game.Sidebar.Value.transform);
+            var copy = GameObject.Instantiate(separatorTemplate, sidebar.transform);
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             return copy;
@@ -129,7 +152,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateButton(string text, float fontSize, UnityAction onClick, Transform parent)
         {
-            var copy = GameObject.Instantiate(Game.ButtonTemplate.Value, parent);
+            var copy = GameObject.Instantiate(buttonTemplate, parent);
             copy.name += ID;
 
             var textMesh = copy.GetComponentInChildren<TextMeshProUGUI>();
@@ -147,7 +170,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static GameObject CreateContainer(float minHeight, int index)
         {
-            var copy = GameObject.Instantiate(Game.ButtonContainerTemplate.Value, Game.Sidebar.Value.transform);
+            var copy = GameObject.Instantiate(buttonContainerTemplate, sidebar.transform);
             copy.name += ID;
             copy.transform.SetSiblingIndex(index);
             copy.GetComponent<LayoutElement>().minHeight = minHeight;
