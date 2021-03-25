@@ -335,7 +335,6 @@ Global
 		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
