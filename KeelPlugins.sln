@@ -132,6 +132,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Harmony", "src\Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModLoader.PlayHome", "src\ModLoader.PlayHome\ModLoader.PlayHome.csproj", "{6F020ABD-6784-47E7-9526-1E8A83998942}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteCards.Koikatu", "src\FavoriteCards.Koikatu\FavoriteCards.Koikatu.csproj", "{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -330,6 +332,10 @@ Global
 		{6F020ABD-6784-47E7-9526-1E8A83998942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F020ABD-6784-47E7-9526-1E8A83998942}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F020ABD-6784-47E7-9526-1E8A83998942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -383,6 +389,7 @@ Global
 		{AFC4EE66-2891-439A-925A-BAF22553E1BA} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{81E73402-3A7E-4ED3-B990-33C1B31FC205} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{6F020ABD-6784-47E7-9526-1E8A83998942} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
