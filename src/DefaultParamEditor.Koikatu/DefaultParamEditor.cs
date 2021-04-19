@@ -12,12 +12,13 @@ using UnityEngine.UI;
 
 namespace DefaultParamEditor.Koikatu
 {
-    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "DefaultParamEditor", Version)]
+    [BepInProcess(Constants.StudioProcessName)]
+    [BepInDependency(Sideloader.Sideloader.GUID)]
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.1.1." + BuildNumber.Version;
+        public const string Version = "1.1.2." + BuildNumber.Version;
 
         private static string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();

@@ -4,8 +4,8 @@ namespace DefaultParamEditor.Koikatu
 {
     internal class ParamData
     {
-        public CharaData charaParamData = new CharaData();
-        public SceneData sceneParamData = new SceneData();
+        public readonly CharaData charaParamData = new CharaData();
+        public readonly SceneData sceneParamData = new SceneData();
 
         public class CharaData
         {
@@ -41,6 +41,7 @@ namespace DefaultParamEditor.Koikatu
             public bool saved = false;
 
             public int aceNo;
+            public string aceNo_GUID;
             public float aceBlend;
             public bool enableAOE;
             public Color aoeColor;
@@ -65,6 +66,7 @@ namespace DefaultParamEditor.Koikatu
             public Color ambientShadow;
             public float lineWidthG;
             public int rampG;
+            public string rampG_GUID;
             public float ambientShadowG;
             public float cameraNearClip;
             public float fov;
