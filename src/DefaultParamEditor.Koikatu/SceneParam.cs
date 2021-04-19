@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Linq;
+using HarmonyLib;
+using Sideloader.AutoResolver;
 using Studio;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +26,13 @@ namespace DefaultParamEditor.Koikatu
             {
                 _sceneData.aceNo = sceneInfo.aceNo;
                 _sceneData.aceBlend = sceneInfo.aceBlend;
+                
+                var aceInfo = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.ResolveItem && x.LocalSlot == sceneInfo.aceNo);
+                if(aceInfo != null)
+                {
+                    _sceneData.aceNo = aceInfo.Slot;
+                    _sceneData.aceNo_GUID = aceInfo.GUID;
+                }
 
                 var aoe = Traverse.Create(systemButtonCtrl).Field("amplifyOcculusionEffectInfo").Property("aoe").GetValue<AmplifyOcclusionEffect>();
                 _sceneData.enableAOE = (bool)aoe.GetType().GetProperty("enabled").GetValue(aoe, null);
@@ -50,6 +59,13 @@ namespace DefaultParamEditor.Koikatu
                 _sceneData.enableShadow = (bool)toggleEnable.GetType().GetProperty("isOn").GetValue(toggleEnable, null);
 
                 _sceneData.rampG = sceneInfo.rampG;
+                var rampGInfo = UniversalAutoResolver.TryGetResolutionInfo(ChaListDefine.CategoryNo.mt_ramp, sceneInfo.rampG);
+                if(rampGInfo != null)
+                {
+                    _sceneData.rampG = rampGInfo.Slot;
+                    _sceneData.rampG_GUID = rampGInfo.GUID;
+                }
+                
                 _sceneData.ambientShadowG = sceneInfo.ambientShadowG;
                 _sceneData.lineWidthG = sceneInfo.lineWidthG;
                 _sceneData.lineColorG = sceneInfo.lineColorG;
@@ -80,6 +96,13 @@ namespace DefaultParamEditor.Koikatu
         private static void SetSceneInfoValues(SceneInfo sceneInfo)
         {
             sceneInfo.aceNo = _sceneData.aceNo;
+            if(!string.IsNullOrEmpty(_sceneData.aceNo_GUID))
+            {
+                var aceInfo = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.aceNo_GUID && x.Slot == _sceneData.aceNo);
+                if(aceInfo != null)
+                    sceneInfo.aceNo = aceInfo.LocalSlot;
+            }
+            
             sceneInfo.aceBlend = _sceneData.aceBlend;
             sceneInfo.enableAOE = _sceneData.enableAOE;
             sceneInfo.aoeColor = _sceneData.aoeColor;
@@ -100,7 +123,15 @@ namespace DefaultParamEditor.Koikatu
             sceneInfo.sunThresholdColor = _sceneData.sunThresholdColor;
             sceneInfo.sunColor = _sceneData.sunColor;
             sceneInfo.enableShadow = _sceneData.enableShadow;
+
             sceneInfo.rampG = _sceneData.rampG;
+            if(!string.IsNullOrEmpty(_sceneData.rampG_GUID))
+            {
+                var rampGInfo = UniversalAutoResolver.TryGetResolutionInfo(_sceneData.rampG, ChaListDefine.CategoryNo.mt_ramp, _sceneData.rampG_GUID);
+                if(rampGInfo != null)
+                    sceneInfo.rampG = rampGInfo.LocalSlot;
+            }
+            
             sceneInfo.ambientShadowG = _sceneData.ambientShadowG;
             sceneInfo.lineWidthG = _sceneData.lineWidthG;
             sceneInfo.lineColorG = _sceneData.lineColorG;
