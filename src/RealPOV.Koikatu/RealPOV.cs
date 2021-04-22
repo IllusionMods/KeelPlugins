@@ -1,3 +1,4 @@
+using System;
 using BepInEx;
 using HarmonyLib;
 using RealPOV.Core;
@@ -179,16 +180,24 @@ namespace RealPOV.Koikatu
                 
                 if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
                 {
-                    __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.Rotate(LookRotation);
+                    try
+                    {
+                        __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.Rotate(LookRotation);
 
-                    var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
-                    GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
-                    GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
-                    GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
-                    GameCamera.fieldOfView = CurrentFOV.Value;
+                        var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
+                        GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
+                        GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
+                        GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
+                        if (CurrentFOV != null) GameCamera.fieldOfView = CurrentFOV.Value;
 
+                    }
+                    catch (Exception e)
+                    {
+                        UnityEngine.Debug.LogError($"Crash in {nameof(ApplyRotation)}, turning POV off - {e.Message}");
+                        POVEnabled = false;
+                    }
                     return false;
                 }
             }
