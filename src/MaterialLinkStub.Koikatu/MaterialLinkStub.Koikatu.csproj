@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\BuildSettings.Common.props" />
+    <PropertyGroup>
+        <TargetFramework>net35</TargetFramework>
+        <AssemblyName>MaterialLink.Koikatu</AssemblyName>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" Version="2019.4.27.2" />
+        <PackageReference Include="IllusionLibs.Koikatu.UnityEngine" Version="5.6.2.2" />
+    </ItemGroup>
+</Project>
