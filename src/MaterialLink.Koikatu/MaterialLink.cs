@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
@@ -27,18 +25,21 @@ namespace MaterialLink.Koikatu
             Harmony.CreateAndPatchAll(typeof(MaterialLinkInfo));
         }
 
+        // color change
         [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCustomClothes))]
         private static void ChangeCustomClothes_Postfix(ChaControl __instance)
         {
             UpdateMaterials?.Invoke(__instance);
         }
         
+        // coordinate change
         [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.UpdateClothesStateAll))]
         private static void UpdateClothesStateAll_Postfix(ChaControl __instance)
         {
             UpdateMaterialsDelayed(__instance, 2);
         }
         
+        // character start
         [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.Initialize))]
         private static void Initialize_Postfix(ChaControl __instance)
         {
