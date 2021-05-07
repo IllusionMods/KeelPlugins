@@ -13,7 +13,7 @@ namespace MaterialLink.Koikatu
     {
         public const string GUID = "keelhauled.materiallink";
         public const string PluginName = "MaterialLink";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.0" + BuildNumber.Version;
 
         public static Action<ChaControl> UpdateMaterials;
 
