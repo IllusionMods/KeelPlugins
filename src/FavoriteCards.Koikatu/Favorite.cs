@@ -12,7 +12,7 @@ namespace FavoriteCards.Koikatu
     [BepInPlugin(GUID, "Favorite Cards", Version)]
     public class Favorite : BaseUnityPlugin
     {
-        public const string GUID = "keelhauled.itemlayeredit";
+        public const string GUID = "keelhauled.favoritecards";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
         private bool show;
