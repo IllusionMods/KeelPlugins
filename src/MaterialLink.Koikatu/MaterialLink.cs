@@ -1,4 +1,9 @@
-﻿using BepInEx;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using BepInEx;
+using HarmonyLib;
 using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(MaterialLink.Koikatu.MaterialLinkInfo.Version)]
@@ -11,6 +16,47 @@ namespace MaterialLink.Koikatu
         public const string GUID = "keelhauled.materiallink";
         public const string PluginName = "MaterialLink";
         public const string Version = "1.0.0";
+
+        public static Action<ChaControl> UpdateMaterials;
+
+        private static MaterialLinkInfo plugin;
+
+        private void Awake()
+        {
+            plugin = this;
+            Harmony.CreateAndPatchAll(typeof(MaterialLinkInfo));
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCustomClothes))]
+        private static void ChangeCustomClothes_Postfix(ChaControl __instance)
+        {
+            UpdateMaterials?.Invoke(__instance);
+        }
+        
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.UpdateClothesStateAll))]
+        private static void UpdateClothesStateAll_Postfix(ChaControl __instance)
+        {
+            UpdateMaterialsDelayed(__instance, 2);
+        }
+        
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.Initialize))]
+        private static void Initialize_Postfix(ChaControl __instance)
+        {
+            UpdateMaterialsDelayed(__instance, 10);
+        }
+
+        private static void UpdateMaterialsDelayed(ChaControl chara, int framesToWait)
+        {
+            plugin.StartCoroutine(Coroutine());
+
+            IEnumerator Coroutine()
+            {
+                for(int i = 0; i < framesToWait; i++)
+                    yield return null;
+                
+                UpdateMaterials?.Invoke(chara);
+            }
+        }
     }
 
     public class MaterialLink : MonoBehaviour
@@ -22,9 +68,21 @@ namespace MaterialLink.Koikatu
         private void Start()
         {
             chaControl = gameObject.GetComponentInParent<ChaControl>();
+            MaterialLinkInfo.UpdateMaterials += UpdateMaterialsIfSelf;
         }
 
-        private void Update()
+        private void OnDestroy()
+        {
+            MaterialLinkInfo.UpdateMaterials -= UpdateMaterialsIfSelf;
+        }
+
+        private void UpdateMaterialsIfSelf(ChaControl chara)
+        {
+            if(chara == chaControl)
+                UpdateMaterials();
+        }
+
+        private void UpdateMaterials()
         {
             if(chaControl != null && chaControl.customMatBody != null)
             {
