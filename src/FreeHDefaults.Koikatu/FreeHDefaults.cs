@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using ActionGame;
 using BepInEx;
 using ChaCustom;
 using FreeH;
 using HarmonyLib;
 using Manager;
 using UniRx;
+using UnityEngine.UI;
 
 namespace FreeHDefaults.Koikatu
 {
@@ -94,6 +93,13 @@ namespace FreeHDefaults.Koikatu
         private static void HookCancelButton(FreeHPreviewCharaList __instance)
         {
             __instance.onCancel += () => lastFileList = null;
+        }
+        
+        [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), "MasturbationSetup")]
+        private static void FixDiscoveryLogic(Toggle ___tglDiscoverySafeMasturbation, Toggle ___tglDiscoveryOutMasturbation, bool ___discovery)
+        {
+            ___tglDiscoverySafeMasturbation.isOn = !___discovery;
+            ___tglDiscoveryOutMasturbation.isOn = ___discovery;
         }
 
         private static T LoadChara<T>(string path, Func<ChaFileControl, T> action)
