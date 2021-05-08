@@ -52,6 +52,7 @@ namespace FreeHDefaults.Koikatu
             backData.heroine = LoadChara(saveData.HeroinePath, x => backData.heroine = new SaveData.Heroine(x, false));
             backData.partner = LoadChara(saveData.PartnerPath, x => backData.partner = new SaveData.Heroine(x, false));
             backData.player = LoadChara(saveData.PlayerPath, x => backData.player = new SaveData.Player(x, false));
+            backData.map = saveData.map;
             backData.timeZone = saveData.timeZone;
             backData.stageH1 = saveData.stageH1;
             backData.stageH2 = saveData.stageH2;
@@ -69,11 +70,12 @@ namespace FreeHDefaults.Koikatu
             member.resultPartner.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PartnerPath = y));
             member.resultPlayer.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PlayerPath = y));
 
-            member.resultTimeZone.Subscribe(x => SaveValue(() => saveData.timeZone = x));
-            member.resultStage1.Subscribe(x => SaveValue(() => saveData.stageH1 = x));
-            member.resultStage2.Subscribe(x => SaveValue(() => saveData.stageH2 = x));
-            member.resultStatus.Subscribe(x => SaveValue(() => saveData.statusH = x));
-            member.resultDiscovery.Subscribe(x => SaveValue(() => saveData.discovery = x));
+            member.resultMapInfo.Subscribe(x  => { if(x != null) saveData.map = x.No; SaveXml(); });
+            member.resultTimeZone.Subscribe(x => { saveData.timeZone = x; SaveXml(); });
+            member.resultStage1.Subscribe(x => { saveData.stageH1 = x; SaveXml(); });
+            member.resultStage2.Subscribe(x => { saveData.stageH2 = x; SaveXml(); });
+            member.resultStatus.Subscribe(x => { saveData.statusH = x; SaveXml(); });
+            member.resultDiscovery.Subscribe(x => { saveData.discovery = x; SaveXml(); });
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), "SetMainCanvasObject")]
@@ -122,12 +124,6 @@ namespace FreeHDefaults.Koikatu
                 action(fullPath);
                 SaveXml();
             }
-        }
-
-        private static void SaveValue(Action action)
-        {
-            action();
-            SaveXml();
         }
 
         private static void SaveXml()
