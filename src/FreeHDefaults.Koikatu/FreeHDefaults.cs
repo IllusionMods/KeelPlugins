@@ -21,7 +21,6 @@ namespace FreeHDefaults.Koikatu
         public const string Version = "1.0.0." + BuildNumber.Version;
 
         private static Harmony harmony;
-        private static FreeHDefaults plugin;
         private static List<CustomFileInfo> lastFileList;
         private static Savedata saveData = new Savedata();
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
@@ -31,7 +30,6 @@ namespace FreeHDefaults.Koikatu
         private void Start()
         {
             Log.SetLogSource(Logger);
-            plugin = this;
             harmony = Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
 
             if(File.Exists(saveFilePath))
@@ -40,7 +38,7 @@ namespace FreeHDefaults.Koikatu
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
             }
             
-            //TitleScene_Start();
+            TitleScene_Start();
         }
         private void OnDestroy() => harmony.UnpatchSelf();
 
@@ -59,85 +57,20 @@ namespace FreeHDefaults.Koikatu
             backData.categorys = new List<int>{ saveData.category };
         }
 
-        private static T LoadChara<T>(string path, Func<ChaFileControl, T> action)
+        [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), "NormalSetup")]
+        private static void HookProps(FreeHScene __instance)
         {
-            var chaFileControl = new ChaFileControl();
-            chaFileControl.LoadCharaFile(path, 1);
-            return action(chaFileControl);
-        }
+            var member = Traverse.Create(__instance).Field("member").GetValue<FreeHScene.Member>();
 
-        [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), "Start")]
-        private static void FreeHScene_Start_Postfix(FreeHScene __instance)
-        {
-            plugin.StartCoroutine(Delay());
-            
-            IEnumerator Delay()
-            {
-                yield return null;
-                yield return null;
-                
-                var member = Traverse.Create(__instance).Field("member").GetValue<FreeHScene.Member>();
+            member.resultHeroine.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.HeroinePath = y));
+            member.resultPartner.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PartnerPath = y));
+            member.resultPlayer.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PlayerPath = y));
 
-                member.resultHeroine.Where(x => x != null).Subscribe(x =>
-                {
-                    var fullPath = GetFullPath(x.charFile.charaFileName);
-                    if(!string.IsNullOrEmpty(fullPath))
-                    {
-                        saveData.HeroinePath = fullPath;
-                        SaveXml();
-                    }
-                });
-                
-                member.resultPartner.Where(x => x != null).Subscribe(x =>
-                {
-                    var fullPath = GetFullPath(x.charFile.charaFileName);
-                    if(!string.IsNullOrEmpty(fullPath))
-                    {
-                        saveData.PartnerPath = fullPath;
-                        SaveXml();
-                    }
-                });
-                
-                member.resultPlayer.Where(x => x != null).Subscribe(x =>
-                {
-                    var fullPath = GetFullPath(x.charFile.charaFileName);
-                    if(!string.IsNullOrEmpty(fullPath))
-                    {
-                        saveData.PlayerPath = fullPath;
-                        SaveXml();
-                    }
-                });
-
-                member.resultTimeZone.Subscribe(x =>
-                {
-                    saveData.timeZone = x;
-                    SaveXml();
-                });
-
-                member.resultStage1.Subscribe(x =>
-                {
-                    saveData.stageH1 = x;
-                    SaveXml();
-                });
-                
-                member.resultStage2.Subscribe(x =>
-                {
-                    saveData.stageH2 = x;
-                    SaveXml();
-                });
-
-                member.resultStatus.Subscribe(x =>
-                {
-                    saveData.statusH = x;
-                    SaveXml();
-                });
-                
-                member.resultDiscovery.Subscribe(x =>
-                {
-                    saveData.discovery = x;
-                    SaveXml();
-                });
-            }
+            member.resultTimeZone.Subscribe(x => SaveValue(() => saveData.timeZone = x));
+            member.resultStage1.Subscribe(x => SaveValue(() => saveData.stageH1 = x));
+            member.resultStage2.Subscribe(x => SaveValue(() => saveData.stageH2 = x));
+            member.resultStatus.Subscribe(x => SaveValue(() => saveData.statusH = x));
+            member.resultDiscovery.Subscribe(x => SaveValue(() => saveData.discovery = x));
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), "SetMainCanvasObject")]
@@ -150,8 +83,7 @@ namespace FreeHDefaults.Koikatu
         [HarmonyPostfix, HarmonyPatch(typeof(FreeHClassRoomCharaFile), "Start")]
         private static void UpdateFileList(FreeHClassRoomCharaFile __instance)
         {
-            var listCtrl = Traverse.Create(__instance).Field("listCtrl").GetValue<ClassRoomFileListCtrl>();
-            lastFileList = Traverse.Create(listCtrl).Field("lstFileInfo").GetValue<List<CustomFileInfo>>();
+            lastFileList = Traverse.Create(__instance).Field("listCtrl").Field("lstFileInfo").GetValue<List<CustomFileInfo>>();
         }
         
         [HarmonyPostfix, HarmonyPatch(typeof(FreeHPreviewCharaList), "Start")]
@@ -160,11 +92,29 @@ namespace FreeHDefaults.Koikatu
             __instance.onCancel += () => lastFileList = null;
         }
 
-        private static string GetFullPath(string fileName)
+        private static T LoadChara<T>(string path, Func<ChaFileControl, T> action)
         {
-            var path = lastFileList?.First(x => x.FileName == fileName.Remove(fileName.Length - 4)).FullPath;
+            var chaFileControl = new ChaFileControl();
+            chaFileControl.LoadCharaFile(path, 1);
+            return action(chaFileControl);
+        }
+
+        private static void SaveChara(ChaFile chaFile, Action<string> action)
+        {
+            var fullPath = lastFileList?.First(x => x.FileName == chaFile.charaFileName.Remove(chaFile.charaFileName.Length - 4)).FullPath;
             lastFileList = null;
-            return path;
+            
+            if(!string.IsNullOrEmpty(fullPath))
+            {
+                action(fullPath);
+                SaveXml();
+            }
+        }
+
+        private static void SaveValue(Action action)
+        {
+            action();
+            SaveXml();
         }
 
         private static void SaveXml()
