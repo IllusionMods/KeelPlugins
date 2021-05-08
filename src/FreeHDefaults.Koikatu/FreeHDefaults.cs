@@ -102,8 +102,11 @@ namespace FreeHDefaults.Koikatu
             ___tglDiscoveryOutMasturbation.isOn = ___discovery;
         }
 
-        private static T LoadChara<T>(string path, Func<ChaFileControl, T> action)
+        private static T LoadChara<T>(string path, Func<ChaFileControl, T> action) where T : SaveData.CharaData
         {
+            if(!File.Exists(path))
+                return null;
+            
             var chaFileControl = new ChaFileControl();
             chaFileControl.LoadCharaFile(path, 1);
             return action(chaFileControl);
