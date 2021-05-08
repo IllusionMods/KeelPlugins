@@ -37,10 +37,14 @@ namespace FreeHDefaults.Koikatu
                 using(var reader = new StreamReader(saveFilePath))
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
             }
-            
+
+#if DEBUG
             TitleScene_Start();
+#endif
         }
+#if DEBUG
         private void OnDestroy() => harmony.UnpatchSelf();
+#endif
 
         [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), "Start")]
         private static void TitleScene_Start()
