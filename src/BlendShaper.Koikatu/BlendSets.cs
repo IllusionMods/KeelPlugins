@@ -45,18 +45,15 @@ namespace BlendShaper.Koikatu
             {
                 Actions.Clear();
 
-                var skinnedMeshRenderers = chara.charInfo.animBody.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(x => x.sharedMesh && x.sharedMesh.blendShapeCount > 0);
+                var skinnedMeshRenderers = chara.charInfo.animBody.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(x => x.sharedMesh && x.sharedMesh.blendShapeCount > 0).ToList();
 
                 var firstShape = Shapes.First();
-                Value = skinnedMeshRenderers.FirstOrDefault((x) => x.name == firstShape.Renderer).GetBlendShapeWeight(firstShape.Index);
+                Value = skinnedMeshRenderers.FirstOrDefault(x => x.name == firstShape.Renderer).GetBlendShapeWeight(firstShape.Index);
 
                 foreach(var renderer in skinnedMeshRenderers)
                 {
-                    foreach(var shape in Shapes)
-                    {
-                        if(renderer.name == shape.Renderer)
-                            Actions.Add(() => renderer.SetBlendShapeWeight(shape.Index, Value));
-                    }
+                    foreach(var shape in Shapes.Where(shape => renderer.name == shape.Renderer))
+                        Actions.Add(() => renderer.SetBlendShapeWeight(shape.Index, Value));
                 }
             }
 
@@ -69,7 +66,7 @@ namespace BlendShaper.Koikatu
                 }
             }
 
-            public bool Enabled = false;
+            public bool Enabled;
             public float Value;
             public List<Action> Actions = new List<Action>();
 

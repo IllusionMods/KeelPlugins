@@ -113,7 +113,7 @@ namespace BlendShaper.Koikatu
                 slider.maxValue = 100f;
                 slider.minValue = 0f;
                 slider.value = set.Value;
-                slider.onValueChanged.AddListener((value) => set.ChangeValue(value));
+                slider.onValueChanged.AddListener(value => set.ChangeValue(value));
             }
         }
 

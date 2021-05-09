@@ -3,7 +3,4 @@
     <TargetFramework>net35</TargetFramework>
     <OutputPath>$(SolutionDir)bin\$(Configuration)\KeelPluginsKK</OutputPath>
   </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="IF EXIST &quot;$(SolutionDir)PostBuild.ps1&quot; powershell &quot;$(SolutionDir)PostBuild.ps1&quot; &quot;KK&quot; &quot;$(TargetPath)&quot; &quot;$(ProjectPath)&quot; &quot;$(ConfigurationName)&quot;" />
-  </Target>
 </Project>

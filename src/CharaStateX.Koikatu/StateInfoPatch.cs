@@ -39,7 +39,7 @@ namespace CharaStateX.Koikatu
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.SetCoordinateInfo((ChaFileDefine.CoordinateType)_value, false);
+                chara.SetCoordinateInfo((ChaFileDefine.CoordinateType)_value);
         }
 
         private static void Patch_OnClickShoesType(object __instance, ref int _value)

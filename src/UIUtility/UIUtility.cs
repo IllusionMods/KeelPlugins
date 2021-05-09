@@ -42,7 +42,7 @@ namespace UILib
         public static int defaultFontSize;
         public static DefaultControls.Resources resources;
 
-        private static bool _initCalled = false;
+        private static bool _initCalled;
 
         /// <summary>Initialize UIUtility for Koikatu</summary>
         /// <param name="callingAssembly">Use typeof(Type).Assembly to get this</param>

@@ -42,7 +42,7 @@ namespace PosePng.Koikatu
                     using(var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                     using(var binaryWriter = new BinaryWriter(fileStream))
                     {
-                        var buffer = Studio.Studio.Instance.gameScreenShot.CreatePngScreen(320, 180, false, false);
+                        var buffer = Studio.Studio.Instance.gameScreenShot.CreatePngScreen(320, 180);
                         binaryWriter.Write(buffer);
                         binaryWriter.Write(PauseCtrl.saveIdentifyingCode);
                         binaryWriter.Write(PauseCtrl.saveVersion);
@@ -65,13 +65,13 @@ namespace PosePng.Koikatu
             {
                 if(Path.GetExtension(_path).ToLower() == PngExt)
                 {
-                    var fileInfo = new PauseCtrl.FileInfo(null);
+                    var fileInfo = new PauseCtrl.FileInfo();
                     using(var fileStream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     using(var binaryReader = new BinaryReader(fileStream))
                     {
                         PngFile.SkipPng(binaryReader);
 
-                        if(string.Compare(binaryReader.ReadString(), PauseCtrl.saveIdentifyingCode) != 0)
+                        if(string.CompareOrdinal(binaryReader.ReadString(), PauseCtrl.saveIdentifyingCode) != 0)
                         {
                             __result = false;
                             return false;

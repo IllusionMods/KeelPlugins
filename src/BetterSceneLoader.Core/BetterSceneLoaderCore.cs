@@ -17,7 +17,7 @@ namespace BetterSceneLoader.Core
         public static ConfigEntry<bool> AutoClose { get; set; }
         public static ConfigEntry<bool> SmallWindow { get; set; }
 
-        internal static SceneLoaderUI SceneLoaderUI = new SceneLoaderUI();
+        internal static readonly SceneLoaderUI SceneLoaderUI = new SceneLoaderUI();
 
         protected virtual void Awake()
         {

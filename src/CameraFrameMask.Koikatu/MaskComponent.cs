@@ -4,8 +4,8 @@ namespace CameraFrameMask.Koikatu
 {
     public class MaskComponent : MonoBehaviour
     {
-        private int count = 0;
-        private RenderTexture lastFrame = null;
+        private int count;
+        private RenderTexture lastFrame;
         private int lastWidth;
         private int lastHeight;
 

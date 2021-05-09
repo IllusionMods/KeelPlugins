@@ -27,7 +27,7 @@ namespace KeelPlugins.Utils
         internal readonly Dictionary<K, V> baseDictionary = new Dictionary<K, V>();
         internal readonly Dictionary<L, K> subDictionary = new Dictionary<L, K>();
         internal readonly Dictionary<K, L> primaryToSubkeyMapping = new Dictionary<K, L>();
-        private ReaderWriterLockSlim readerWriterLock = new ReaderWriterLockSlim();
+        private readonly ReaderWriterLockSlim readerWriterLock = new ReaderWriterLockSlim();
 
         public V this[L subKey]
         {
@@ -36,7 +36,7 @@ namespace KeelPlugins.Utils
                 if(TryGetValue(subKey, out V item))
                     return item;
 
-                throw new KeyNotFoundException("sub key not found: " + subKey.ToString());
+                throw new KeyNotFoundException("sub key not found: " + subKey);
             }
         }
 
@@ -47,7 +47,7 @@ namespace KeelPlugins.Utils
                 if(TryGetValue(primaryKey, out V item))
                     return item;
 
-                throw new KeyNotFoundException("primary key not found: " + primaryKey.ToString());
+                throw new KeyNotFoundException("primary key not found: " + primaryKey);
             }
         }
 
@@ -58,7 +58,7 @@ namespace KeelPlugins.Utils
             try
             {
                 if(!baseDictionary.ContainsKey(primaryKey))
-                    throw new KeyNotFoundException(string.Format("The base dictionary does not contain the key '{0}'", primaryKey));
+                    throw new KeyNotFoundException($"The base dictionary does not contain the key '{primaryKey}'");
 
                 if(primaryToSubkeyMapping.ContainsKey(primaryKey)) // Remove the old mapping first
                 {
@@ -207,7 +207,7 @@ namespace KeelPlugins.Utils
 
             try
             {
-                V[] values = new V[baseDictionary.Values.Count];
+                var values = new V[baseDictionary.Values.Count];
 
                 baseDictionary.Values.CopyTo(values, 0);
 
@@ -242,7 +242,7 @@ namespace KeelPlugins.Utils
 
             try
             {
-                K[] values = new K[baseDictionary.Keys.Count];
+                var values = new K[baseDictionary.Keys.Count];
 
                 baseDictionary.Keys.CopyTo(values, 0);
 
@@ -260,7 +260,7 @@ namespace KeelPlugins.Utils
 
             try
             {
-                L[] values = new L[subDictionary.Keys.Count];
+                var values = new L[subDictionary.Keys.Count];
 
                 subDictionary.Keys.CopyTo(values, 0);
 

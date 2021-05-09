@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LockOnPlugin.Koikatu
 {
-    internal partial class HSceneMono : LockOnBase
+    internal class HSceneMono : LockOnBase
     {
         private CameraControl_Ver2 camera = Singleton<CameraControl_Ver2>.Instance;
 

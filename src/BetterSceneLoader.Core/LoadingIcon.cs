@@ -15,9 +15,9 @@ namespace BetterSceneLoader.Core
             rotator.speed = speed;
         }
 
-        public static Dictionary<string, bool> loadingState = new Dictionary<string, bool>();
-        private bool rotate = false;
-        private bool prevState = false;
+        public static readonly Dictionary<string, bool> loadingState = new Dictionary<string, bool>();
+        private bool rotate;
+        private bool prevState;
         private Image image;
         private float speed;
 

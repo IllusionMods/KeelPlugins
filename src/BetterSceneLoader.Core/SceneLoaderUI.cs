@@ -18,7 +18,7 @@ namespace BetterSceneLoader.Core
 {
     public class SceneLoaderUI
     {
-        private static string scenePath = BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene");
+        private static readonly string scenePath = BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene");
 
         private float buttonSize = 10f;
         private float marginSize = 5f;
@@ -27,9 +27,9 @@ namespace BetterSceneLoader.Core
         private float scrollOffsetX = -15f;
         private float windowMargin = 130f;
 
-        private Color dragColor = new Color(0.4f, 0.4f, 0.4f, 1f);
-        private Color backgroundColor = new Color(1f, 1f, 1f, 1f);
-        private Color outlineColor = new Color(0f, 0f, 0f, 1f);
+        private readonly Color dragColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+        private readonly Color backgroundColor = new Color(1f, 1f, 1f, 1f);
+        private readonly Color outlineColor = new Color(0f, 0f, 0f, 1f);
 
         private Canvas UISystem;
         private Image mainPanel;
@@ -78,10 +78,7 @@ namespace BetterSceneLoader.Core
 
             if(mainPanel)
             {
-                if(BetterSceneLoaderCore.SmallWindow.Value)
-                    mainPanel.transform.SetRect(0.5f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
-                else
-                    mainPanel.transform.SetRect(0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
+                mainPanel.transform.SetRect(BetterSceneLoaderCore.SmallWindow.Value ? 0.5f : 0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
             }
         }
 
@@ -122,7 +119,7 @@ namespace BetterSceneLoader.Core
             category.captionText.transform.SetRect(0f, 0f, 1f, 1f, 0f, 2f, -15f, -2f);
             category.captionText.alignment = TextAnchor.MiddleCenter;
             category.options = GetCategories();
-            category.onValueChanged.AddListener((x) =>
+            category.onValueChanged.AddListener(x =>
             {
                 currentCategoryFolder = CategoryFolders[category.options[x].text];
                 imagelist.content.GetComponentInChildren<Image>().gameObject.SetActive(false);
@@ -132,7 +129,7 @@ namespace BetterSceneLoader.Core
 
             var refresh = UIUtility.CreateButton("RefreshButton", drag.transform, "Refresh");
             refresh.transform.SetRect(0f, 0f, 0f, 1f, 100f, 0f, 180f);
-            refresh.onClick.AddListener(() => ReloadImages());
+            refresh.onClick.AddListener(ReloadImages);
 
             var save = UIUtility.CreateButton("SaveButton", drag.transform, "Save");
             save.transform.SetRect(0f, 0f, 0f, 1f, 180f, 0f, 260f);
@@ -212,7 +209,7 @@ namespace BetterSceneLoader.Core
             });
 
             var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.pluginicon"));
-            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, x => ShowWindow(x));
+            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
 
             UpdateWindow();
             PopulateGrid();
@@ -266,7 +263,7 @@ namespace BetterSceneLoader.Core
             else
             {
                 var scenefiles = Directory.GetFiles(currentCategoryFolder, "*.png").Select(x => new KeyValuePair<DateTime, string>(File.GetLastWriteTime(x), x)).ToList();
-                scenefiles.Sort((KeyValuePair<DateTime, string> a, KeyValuePair<DateTime, string> b) => b.Key.CompareTo(a.Key));
+                scenefiles.Sort((a, b) => b.Key.CompareTo(a.Key));
 
                 var container = UIUtility.CreatePanel("GridContainer", imagelist.content.transform);
                 container.transform.SetRect(0f, 0f, 1f, 1f);

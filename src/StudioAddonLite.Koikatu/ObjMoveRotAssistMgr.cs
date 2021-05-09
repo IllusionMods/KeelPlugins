@@ -18,7 +18,7 @@ namespace StudioAddonLite.Koikatu
         private GuideObject firstTarget;
         private Dictionary<int, GuideObject> targets = new Dictionary<int, GuideObject>();
 
-        private Dictionary<KEY, KeyboardShortcut> rotationKeys = new Dictionary<KEY, KeyboardShortcut>()
+        private readonly Dictionary<KEY, KeyboardShortcut> rotationKeys = new Dictionary<KEY, KeyboardShortcut>
         {
             { KEY.OBJ_ROT_X, StudioAddonLite.KEY_OBJ_ROT_X.Value },
             { KEY.OBJ_ROT_Y, StudioAddonLite.KEY_OBJ_ROT_Y.Value },
@@ -313,21 +313,18 @@ namespace StudioAddonLite.Koikatu
                 var vector = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, Input.mousePosition.z);
                 Ray ray = mainCmaera.ScreenPointToRay(vector);
                 ray.direction = new Vector3(ray.direction.x, 0f, ray.direction.z);
-                Vector3 vector2 = ray.direction * -1f * delta.z;
+                Vector3 vector2 = ray.direction * (-1f * delta.z);
                 ray.direction = Quaternion.LookRotation(ray.direction) * Vector3.right;
-                vector2 += ray.direction * -1f * delta.x;
+                vector2 += ray.direction * (-1f * delta.x);
                 vector2.y = delta.y;
                 delta = vector2;
             }
 
-            delta = delta * Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.MOVE_RATIO.Value;
-            foreach(GuideObject guideObject in targets.Values)
+            delta *= Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.MOVE_RATIO.Value;
+            foreach(var guideObject in targets.Values.Where(guideObject => guideObject.enablePos))
             {
-                if(guideObject.enablePos)
-                {
-                    guideObject.transformTarget.position += delta;
-                    guideObject.changeAmount.pos = guideObject.transformTarget.localPosition;
-                }
+                guideObject.transformTarget.position += delta;
+                guideObject.changeAmount.pos = guideObject.transformTarget.localPosition;
             }
         }
 
@@ -339,7 +336,7 @@ namespace StudioAddonLite.Koikatu
 
         private void Rotate(Vector3 delta)
         {
-            delta = delta * Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.ROTATE_RATIO.Value;
+            delta *= Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.ROTATE_RATIO.Value;
 
             foreach(GuideObject guideObject in targets.Values)
             {
@@ -404,7 +401,7 @@ namespace StudioAddonLite.Koikatu
 
         private void Scale(Vector3 scaleDelta)
         {
-            Vector3 vector = scaleDelta * Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.SCALE_RATIO.Value;
+            Vector3 vector = scaleDelta * (Studio.Studio.optionSystem.manipuleteSpeed * StudioAddonLite.SCALE_RATIO.Value);
             foreach(GuideObject guideObject in targets.Values)
             {
                 if(guideObject.enableRot)

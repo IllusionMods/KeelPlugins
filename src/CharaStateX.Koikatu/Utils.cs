@@ -16,7 +16,7 @@ namespace CharaStateX.Koikatu
         public static IEnumerable<OCIChar> GetAllSelectedButMain(object __instance)
         {
             var mainChara = GetMainChara(__instance);
-            return GetSelectedCharacters().Where((chara) => chara != mainChara);
+            return GetSelectedCharacters().Where(chara => chara != mainChara);
         }
 
         public static OCIChar GetMainChara(object __instance)

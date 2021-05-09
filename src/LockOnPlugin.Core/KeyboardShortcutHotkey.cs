@@ -9,8 +9,8 @@ namespace LockOnPlugin.Core
     internal class KeyboardShortcutHotkey
     {
         private KeyboardShortcut key;
-        private float procTime = 0f;
-        private float timeHeld = 0f;
+        private float procTime;
+        private float timeHeld;
         private bool released = true;
         private bool enabled = true;
 

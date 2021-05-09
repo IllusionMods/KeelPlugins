@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace DefaultParamEditor.Koikatu
 {
-    internal class SceneParam
+    internal static class SceneParam
     {
         private static ParamData.SceneData _sceneData;
 
@@ -138,7 +138,7 @@ namespace DefaultParamEditor.Koikatu
             sceneInfo.ambientShadow = _sceneData.ambientShadow;
         }
 
-        private class Hooks
+        private static class Hooks
         {
             [HarmonyPostfix, HarmonyPatch(typeof(SceneInfo), nameof(SceneInfo.Init))]
             public static void HarmonyPatch_SceneInfo_Init(SceneInfo __instance)

@@ -29,7 +29,7 @@ namespace MakerBridge.Core
             {
                 try
                 {
-                    using(var file = File.Open(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
+                    using(File.Open(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read)){ }
                     fileIsBusy = false;
                 }
                 catch(IOException)

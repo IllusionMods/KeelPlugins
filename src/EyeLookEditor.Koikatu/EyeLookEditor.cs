@@ -27,7 +27,7 @@ namespace EyeLookEditor.Koikatu
             var category = new MakerCategory(irisCategory.CategoryName, "eyelookeditor", irisCategory.Position, "EyeLookEditor");
             e.AddSubCategory(category);
 
-            var stringToValue = new Func<string, float>(txt => float.Parse(txt));
+            var stringToValue = new Func<string, float>(float.Parse);
             var valueToString = new Func<float, string>(f => f.ToString("0.#"));
 
             var slider_thresholdAngleDifference = e.AddControl(new MakerSlider(category, "thresholdAngleDifference", -10f, 10f, DefaultValue.ThresholdAngleDifference, this) { StringToValue = stringToValue, ValueToString = valueToString });

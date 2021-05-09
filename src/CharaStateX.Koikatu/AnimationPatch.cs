@@ -15,7 +15,7 @@ namespace CharaStateX.Koikatu
             var listPath = traverse.Field("listPath").GetValue<List<string>>();
             var select = traverse.Field("select").GetValue<int>();
 
-            foreach(var chara in Utils.GetSelectedCharacters().Where((chara) => chara != __instance.ociChar))
+            foreach(var chara in Utils.GetSelectedCharacters().Where(chara => chara != __instance.ociChar))
                 PauseCtrl.Load(chara, listPath[select]);
         }
 
@@ -32,7 +32,7 @@ namespace CharaStateX.Koikatu
                     float param2 = chara.animeOptionParam2;
 
                     var soup = sexMatch ? MatchCategory(chara.sex, _group) : _group;
-                    chara.LoadAnime(soup, _category, _no, 0f);
+                    chara.LoadAnime(soup, _category, _no);
 
                     chara.animeOptionParam1 = param1;
                     chara.animeOptionParam2 = param2;
@@ -43,7 +43,7 @@ namespace CharaStateX.Koikatu
             float animeOptionParam2 = __instance.ociChar.animeOptionParam2;
 
             int group = sexMatch ? MatchCategory(__instance.ociChar.sex, _group) : _group;
-            __instance.ociChar.LoadAnime(group, _category, _no, 0f);
+            __instance.ociChar.LoadAnime(group, _category, _no);
             Traverse.Create(__instance).Field("animeControl").Method("UpdateInfo").GetValue();
 
             __instance.ociChar.animeOptionParam1 = animeOptionParam1;

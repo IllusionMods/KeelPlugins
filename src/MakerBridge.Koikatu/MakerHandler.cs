@@ -33,13 +33,13 @@ namespace MakerBridge.Koikatu
                 charFile.pngData = empty.EncodeToPNG();
                 charFile.facePngData = empty.EncodeToPNG();
 
-                customBase.chaCtrl.chaFile.SaveCharaFile(path, byte.MaxValue, false);
+                customBase.chaCtrl.chaFile.SaveCharaFile(path);
             }
         }
 
         private void LoadChara(string path)
         {
-            var cfw = GameObject.FindObjectsOfType<CustomFileWindow>().FirstOrDefault(x => x.fwType == CustomFileWindow.FileWindowType.CharaLoad);
+            var cfw = FindObjectsOfType<CustomFileWindow>().FirstOrDefault(x => x.fwType == CustomFileWindow.FileWindowType.CharaLoad);
             var loadFace = true;
             var loadBody = true;
             var loadHair = true;
@@ -68,7 +68,7 @@ namespace MakerBridge.Koikatu
                 MakerBridgeCore.LogMsg("Warning: The character's sex has been changed to match the editor mode.");
             }
 
-            chaCtrl.ChangeCoordinateType(true);
+            chaCtrl.ChangeCoordinateType();
             chaCtrl.Reload(!loadCoord, !loadFace && !loadCoord, !loadHair, !loadBody);
             CustomBase.Instance.updateCustomUI = true;
 

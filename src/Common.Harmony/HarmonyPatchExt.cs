@@ -7,8 +7,8 @@ namespace KeelPlugins.Harmony
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public sealed class HarmonyPatchExtAttribute : Attribute
     {
-        private MethodInfo targetMethod;
-        private bool firstRun = true;
+        private readonly MethodInfo targetMethod;
+        private readonly bool firstRun = true;
 
         public HarmonyPatchExtAttribute(Type targetType, string targetMethodName, Type[] paramTypes = null, Type[] genericTypes = null)
         {

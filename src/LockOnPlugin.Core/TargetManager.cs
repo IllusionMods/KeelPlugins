@@ -47,7 +47,7 @@ namespace LockOnPlugin.Core
 
         private void UpdateCustomTargetTransforms()
         {
-            for(int i = 0; i < customTargets.Count; i++) customTargets[i].UpdateTransform();
+            customTargets.ForEach(x => x.UpdateTransform());
             centerPoint?.UpdatePosition();
         }
 
@@ -100,12 +100,7 @@ namespace LockOnPlugin.Core
 
             foreach(var data in TargetData.data.customTargets)
             {
-                bool targetInUse = false;
-
-                if(TargetData.data.quickTargets.Contains(data.target))
-                {
-                    targetInUse = true;
-                }
+                bool targetInUse = TargetData.data.quickTargets.Contains(data.target);
 
                 if(!targetInUse)
                 {

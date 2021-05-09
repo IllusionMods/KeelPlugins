@@ -27,7 +27,7 @@ namespace CharaStateX.Koikatu
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.ChangeLookEyesPtn(_no, false);
+                chara.ChangeLookEyesPtn(_no);
         }
 
         private static void Patch_NeckInfo_OnClick(object __instance, ref int _idx)

@@ -1,7 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using BepInEx.Logging;
-using Illusion;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

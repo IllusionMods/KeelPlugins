@@ -28,7 +28,7 @@ namespace CharaStateX.Koikatu
 
         private static void PatchKKPE(Harmony harmony)
         {
-            var ass = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault((x) => x.FullName.Contains("KKPE,"));
+            var ass = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.FullName.Contains("KKPE,"));
 
             if(ass != null)
             {
@@ -46,7 +46,7 @@ namespace CharaStateX.Koikatu
             var _leftFootCorrectionToggle = traverse.Field("_leftFootCorrectionToggle").GetValue<Toggle>();
             var _rightFootCorrectionToggle = traverse.Field("_rightFootCorrectionToggle").GetValue<Toggle>();
 
-            _crotchCorrectionToggle.onValueChanged.AddListener((x) =>
+            _crotchCorrectionToggle.onValueChanged.AddListener(x =>
             {
                 try
                 {
@@ -66,7 +66,7 @@ namespace CharaStateX.Koikatu
                 }
             });
 
-            _leftFootCorrectionToggle.onValueChanged.AddListener((x) =>
+            _leftFootCorrectionToggle.onValueChanged.AddListener(x =>
             {
                 try
                 {
@@ -86,7 +86,7 @@ namespace CharaStateX.Koikatu
                 }
             });
 
-            _rightFootCorrectionToggle.onValueChanged.AddListener((x) =>
+            _rightFootCorrectionToggle.onValueChanged.AddListener(x =>
             {
                 try
                 {

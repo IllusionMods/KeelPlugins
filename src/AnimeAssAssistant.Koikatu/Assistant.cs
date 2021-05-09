@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
-using UniRx;
 using UnityEngine;
 
 namespace AnimeAssAssistant.Koikatu
@@ -150,7 +149,7 @@ namespace AnimeAssAssistant.Koikatu
                 Log.Message("Warning: The character's sex has been changed to match the editor mode.");
             }
 
-            chaCtrl.ChangeCoordinateType(true);
+            chaCtrl.ChangeCoordinateType();
             chaCtrl.Reload(!loadCoord, !loadFace && !loadCoord, !loadHair, !loadBody);
             CustomBase.Instance.updateCustomUI = true;
         }

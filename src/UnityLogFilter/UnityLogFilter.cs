@@ -20,8 +20,8 @@ namespace UnityLogFilter
         public static void Patch(AssemblyDefinition ass) { }
 
         private static Harmony Harmony;
-        private static List<Regex> filters = new List<Regex>();
-        private static string filterFilePath = Path.Combine(BepInEx.Paths.ConfigPath, "UnityLogFilter.txt");
+        private static readonly List<Regex> filters = new List<Regex>();
+        private static readonly string filterFilePath = Path.Combine(BepInEx.Paths.ConfigPath, "UnityLogFilter.txt");
 
         public static void Finish()
         {
@@ -65,7 +65,7 @@ namespace UnityLogFilter
         {
             bool isValid = true;
 
-            if((testPattern != null) && (testPattern.Trim().Length > 0))
+            if(testPattern != null && testPattern.Trim().Length > 0)
             {
                 try
                 {
