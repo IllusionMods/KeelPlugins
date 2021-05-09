@@ -109,7 +109,7 @@ namespace LockOnPlugin.Core
                         if(target.point1 == data.target || target.point2 == data.target)
                         {
                             targetInUse = true;
-                            continue;
+                            break;
                         }
                     }
                 }
