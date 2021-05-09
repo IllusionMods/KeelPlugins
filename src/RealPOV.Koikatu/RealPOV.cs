@@ -56,7 +56,7 @@ namespace RealPOV.Koikatu
             {
                 currentChara = ((OCIChar)chara).charInfo;
                 currentCharaId = chara.objectInfo.dicKey;
-                LookRotation = povData.Rotation;
+                LookRotation[currentCharaGo] = povData.Rotation;
                 CurrentFOV = povData.Fov;
                 plugin.EnablePov();
             }
@@ -71,7 +71,7 @@ namespace RealPOV.Koikatu
             {
                 CharaId = currentCharaId,
                 Fov = CurrentFOV.Value,
-                Rotation = LookRotation
+                Rotation = LookRotation[currentCharaGo]
             };
         }
 
@@ -87,6 +87,7 @@ namespace RealPOV.Koikatu
                         var ociChar = selectedCharas.First();
                         currentChara = ociChar.charInfo;
                         currentCharaId = ociChar.objectInfo.dicKey;
+                        currentCharaGo = currentChara.gameObject;
                     }
                     else
                     {
@@ -128,6 +129,8 @@ namespace RealPOV.Koikatu
                         charaQueue = CreateQueue();
                         currentChara = GetCurrentChara();
                     }
+
+                    currentCharaGo = currentChara.gameObject;
                 }
             }
 
@@ -143,7 +146,8 @@ namespace RealPOV.Koikatu
                 var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
 
-                //LookRotation = currentChara.objHeadBone.transform.rotation.eulerAngles;
+                if(!LookRotation.TryGetValue(currentCharaGo, out _))
+                    LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
 
                 base.EnablePov();
 
@@ -176,12 +180,18 @@ namespace RealPOV.Koikatu
                     POVEnabled = false;
                     return true;
                 }
-                
+
+                Vector3 rot;
+                if(LookRotation.TryGetValue(currentCharaGo, out var val))
+                    rot = val;
+                else
+                    LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
+
                 if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
                 {
                     __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
                     __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.Rotate(LookRotation);
+                    __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
 
                     var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
                     GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
@@ -194,6 +204,12 @@ namespace RealPOV.Koikatu
             }
 
             return true;
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+        private static void ResetAllRotations()
+        {
+            LookRotation.Clear();
         }
     }
 }

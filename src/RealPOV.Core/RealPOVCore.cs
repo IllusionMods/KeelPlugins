@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System.Collections.Generic;
+using BepInEx;
 using BepInEx.Configuration;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,7 +21,8 @@ namespace RealPOV.Core
 
         protected static bool POVEnabled;
         protected static float? CurrentFOV;
-        protected static Vector3 LookRotation;
+        protected static readonly Dictionary<GameObject, Vector3> LookRotation = new Dictionary<GameObject, Vector3>();
+        protected static GameObject currentCharaGo;
         protected static Camera GameCamera;
         protected static float defaultViewOffset = 0.03f;
         protected static float defaultFov = 70f;
@@ -98,9 +100,13 @@ namespace RealPOV.Core
                 {
                     if(mouseButtonDown0)
                     {
-                        var x = Input.GetAxis("Mouse X") * MouseSens.Value;
-                        var y = -Input.GetAxis("Mouse Y") * MouseSens.Value;
-                        LookRotation += new Vector3(y, x, 0f);
+                        if(LookRotation.ContainsKey(currentCharaGo))
+                        {
+                            var x = Input.GetAxis("Mouse X") * MouseSens.Value;
+                            var y = -Input.GetAxis("Mouse Y") * MouseSens.Value;
+                            LookRotation[currentCharaGo] += new Vector3(y, x, 0f);
+                        }
+                            
                     }
                     else if(mouseButtonDown1)
                     {
@@ -122,6 +128,7 @@ namespace RealPOV.Core
 
         protected virtual void DisablePov()
         {
+            currentCharaGo = null;
             POVEnabled = false;
             GameCamera.fieldOfView = backupFOV;
             GameCamera.nearClipPlane = backupNearClip;
