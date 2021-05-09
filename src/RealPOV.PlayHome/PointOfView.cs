@@ -14,7 +14,7 @@ namespace RealPOV.PlayHome
         private static Male male;
 
         private bool OnUI => EventSystem.current && EventSystem.current.IsPointerOverGameObject();
-        private bool dragging = false;
+        private bool dragging;
 
         private Vector3 FemaleOffset => new Vector3(RealPOV.FemaleOffsetX.Value, RealPOV.FemaleOffsetY.Value, RealPOV.FemaleOffsetZ.Value);
         private Vector3 MaleOffset => new Vector3(RealPOV.MaleOffsetX.Value, RealPOV.MaleOffsetY.Value, RealPOV.MaleOffsetZ.Value);
@@ -23,7 +23,7 @@ namespace RealPOV.PlayHome
         private LookAtRotator.TYPE neckBackup;
         private LookAtRotator.TYPE femEyeBackup;
 
-        private static Vector3 rotation = new Vector3();
+        private static Vector3 rotation;
 
         private Harmony harmony;
 

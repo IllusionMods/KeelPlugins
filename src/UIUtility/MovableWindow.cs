@@ -8,7 +8,7 @@ namespace UILib
     {
         private Vector2 _cachedDragPosition;
         private Vector2 _cachedMousePosition;
-        private bool _pointerDownCalled = false;
+        private bool _pointerDownCalled;
         private BaseCameraControl _cameraControl;
         private BaseCameraControl.NoCtrlFunc _noControlFunctionCached;
 
@@ -22,7 +22,7 @@ namespace UILib
         protected override void Awake()
         {
             base.Awake();
-            _cameraControl = GameObject.FindObjectOfType<BaseCameraControl>();
+            _cameraControl = FindObjectOfType<BaseCameraControl>();
         }
 
         public void OnPointerDown(PointerEventData eventData)

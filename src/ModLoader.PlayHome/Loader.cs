@@ -18,8 +18,8 @@ namespace ModLoader.PlayHome
 
         private static string modFolder;
         private static string[] modFolders;
-        private static Dictionary<string, string> bundleAbdata = new Dictionary<string, string>();
-        private static Dictionary<string, string> thumbAbdata = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> bundleAbdata = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> thumbAbdata = new Dictionary<string, string>();
 
         private void Awake()
         {
@@ -46,7 +46,7 @@ namespace ModLoader.PlayHome
                 {
                     var key = bundle.Substring(@"abdata\");
 
-                    if(bundleAbdata.TryGetValue(key, out var value))
+                    if(bundleAbdata.TryGetValue(key, out _))
                         Log.Warning($"Duplicate assetbundle {key}");
                     else
                         bundleAbdata.Add(key, abdataDir);
@@ -122,7 +122,7 @@ namespace ModLoader.PlayHome
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(ItemDataBase), MethodType.Constructor, new[] { typeof(int), typeof(string), typeof(string), typeof(int), typeof(bool) })]
+        [HarmonyPatch(typeof(ItemDataBase), MethodType.Constructor, typeof(int), typeof(string), typeof(string), typeof(int), typeof(bool))]
         private static void ExtendIds(ref int ___id, int id)
         {
             ___id = id > 999999 && id < 1000000000 ? id : id % 1000;
@@ -169,7 +169,7 @@ namespace ModLoader.PlayHome
                                 prefabData.assetbundleDir = abdataDir;
                             }
 
-                            abc.Close(false);
+                            abc.Close();
                         }
                     }
                 }

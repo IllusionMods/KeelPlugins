@@ -89,7 +89,7 @@ namespace ClothingStateMenuX.Koikatu
             CreateClothingStateButtons("Legwear", ChaFileDefine.ClothesKind.socks, 2);
             CreateClothingStateButtons("Shoes", ChaFileDefine.ClothesKind.shoes_inner, 2);
 
-            GameObject CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind, int buttons)
+            void CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind, int buttons)
             {
                 var container = CreateContainer(22, index + counter++);
 
@@ -113,8 +113,6 @@ namespace ClothingStateMenuX.Koikatu
 
                 var buttonOff = CreateButton("Off", 10, () => character.SetClothesState((int)kind, 3), container.transform);
                 buttonOff.transform.SetRect(pos, 0f, pos += step, 1f);
-
-                return container;
             }
         }
 

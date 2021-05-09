@@ -19,7 +19,6 @@ namespace FreeHDefaults.Koikatu
         public const string GUID = "keelhauled.freehdefaults";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
-        private static Harmony harmony;
         private static List<CustomFileInfo> lastFileList;
         private static Savedata saveData = new Savedata();
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
@@ -29,21 +28,14 @@ namespace FreeHDefaults.Koikatu
         private void Start()
         {
             Log.SetLogSource(Logger);
-            harmony = Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
+            Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
 
             if(File.Exists(saveFilePath))
             {
                 using(var reader = new StreamReader(saveFilePath))
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
             }
-
-#if DEBUG
-            TitleScene_Start();
-#endif
         }
-#if DEBUG
-        private void OnDestroy() => harmony.UnpatchSelf();
-#endif
 
         [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), "Start")]
         private static void TitleScene_Start()

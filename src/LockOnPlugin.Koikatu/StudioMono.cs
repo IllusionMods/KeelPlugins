@@ -1,14 +1,13 @@
 ﻿using HarmonyLib;
 using LockOnPlugin.Core;
 using Studio;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace LockOnPlugin.Koikatu
 {
-    internal partial class StudioMono : LockOnBase
+    internal class StudioMono : LockOnBase
     {
         protected override float CameraMoveSpeed
         {
@@ -64,8 +63,8 @@ namespace LockOnPlugin.Koikatu
             base.Start();
 
             cameraData = Traverse.Create(camera).Field("cameraData").GetValue<Studio.CameraControl.CameraData>();
-            treeNodeCtrl.onSelect += new Action<TreeNodeObject>(OnSelectWork);
-            studio.onDelete += new Action<ObjectCtrlInfo>(OnDeleteWork);
+            treeNodeCtrl.onSelect += OnSelectWork;
+            studio.onDelete += OnDeleteWork;
             var systemMenuContent = studio.transform.Find("Canvas Main Menu/04_System/Viewport/Content");
             systemMenuContent.Find("Load").GetComponent<Button>().onClick.AddListener(ResetModState);
             Guitime.pos = new Vector2(1f, 1f);

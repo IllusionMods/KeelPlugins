@@ -14,7 +14,7 @@ namespace CameraFrameMask.Koikatu
         public const string Version = "1.0.1." + BuildNumber.Version;
 
         private static MaskComponent maskComponent;
-        private static bool inStudio = Paths.ProcessName == "CharaStudio";
+        private static readonly bool inStudio = Paths.ProcessName == "CharaStudio";
 
         private void Awake()
         {

@@ -1,6 +1,7 @@
 ﻿using LightManager.Core;
 using Studio;
 using System.Collections.Generic;
+using System.Globalization;
 using UILib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,14 +46,13 @@ namespace LightManager.Koikatu
         {
             if(Studio.Studio.Instance.dicInfo.TryGetValue(node, out ObjectCtrlInfo objectCtrlInfo))
             {
-                if(objectCtrlInfo is OCILight)
+                if(objectCtrlInfo is OCILight ocilight)
                 {
-                    var ocilight = objectCtrlInfo as OCILight;
                     var tracker = ocilight.light.gameObject.GetComponent<TrackTransform>();
                     if(tracker)
                     {
                         targetText.text = tracker.targetName;
-                        speedField.text = tracker.rotationSpeed.ToString();
+                        speedField.text = tracker.rotationSpeed.ToString(CultureInfo.InvariantCulture);
                     }
                     else
                     {
@@ -65,8 +65,8 @@ namespace LightManager.Koikatu
 
         private void ExtraLightUI(Transform parent)
         {
-            float width = 50f;
-            float height = 50f;
+            const float width = 50f;
+            const float height = 50f;
 
             mainPanel = UIUtility.CreatePanel("LightManagerPanel", parent);
             mainPanel.color = new Color(0.41f, 0.42f, 0.43f, 1f);
@@ -92,7 +92,7 @@ namespace LightManager.Koikatu
             speedField.transform.SetRect(0.6f, 0.08f, 0.9f, 0.32f);
             speedField.text = "1";
             speedField.textComponent.alignment = TextAnchor.MiddleCenter;
-            speedField.onEndEdit.AddListener((input) => UpdateSelectedTrackers(input));
+            speedField.onEndEdit.AddListener(UpdateSelectedTrackers);
         }
 
         private void UpdateSelectedTrackers(string input)

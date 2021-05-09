@@ -20,7 +20,7 @@ namespace DefaultParamEditor.Koikatu
         public const string GUID = "keelhauled.defaultparameditor";
         public const string Version = "1.1.2." + BuildNumber.Version;
 
-        private static string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
+        private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();
 
         private void Awake()
@@ -104,7 +104,7 @@ namespace DefaultParamEditor.Koikatu
             private static Button CreateButton(string name, ScrollRect scrollRect, UnityAction onClickEvent, string goPath)
             {
                 var template = GameObject.Find(goPath);
-                var newObject = GameObject.Instantiate(template, scrollRect.content.transform);
+                var newObject = Instantiate(template, scrollRect.content.transform);
                 newObject.name = "NewObject";
                 var textComponent = newObject.GetComponentInChildren<Text>();
                 textComponent.text = name;

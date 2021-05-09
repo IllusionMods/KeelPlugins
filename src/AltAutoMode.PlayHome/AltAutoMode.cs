@@ -2,7 +2,6 @@
 using H;
 using HarmonyLib;
 using KeelPlugins.PlayHome;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -31,8 +30,8 @@ namespace AltAutoMode.PlayHome
         {
             private static float sliderVal;
             private static Slider slider;
-            private static float time = 0f;
-            private static float random = 0f;
+            private static float time;
+            private static float random;
 
             [HarmonyPrefix, HarmonyPatch(typeof(MixController), "Update")]
             public static void SaveSliderVal(MixController __instance)
@@ -122,7 +121,7 @@ namespace AltAutoMode.PlayHome
                 return false;
             }
 
-            [HarmonyPostfix, HarmonyPatch(typeof(H_ExpressionData), nameof(H_ExpressionData.ChangeExpression), new Type[] { typeof(Human), typeof(H_Expression.TYPE), typeof(H_Parameter), typeof(float) })]
+            [HarmonyPostfix, HarmonyPatch(typeof(H_ExpressionData), nameof(H_ExpressionData.ChangeExpression), typeof(Human), typeof(H_Expression.TYPE), typeof(H_Parameter), typeof(float))]
             public static void OpenEyes(Human human)
             {
                 if(human.blink.LimitMax == 0f)

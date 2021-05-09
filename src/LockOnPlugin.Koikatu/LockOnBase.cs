@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using LockOnPlugin.Core;
+﻿using LockOnPlugin.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,7 +7,7 @@ namespace LockOnPlugin.Koikatu
 {
     internal abstract class LockOnBase : MonoBehaviour
     {
-        public static bool lockedOn = false;
+        public static bool lockedOn;
 
         protected abstract float CameraMoveSpeed { get; set; }
         protected abstract Vector3 CameraTargetPos { get; set; }
@@ -35,12 +34,12 @@ namespace LockOnPlugin.Koikatu
         protected Vector3? lastTargetPos;
         protected float defaultCameraSpeed;
         protected float trackingSpeedMax = 0.3f;
-        protected bool shouldResetLock = false;
+        protected bool shouldResetLock;
 
-        protected Vector3 targetOffsetSize = new Vector3();
-        protected Vector3 targetOffsetSizeAdded = new Vector3();
-        protected float offsetKeyHeld = 0f;
-        protected bool reduceOffset = false;
+        protected Vector3 targetOffsetSize;
+        protected Vector3 targetOffsetSizeAdded;
+        protected float offsetKeyHeld;
+        protected bool reduceOffset;
 
         protected virtual void Start()
         {
@@ -76,7 +75,7 @@ namespace LockOnPlugin.Koikatu
                     float y = Input.GetAxis("Mouse Y");
                     if(Mathf.Abs(x) > 0f || Mathf.Abs(y) > 0f)
                     {
-                        targetOffsetSize += (CameraRight * x * defaultCameraSpeed) + (CameraForward * y * defaultCameraSpeed);
+                        targetOffsetSize += CameraRight * (x * defaultCameraSpeed) + CameraForward * (y * defaultCameraSpeed);
                         reduceOffset = false;
                     }
                 }
@@ -118,7 +117,7 @@ namespace LockOnPlugin.Koikatu
                         float y = Input.GetAxis("Mouse Y");
                         if(Mathf.Abs(y) > 0f)
                         {
-                            targetOffsetSize += (Vector3.up * y * defaultCameraSpeed);
+                            targetOffsetSize += Vector3.up * (y * defaultCameraSpeed);
                             reduceOffset = false;
                         }
                     }
@@ -233,7 +232,7 @@ namespace LockOnPlugin.Koikatu
                     return LockOn(targets[0]);
                 }
 
-                if(reduceOffset == true)
+                if(reduceOffset)
                 {
                     CameraTargetPos += targetOffsetSize;
                     targetOffsetSize = new Vector3();
@@ -337,9 +336,9 @@ namespace LockOnPlugin.Koikatu
 
         protected static class Guitime
         {
-            public static float angle = 0f;
-            public static float fov = 0f;
-            public static float info = 0f;
+            public static float angle;
+            public static float fov;
+            public static float info;
             public static string msg = "";
             public static Vector2 pos = new Vector2(0.5f, 0f);
 

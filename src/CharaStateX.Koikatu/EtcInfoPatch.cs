@@ -31,13 +31,12 @@ namespace CharaStateX.Koikatu
             harmony.Patch(target, null, new HarmonyMethod(patch));
         }
 
-#pragma warning disable IDE0051 // Remove unused private members
         private static void Patch_ChangeEyebrowsPtn(object __instance, ref int _no)
         {
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.charInfo.ChangeEyebrowPtn(_no, true);
+                chara.charInfo.ChangeEyebrowPtn(_no);
         }
 
         private static void Patch_OnValueChangedForegroundEyebrow(object __instance, ref int _value)
@@ -53,7 +52,7 @@ namespace CharaStateX.Koikatu
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.charInfo.ChangeEyesPtn(_no, true);
+                chara.charInfo.ChangeEyesPtn(_no);
         }
 
         private static void Patch_OnValueChangedEyesOpen(object __instance, ref float _value)
@@ -85,7 +84,7 @@ namespace CharaStateX.Koikatu
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.charInfo.ChangeMouthPtn(_no, true);
+                chara.charInfo.ChangeMouthPtn(_no);
         }
 
         private static void Patch_OnValueChangedMouthOpen(object __instance, ref float _value)
@@ -103,6 +102,5 @@ namespace CharaStateX.Koikatu
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
                 chara.ChangeLipSync(_value);
         }
-#pragma warning restore IDE0051 // Remove unused private members
     }
 }
