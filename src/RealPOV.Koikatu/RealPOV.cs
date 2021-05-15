@@ -56,6 +56,7 @@ namespace RealPOV.Koikatu
             {
                 currentChara = ((OCIChar)chara).charInfo;
                 currentCharaId = chara.objectInfo.dicKey;
+                currentCharaGo = currentChara.gameObject;
                 LookRotation[currentCharaGo] = povData.Rotation;
                 CurrentFOV = povData.Fov;
                 plugin.EnablePov();
@@ -108,12 +109,12 @@ namespace RealPOV.Koikatu
                             var chaControl = charaQueue.Dequeue();
 
                             // Remove destroyed
-                            if(chaControl == null)
+                            if(!chaControl)
                                 continue;
 
                             // Rotate the queue
                             charaQueue.Enqueue(chaControl);
-                            if(chaControl.sex == 0 && hFlag != null && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
+                            if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
                             // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
                             if(chaControl.objTop.activeInHierarchy) return chaControl;
                         }
@@ -124,7 +125,7 @@ namespace RealPOV.Koikatu
                         charaQueue = CreateQueue();
 
                     currentChara = GetCurrentChara();
-                    if(currentChara == null)
+                    if(!currentChara)
                     {
                         charaQueue = CreateQueue();
                         currentChara = GetCurrentChara();
@@ -136,9 +137,6 @@ namespace RealPOV.Koikatu
 
             if(currentChara)
             {
-                //foreach(var bone in currentChara.neckLookCtrl.neckLookScript.aBones)
-                //    bone.neckBone.rotation = new Quaternion();
-
                 prevVisibleHeadAlways = currentChara.fileStatus.visibleHeadAlways;
                 if(HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
 
@@ -146,8 +144,17 @@ namespace RealPOV.Koikatu
                 var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
 
+                // only use head rotation if there is no existing rotation
                 if(!LookRotation.TryGetValue(currentCharaGo, out _))
+                {
                     LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
+                }
+                else
+                {
+                    // always get z axis from head
+                    var rot = LookRotation[currentCharaGo];
+                    LookRotation[currentCharaGo] = new Vector3(rot.x, rot.y, currentChara.objHeadBone.transform.rotation.eulerAngles.z);
+                }
 
                 base.EnablePov();
 
