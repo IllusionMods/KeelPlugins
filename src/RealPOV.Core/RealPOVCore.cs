@@ -106,7 +106,6 @@ namespace RealPOV.Core
                             var y = -Input.GetAxis("Mouse Y") * MouseSens.Value;
                             LookRotation[currentCharaGo] += new Vector3(y, x, 0f);
                         }
-                            
                     }
                     else if(mouseButtonDown1)
                     {

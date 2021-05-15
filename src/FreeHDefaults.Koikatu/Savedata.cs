@@ -34,5 +34,8 @@ namespace FreeHDefaults.Koikatu
 
         [XmlElement]
         public int category;
+
+        [XmlElement]
+        public bool isAibuSelect;
     }
 }

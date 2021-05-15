@@ -7,9 +7,10 @@ using BepInEx;
 using ChaCustom;
 using FreeH;
 using HarmonyLib;
+using Illusion.Component;
 using Manager;
 using UniRx;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace FreeHDefaults.Koikatu
 {
@@ -37,9 +38,10 @@ namespace FreeHDefaults.Koikatu
             }
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), "Start")]
-        private static void TitleScene_Start()
+        [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), nameof(TitleScene.Start))]
+        private static void PrepareSavedata()
         {
+            // vanilla code will load values from FreeHBackData when freeh is started
             var backData = Singleton<Scene>.Instance.commonSpace.GetOrAddComponent<FreeHBackData>();
             backData.heroine = LoadChara(saveData.HeroinePath, x => backData.heroine = new SaveData.Heroine(x, false));
             backData.partner = LoadChara(saveData.PartnerPath, x => backData.partner = new SaveData.Heroine(x, false));
@@ -53,15 +55,13 @@ namespace FreeHDefaults.Koikatu
             backData.categorys = new List<int>{ saveData.category };
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), "NormalSetup")]
+        [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.NormalSetup))]
         private static void HookProps(FreeHScene __instance)
         {
-            var member = Traverse.Create(__instance).Field("member").GetValue<FreeHScene.Member>();
-
+            var member = __instance.member;
             member.resultHeroine.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.HeroinePath = y));
             member.resultPartner.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PartnerPath = y));
             member.resultPlayer.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PlayerPath = y));
-
             member.resultMapInfo.Subscribe(x  => { if(x != null) saveData.map = x.No; SaveXml(); });
             member.resultTimeZone.Subscribe(x => { saveData.timeZone = x; SaveXml(); });
             member.resultStage1.Subscribe(x => { saveData.stageH1 = x; SaveXml(); });
@@ -70,30 +70,43 @@ namespace FreeHDefaults.Koikatu
             member.resultDiscovery.Subscribe(x => { saveData.discovery = x; SaveXml(); });
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), "SetMainCanvasObject")]
+        [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.SetMainCanvasObject))]
         private static void SaveMode(int _mode)
         {
             saveData.category = modeMagic[_mode];
             SaveXml();
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(FreeHClassRoomCharaFile), "Start")]
+        [HarmonyPostfix, HarmonyPatch(typeof(FreeHClassRoomCharaFile), nameof(FreeHClassRoomCharaFile.Start))]
         private static void UpdateFileList(FreeHClassRoomCharaFile __instance)
         {
-            lastFileList = Traverse.Create(__instance).Field("listCtrl").Field("lstFileInfo").GetValue<List<CustomFileInfo>>();
+            lastFileList = __instance.listCtrl.lstFileInfo;
         }
         
-        [HarmonyPostfix, HarmonyPatch(typeof(FreeHPreviewCharaList), "Start")]
+        [HarmonyPostfix, HarmonyPatch(typeof(FreeHPreviewCharaList), nameof(FreeHPreviewCharaList.Start))]
         private static void HookCancelButton(FreeHPreviewCharaList __instance)
         {
             __instance.onCancel += () => lastFileList = null;
         }
         
-        [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), "MasturbationSetup")]
-        private static void FixDiscoveryLogic(Toggle ___tglDiscoverySafeMasturbation, Toggle ___tglDiscoveryOutMasturbation, bool ___discovery)
+        [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.MasturbationSetup))]
+        private static void FixDiscoveryLogic(FreeHScene __instance)
         {
-            ___tglDiscoverySafeMasturbation.isOn = !___discovery;
-            ___tglDiscoveryOutMasturbation.isOn = ___discovery;
+            __instance.tglDiscoverySafeMasturbation.isOn = !__instance.discovery;
+            __instance.tglDiscoveryOutMasturbation.isOn = __instance.discovery;
+        }
+        
+        [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.SetShortcutKey))]
+        private static void ManageAibuSelect(HSceneProc __instance)
+        {
+            __instance.flags.isAibuSelect = saveData.isAibuSelect;
+            
+            __instance.gameObject.GetComponent<ShortcutKey>().procList
+                .First(x => x.keyCode == KeyCode.A).call.AddListener(() =>
+            {
+                saveData.isAibuSelect = __instance.flags.isAibuSelect;
+                SaveXml();
+            });
         }
 
         private static T LoadChara<T>(string path, Func<ChaFileControl, T> action) where T : SaveData.CharaData
