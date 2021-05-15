@@ -36,6 +36,9 @@ namespace FreeHDefaults.Koikatu
         public int category;
 
         [XmlElement]
-        public bool isAibuSelect;
+        public bool isAibuSelect = true;
+
+        [XmlElement]
+        public float Fov = 23f;
     }
 }

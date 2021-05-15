@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace FreeHDefaults.Koikatu
         [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), nameof(TitleScene.Start))]
         private static void PrepareSavedata()
         {
-            // vanilla code will load values from FreeHBackData when freeh is started
+            // vanilla code will load values from FreeHBackData when freeh chara select is started
             var backData = Singleton<Scene>.Instance.commonSpace.GetOrAddComponent<FreeHBackData>();
             backData.heroine = LoadChara(saveData.HeroinePath, x => backData.heroine = new SaveData.Heroine(x, false));
             backData.partner = LoadChara(saveData.PartnerPath, x => backData.partner = new SaveData.Heroine(x, false));
@@ -56,7 +57,7 @@ namespace FreeHDefaults.Koikatu
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.NormalSetup))]
-        private static void HookProps(FreeHScene __instance)
+        private static void HookFreeHProps(FreeHScene __instance)
         {
             var member = __instance.member;
             member.resultHeroine.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.HeroinePath = y));
@@ -97,8 +98,9 @@ namespace FreeHDefaults.Koikatu
         }
         
         [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.SetShortcutKey))]
-        private static void ManageAibuSelect(HSceneProc __instance)
+        private static void HookHSceneValues(HSceneProc __instance)
         {
+            __instance.flags.ctrlCamera.CameraFov = saveData.Fov;
             __instance.flags.isAibuSelect = saveData.isAibuSelect;
             
             __instance.gameObject.GetComponent<ShortcutKey>().procList
@@ -107,6 +109,25 @@ namespace FreeHDefaults.Koikatu
                 saveData.isAibuSelect = __instance.flags.isAibuSelect;
                 SaveXml();
             });
+
+            __instance.StartCoroutine(DetectFovChange(__instance.flags.ctrlCamera));
+        }
+
+        private static IEnumerator DetectFovChange(CameraControl_Ver2 camera)
+        {
+            yield return new WaitForSeconds(5f);
+            float tempFov = 0;
+            
+            while(true)
+            {
+                if(Math.Abs(tempFov - camera.CameraFov) > 0.001f)
+                {
+                    tempFov = saveData.Fov = camera.CameraFov;
+                    SaveXml();
+                }
+                
+                yield return new WaitForSeconds(5f);
+            }
         }
 
         private static T LoadChara<T>(string path, Func<ChaFileControl, T> action) where T : SaveData.CharaData
