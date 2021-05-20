@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using BepInEx;
+using BepInEx.Configuration;
 using ChaCustom;
 using FreeH;
 using HarmonyLib;
@@ -12,6 +13,7 @@ using Illusion.Component;
 using Manager;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FreeHDefaults.Koikatu
 {
@@ -27,7 +29,7 @@ namespace FreeHDefaults.Koikatu
         private static readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(Savedata));
         private static readonly int[] modeMagic = { 0, 1012, 1100, 3000, 4000 };
 
-        private void Start()
+        private void Awake()
         {
             Log.SetLogSource(Logger);
             Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
@@ -36,6 +38,22 @@ namespace FreeHDefaults.Koikatu
             {
                 using(var reader = new StreamReader(saveFilePath))
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
+            }
+        }
+
+        private void Start()
+        {
+            var lightControlType = Type.GetType("KK_HLightControl.KK_HLightControl, KK_HLightControl");
+            if(lightControlType != null)
+            {
+                var lightTraverse = Traverse.Create(lightControlType);
+                var toggleInfo = lightTraverse.Field("toggleInfo").GetValue<IList>();
+                var clickEventField = Traverse.Create(toggleInfo[0]).Field("clickEvent");
+                var btn = lightTraverse.Field("btn").GetValue<List<ConfigEntry<bool>>>().First();
+                
+                var clickEvent = clickEventField.GetValue<UnityAction<bool>>();
+                clickEvent += x => { if(btn.Value != x) btn.Value = x; };
+                clickEventField.SetValue(clickEvent);
             }
         }
 
