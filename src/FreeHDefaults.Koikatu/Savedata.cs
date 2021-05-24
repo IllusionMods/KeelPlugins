@@ -40,5 +40,12 @@ namespace FreeHDefaults.Koikatu
 
         [XmlElement]
         public float Fov = 23f;
+        
+        [XmlElement]
+        public float LightX;
+        [XmlElement]
+        public float LightY;
+        [XmlElement]
+        public float LightZ;
     }
 }

@@ -13,7 +13,6 @@ using Illusion.Component;
 using Manager;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace FreeHDefaults.Koikatu
 {
@@ -23,16 +22,18 @@ namespace FreeHDefaults.Koikatu
         public const string GUID = "keelhauled.freehdefaults";
         public const string Version = "1.0.0." + BuildNumber.Version;
 
-        private static List<CustomFileInfo> lastFileList;
-        private static Savedata saveData = new Savedata();
+        private Harmony harmony;
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
         private static readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(Savedata));
         private static readonly int[] modeMagic = { 0, 1012, 1100, 3000, 4000 };
+        private static List<CustomFileInfo> lastFileList;
+        private static Savedata saveData = new Savedata();
+        private static bool firstRun;
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
+            harmony = Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
 
             if(File.Exists(saveFilePath))
             {
@@ -41,19 +42,33 @@ namespace FreeHDefaults.Koikatu
             }
         }
 
-        private void Start()
+        // private void Start()
+        // {
+        //     var lightControlType = Type.GetType("KK_HLightControl.KK_HLightControl, KK_HLightControl");
+        //     if(lightControlType != null)
+        //     {
+        //         harmony.Patch(AccessTools.Method(lightControlType, "btn_LockCamLight"),
+        //             postfix: new HarmonyMethod(AccessTools.Method(typeof(FreeHDefaults), nameof(HookHLightControl))));
+        //     }
+        // }
+
+        private static void HookHLightControl(List<ConfigEntry<bool>> ___btn, GameObject ___newParent, ref bool value)
         {
-            var lightControlType = Type.GetType("KK_HLightControl.KK_HLightControl, KK_HLightControl");
-            if(lightControlType != null)
+            if(___btn[0].Value != value)
+                ___btn[0].Value = value;
+            
+            if(firstRun && value)
             {
-                var lightTraverse = Traverse.Create(lightControlType);
-                var toggleInfo = lightTraverse.Field("toggleInfo").GetValue<IList>();
-                var clickEventField = Traverse.Create(toggleInfo[0]).Field("clickEvent");
-                var btn = lightTraverse.Field("btn").GetValue<List<ConfigEntry<bool>>>().First();
-                
-                var clickEvent = clickEventField.GetValue<UnityAction<bool>>();
-                clickEvent += x => { if(btn.Value != x) btn.Value = x; };
-                clickEventField.SetValue(clickEvent);
+                firstRun = false;
+                ___newParent.transform.eulerAngles = new Vector3(saveData.LightX, saveData.LightY);
+            }
+            else if(value)
+            {
+                var rot = ___newParent.transform.eulerAngles;
+                saveData.LightX = rot.x;
+                saveData.LightY = rot.y;
+                saveData.LightZ = rot.z;
+                SaveXml();
             }
         }
 
@@ -61,7 +76,7 @@ namespace FreeHDefaults.Koikatu
         private static void PrepareSavedata()
         {
             // vanilla code will load values from FreeHBackData when freeh chara select is started
-            var backData = Singleton<Scene>.Instance.commonSpace.GetOrAddComponent<FreeHBackData>();
+            var backData = Singleton<Scene>.Instance.commonSpace.AddComponent<FreeHBackData>();
             backData.heroine = LoadChara(saveData.HeroinePath, x => backData.heroine = new SaveData.Heroine(x, false));
             backData.partner = LoadChara(saveData.PartnerPath, x => backData.partner = new SaveData.Heroine(x, false));
             backData.player = LoadChara(saveData.PlayerPath, x => backData.player = new SaveData.Player(x, false));
@@ -77,6 +92,8 @@ namespace FreeHDefaults.Koikatu
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.NormalSetup))]
         private static void HookFreeHProps(FreeHScene __instance)
         {
+            firstRun = true;
+            
             var member = __instance.member;
             member.resultHeroine.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.HeroinePath = y));
             member.resultPartner.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PartnerPath = y));
