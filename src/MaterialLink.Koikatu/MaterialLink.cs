@@ -85,7 +85,7 @@ namespace MaterialLink.Koikatu
 
         private void UpdateMaterials()
         {
-            if(chaControl != null && chaControl.customMatBody != null)
+            if(chaControl && chaControl.customMatBody)
             {
                 foreach(var rend in ManagedRenderers)
                 {

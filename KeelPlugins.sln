@@ -118,7 +118,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-4
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		nuget.config = nuget.config
-		PostBuild.ps1 = PostBuild.ps1
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -378,6 +377,7 @@ Global
 		{805950CD-B415-4A41-97E2-7BCE459C08A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{805950CD-B415-4A41-97E2-7BCE459C08A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{805950CD-B415-4A41-97E2-7BCE459C08A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805950CD-B415-4A41-97E2-7BCE459C08A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A75A3219-3E64-48F0-856E-7A2AF1D61CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A75A3219-3E64-48F0-856E-7A2AF1D61CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
