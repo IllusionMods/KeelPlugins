@@ -40,7 +40,7 @@ By selecting a male and a female, and then clicking on an H anim in the list whi
 
 #### ClothingStateMenuX [KK]
 Adds options to edit chara clothing states and current outfit to the maker sidebar.  
-Accessories might come later.
+<sub><sup>Accessory options might come later.</sup></sub>
 
 #### DefaultParamEditor [KK]
 Allows editing default settings for character/scene parameters such as eye blinking or shadow density.  
@@ -64,8 +64,9 @@ Make studio spotlights automatically track characters.
 First select the lights you want to edit then add the character you want to track to the selection and hit apply in the light settings. You cannot select a character first because the light menu has to be open to edit the settings.
 
 #### LockOnPlugin [KK]
-A camera helper plugin that lets you forget the annoying camera controls and keeps the action right where it needs to be.  
+A camera helper plugin that lets you forget the annoying camera controls and keeps the action right where it needs to be.
 Select a character and press the hotkey to automatically keep the camera focus on the character.
+In an H scene the closest character to the camera target will be selected.
 
 #### MakerBridge [KK]
 Press the hotkey to send the selected character from maker to studio and vice versa.  
