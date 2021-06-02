@@ -34,7 +34,7 @@ namespace RealPOV.PlayHome
 
         private void OnDestroy()
         {
-            harmony.UnpatchAll();
+            harmony.UnpatchSelf();
 
             if(lockNormalCamera)
                 Restore();
