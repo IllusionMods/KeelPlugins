@@ -1,8 +1,11 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
 using System.Collections;
+using System.Collections.Generic;
+using KeelPlugins.Harmony;
 using TitleShortcuts.Core;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,7 +19,7 @@ namespace TitleShortcuts.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.2.2." + BuildNumber.Version;
+        public const string Version = "1.2.3." + BuildNumber.Version;
 
         private static ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
@@ -39,8 +42,7 @@ namespace TitleShortcuts.Koikatu
             Harmony.CreateAndPatchAll(GetType());
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(TitleScene), "Start")]
+        [HarmonyPrefix, HarmonyPatch(typeof(TitleScene), "Start")]
         private static void TitleStart(TitleScene __instance)
         {
             Plugin.StartCoroutine(TitleInput(__instance));
@@ -52,24 +54,49 @@ namespace TitleShortcuts.Koikatu
             {
                 yield return null;
 
-                if (StartFemaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomFemale, "Starting female maker");
-                else if (StartMaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomMale, "Starting male maker");
-                else if (StartUploader.Value.IsDown()) StartMode(titleScene.OnUploader, "Starting uploader");
-                else if (StartDownloader.Value.IsDown()) StartMode(titleScene.OnDownloader, "Starting downloader");
-                else if (StartFreeH.Value.IsDown()) StartMode(titleScene.OnOtherFreeH, "Starting free H");
-                else if (StartLiveShow.Value.IsDown()) StartMode(titleScene.OnOtherIdolLive, "Starting live show");
+                if(StartFemaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomFemale, "Starting female maker");
+                else if(StartMaleMaker.Value.IsDown()) StartMode(titleScene.OnCustomMale, "Starting male maker");
+                else if(StartUploader.Value.IsDown()) StartMode(titleScene.OnUploader, "Starting uploader");
+                else if(StartDownloader.Value.IsDown()) StartMode(titleScene.OnDownloader, "Starting downloader");
+                else if(StartFreeH.Value.IsDown()) StartMode(titleScene.OnOtherFreeH, "Starting free H");
+                else if(StartLiveShow.Value.IsDown()) StartMode(titleScene.OnOtherIdolLive, "Starting live show");
             }
-            while (titleScene);
+            while(titleScene);
 
             void StartMode(UnityAction action, string msg)
             {
-                if (titleScene && !FindObjectOfType<ConfigScene>())
+                if(titleScene && !FindObjectOfType<ConfigScene>())
                 {
                     Log.Message(msg);
                     action();
                     titleScene = null;
                 }
             }
+        }
+        
+        [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), "Start")]
+        private static void TitleStart(FreeHScene __instance, ref IEnumerator __result)
+        {
+            __result = __result.AppendCo(HSceneInput(__instance));
+        }
+
+        private static IEnumerator HSceneInput(FreeHScene freeHScene)
+        {
+            yield return null;
+            yield return null;
+            yield return null;
+            
+            do
+            {
+                yield return null;
+
+                if(StartFreeH.Value.IsDown())
+                {
+                    freeHScene.enterButton.onClick.Invoke();
+                    freeHScene = null;
+                }
+            }
+            while(freeHScene);
         }
     }
 }

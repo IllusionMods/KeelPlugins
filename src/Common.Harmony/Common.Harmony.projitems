@@ -12,6 +12,7 @@
     <None Include="$(MSBuildThisFileDirectory)EventFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CoroutineExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HarmonyExtensions.cs" />
     <None Include="$(MSBuildThisFileDirectory)HarmonyDelegatePatchingExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatchExt.cs" />
