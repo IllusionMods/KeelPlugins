@@ -4,11 +4,9 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
 using System.Collections;
-using System.Collections.Generic;
 using KeelPlugins.Harmony;
 using TitleShortcuts.Core;
 using UnityEngine;
-using UnityEngine.Events;
 
 [assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.Koikatu.TitleShortcuts.Version)]
 
@@ -63,7 +61,7 @@ namespace TitleShortcuts.Koikatu
             }
             while(titleScene);
 
-            void StartMode(UnityAction action, string msg)
+            void StartMode(Action action, string msg)
             {
                 if(titleScene && !FindObjectOfType<ConfigScene>())
                 {
@@ -82,9 +80,8 @@ namespace TitleShortcuts.Koikatu
 
         private static IEnumerator HSceneInput(FreeHScene freeHScene)
         {
-            yield return null;
-            yield return null;
-            yield return null;
+            for(int i = 0; i < 3; i++)
+                yield return null;
             
             do
             {
