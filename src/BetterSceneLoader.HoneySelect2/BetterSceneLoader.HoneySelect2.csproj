@@ -3,14 +3,14 @@
   <Import Project="..\BuildSettings.HoneySelect2.props" />
   <ItemGroup>
     <PackageReference Include="BepInEx.Core" Version="5.4.4" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.Assembly-CSharp" version="2020.5.29.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.AssetBundleModule" version="2018.4.11.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.CoreModule" version="2018.4.11.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.TextRenderingModule" version="2018.4.11.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UI" version="2018.4.11.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UIModule" version="2018.4.11.2" />
-    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UnityWebRequestWWWModule" version="2018.4.11.2" />
-    <PackageReference Include="IllusionModdingAPI.HS2API" version="1.13.4" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.Assembly-CSharp" Version="2020.5.29.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.AssetBundleModule" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.CoreModule" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.TextRenderingModule" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UI" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UIModule" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UnityWebRequestWWWModule" Version="2018.4.11.2" />
+    <PackageReference Include="IllusionModdingAPI.HS2API" Version="1.13.4" />
   </ItemGroup>
   <Import Project="..\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

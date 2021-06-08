@@ -3,9 +3,9 @@
   <Import Project="..\BuildSettings.AiSyoujyo.props" />
   <ItemGroup>
     <PackageReference Include="BepInEx.Core" Version="5.4.4" />
-    <PackageReference Include="IllusionLibs.AIGirl.Assembly-CSharp" version="2020.5.29.2" />
-    <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.CoreModule" version="2018.2.21.3" />
-    <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.UI" version="2018.2.21.3" />
+    <PackageReference Include="IllusionLibs.AIGirl.Assembly-CSharp" Version="2020.5.29.2" />
+    <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.CoreModule" Version="2018.2.21.3" />
+    <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.UI" Version="2018.2.21.3" />
   </ItemGroup>
   <Import Project="..\TitleShortcuts.Core\TitleShortcuts.Core.projitems" Label="Shared" />
   <Import Project="..\Common.AISyoujyo\Common.AISyoujyo.projitems" Label="Shared" />
