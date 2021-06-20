@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\BuildSettings.Common.props" />
+    <Import Project="..\BuildSettings.Patcher.props" />
+    <ItemGroup>
+        <PackageReference Include="BepInEx.Core" Version="5.4.4" />
+    </ItemGroup>
+    <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+</Project>

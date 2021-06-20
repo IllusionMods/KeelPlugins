@@ -1,14 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Patcher.props" />
-  <PropertyGroup>
-    <TargetFramework>net35</TargetFramework>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Core" Version="5.4.4" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="IF EXIST &quot;$(SolutionDir)PostBuild.ps1&quot; powershell &quot;$(SolutionDir)PostBuild.ps1&quot; &quot;GENERICPATCHER&quot; &quot;$(TargetPath)&quot; &quot;$(ProjectPath)&quot; &quot;$(ConfigurationName)&quot;" />
-  </Target>
 </Project>

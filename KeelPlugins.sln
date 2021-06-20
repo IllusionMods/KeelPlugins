@@ -84,6 +84,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
 		src\SkipAllRefs.targets = src\SkipAllRefs.targets
+		src\BuildSettings.Patcher.props = src\BuildSettings.Patcher.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
@@ -172,6 +173,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FreeHDefaults", "FreeHDefaults", "{A541BB96-39B7-44C7-98A1-C934EFBD52AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeHDefaults.Koikatu", "src\FreeHDefaults.Koikatu\FreeHDefaults.Koikatu.csproj", "{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssOverride", "src\AssOverride\AssOverride.csproj", "{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -384,6 +387,9 @@ Global
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -458,6 +464,7 @@ Global
 		{A75A3219-3E64-48F0-856E-7A2AF1D61CF7} = {CC58A4DD-9CC3-4737-87B5-502157A12C6A}
 		{A541BB96-39B7-44C7-98A1-C934EFBD52AE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA} = {A541BB96-39B7-44C7-98A1-C934EFBD52AE}
+		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
