@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
     <DebugType>embedded</DebugType>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -8,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.4" />
+    <PackageReference Include="KoikatuCompatibilityAnalyzer" Version="1.0.1" />
   </ItemGroup>
   <Import Project="SkipAllRefs.targets" />
 </Project>
