@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
+  <Import Project="..\BuildSettings.Patcher.props" />
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
   </PropertyGroup>
