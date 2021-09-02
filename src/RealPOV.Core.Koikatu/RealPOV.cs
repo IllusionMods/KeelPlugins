@@ -1,4 +1,3 @@
-using System;
 using BepInEx;
 using HarmonyLib;
 using RealPOV.Core;
@@ -30,6 +29,9 @@ namespace RealPOV.Koikatu
         private HFlag hFlag;
         private static int currentCharaId = -1;
         private static RealPOV plugin;
+
+        private float dofOrigSize;
+        private float dofOrigAperature;
 
         protected override void Awake()
         {
@@ -144,8 +146,17 @@ namespace RealPOV.Koikatu
                 GameCamera = Camera.main;
                 var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
-
-                Console.WriteLine("anim = " + currentChara.animBody.GetCurrentAnimatorClipInfo(0).FirstOrDefault().clip?.name);
+                
+                // Fix depth of field being completely out of focus
+                var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+                dofOrigSize = depthOfField.focalSize;
+                dofOrigAperature = depthOfField.aperture;
+                if(depthOfField.enabled)
+                {
+                    depthOfField.focalTransform.localPosition = new Vector3(0, 0, 0.25f);
+                    depthOfField.focalSize = 0.9f;
+                    depthOfField.aperture = 0.6f;
+                }
 
                 // only use head rotation if there is no existing rotation
                 if(!LookRotation.TryGetValue(currentCharaGo, out _))
@@ -174,6 +185,10 @@ namespace RealPOV.Koikatu
 
             var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
             if(cc) cc.enabled = true;
+
+            var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+            dofOrigSize = depthOfField.focalSize;
+            dofOrigAperature = depthOfField.aperture;
 
             base.DisablePov();
 
@@ -216,7 +231,9 @@ namespace RealPOV.Koikatu
             return true;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+        [HarmonyPatch(typeof(HFlag), nameof(HFlag.selectAnimationListInfo), MethodType.Setter)]
         private static void ResetAllRotations()
         {
             LookRotation.Clear();

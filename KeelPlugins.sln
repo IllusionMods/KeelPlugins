@@ -177,9 +177,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeHDefaults.Koikatu", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssOverride", "src\AssOverride\AssOverride.csproj", "{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealPOV.KoikatsuSunshine", "src\RealPOV.KoikatsuSunshine\RealPOV.KoikatsuSunshine.csproj", "{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealPOV.KoikatsuSunshine", "src\RealPOV.KoikatsuSunshine\RealPOV.KoikatsuSunshine.csproj", "{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.KoikatsuSunshine", "src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.shproj", "{D0C39DE2-D3E6-46BF-8A32-19250BF4F2D4}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RealPOV.Core.Koikatu", "src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.shproj", "{5034D4DD-F7D2-45C7-893F-9955098BFF4B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -190,6 +192,7 @@ Global
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
@@ -212,6 +215,7 @@ Global
 		src\Common.Utils\Common.Utils.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{4d175c74-23cc-45db-8225-537db7e33142}*SharedItemsImports = 13
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{5034d4dd-f7d2-45c7-893f-9955098bff4b}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{5079fb78-01fb-4a54-a0f7-04aa79a8de7e}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{5079fb78-01fb-4a54-a0f7-04aa79a8de7e}*SharedItemsImports = 5
 		src\Common.Unity\Common.Unity.projitems*{50994af9-8369-47a9-a33a-37650e4b454e}*SharedItemsImports = 13
@@ -284,6 +288,7 @@ Global
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{f452236d-9ff5-4897-8ee8-da0c1d49974d}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
@@ -489,6 +494,7 @@ Global
 		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
 		{D0C39DE2-D3E6-46BF-8A32-19250BF4F2D4} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{5034D4DD-F7D2-45C7-893F-9955098BFF4B} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
