@@ -36,11 +36,11 @@ namespace RealPOV.Koikatu
         protected override void Awake()
         {
             plugin = this;
-            defaultFov = 90f;
-            defaultViewOffset = 0.001f;
+            defaultFov = 45f;
+            defaultViewOffset = 0.05f;
             base.Awake();
 
-            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", true, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
+            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
 
             Harmony.CreateAndPatchAll(GetType());
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
