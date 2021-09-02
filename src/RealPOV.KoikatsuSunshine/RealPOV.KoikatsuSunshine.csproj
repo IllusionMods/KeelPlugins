@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\BuildSettings.Common.props" />
+  <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+  <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
+  <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
+  <ItemGroup>
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.15" />
+    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.5.4" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.8.27.2" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.Cinemachine" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniRx" Version="2021.8.27.2" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniTask" Version="2021.8.27.2" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.Unity.TextMeshPro" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.AnimationModule" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.IMGUIModule" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.InputLegacyModule" Version="2019.4.9" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.24.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets></IncludeAssets>
+      <GeneratePathProperty></GeneratePathProperty>
+    </PackageReference>
+  </ItemGroup>
+</Project>

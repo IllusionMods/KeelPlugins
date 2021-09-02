@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net46</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\KeelPluginsKKS</OutputPath>
+  </PropertyGroup>
+</Project>
