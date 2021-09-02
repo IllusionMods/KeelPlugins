@@ -187,8 +187,8 @@ namespace RealPOV.Koikatu
             if(cc) cc.enabled = true;
 
             var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
-            dofOrigSize = depthOfField.focalSize;
-            dofOrigAperature = depthOfField.aperture;
+            depthOfField.focalSize = dofOrigSize;
+            depthOfField.aperture = dofOrigAperature;
 
             base.DisablePov();
 
