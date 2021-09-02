@@ -134,7 +134,7 @@ namespace RealPOV.Koikatu
                         currentChara = GetCurrentChara();
                     }
 
-                    currentCharaGo = currentChara.gameObject;
+                    currentCharaGo = currentChara?.gameObject;
                 }
             }
 
