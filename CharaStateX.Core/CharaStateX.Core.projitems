@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a016165d-cd33-41e9-8fd2-6f1d366cff73</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CharaStateX.Core</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AnimationPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CharaStateX.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EtcInfoPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FKIKPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HandInfoPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JointInfoPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeckLookPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StateInfoPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />
+  </ItemGroup>
+</Project>

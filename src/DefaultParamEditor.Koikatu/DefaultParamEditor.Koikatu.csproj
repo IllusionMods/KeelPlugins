@@ -11,4 +11,8 @@
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+  <Import Project="..\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems" Label="Shared" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="IF EXIST &quot;$(SolutionDir)PostBuild.bat&quot; CALL &quot;$(SolutionDir)PostBuild.bat&quot; &quot;$(TargetPath)&quot; KK" />
+  </Target>
 </Project>

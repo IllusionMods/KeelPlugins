@@ -9,4 +9,8 @@
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+  <Import Project="..\..\CharaStateX.Core\CharaStateX.Core.projitems" Label="Shared" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="IF EXIST &quot;$(SolutionDir)PostBuild.bat&quot; CALL &quot;$(SolutionDir)PostBuild.bat&quot; &quot;$(TargetPath)&quot; KK" />
+  </Target>
 </Project>
