@@ -17,12 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "archive", "archive", "{AD19
 	ProjectSection(SolutionItems) = preProject
 		archive\AssetHelper.cs = archive\AssetHelper.cs
 		archive\BoundsUtils.cs = archive\BoundsUtils.cs
+		archive\DragManager.cs = archive\DragManager.cs
 		archive\FreeHControl.cs = archive\FreeHControl.cs
 		archive\SelfieCam.cs = archive\SelfieCam.cs
 		archive\ShadowRealm.cs = archive\ShadowRealm.cs
 		archive\StudioUX.cs = archive\StudioUX.cs
 		archive\Unlocker.cs = archive\Unlocker.cs
-		archive\DragManager.cs = archive\DragManager.cs
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharaStateX.Koikatu", "src\CharaStateX.Koikatu\CharaStateX.Koikatu.csproj", "{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220}"
@@ -81,10 +81,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA55B5E5-B0F
 		src\BuildSettings.Common.props = src\BuildSettings.Common.props
 		src\BuildSettings.HoneySelect.props = src\BuildSettings.HoneySelect.props
 		src\BuildSettings.HoneySelect2.props = src\BuildSettings.HoneySelect2.props
+		src\BuildSettings.KoikatsuSunshine.props = src\BuildSettings.KoikatsuSunshine.props
 		src\BuildSettings.Koikatu.props = src\BuildSettings.Koikatu.props
+		src\BuildSettings.Patcher.props = src\BuildSettings.Patcher.props
 		src\BuildSettings.PlayHome.props = src\BuildSettings.PlayHome.props
 		src\SkipAllRefs.targets = src\SkipAllRefs.targets
-		src\BuildSettings.Patcher.props = src\BuildSettings.Patcher.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeAssAssistant.Koikatu", "src\AnimeAssAssistant.Koikatu\AnimeAssAssistant.Koikatu.csproj", "{394BC9B7-DB38-4172-9B2C-60918E87B763}"
@@ -132,7 +133,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.Harmony", "src\Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModLoader.PlayHome", "src\ModLoader.PlayHome\ModLoader.PlayHome.csproj", "{6F020ABD-6784-47E7-9526-1E8A83998942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavoriteCards.Koikatu", "src\FavoriteCards.Koikatu\FavoriteCards.Koikatu.csproj", "{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FavoriteCards.Koikatu", "src\FavoriteCards.Koikatu\FavoriteCards.Koikatu.csproj", "{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AltAutoMode", "AltAutoMode", "{580B8BB3-AD49-4DCE-850C-49DF209263F4}"
 EndProject
@@ -166,15 +167,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudioAddonLite", "StudioAd
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MaterialLink", "MaterialLink", "{CC58A4DD-9CC3-4737-87B5-502157A12C6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialLink.Koikatu", "src\MaterialLink.Koikatu\MaterialLink.Koikatu.csproj", "{805950CD-B415-4A41-97E2-7BCE459C08A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialLink.Koikatu", "src\MaterialLink.Koikatu\MaterialLink.Koikatu.csproj", "{805950CD-B415-4A41-97E2-7BCE459C08A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialLinkStub.Koikatu", "src\MaterialLinkStub.Koikatu\MaterialLinkStub.Koikatu.csproj", "{A75A3219-3E64-48F0-856E-7A2AF1D61CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialLinkStub.Koikatu", "src\MaterialLinkStub.Koikatu\MaterialLinkStub.Koikatu.csproj", "{A75A3219-3E64-48F0-856E-7A2AF1D61CF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FreeHDefaults", "FreeHDefaults", "{A541BB96-39B7-44C7-98A1-C934EFBD52AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeHDefaults.Koikatu", "src\FreeHDefaults.Koikatu\FreeHDefaults.Koikatu.csproj", "{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeHDefaults.Koikatu", "src\FreeHDefaults.Koikatu\FreeHDefaults.Koikatu.csproj", "{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssOverride", "src\AssOverride\AssOverride.csproj", "{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssOverride", "src\AssOverride\AssOverride.csproj", "{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealPOV.KoikatsuSunshine", "src\RealPOV.KoikatsuSunshine\RealPOV.KoikatsuSunshine.csproj", "{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.KoikatsuSunshine", "src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.shproj", "{D0C39DE2-D3E6-46BF-8A32-19250BF4F2D4}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RealPOV.Core.Koikatu", "src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.shproj", "{5034D4DD-F7D2-45C7-893F-9955098BFF4B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -183,6 +190,10 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
+		src\RealPOV.Core\RealPOV.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
@@ -204,6 +215,9 @@ Global
 		src\Common.Utils\Common.Utils.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{4d175c74-23cc-45db-8225-537db7e33142}*SharedItemsImports = 13
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{5034d4dd-f7d2-45c7-893f-9955098bff4b}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{5079fb78-01fb-4a54-a0f7-04aa79a8de7e}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{5079fb78-01fb-4a54-a0f7-04aa79a8de7e}*SharedItemsImports = 5
 		src\Common.Unity\Common.Unity.projitems*{50994af9-8369-47a9-a33a-37650e4b454e}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{558ed2d2-7fb3-4eec-b280-46decbe4ec3c}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{558ed2d2-7fb3-4eec-b280-46decbe4ec3c}*SharedItemsImports = 5
@@ -227,6 +241,8 @@ Global
 		src\Common.Harmony\Common.Harmony.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\Common.PlayHome\Common.PlayHome.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\Common.Harmony\Common.Harmony.projitems*{81e73402-3a7e-4ed3-b990-33c1b31fc205}*SharedItemsImports = 13
@@ -245,7 +261,11 @@ Global
 		src\Common.PlayHome\Common.PlayHome.projitems*{97b9edbf-3152-47db-8240-69818972e177}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{987845c6-3389-4d18-9e1d-43cb0414573e}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{9c4ae49d-6960-4aa0-b41f-3be11a61db2e}*SharedItemsImports = 5
 		src\Common.HoneySelect\Common.HoneySelect.projitems*{a19f5b25-6318-4323-93c8-b27f0343e582}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{a24e1f1f-16de-46cc-9b90-65f0f60f3fba}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{a24e1f1f-16de-46cc-9b90-65f0f60f3fba}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{a24e1f1f-16de-46cc-9b90-65f0f60f3fba}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{a52280cd-3cc4-452a-8c11-67e440e0262f}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 5
@@ -256,8 +276,10 @@ Global
 		src\Common.Core\Common.Core.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 5
+		src\Common.Harmony\Common.Harmony.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3a790c-911e-441b-b9c6-4d45dcb9882e}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{d0c39de2-d3e6-46bf-8a32-19250bf4f2d4}*SharedItemsImports = 13
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 5
@@ -266,6 +288,7 @@ Global
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{f452236d-9ff5-4897-8ee8-da0c1d49974d}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
+		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
@@ -390,6 +413,10 @@ Global
 		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -400,6 +427,9 @@ Global
 		{0902BF3D-81D2-4AEE-AB32-EF238F15052E} = {FAF05F03-1080-46D3-AB9B-C67556251D3A}
 		{DD7D6945-54A6-4190-8F49-46A189EE32CD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{5FC98374-508A-40B7-B4E1-EDB3B1D482F6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220} = {4538FA39-E1EE-41A4-BB94-D3323B7B8286}
+		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8} = {4A22457A-107B-4D71-9338-8D58677305DD}
+		{A9A5B556-B590-4948-9E89-87D38623DAF1} = {FD39F147-F3C9-47AD-A511-96BC42F1894B}
 		{21652626-F032-4986-B258-C36B4C9115E7} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{17FF704B-6D86-4F64-8052-123DC8C2AC0A} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{E462D3D8-0715-45C9-869C-F1FA8CD2F5CD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
@@ -409,16 +439,25 @@ Global
 		{3B6CD84F-6327-46B6-91E1-5EB972BC60FE} = {17FF704B-6D86-4F64-8052-123DC8C2AC0A}
 		{CA3A790C-911E-441B-B9C6-4D45DCB9882E} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{7F30866A-1B8B-40F1-8960-0E203EEDE225} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{97B9EDBF-3152-47DB-8240-69818972E177} = {580B8BB3-AD49-4DCE-850C-49DF209263F4}
 		{624F7C3F-0557-4FA6-A915-C99C5A40A851} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{A19F5B25-6318-4323-93C8-B27F0343E582} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{55D59483-E493-40CA-9FD6-538063647F38} = {B48D1D9B-DF53-4878-BD38-E11780ACEFD6}
 		{58AAB72D-86B3-4445-B25E-62D6A7FF1237} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{4AEB033D-D953-4E02-9274-CB44160E6B7F} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
 		{F6C012F1-F0BC-4B65-999D-8939DA4B2DD5} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
 		{A52280CD-3CC4-452A-8C11-67E440E0262F} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
+		{987845C6-3389-4D18-9E1D-43CB0414573E} = {87704EAF-C85F-4995-997B-590B4E0322C3}
+		{2CBE1772-D2A2-40A5-8014-81904AAB9781} = {27ABF983-5523-4A86-8F7C-1502C49D343E}
+		{124A215F-69B4-4310-98DE-209FAFE16D44} = {1B2C3D67-2605-48A8-B6B0-2D65A40BFAC6}
 		{5A7AE896-F7D0-4300-831B-CDD21A770E21} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{4D175C74-23CC-45DB-8225-537DB7E33142} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
+		{394BC9B7-DB38-4172-9B2C-60918E87B763} = {5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC}
 		{0F9AA09D-DCF3-41DE-8028-61735024FE80} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{5837FDE8-4B7C-431B-9402-3D8019F7BF37} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C} = {28C62819-4103-45B7-9115-C6C559D12964}
+		{6D058450-09B2-4D25-903F-9AE3A75DF066} = {EDF802BE-DFA7-45C5-A960-3B2E96EE8143}
+		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {A41DE533-BC37-42DC-8EA3-7433E91AB0CE}
 		{C8DE4A42-1B6C-4E58-985E-76972009A8BF} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{6EE11F86-3DA2-4454-ACCA-8A9068CC7B7C} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{8C9D88EC-5F03-43EF-8954-B54144A5089C} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
@@ -426,45 +465,36 @@ Global
 		{10906E95-5D65-476F-AFB3-5DB81DF04C27} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{8B9E7744-8345-46E9-96B7-13B0269819CC} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
 		{F452236D-9FF5-4897-8EE8-DA0C1D49974D} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{F927C67B-778F-4144-92E4-2AE745790893} = {1D5A23BB-7E05-42BF-AD34-DF616BC2E787}
 		{50994AF9-8369-47A9-A33A-37650E4B454E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{AFC4EE66-2891-439A-925A-BAF22553E1BA} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{81E73402-3A7E-4ED3-B990-33C1B31FC205} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{6F020ABD-6784-47E7-9526-1E8A83998942} = {D4027038-4ED4-432B-B232-0551B72723DD}
+		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E} = {1352BF50-BCE5-40F7-9F2E-46A3EC4CC0D3}
 		{580B8BB3-AD49-4DCE-850C-49DF209263F4} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{97B9EDBF-3152-47DB-8240-69818972E177} = {580B8BB3-AD49-4DCE-850C-49DF209263F4}
 		{5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{394BC9B7-DB38-4172-9B2C-60918E87B763} = {5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC}
 		{27ABF983-5523-4A86-8F7C-1502C49D343E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{2CBE1772-D2A2-40A5-8014-81904AAB9781} = {27ABF983-5523-4A86-8F7C-1502C49D343E}
 		{28C62819-4103-45B7-9115-C6C559D12964} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{4538FA39-E1EE-41A4-BB94-D3323B7B8286} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{558ED2D2-7FB3-4EEC-B280-46DECBE4EC3C} = {28C62819-4103-45B7-9115-C6C559D12964}
-		{C9703EB1-626B-4D1D-AEB9-42E7CC0E4220} = {4538FA39-E1EE-41A4-BB94-D3323B7B8286}
 		{1D5A23BB-7E05-42BF-AD34-DF616BC2E787} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{F927C67B-778F-4144-92E4-2AE745790893} = {1D5A23BB-7E05-42BF-AD34-DF616BC2E787}
 		{4A22457A-107B-4D71-9338-8D58677305DD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{EFE42A5E-391C-4261-8B4A-9C9FB5AAB9D8} = {4A22457A-107B-4D71-9338-8D58677305DD}
 		{A41DE533-BC37-42DC-8EA3-7433E91AB0CE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{80C73B5C-D95E-4706-A7D8-48C79937283C} = {A41DE533-BC37-42DC-8EA3-7433E91AB0CE}
 		{EDF802BE-DFA7-45C5-A960-3B2E96EE8143} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{6D058450-09B2-4D25-903F-9AE3A75DF066} = {EDF802BE-DFA7-45C5-A960-3B2E96EE8143}
 		{1352BF50-BCE5-40F7-9F2E-46A3EC4CC0D3} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{5079FB78-01FB-4A54-A0F7-04AA79A8DE7E} = {1352BF50-BCE5-40F7-9F2E-46A3EC4CC0D3}
 		{FD39F147-F3C9-47AD-A511-96BC42F1894B} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{A9A5B556-B590-4948-9E89-87D38623DAF1} = {FD39F147-F3C9-47AD-A511-96BC42F1894B}
 		{D4027038-4ED4-432B-B232-0551B72723DD} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{6F020ABD-6784-47E7-9526-1E8A83998942} = {D4027038-4ED4-432B-B232-0551B72723DD}
 		{87704EAF-C85F-4995-997B-590B4E0322C3} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{987845C6-3389-4D18-9E1D-43CB0414573E} = {87704EAF-C85F-4995-997B-590B4E0322C3}
 		{B48D1D9B-DF53-4878-BD38-E11780ACEFD6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{55D59483-E493-40CA-9FD6-538063647F38} = {B48D1D9B-DF53-4878-BD38-E11780ACEFD6}
 		{1B2C3D67-2605-48A8-B6B0-2D65A40BFAC6} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
-		{124A215F-69B4-4310-98DE-209FAFE16D44} = {1B2C3D67-2605-48A8-B6B0-2D65A40BFAC6}
 		{CC58A4DD-9CC3-4737-87B5-502157A12C6A} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{805950CD-B415-4A41-97E2-7BCE459C08A0} = {CC58A4DD-9CC3-4737-87B5-502157A12C6A}
 		{A75A3219-3E64-48F0-856E-7A2AF1D61CF7} = {CC58A4DD-9CC3-4737-87B5-502157A12C6A}
 		{A541BB96-39B7-44C7-98A1-C934EFBD52AE} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{A24E1F1F-16DE-46CC-9B90-65F0F60F3FBA} = {A541BB96-39B7-44C7-98A1-C934EFBD52AE}
 		{9C4AE49D-6960-4AA0-B41F-3BE11A61DB2E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{0DFA53AB-37B6-4ACA-B5D2-4441F62CC15A} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
+		{D0C39DE2-D3E6-46BF-8A32-19250BF4F2D4} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{5034D4DD-F7D2-45C7-893F-9955098BFF4B} = {58AAB72D-86B3-4445-B25E-62D6A7FF1237}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}

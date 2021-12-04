@@ -17,7 +17,7 @@ namespace RealPOV.Koikatu
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.2.0." + BuildNumber.Version;
+        public const string Version = "1.3.0." + BuildNumber.Version;
 
         private ConfigEntry<bool> HideHead { get; set; }
 
@@ -30,14 +30,17 @@ namespace RealPOV.Koikatu
         private static int currentCharaId = -1;
         private static RealPOV plugin;
 
+        private float dofOrigSize;
+        private float dofOrigAperature;
+
         protected override void Awake()
         {
             plugin = this;
-            defaultFov = 90f;
-            defaultViewOffset = 0.001f;
+            defaultFov = 45f;
+            defaultViewOffset = 0.05f;
             base.Awake();
 
-            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", true, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
+            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
 
             Harmony.CreateAndPatchAll(GetType());
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
@@ -131,7 +134,7 @@ namespace RealPOV.Koikatu
                         currentChara = GetCurrentChara();
                     }
 
-                    currentCharaGo = currentChara.gameObject;
+                    currentCharaGo = currentChara?.gameObject;
                 }
             }
 
@@ -143,6 +146,17 @@ namespace RealPOV.Koikatu
                 GameCamera = Camera.main;
                 var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
+                
+                // Fix depth of field being completely out of focus
+                var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+                dofOrigSize = depthOfField.focalSize;
+                dofOrigAperature = depthOfField.aperture;
+                if(depthOfField.enabled)
+                {
+                    depthOfField.focalTransform.localPosition = new Vector3(0, 0, 0.25f);
+                    depthOfField.focalSize = 0.9f;
+                    depthOfField.aperture = 0.6f;
+                }
 
                 // only use head rotation if there is no existing rotation
                 if(!LookRotation.TryGetValue(currentCharaGo, out _))
@@ -171,6 +185,10 @@ namespace RealPOV.Koikatu
 
             var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
             if(cc) cc.enabled = true;
+
+            var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+            depthOfField.focalSize = dofOrigSize;
+            depthOfField.aperture = dofOrigAperature;
 
             base.DisablePov();
 
@@ -213,7 +231,9 @@ namespace RealPOV.Koikatu
             return true;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+        [HarmonyPatch(typeof(HFlag), nameof(HFlag.selectAnimationListInfo), MethodType.Setter)]
         private static void ResetAllRotations()
         {
             LookRotation.Clear();
