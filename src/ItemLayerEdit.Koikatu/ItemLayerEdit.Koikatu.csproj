@@ -1,6 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\Release\KeelPluginsKK\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\Debug\KeelPluginsKK\</OutputPath>
+    <DefineConstants>TRACE;KK</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Core" Version="5.4.4" />
     <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="16.0.0" />
@@ -15,4 +22,5 @@
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\UIUtility\UIUtility.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+  <Import Project="..\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems" Label="Shared" />
 </Project>

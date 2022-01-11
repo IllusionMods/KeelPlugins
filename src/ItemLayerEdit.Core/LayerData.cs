@@ -9,7 +9,7 @@ namespace ItemLayerEdit.Koikatu
     }
 
     [MessagePackObject(true)]
-    internal class LayerSaveData
+    public class LayerSaveData
     {
         public int DefaultLayer;
         public int NewLayer;

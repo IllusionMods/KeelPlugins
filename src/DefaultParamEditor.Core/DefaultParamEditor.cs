@@ -4,6 +4,7 @@ using KeelPlugins.Koikatu;
 using ParadoxNotion.Serialization;
 using System;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -28,14 +29,14 @@ namespace DefaultParamEditor.Koikatu
             Log.SetLogSource(Logger);
             Harmony.CreateAndPatchAll(typeof(Hooks));
 
-            if(File.Exists(savePath))
+            if (File.Exists(savePath))
             {
                 try
                 {
                     var json = File.ReadAllText(savePath);
                     data = JSONSerializer.Deserialize<ParamData>(json);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Log.Error($"Failed to load settings from {savePath} with error: " + ex);
                     data = new ParamData();
@@ -82,7 +83,7 @@ namespace DefaultParamEditor.Koikatu
                 scrollRect.content.gameObject.GetOrAddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
                 scrollRect.scrollSensitivity = 25;
 
-                foreach(Transform item in scrollRect.content.transform)
+                foreach (Transform item in scrollRect.content.transform)
                 {
                     var layoutElement = item.gameObject.GetOrAddComponent<LayoutElement>();
                     layoutElement.preferredHeight = 40;
@@ -107,7 +108,17 @@ namespace DefaultParamEditor.Koikatu
                 var newObject = Instantiate(template, scrollRect.content.transform);
                 newObject.name = "NewObject";
                 var textComponent = newObject.GetComponentInChildren<Text>();
-                textComponent.text = name;
+                if (textComponent != null)
+                {
+                    textComponent.text = name;
+                }
+#if KKS
+                else
+                {
+                    var textComponent2 = newObject.GetComponentInChildren<TextMeshProUGUI>();
+                    textComponent2.text = name;
+                }
+#endif
                 var buttonComponent = newObject.GetComponent<Button>();
                 buttonComponent.onClick.ActuallyRemoveAllListeners();
                 buttonComponent.onClick.AddListener(onClickEvent);
