@@ -1,10 +1,12 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
 using Studio;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(PosePng.Koikatu.PosePng.Version)]
 
@@ -17,30 +19,30 @@ namespace PosePng.Koikatu
         public const string GUID = "keelhauled.posepng";
         public const string Version = "1.0.1." + BuildNumber.Version;
 
-        private static ConfigEntry<string> SaveFolder { get; set; }
-
         private const string PngExt = ".png";
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            SaveFolder = Config.Bind("", "Save folder path", "");
             Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
+        /// <summary>
+        /// Save as .png with attached data instead of .dat
+        /// </summary>
         private class Hooks
         {
             [HarmonyPrefix, HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.Save))]
             public static bool PoseSavePatch(OCIChar _ociChar, ref string _name)
             {
-                var filename = $"{_name}_{DateTime.Now:yyyy_MMdd_HHmm_ss_fff}{PngExt}";
-                var path = Path.Combine(SaveFolder.Value, filename);
+                var filename = $"{DateTime.Now:yyyy_MMdd_HHmm_ss_fff}{PngExt}";
+                var path = Path.Combine(UserData.Create("studio/pose"), filename);
                 var fileInfo = new PauseCtrl.FileInfo(_ociChar);
 
                 try
                 {
-                    using(var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-                    using(var binaryWriter = new BinaryWriter(fileStream))
+                    using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+                    using (var binaryWriter = new BinaryWriter(fileStream))
                     {
                         var buffer = Studio.Studio.Instance.gameScreenShot.CreatePngScreen(320, 180);
                         binaryWriter.Write(buffer);
@@ -51,7 +53,7 @@ namespace PosePng.Koikatu
                         fileInfo.Save(binaryWriter);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Log.Message("Save path has not been set properly");
                     Log.Error(ex);
@@ -60,18 +62,48 @@ namespace PosePng.Koikatu
                 return false;
             }
 
+            /// <summary>
+            /// Add the .png poses after the vanilla code runs. This should be a transpiler so they all get done together.
+            /// </summary>
+            [HarmonyPostfix, HarmonyPatch(typeof(PauseRegistrationList), nameof(PauseRegistrationList.InitList))]
+            private static void PauseRegistrationList_InitList(PauseRegistrationList __instance)
+            {
+                int sex = __instance.m_OCIChar.oiCharInfo.sex;
+                List<string> additionalPoses = Directory.GetFiles(UserData.Create("studio/pose"), "*.png").ToList();
+
+                for (int j = 0; j < additionalPoses.Count; j++)
+                {
+                    GameObject gameObject = Instantiate(__instance.prefabNode);
+                    gameObject.transform.SetParent(__instance.transformRoot, false);
+                    StudioNode component = gameObject.GetComponent<StudioNode>();
+                    component.active = true;
+                    int no = __instance.listPath.Count;
+                    component.addOnClick = delegate
+                    {
+                        __instance.OnClickSelect(no);
+                    };
+                    component.text = PauseCtrl.LoadName(additionalPoses[j]);
+                    __instance.dicNode.Add(__instance.listPath.Count, component);
+
+                    __instance.listPath.Add(additionalPoses[j]);
+                }
+            }
+
+            /// <summary>
+            /// Patch with added PngFile.SkipPng
+            /// </summary>
             [HarmonyPrefix, HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.Load))]
             public static bool PoseLoadPatch(OCIChar _ociChar, ref string _path, ref bool __result)
             {
-                if(Path.GetExtension(_path).ToLower() == PngExt)
+                if (Path.GetExtension(_path).ToLower() == PngExt)
                 {
                     var fileInfo = new PauseCtrl.FileInfo();
-                    using(var fileStream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using(var binaryReader = new BinaryReader(fileStream))
+                    using (var fileStream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var binaryReader = new BinaryReader(fileStream))
                     {
                         PngFile.SkipPng(binaryReader);
 
-                        if(string.CompareOrdinal(binaryReader.ReadString(), PauseCtrl.saveIdentifyingCode) != 0)
+                        if (string.CompareOrdinal(binaryReader.ReadString(), PauseCtrl.saveIdentifyingCode) != 0)
                         {
                             __result = false;
                             return false;
@@ -88,6 +120,57 @@ namespace PosePng.Koikatu
                     return false;
                 }
 
+                return true;
+            }
+
+            /// <summary>
+            /// Patch with added PngFile.SkipPng
+            /// </summary>
+            [HarmonyPrefix, HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.CheckIdentifyingCode))]
+            public static bool PauseCtrl_CheckIdentifyingCode(string _path, ref bool __result)
+            {
+                if (Path.GetExtension(_path).ToLower() == PngExt)
+                {
+                    using (FileStream input = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        using (BinaryReader binaryReader = new BinaryReader(input))
+                        {
+                            PngFile.SkipPng(binaryReader);
+                            if (string.Compare(binaryReader.ReadString(), "【pose】") != 0)
+                            {
+                                __result = false;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                return true;
+            }
+
+            /// <summary>
+            /// Patch with added PngFile.SkipPng
+            /// </summary>
+            [HarmonyPrefix, HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.LoadName))]
+            public static bool PauseCtrl_LoadName(string _path, ref string __result)
+            {
+                if (Path.GetExtension(_path).ToLower() == PngExt)
+                {
+                    using (FileStream input = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        using (BinaryReader binaryReader = new BinaryReader(input))
+                        {
+                            PngFile.SkipPng(binaryReader);
+                            if (string.Compare(binaryReader.ReadString(), "【pose】") != 0)
+                            {
+                                __result = string.Empty;
+                            }
+                            binaryReader.ReadInt32();
+                            binaryReader.ReadInt32();
+                            __result = binaryReader.ReadString();
+                        }
+                    }
+                    return false;
+                }
                 return true;
             }
         }
