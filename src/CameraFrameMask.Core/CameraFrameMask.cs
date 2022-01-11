@@ -36,7 +36,7 @@ namespace CameraFrameMask.Koikatu
         [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
         private static void ChangeCoordinateTypePrefix()
         {
-            MaskFrames(inStudio ? 3 : 1);
+            MaskFrames(inStudio ? 3 : 2);
         }
 
         public static void MaskFrames(int count)
