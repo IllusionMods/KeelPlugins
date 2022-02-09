@@ -4,6 +4,7 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Utils;
 using RealPOV.Core;
+using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(RealPOV.PlayHome.RealPOV.Version)]
 
@@ -22,6 +23,9 @@ namespace RealPOV.PlayHome
         internal static ConfigEntry<float> MaleOffsetX { get; set; }
         internal static ConfigEntry<float> MaleOffsetY { get; set; }
         internal static ConfigEntry<float> MaleOffsetZ { get; set; }
+        internal static ConfigEntry<KeyboardShortcut> CycleNextHotkey { get; set; }
+        internal static ConfigEntry<KeyboardShortcut> CyclePrevHotkey { get; set; }
+        internal static ConfigEntry<bool> IncludeFemalePOV { get; set; }
 
         protected override void Awake()
         {
@@ -34,6 +38,10 @@ namespace RealPOV.PlayHome
             MaleOffsetX = Config.Bind(SECTION_OFFSETS, "Male offset X", 0f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetY = Config.Bind(SECTION_OFFSETS, "Male offset Y", 0.092f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
             MaleOffsetZ = Config.Bind(SECTION_OFFSETS, "Male offset Z", 0.12f, new ConfigDescription("", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
+
+            CycleNextHotkey = Config.Bind(SECTION_HOTKEYS, "Cycle next character POV", new KeyboardShortcut(KeyCode.KeypadPlus));
+            CyclePrevHotkey = Config.Bind(SECTION_HOTKEYS, "Cycle previous character POV", new KeyboardShortcut(KeyCode.KeypadMinus));
+            IncludeFemalePOV = Config.Bind(SECTION_GENERAL, "Include female POV when cycling", false);
 
             Harmony.CreateAndPatchAll(GetType());
         }

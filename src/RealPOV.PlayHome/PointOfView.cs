@@ -11,7 +11,8 @@ namespace RealPOV.PlayHome
         private static bool lockNormalCamera;
         private static Human currentTarget;
         private static Female female;
-        private static Male male;
+        private static Human[] targets;
+        private static int currentTargetIndex = 0;
 
         private bool OnUI => EventSystem.current && EventSystem.current.IsPointerOverGameObject();
         private bool dragging;
@@ -52,6 +53,25 @@ namespace RealPOV.PlayHome
 
             if(lockNormalCamera)
             {
+                if(RealPOV.CycleNextHotkey.Value.IsDown())
+                {
+                    Restore();
+                    currentTargetIndex++;
+                    if(currentTargetIndex >= targets.Length) {
+                        currentTargetIndex = 0;
+                    }
+                    SetPOV();
+                }
+                else if(RealPOV.CyclePrevHotkey.Value.IsDown())
+                {
+                    Restore();
+                    currentTargetIndex--;
+                    if(currentTargetIndex < 0) {
+                        currentTargetIndex = targets.Length - 1;
+                    }
+                    SetPOV();
+                }
+
                 if(currentTarget)
                     UpdateCamera();
                 else
@@ -64,8 +84,20 @@ namespace RealPOV.PlayHome
             if(!lockNormalCamera)
             {
                 female = FindObjectOfType<Female>();
-                male = FindObjectOfType<Male>();
-                currentTarget = male;
+                if(RealPOV.IncludeFemalePOV.Value)
+                {
+                    targets = FindObjectsOfType<Human>();
+                }
+                else
+                {
+                    targets = FindObjectsOfType<Male>();
+                }
+
+                if(currentTargetIndex > targets.Length - 1)
+                {
+                    currentTargetIndex = 0;
+                }
+                currentTarget = targets[currentTargetIndex];
 
                 if(currentTarget)
                 {
