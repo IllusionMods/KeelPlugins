@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using Studio;
 using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(CameraFrameMask.Koikatu.CameraFrameMask.Version)]
@@ -33,15 +34,19 @@ namespace CameraFrameMask.Koikatu
         [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
         private static void HSceneEnd() => maskComponent = null;
 
-        [HarmonyPrefix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
-        private static void ChangeCoordinateTypePrefix()
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCoordinateType), typeof(ChaFileDefine.CoordinateType), typeof(bool))]
+        [HarmonyPatch(typeof(PauseCtrl), nameof(PauseCtrl.Load))]
+        [HarmonyPatch(typeof(OCIChar), nameof(OCIChar.LoadAnime))]
+        [HarmonyPatch(typeof(OCIChar), nameof(OCIChar.ActiveKinematicMode))]
+        private static void MaskFramesPatch()
         {
             MaskFrames(inStudio ? 3 : 2);
         }
 
         public static void MaskFrames(int count)
         {
-            if(maskComponent)
+            if (maskComponent)
                 maskComponent.MaskFrames(count);
         }
     }
