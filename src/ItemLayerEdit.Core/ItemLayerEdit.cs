@@ -16,7 +16,7 @@ namespace ItemLayerEdit.Koikatu
     public class ItemLayerEdit : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.itemlayeredit";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.1.0." + BuildNumber.Version;
 
         private ConfigEntry<KeyboardShortcut> ChangeLayer { get; set; }
 

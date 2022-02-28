@@ -11,7 +11,7 @@ namespace CharaStateX.Koikatu
     public class CharaStateX : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.charastatex";
-        public const string Version = "1.0.3." + BuildNumber.Version;
+        public const string Version = "1.1.0." + BuildNumber.Version;
 
         private void Awake()
         {
