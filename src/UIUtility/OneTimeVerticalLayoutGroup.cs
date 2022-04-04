@@ -5,7 +5,7 @@ namespace UILib
 {
     public class OneTimeVerticalLayoutGroup : VerticalLayoutGroup
     {
-#if KKS
+#if KKS || HS2 || AI
         public override void OnEnable()
 #else
         protected override void OnEnable()
@@ -16,7 +16,7 @@ namespace UILib
                 this.ExecuteDelayed(() => enabled = false, 3);
         }
 
-#if KKS
+#if KKS || HS2 || AI
         public override void OnDisable()
 #else
         protected override void OnDisable()
