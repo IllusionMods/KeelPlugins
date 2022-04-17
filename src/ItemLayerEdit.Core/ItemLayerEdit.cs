@@ -1,6 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+#if AI
+using KeelPlugins.AISyoujyo;
+#elif HS2
+using KeelPlugins.HoneySelect2;
+#else
 using KeelPlugins.Koikatu;
+#endif
 using KKAPI.Studio.SaveLoad;
 using Studio;
 using System.Linq;

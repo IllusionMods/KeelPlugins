@@ -19,7 +19,7 @@ namespace UILib
         public RectTransform toDrag;
         public bool preventCameraControl;
 
-#if KKS
+#if KKS || HS2 || AI
         public override void Awake()
 #else
         protected override void Awake()

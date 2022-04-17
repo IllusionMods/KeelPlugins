@@ -4,11 +4,19 @@ using HarmonyLib;
 using System.Collections;
 using System.IO;
 using UnityEngine;
+#if AI
+using KeelPlugins.AISyoujyo;
+#elif HS2
+using KeelPlugins.HoneySelect2;
+#else
+using KeelPlugins.Koikatu;
+#endif
 
 [assembly: System.Reflection.AssemblyFileVersion(DefaultStudioScene.Koikatu.DefaultStudioScene.Version)]
 
 namespace DefaultStudioScene.Koikatu
 {
+    [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "DefaultStudioScene", Version)]
     public class DefaultStudioScene : BaseUnityPlugin
     {
