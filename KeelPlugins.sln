@@ -316,7 +316,7 @@ Global
 		src\Common.Utils\Common.Utils.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
-		src\Common.Koikatu\Common.Koikatu.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
 		src\LightManager.Core\LightManager.Core.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
@@ -356,10 +356,11 @@ Global
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{d0c39de2-d3e6-46bf-8a32-19250bf4f2d4}*SharedItemsImports = 13
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{dd7d6945-54a6-4190-8f49-46a189ee32cd}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 4
-		src\Common.Utils\Common.Utils.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 4
-		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
+		src\Common.Utils\Common.Utils.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
+		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
 		src\Common.Unity\Common.Unity.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
