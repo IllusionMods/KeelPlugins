@@ -9,6 +9,9 @@
     <Import_RootNamespace>LightManager.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)LightManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LightManagerPlugin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneDataController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrackTransform.cs" />
   </ItemGroup>
 </Project>

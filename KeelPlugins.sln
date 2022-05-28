@@ -213,6 +213,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.HoneySelect2"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.AISyoujyo", "src\ItemLayerEdit.AISyoujyo\ItemLayerEdit.AISyoujyo.csproj", "{57A8753A-3E34-478A-9AF4-746EFF566D6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightManager.KoikatuSunshine", "src\LightManager.KoikatuSunshine\LightManager.KoikatuSunshine.csproj", "{8C76020F-A387-4306-8FD3-AA4E7660C8C8}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{073d65ba-9bb7-4386-9b01-f86fa6df6984}*SharedItemsImports = 13
@@ -313,6 +315,10 @@ Global
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
+		src\LightManager.Core\LightManager.Core.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{8c76020f-a387-4306-8fd3-aa4e7660c8c8}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
 		src\LightManager.Core\LightManager.Core.projitems*{9495ffe8-c90d-44e6-ae4f-a21506594aad}*SharedItemsImports = 5
@@ -538,6 +544,10 @@ Global
 		{57A8753A-3E34-478A-9AF4-746EFF566D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A8753A-3E34-478A-9AF4-746EFF566D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A8753A-3E34-478A-9AF4-746EFF566D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C76020F-A387-4306-8FD3-AA4E7660C8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C76020F-A387-4306-8FD3-AA4E7660C8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C76020F-A387-4306-8FD3-AA4E7660C8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C76020F-A387-4306-8FD3-AA4E7660C8C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -631,6 +641,7 @@ Global
 		{0EFAD08F-D9A9-49A0-AAEB-A47E9B60FB91} = {A41DE533-BC37-42DC-8EA3-7433E91AB0CE}
 		{B026FAE9-1938-4650-B76B-E3810ED2C9CE} = {FD39F147-F3C9-47AD-A511-96BC42F1894B}
 		{57A8753A-3E34-478A-9AF4-746EFF566D6B} = {FD39F147-F3C9-47AD-A511-96BC42F1894B}
+		{8C76020F-A387-4306-8FD3-AA4E7660C8C8} = {21652626-F032-4986-B258-C36B4C9115E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
