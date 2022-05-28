@@ -4,7 +4,6 @@
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />
-  <Import Project="..\UIUtility\UIUtility.projitems" Label="Shared" />
   <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;KKS</DefineConstants>

@@ -360,7 +360,6 @@ Global
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
-		src\UIUtility\UIUtility.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
 		src\Common.Unity\Common.Unity.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
