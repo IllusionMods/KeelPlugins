@@ -5,6 +5,7 @@ using KeelPlugins.PlayHome;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using BepInEx.Configuration;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,8 +22,13 @@ namespace AltAutoMode.PlayHome
         public const string GUID = "keelhauled.altautomode";
         public const string Version = "1.0.2." + BuildNumber.Version;
 
+        private static ConfigEntry<bool> _sUnlockPoses;
+        private static ConfigEntry<bool> _sEyesOpen;
+
         private void Awake()
         {
+            _sUnlockPoses = Config.Bind("H Scene", "Unlock all positions", false, "Unlock all H positions regardless of game progress and map. All special positions are always available.");
+            _sEyesOpen = Config.Bind("H Scene", "Prevent eyes from staying closed", true);
             Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
@@ -117,15 +123,22 @@ namespace AltAutoMode.PlayHome
             [HarmonyPrefix, HarmonyPatch(typeof(HStyleChangeUI), "StyleCheck")]
             public static bool UnlockPositions(HStyleChangeUI __instance, ref bool __result, H_StyleData data)
             {
-                __result = data.state == Traverse.Create(__instance).Field("nowState").GetValue<H_StyleData.STATE>();
-                return false;
+                if(_sUnlockPoses.Value)
+                {
+                    __result = data.state == Traverse.Create(__instance).Field("nowState").GetValue<H_StyleData.STATE>();
+                    return false;
+                }
+                return true;
             }
 
             [HarmonyPostfix, HarmonyPatch(typeof(H_ExpressionData), nameof(H_ExpressionData.ChangeExpression), typeof(Human), typeof(H_Expression.TYPE), typeof(H_Parameter), typeof(float))]
             public static void OpenEyes(Human human)
             {
-                if(human.blink.LimitMax == 0f)
-                    human.blink.LimitMax = 0.7f;
+                if(_sEyesOpen.Value)
+                {
+                    if(human.blink.LimitMax == 0f) 
+                        human.blink.LimitMax = 0.7f;
+                }
             }
         }
     }
