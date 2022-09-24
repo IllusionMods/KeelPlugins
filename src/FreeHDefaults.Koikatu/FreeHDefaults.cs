@@ -17,10 +17,14 @@ using UnityEngine;
 namespace FreeHDefaults.Koikatu
 {
     [BepInPlugin(GUID, "FreeH Defaults", Version)]
+    [BepInProcess("Koikatu")]
+    [BepInProcess("Koikatsu Party")]
+    [BepInProcess("KoikatuVR")] //todo test if it actually works
+    [BepInProcess("Koikatsu Party VR")] //todo test if it actually works
     public class FreeHDefaults : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.freehdefaults";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.1.0." + BuildNumber.Version;
 
         private Harmony harmony;
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
@@ -35,9 +39,9 @@ namespace FreeHDefaults.Koikatu
             Log.SetLogSource(Logger);
             harmony = Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
 
-            if(File.Exists(saveFilePath))
+            if (File.Exists(saveFilePath))
             {
-                using(var reader = new StreamReader(saveFilePath))
+                using (var reader = new StreamReader(saveFilePath))
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
             }
         }
@@ -54,15 +58,15 @@ namespace FreeHDefaults.Koikatu
 
         private static void HookHLightControl(List<ConfigEntry<bool>> ___btn, GameObject ___newParent, ref bool value)
         {
-            if(___btn[0].Value != value)
+            if (___btn[0].Value != value)
                 ___btn[0].Value = value;
-            
-            if(firstRun && value)
+
+            if (firstRun && value)
             {
                 firstRun = false;
                 ___newParent.transform.eulerAngles = new Vector3(saveData.LightX, saveData.LightY);
             }
-            else if(value)
+            else if (value)
             {
                 var rot = ___newParent.transform.eulerAngles;
                 saveData.LightX = rot.x;
@@ -86,19 +90,19 @@ namespace FreeHDefaults.Koikatu
             backData.stageH2 = saveData.stageH2;
             backData.statusH = saveData.statusH;
             backData.discovery = saveData.discovery;
-            backData.categorys = new List<int>{ saveData.category };
+            backData.categorys = new List<int> { saveData.category };
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.NormalSetup))]
         private static void HookFreeHProps(FreeHScene __instance)
         {
             firstRun = true;
-            
+
             var member = __instance.member;
             member.resultHeroine.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.HeroinePath = y));
             member.resultPartner.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PartnerPath = y));
             member.resultPlayer.Where(x => x != null).Subscribe(x => SaveChara(x.charFile, y => saveData.PlayerPath = y));
-            member.resultMapInfo.Subscribe(x  => { if(x != null) saveData.map = x.No; SaveXml(); });
+            member.resultMapInfo.Subscribe(x => { if (x != null) saveData.map = x.No; SaveXml(); });
             member.resultTimeZone.Subscribe(x => { saveData.timeZone = x; SaveXml(); });
             member.resultStage1.Subscribe(x => { saveData.stageH1 = x; SaveXml(); });
             member.resultStage2.Subscribe(x => { saveData.stageH2 = x; SaveXml(); });
@@ -113,31 +117,28 @@ namespace FreeHDefaults.Koikatu
             SaveXml();
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(FreeHClassRoomCharaFile), nameof(FreeHClassRoomCharaFile.Start))]
-        private static void UpdateFileList(FreeHClassRoomCharaFile __instance)
-        {
-            lastFileList = __instance.listCtrl.lstFileInfo;
-        }
-        
         [HarmonyPostfix, HarmonyPatch(typeof(FreeHPreviewCharaList), nameof(FreeHPreviewCharaList.Start))]
         private static void HookCancelButton(FreeHPreviewCharaList __instance)
         {
+            // Need to do this because of differences in KK and KKP
+            lastFileList = FieldOrProperty(Traverse.Create(__instance).Field("charFile").Field("listCtrl"), "lstFileInfo").GetValue<List<CustomFileInfo>>();
+
             __instance.onCancel += () => lastFileList = null;
         }
-        
+
         [HarmonyPostfix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.MasturbationSetup))]
         private static void FixDiscoveryLogic(FreeHScene __instance)
         {
             __instance.tglDiscoverySafeMasturbation.isOn = !__instance.discovery;
             __instance.tglDiscoveryOutMasturbation.isOn = __instance.discovery;
         }
-        
+
         [HarmonyPostfix, HarmonyPatch(typeof(HSceneProc), nameof(HSceneProc.SetShortcutKey))]
         private static void HookHSceneValues(HSceneProc __instance)
         {
             __instance.flags.ctrlCamera.CameraFov = saveData.Fov;
             __instance.flags.isAibuSelect = saveData.isAibuSelect;
-            
+
             __instance.gameObject.GetComponent<ShortcutKey>().procList
                 .First(x => x.keyCode == KeyCode.A).call.AddListener(() =>
             {
@@ -152,24 +153,24 @@ namespace FreeHDefaults.Koikatu
         {
             yield return new WaitForSeconds(5f);
             float tempFov = 0;
-            
-            while(true)
+
+            while (true)
             {
-                if(Math.Abs(tempFov - camera.CameraFov) > 0.001f)
+                if (Math.Abs(tempFov - camera.CameraFov) > 0.001f)
                 {
                     tempFov = saveData.Fov = camera.CameraFov;
                     SaveXml();
                 }
-                
+
                 yield return new WaitForSeconds(5f);
             }
         }
 
         private static T LoadChara<T>(string path, Func<ChaFileControl, T> action) where T : SaveData.CharaData
         {
-            if(!File.Exists(path))
+            if (!File.Exists(path))
                 return null;
-            
+
             var chaFileControl = new ChaFileControl();
             chaFileControl.LoadCharaFile(path, 1);
             return action(chaFileControl);
@@ -177,10 +178,11 @@ namespace FreeHDefaults.Koikatu
 
         private static void SaveChara(ChaFile chaFile, Action<string> action)
         {
-            var fullPath = lastFileList?.First(x => x.FileName == chaFile.charaFileName.Remove(chaFile.charaFileName.Length - 4)).FullPath;
+            // Need to do this because of differences in KK and KKP
+            var fullPath = GetFieldOrProperty("FullPath", lastFileList?.First(x => GetFieldOrProperty("FileName", x) == chaFile.charaFileName.Remove(chaFile.charaFileName.Length - 4)));
             lastFileList = null;
-            
-            if(!string.IsNullOrEmpty(fullPath))
+
+            if (!string.IsNullOrEmpty(fullPath))
             {
                 action(fullPath);
                 SaveXml();
@@ -189,8 +191,24 @@ namespace FreeHDefaults.Koikatu
 
         private static void SaveXml()
         {
-            using(var writer = new StreamWriter(saveFilePath))
-                xmlSerializer.Serialize(writer, saveData); 
+            using (var writer = new StreamWriter(saveFilePath))
+                xmlSerializer.Serialize(writer, saveData);
+        }
+
+        private static string GetFieldOrProperty(string name, CustomFileInfo x)
+        {
+            var t = Traverse.Create(x);
+            var f = FieldOrProperty(t, name);
+
+            var fileName = f.GetValue<string>();
+            return fileName;
+        }
+        private static Traverse FieldOrProperty(Traverse t, string name)
+        {
+            var f = t.Field(name);
+            if (!f.FieldExists())
+                f = t.Property(name);
+            return f;
         }
     }
 }
