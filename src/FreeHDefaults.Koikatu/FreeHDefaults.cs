@@ -14,6 +14,8 @@ using Manager;
 using UniRx;
 using UnityEngine;
 
+[assembly: System.Reflection.AssemblyFileVersion(FreeHDefaults.Koikatu.FreeHDefaults.Version)]
+
 namespace FreeHDefaults.Koikatu
 {
     [BepInPlugin(GUID, "FreeH Defaults", Version)]
