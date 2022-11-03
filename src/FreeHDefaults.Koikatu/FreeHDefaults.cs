@@ -96,6 +96,14 @@ namespace FreeHDefaults.Koikatu
         [HarmonyPrefix, HarmonyPatch(typeof(FreeHScene), nameof(FreeHScene.NormalSetup))]
         private static void HookFreeHProps(FreeHScene __instance)
         {
+            // Handle removed maps
+            if (!__instance.member.map.infoDic.ContainsKey(__instance.mapNo))
+            {
+                __instance.mapNo = __instance.member.map.infoDic.Keys.Min();
+                saveData.map = __instance.mapNo;
+                SaveXml();
+            }
+
             firstRun = true;
 
             var member = __instance.member;
