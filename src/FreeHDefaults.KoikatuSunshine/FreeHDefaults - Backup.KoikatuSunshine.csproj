@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <Import Project="..\BuildSettings.Common.props" />
+    <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
+    <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
+    <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+    <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+    <ItemGroup>
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp-firstpass" Version="2021.9.17" />
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniRx" Version="2021.9.17" />
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniTask" Version="2021.9.17" />
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
+      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
+    </ItemGroup>
+</Project>

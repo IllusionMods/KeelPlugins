@@ -1,12 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DefineConstants>$(DefineConstants)TRACE;KK</DefineConstants>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DefineConstants>$(DefineConstants)TRACE;KK</DefineConstants>
     </PropertyGroup>
     <Import Project="..\BuildSettings.Common.props" />
     <Import Project="..\BuildSettings.Koikatu.props" />
     <ItemGroup>
-        <PackageReference Include="BepInEx.Core" Version="5.4.4" />
         <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="16.0.0" />
+        <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.20" />
         <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" Version="2019.4.27.4" />
         <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp-firstpass" Version="2019.4.27.4" />
         <PackageReference Include="IllusionLibs.Koikatu.TextMeshPro" Version="2019.4.27.4" />
@@ -16,4 +22,5 @@
     <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
     <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
     <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+    <Import Project="..\FreeHDefaults.Core\FreeHDefaults.Core.projitems" Label="Shared" />
 </Project>
