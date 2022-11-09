@@ -17,7 +17,7 @@ namespace TitleShortcuts.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.2.3." + BuildNumber.Version;
+        public const string Version = "1.3.0." + BuildNumber.Version;
 
         private static ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }
@@ -25,6 +25,7 @@ namespace TitleShortcuts.Koikatu
         private static ConfigEntry<KeyboardShortcut> StartDownloader { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartFreeH { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartLiveShow { get; set; }
+        private static ConfigEntry<KeyboardShortcut> StartGameLoad { get; set; }
 
         protected override void Awake()
         {
@@ -36,6 +37,7 @@ namespace TitleShortcuts.Koikatu
             StartDownloader = Config.Bind(SECTION_HOTKEYS, "Open downloader", new KeyboardShortcut(KeyCode.D));
             StartFreeH = Config.Bind(SECTION_HOTKEYS, "Start free H", new KeyboardShortcut(KeyCode.H));
             StartLiveShow = Config.Bind(SECTION_HOTKEYS, "Start live show", new KeyboardShortcut(KeyCode.L));
+            StartGameLoad = Config.Bind(SECTION_HOTKEYS, "Open Load Game screen", new KeyboardShortcut(KeyCode.G));
 
             Harmony.CreateAndPatchAll(GetType());
         }
@@ -58,6 +60,7 @@ namespace TitleShortcuts.Koikatu
                 else if(StartDownloader.Value.IsDown()) StartMode(titleScene.OnDownloader, "Starting downloader");
                 else if(StartFreeH.Value.IsDown()) StartMode(titleScene.OnOtherFreeH, "Starting free H");
                 else if(StartLiveShow.Value.IsDown()) StartMode(titleScene.OnOtherIdolLive, "Starting live show");
+                else if(StartGameLoad.Value.IsDown()) StartMode(titleScene.OnLoad, "Opening Load Game screen");
             }
             while(titleScene);
 
