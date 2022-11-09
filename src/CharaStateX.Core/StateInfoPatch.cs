@@ -13,33 +13,35 @@ namespace CharaStateX.Koikatu
         {
             harmony = harmonyInstance;
             stateInfoType = typeof(MPCharCtrl).GetNestedType("StateInfo", AccessTools.all);
-            PatchStateInfoMethod("OnClickCosType");
-            PatchStateInfoMethod("OnClickShoesType");
-            PatchStateInfoMethod("OnClickCosState");
-            PatchStateInfoMethod("OnClickClothingDetails");
-            PatchStateInfoMethod("OnClickAccessories");
-            PatchStateInfoMethod("OnClickLiquid");
-            PatchStateInfoMethod("OnClickTears");
-            PatchStateInfoMethod("OnValueChangedCheek");
-            PatchStateInfoMethod("OnValueChangedNipple");
-            PatchStateInfoMethod("OnValueChangedSon");
-            PatchStateInfoMethod("OnValueChangedSonLength");
+            PatchStateInfoMethod(nameof(Patch_OnClickCosType));
+            PatchStateInfoMethod(nameof(Patch_OnClickShoesType));
+            PatchStateInfoMethod(nameof(Patch_OnClickCosState));
+            PatchStateInfoMethod(nameof(Patch_OnClickClothingDetails));
+            PatchStateInfoMethod(nameof(Patch_OnClickAccessories));
+            PatchStateInfoMethod(nameof(Patch_OnClickLiquid));
+            PatchStateInfoMethod(nameof(Patch_OnClickTears));
+            PatchStateInfoMethod(nameof(Patch_OnValueChangedCheek));
+            PatchStateInfoMethod(nameof(Patch_OnValueChangedNipple));
+            PatchStateInfoMethod(nameof(Patch_OnValueChangedSon));
+            PatchStateInfoMethod(nameof(Patch_OnValueChangedSonLength));
         }
 
         private static void PatchStateInfoMethod(string targetName)
         {
-            var target = AccessTools.Method(stateInfoType, targetName);
-            var patch = AccessTools.Method(typeof(StateInfoPatch), $"Patch_{targetName}");
+            var target = AccessTools.Method(stateInfoType, targetName.Substring("Patch_".Length));
+            var patch = AccessTools.Method(typeof(StateInfoPatch), targetName);
             harmony.Patch(target, null, new HarmonyMethod(patch));
         }
 
-#pragma warning disable IDE0051 // Remove unused private members
         private static void Patch_OnClickCosType(object __instance, ref int _value)
         {
             if(Utils.GetIsUpdateInfo(__instance)) return;
 
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
-                chara.SetCoordinateInfo((ChaFileDefine.CoordinateType)_value);
+            {
+                if(chara.charInfo.chaFile.coordinate.Length > _value)
+                    chara.SetCoordinateInfo((ChaFileDefine.CoordinateType)_value);
+            }
         }
 
         private static void Patch_OnClickShoesType(object __instance, ref int _value)
@@ -121,6 +123,5 @@ namespace CharaStateX.Koikatu
             foreach(var chara in Utils.GetAllSelectedButMain(__instance))
                 chara.SetSonLength(_value);
         }
-#pragma warning restore IDE0051 // Remove unused private members
     }
 }
