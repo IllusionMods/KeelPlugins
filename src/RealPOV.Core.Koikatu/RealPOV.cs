@@ -1,3 +1,4 @@
+using System;
 using BepInEx;
 using HarmonyLib;
 using RealPOV.Core;
@@ -70,7 +71,9 @@ namespace RealPOV.Koikatu
         {
             if(currentCharaId == -1)
                 return null;
-            
+            if (CurrentFOV == null)
+                throw new InvalidOperationException("CurrentFOV == null");
+
             return new ScenePovData
             {
                 CharaId = currentCharaId,
@@ -138,7 +141,7 @@ namespace RealPOV.Koikatu
                 }
             }
 
-            if(currentChara)
+            if(currentChara != null)
             {
                 prevVisibleHeadAlways = currentChara.fileStatus.visibleHeadAlways;
                 if(HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
@@ -159,7 +162,7 @@ namespace RealPOV.Koikatu
                 }
 
                 // only use head rotation if there is no existing rotation
-                if(!LookRotation.TryGetValue(currentCharaGo, out _))
+                if(!LookRotation.TryGetValue(currentCharaGo ?? throw new InvalidOperationException("currentCharaGo null"), out _))
                 {
                     LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
                 }
@@ -195,7 +198,7 @@ namespace RealPOV.Koikatu
             GameCamera.gameObject.layer = backupLayer;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), "LateUpdate")]
+        [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate))]
         private static bool ApplyRotation(NeckLookControllerVer2 __instance)
         {
             if(POVEnabled)
@@ -206,25 +209,33 @@ namespace RealPOV.Koikatu
                     return true;
                 }
 
-                Vector3 rot;
-                if(LookRotation.TryGetValue(currentCharaGo, out var val))
-                    rot = val;
-                else
-                    LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
-
-                if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
+                try
                 {
-                    __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
+                    Vector3 rot;
+                    if(LookRotation.TryGetValue(currentCharaGo, out var val))
+                        rot = val;
+                    else
+                        LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
 
-                    var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
-                    GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
-                    GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
-                    GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
-                    GameCamera.fieldOfView = CurrentFOV.Value;
+                    if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
+                    {
+                        __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
 
-                    return false;
+                        var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
+                        GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
+                        GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
+                        GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
+                        if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
+                        GameCamera.fieldOfView = CurrentFOV.Value;
+
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
                 }
             }
 

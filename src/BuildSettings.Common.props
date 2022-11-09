@@ -8,7 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.4" />
-    <PackageReference Include="KoikatuCompatibilityAnalyzer" Version="1.0.1" />
   </ItemGroup>
   <Import Project="SkipAllRefs.targets" />
 </Project>

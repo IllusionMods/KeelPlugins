@@ -66,14 +66,16 @@ namespace RealPOV.Core
                         {
                             mouseButtonDown0 = true;
                             allowCamera = true;
-                            GameCursor.Instance.SetCursorLock(true);
+                            if(GameCursor.IsInstance())
+                                GameCursor.Instance.SetCursorLock(true);
                         }
 
                         if(Input.GetMouseButtonDown(1))
                         {
                             mouseButtonDown1 = true;
                             allowCamera = true;
-                            GameCursor.Instance.SetCursorLock(true);
+                            if(GameCursor.IsInstance())
+                                GameCursor.Instance.SetCursorLock(true);
                         }
                     }
                 }
@@ -91,7 +93,8 @@ namespace RealPOV.Core
                         if(!mouseButtonDown0 && !mouseButtonDown1)
                         {
                             allowCamera = false;
-                            GameCursor.Instance.SetCursorLock(false);
+                            if(GameCursor.IsInstance())
+                                GameCursor.Instance.SetCursorLock(false);
                         }
                     }
                 }
@@ -131,7 +134,8 @@ namespace RealPOV.Core
             POVEnabled = false;
             GameCamera.fieldOfView = backupFOV;
             GameCamera.nearClipPlane = backupNearClip;
-            GameCursor.Instance.SetCursorLock(false);
+            if(GameCursor.IsInstance())
+                GameCursor.Instance.SetCursorLock(false);
         }
     }
 }
