@@ -18,7 +18,7 @@ namespace RealPOV.Koikatu
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.3.0." + BuildNumber.Version;
+        public const string Version = "1.3.1." + BuildNumber.Version;
 
         private ConfigEntry<bool> HideHead { get; set; }
 
@@ -178,6 +178,10 @@ namespace RealPOV.Koikatu
                 backupLayer = GameCamera.gameObject.layer;
                 GameCamera.gameObject.layer = 0;
             }
+            else
+            {
+                Log.Message("Can't enter POV: Could not find any valid characters");
+            }
         }
 
         protected override void DisablePov()
@@ -203,14 +207,14 @@ namespace RealPOV.Koikatu
         {
             if(POVEnabled)
             {
-                if(!currentChara)
-                {
-                    POVEnabled = false;
-                    return true;
-                }
-
                 try
                 {
+                    if(!currentChara)
+                    {
+                        plugin.DisablePov();
+                        return true;
+                    }
+
                     Vector3 rot;
                     if(LookRotation.TryGetValue(currentCharaGo, out var val))
                         rot = val;
