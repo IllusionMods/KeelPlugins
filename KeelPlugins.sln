@@ -221,6 +221,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FreeHDefaults.Core", "src\F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TitleShortcuts.HoneySelect2", "src\TitleShortcuts.HoneySelect2\TitleShortcuts.HoneySelect2.csproj", "{CA3C684F-A778-4C76-8CA2-DFB93A8CAC13}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TitleShortcuts.KoikatuSunshine", "src\TitleShortcuts.KoikatuSunshine\TitleShortcuts.KoikatuSunshine.csproj", "{74EA67FD-3A71-4043-ABD5-B8907D70938C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -397,6 +399,10 @@ Global
 		{CA3C684F-A778-4C76-8CA2-DFB93A8CAC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA3C684F-A778-4C76-8CA2-DFB93A8CAC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA3C684F-A778-4C76-8CA2-DFB93A8CAC13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EA67FD-3A71-4043-ABD5-B8907D70938C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EA67FD-3A71-4043-ABD5-B8907D70938C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EA67FD-3A71-4043-ABD5-B8907D70938C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EA67FD-3A71-4043-ABD5-B8907D70938C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -494,6 +500,7 @@ Global
 		{A7AFC683-C17F-4B97-8127-122BAD10FBE8} = {A541BB96-39B7-44C7-98A1-C934EFBD52AE}
 		{D77A4720-B234-4A59-B7EF-7F9ABEA81CD3} = {A541BB96-39B7-44C7-98A1-C934EFBD52AE}
 		{CA3C684F-A778-4C76-8CA2-DFB93A8CAC13} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
+		{74EA67FD-3A71-4043-ABD5-B8907D70938C} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
@@ -509,7 +516,7 @@ Global
 		src\Common.Unity\Common.Unity.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
 		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
 		src\Common.Core\Common.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
-		src\Common.Koikatu\Common.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 4
@@ -577,6 +584,9 @@ Global
 		src\Common.Core\Common.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
 		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
+		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
