@@ -1,9 +1,10 @@
 ﻿using BepInEx;
-using KeelPlugins.Utils;
 using ParadoxNotion.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using KKAPI.Utilities;
 
 namespace LockOnPlugin.Core
 {
@@ -39,7 +40,7 @@ namespace LockOnPlugin.Core
 
         private static void LoadResourceData()
         {
-            var json = Resource.GetResourceAsString(typeof(LockOnPluginCore).Assembly, dataFileName);
+            var json = Encoding.UTF8.GetString(ResourceUtils.GetEmbeddedResource(dataFileName, typeof(LockOnPluginCore).Assembly));
             data = JSONSerializer.Deserialize<TargetData>(json);
         }
 

@@ -1,5 +1,7 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using HarmonyLib;
+using KKAPI.Maker;
 using LockOnPlugin.Core;
 
 [assembly: System.Reflection.AssemblyFileVersion(LockOnPlugin.Koikatu.LockOnPlugin.Version)]
@@ -9,25 +11,25 @@ namespace LockOnPlugin.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class LockOnPlugin : LockOnPluginCore
     {
-        public const string Version = "2.6.2." + BuildNumber.Version;
+        public const string Version = "2.6.3." + BuildNumber.Version;
 
         protected override void Awake()
         {
             base.Awake();
 
             Harmony.CreateAndPatchAll(typeof(Entrypoints));
+            MakerAPI.MakerBaseLoaded += Entrypoints.MakerEntrypoint;
+            MakerAPI.MakerExiting += Entrypoints.MakerEnd;
         }
 
         private class Entrypoints
         {
-            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
-            public static void MakerEntrypoint()
+            public static void MakerEntrypoint(object sender, RegisterCustomControlsEvent e)
             {
                 bepinex.GetOrAddComponent<MakerMono>();
             }
 
-            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
-            public static void MakerEnd()
+            public static void MakerEnd(object sender, EventArgs e)
             {
                 Destroy(bepinex.GetComponent<MakerMono>());
             }
