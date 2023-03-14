@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
@@ -15,12 +15,6 @@
     <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
     <Import Project="..\FreeHDefaults.Core\FreeHDefaults.Core.projitems" Label="Shared" />
     <ItemGroup>
-      <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.20" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp-firstpass" Version="2021.9.17" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniRx" Version="2021.9.17" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniTask" Version="2021.9.17" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
-      <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
+      <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0"/>
     </ItemGroup>
 </Project>

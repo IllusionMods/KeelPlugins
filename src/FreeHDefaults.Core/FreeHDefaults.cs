@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using BepInEx;
-using BepInEx.Configuration;
-using ChaCustom;
 using FreeH;
 using HarmonyLib;
 using Illusion.Component;
+using KKAPI;
+using KKAPI.Chara;
 using Manager;
 using UniRx;
 using UnityEngine;
@@ -21,21 +20,20 @@ namespace FreeHDefaults.Koikatu
 {
     [BepInPlugin(GUID, "FreeH Defaults", Version)]
 #if KK
-    [BepInProcess("Koikatu")]
-    [BepInProcess("Koikatsu Party")]
+    [BepInProcess(KoikatuAPI.GameProcessName)]
+    [BepInProcess(KoikatuAPI.GameProcessNameSteam)]
     //todo VR doesn't work because different FreeHScene class are used. Could take code from FreeHRandom but it'll be a mess
     //[BepInProcess("KoikatuVR")]
     //[BepInProcess("Koikatsu Party VR")]
 #elif KKS
-    [BepInProcess("KoikatsuSunshine")]
+    [BepInProcess(KoikatuAPI.GameProcessName)]
     //[BepInProcess("KoikatsuSunshine_VR")]
 #endif
     public class FreeHDefaults : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.freehdefaults";
-        public const string Version = "2.0.0." + BuildNumber.Version;
+        public const string Version = "2.0.1." + BuildNumber.Version;
 
-        private Harmony harmony;
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
         private static readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(Savedata));
         /// <summary>
@@ -44,41 +42,18 @@ namespace FreeHDefaults.Koikatu
         /// loaded in darkness slot, so instead just load into normal to be safe.
         /// </summary>
         private static readonly int[] modeMagic = { 0, 1012, 1100, 3000, 0 };
-        private static readonly Dictionary<ChaFile, string> chaFileFullPathLookup = new Dictionary<ChaFile, string>();
         private static Savedata saveData = new Savedata();
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            harmony = Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
-
-            harmony.Patch(original: AccessTools.FirstMethod(typeof(ChaFile), info => info.Name == nameof(ChaFile.LoadFile) && info.GetParameters().FirstOrDefault()?.ParameterType == typeof(BinaryReader)),
-                          prefix: new HarmonyMethod(typeof(FreeHDefaults), nameof(FreeHDefaults.ChaFileLoadHook)) { wrapTryCatch = true });
+            Harmony.CreateAndPatchAll(typeof(FreeHDefaults));
 
             if (File.Exists(saveFilePath))
             {
                 using (var reader = new StreamReader(saveFilePath))
                     saveData = (Savedata)xmlSerializer.Deserialize(reader);
             }
-        }
-
-        private static void ChaFileLoadHook(ChaFile __instance, BinaryReader br)
-        {
-            // Keep track of what filenames cards get loaded from
-            // Doesn't handle studio scenes and files loaded from memory but it doesn't matter here
-            if (br.BaseStream is FileStream fs)
-            {
-                // .Name should already be the full path, but it usually has a bunch of ../ in it, GetFullPath will clean it up
-                var fullPath = Path.GetFullPath(fs.Name);
-                chaFileFullPathLookup[__instance] = fullPath;
-#if DEBUG
-                Log.Debug($"FullName for {__instance} is {fullPath}");
-#endif
-            }
-#if DEBUG
-            else
-                Log.Warning($"Failed to get FullName for {__instance}, BaseStream is {br.BaseStream} in {new StackTrace()}");
-#endif
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(TitleScene), nameof(TitleScene.Start)), HarmonyWrapSafe]
@@ -187,8 +162,8 @@ namespace FreeHDefaults.Koikatu
             if (chaFile == null) throw new ArgumentNullException(nameof(chaFile));
             if (action == null) throw new ArgumentNullException(nameof(action));
             // Need to do this because of differences in KK and KKP
-            chaFileFullPathLookup.TryGetValue(chaFile, out var fullPath);
-            if (!string.IsNullOrEmpty(fullPath))
+            var fullPath = chaFile.GetSourceFilePath();
+            if (fullPath != null && fullPath.EndsWith(".png", StringComparison.InvariantCultureIgnoreCase))
             {
                 action(fullPath);
                 SaveXml();
