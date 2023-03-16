@@ -132,10 +132,15 @@ namespace RealPOV.Core
         {
             currentCharaGo = null;
             POVEnabled = false;
-            GameCamera.fieldOfView = backupFOV;
-            GameCamera.nearClipPlane = backupNearClip;
-            if(GameCursor.IsInstance())
-                GameCursor.Instance.SetCursorLock(false);
+
+            if(GameCamera != null)
+            {
+                GameCamera.fieldOfView = backupFOV;
+                GameCamera.nearClipPlane = backupNearClip;
+
+                if(GameCursor.IsInstance())
+                    GameCursor.Instance.SetCursorLock(false);
+            }
         }
     }
 }

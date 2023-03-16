@@ -18,7 +18,7 @@ namespace RealPOV.Koikatu
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class RealPOV : RealPOVCore
     {
-        public const string Version = "1.3.1." + BuildNumber.Version;
+        public const string Version = "1.3.2." + BuildNumber.Version;
 
         private ConfigEntry<bool> HideHead { get; set; }
 
@@ -107,7 +107,7 @@ namespace RealPOV.Koikatu
                     {
                         return new Queue<ChaControl>(FindObjectsOfType<ChaControl>());
                     }
-                    
+
                     ChaControl GetCurrentChara()
                     {
                         for(int i = 0; i < charaQueue.Count; i++)
@@ -149,7 +149,7 @@ namespace RealPOV.Koikatu
                 GameCamera = Camera.main;
                 var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
-                
+
                 // Fix depth of field being completely out of focus
                 var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
                 dofOrigSize = depthOfField.focalSize;
@@ -190,16 +190,20 @@ namespace RealPOV.Koikatu
             currentChara = null;
             currentCharaId = -1;
 
-            var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
-            if(cc) cc.enabled = true;
+            if(GameCamera != null)
+            {
+                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
+                if(cc) cc.enabled = true;
 
-            var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
-            depthOfField.focalSize = dofOrigSize;
-            depthOfField.aperture = dofOrigAperature;
+                var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+                depthOfField.focalSize = dofOrigSize;
+                depthOfField.aperture = dofOrigAperature;
+            }
 
             base.DisablePov();
 
-            GameCamera.gameObject.layer = backupLayer;
+            if(GameCamera != null)
+                GameCamera.gameObject.layer = backupLayer;
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate))]
