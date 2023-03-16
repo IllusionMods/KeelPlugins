@@ -19,7 +19,7 @@ namespace DefaultParamEditor.Koikatu
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.2.0." + BuildNumber.Version;
+        public const string Version = "1.3.0." + BuildNumber.Version;
 
         private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();

@@ -4,6 +4,7 @@ using Sideloader.AutoResolver;
 using Studio;
 using UnityEngine;
 using UnityEngine.UI;
+using static DefaultParamEditor.Koikatu.ParamData;
 
 namespace DefaultParamEditor.Koikatu
 {
@@ -26,12 +27,32 @@ namespace DefaultParamEditor.Koikatu
             {
                 _sceneData.aceNo = sceneInfo.aceNo;
                 _sceneData.aceBlend = sceneInfo.aceBlend;
-                
+
                 var aceInfo = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.ResolveItem && x.LocalSlot == sceneInfo.aceNo);
                 if(aceInfo != null)
                 {
                     _sceneData.aceNo = aceInfo.Slot;
                     _sceneData.aceNo_GUID = aceInfo.GUID;
+                }
+
+                // Second ace/ramp dropdown added by the TwoLut Plugin
+                _sceneData.ace2No = null;
+                _sceneData.ace2No_GUID = null;
+                var tlp = Traverse.CreateWithType("KK_Plugins.TwoLutPlugin");
+                if (tlp.TypeExists())
+                {
+                    var prop = tlp.Property("CurrentLut2LocalSlot");
+                    if (prop.PropertyExists())
+                    {
+                        _sceneData.ace2No = prop.GetValue<int>();
+
+                        var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.ResolveItem && x.LocalSlot == _sceneData.ace2No);
+                        if (ace2Info != null)
+                        {
+                            _sceneData.ace2No = ace2Info.Slot;
+                            _sceneData.ace2No_GUID = ace2Info.GUID;
+                        }
+                    }
                 }
 
                 var aoe = Traverse.Create(systemButtonCtrl).Field("amplifyOcculusionEffectInfo").Property("aoe").GetValue<AmplifyOcclusionEffect>();
@@ -65,7 +86,7 @@ namespace DefaultParamEditor.Koikatu
                     _sceneData.rampG = rampGInfo.Slot;
                     _sceneData.rampG_GUID = rampGInfo.GUID;
                 }
-                
+
                 _sceneData.ambientShadowG = sceneInfo.ambientShadowG;
                 _sceneData.lineWidthG = sceneInfo.lineWidthG;
                 _sceneData.lineColorG = sceneInfo.lineColorG;
@@ -102,7 +123,28 @@ namespace DefaultParamEditor.Koikatu
                 if(aceInfo != null)
                     sceneInfo.aceNo = aceInfo.LocalSlot;
             }
-            
+
+            // Second ace/ramp dropdown added by the TwoLut Plugin
+            if (_sceneData.ace2No != null)
+            {
+                var tlp = Traverse.CreateWithType("KK_Plugins.TwoLutPlugin");
+                if (tlp.TypeExists())
+                {
+                    var prop = tlp.Property("CurrentLut2LocalSlot");
+                    if (prop.PropertyExists())
+                    {
+                        prop.SetValue(_sceneData.ace2No);
+
+                        if (!string.IsNullOrEmpty(_sceneData.ace2No_GUID))
+                        {
+                            var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.ace2No_GUID && x.Slot == _sceneData.ace2No);
+                            if (ace2Info != null)
+                                prop.SetValue(ace2Info.LocalSlot);
+                        }
+                    }
+                }
+            }
+
             sceneInfo.aceBlend = _sceneData.aceBlend;
             sceneInfo.enableAOE = _sceneData.enableAOE;
             sceneInfo.aoeColor = _sceneData.aoeColor;
@@ -131,7 +173,7 @@ namespace DefaultParamEditor.Koikatu
                 if(rampGInfo != null)
                     sceneInfo.rampG = rampGInfo.LocalSlot;
             }
-            
+
             sceneInfo.ambientShadowG = _sceneData.ambientShadowG;
             sceneInfo.lineWidthG = _sceneData.lineWidthG;
             sceneInfo.lineColorG = _sceneData.lineColorG;

@@ -42,6 +42,10 @@ namespace DefaultParamEditor.Koikatu
 
             public int aceNo;
             public string aceNo_GUID;
+            // Added by the TwoLut plugin
+            public int? ace2No;
+            // Added by the TwoLut plugin
+            public string ace2No_GUID;
             public float aceBlend;
             public bool enableAOE;
             public Color aoeColor;
