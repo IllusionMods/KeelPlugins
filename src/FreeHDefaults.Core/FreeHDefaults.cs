@@ -19,6 +19,7 @@ using UnityEngine;
 namespace FreeHDefaults.Koikatu
 {
     [BepInPlugin(GUID, "FreeH Defaults", Version)]
+    [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
 #if KK
     [BepInProcess(KoikatuAPI.GameProcessName)]
     [BepInProcess(KoikatuAPI.GameProcessNameSteam)]
