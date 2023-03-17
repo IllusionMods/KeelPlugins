@@ -4,6 +4,7 @@ using KeelPlugins.Koikatu;
 using ParadoxNotion.Serialization;
 using System;
 using System.IO;
+using KKAPI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,11 +16,12 @@ namespace DefaultParamEditor.Koikatu
 {
     [BepInPlugin(GUID, "DefaultParamEditor", Version)]
     [BepInProcess(Constants.StudioProcessName)]
+    [BepInDependency(KoikatuAPI.GUID, KoikatuAPI.VersionConst)]
     [BepInDependency(Sideloader.Sideloader.GUID)]
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.3.0." + BuildNumber.Version;
+        public const string Version = "1.3.1." + BuildNumber.Version;
 
         private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();

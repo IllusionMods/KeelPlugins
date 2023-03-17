@@ -1,10 +1,13 @@
 ﻿using System.Linq;
+using BepInEx;
 using HarmonyLib;
+using KKAPI.Studio;
+using KKAPI.Studio.SaveLoad;
+using KKAPI.Utilities;
 using Sideloader.AutoResolver;
 using Studio;
 using UnityEngine;
 using UnityEngine.UI;
-using static DefaultParamEditor.Koikatu.ParamData;
 
 namespace DefaultParamEditor.Koikatu
 {
@@ -185,7 +188,7 @@ namespace DefaultParamEditor.Koikatu
             [HarmonyPostfix, HarmonyPatch(typeof(SceneInfo), nameof(SceneInfo.Init))]
             public static void HarmonyPatch_SceneInfo_Init(SceneInfo __instance)
             {
-                if(_sceneData.saved)
+                if(_sceneData.saved && !StudioSaveLoadApi.LoadInProgress && !StudioSaveLoadApi.ImportInProgress)
                 {
                     Log.Debug("Loading defaults for a new scene");
                     SetSceneInfoValues(__instance);
