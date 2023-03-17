@@ -128,22 +128,28 @@ namespace DefaultParamEditor.Koikatu
             }
 
             // Second ace/ramp dropdown added by the TwoLut Plugin
-            if (_sceneData.ace2No != null)
+            if(_sceneData.ace2No != null)
             {
                 var tlp = Traverse.CreateWithType("KK_Plugins.TwoLutPlugin");
-                if (tlp.TypeExists())
+                if(tlp.TypeExists())
                 {
                     var prop = tlp.Property("CurrentLut2LocalSlot");
-                    if (prop.PropertyExists())
+                    if(prop.PropertyExists())
                     {
-                        prop.SetValue(_sceneData.ace2No);
+                        // Need to do a delayed load because on studio startup this is called before studio controls and TwoLut are initialized
+                        ThreadingHelper.Instance.StartCoroutine(new WaitUntil(() => StudioAPI.StudioLoaded)
+                            .AppendCo(new WaitForEndOfFrame())
+                            .AppendCo(() =>
+                            {
+                                prop.SetValue(_sceneData.ace2No);
 
-                        if (!string.IsNullOrEmpty(_sceneData.ace2No_GUID))
-                        {
-                            var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.ace2No_GUID && x.Slot == _sceneData.ace2No);
-                            if (ace2Info != null)
-                                prop.SetValue(ace2Info.LocalSlot);
-                        }
+                                if (!string.IsNullOrEmpty(_sceneData.ace2No_GUID))
+                                {
+                                    var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.ace2No_GUID && x.Slot == _sceneData.ace2No);
+                                    if (ace2Info != null)
+                                        prop.SetValue(ace2Info.LocalSlot);
+                                }
+                            }));
                     }
                 }
             }
