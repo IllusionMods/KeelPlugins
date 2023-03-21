@@ -46,6 +46,16 @@ namespace RealPOV.PlayHome
             Harmony.CreateAndPatchAll(GetType());
         }
 
+        protected override void EnablePov()
+        {
+            
+        }
+
+        protected override void DisablePov()
+        {
+            
+        }
+
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "Awake")]
         private static void HSceneInit()
         {
