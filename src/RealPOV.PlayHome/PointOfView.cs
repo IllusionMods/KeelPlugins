@@ -93,11 +93,18 @@ namespace RealPOV.PlayHome
                     targets = FindObjectsOfType<Male>();
                 }
 
-                if(currentTargetIndex > targets.Length - 1)
+                if(targets.Length != 0)
                 {
-                    currentTargetIndex = 0;
+                    if(currentTargetIndex > targets.Length - 1)
+                    {
+                        currentTargetIndex = 0;
+                    }
+                    currentTarget = targets[currentTargetIndex];
                 }
-                currentTarget = targets[currentTargetIndex];
+                else
+                {
+                    Log.Info("Unable to enter POV, no targets available.");
+                }
 
                 if(currentTarget)
                 {
