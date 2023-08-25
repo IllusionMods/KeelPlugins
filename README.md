@@ -73,8 +73,7 @@ Press the hotkey to send the selected character from maker to studio and vice ve
 To put it plainly, a temporary character card is created by the sending program which is then loaded by the receiving program when it is detected.
 
 #### MaterialLink [KK]
-Automatically sets the correct skin material on clothing that has the MaterialLink monobehaviour (for example, skindentation thighhighs).
-To add this monobehaviour to your mod you can use a [stubbed MaterialLink dll](src/MaterialLinkStub.Koikatu/MaterialLink.Koikatu.dll) in unity or just copy the mb from another mod with SB3UGS. 
+Automatically matches your characters skin on clothing meshes that are using the `Shader Forge/main_skin` shader (for example, thigh high socks with skindentation).
 
 #### RealPOV [KK][PH]
 First person mode for studio and H scenes.
