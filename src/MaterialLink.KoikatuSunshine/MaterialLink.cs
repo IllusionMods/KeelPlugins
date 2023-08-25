@@ -27,14 +27,14 @@ namespace MaterialLink.KoikatuSunshine
         }
 
         // color change
-        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCustomClothes))]
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCustomClothes)), HarmonyWrapSafe]
         private static void ChangeCustomClothes_Postfix(ChaControl __instance)
         {
             UpdateMaterials(__instance);
         }
         
         // character start
-        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.Initialize))]
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.Initialize)), HarmonyWrapSafe]
         private static void Initialize_Postfix(ChaControl __instance)
         {
             UpdateMaterialsDelayed(__instance, 10);
