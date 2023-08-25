@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\BuildSettings.Common.props" />
+    <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
+    <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+    <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
+    <ItemGroup>
+        <PackageReference Include="BepInEx.Core" Version="5.4.8" />
+        <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />
+        <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
+    </ItemGroup>
+</Project>
