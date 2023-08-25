@@ -17,12 +17,12 @@ namespace MaterialLink.KoikatuSunshine
         public const string Version = "1.0.0." + BuildNumber.Version;
 
         private static MaterialLinkInfo plugin;
-
         private static readonly List<Renderer> ManagedRenderers = new List<Renderer>();
 
         private void Awake()
         {
             plugin = this;
+            Log.SetLogSource(Logger);
             Harmony.CreateAndPatchAll(typeof(MaterialLinkInfo));
         }
 
@@ -30,14 +30,7 @@ namespace MaterialLink.KoikatuSunshine
         [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.ChangeCustomClothes))]
         private static void ChangeCustomClothes_Postfix(ChaControl __instance)
         {
-            UpdateMaterialsDelayed(__instance, 10);
-        }
-        
-        // coordinate change
-        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.UpdateClothesStateAll))]
-        private static void UpdateClothesStateAll_Postfix(ChaControl __instance)
-        {
-            UpdateMaterialsDelayed(__instance, 10);
+            UpdateMaterials(__instance);
         }
         
         // character start
@@ -56,34 +49,28 @@ namespace MaterialLink.KoikatuSunshine
                 for(int i = 0; i < framesToWait; i++)
                     yield return null;
                 
-                GatherRenderers(chara);
-                UpdateRenderers(chara);
+                UpdateMaterials(chara);
             }
         }
 
-        private static void GatherRenderers(ChaControl chara)
+        private static void UpdateMaterials(ChaControl chara)
         {
-            if(chara)
+            if(!chara)
+                return;
+
+            // Find clothing that uses the skin shader
+            foreach(var cloth in chara.gameObject.GetComponentsInChildren<ChaClothesComponent>())
+            foreach(var rend in cloth.gameObject.GetComponentsInChildren<Renderer>())
             {
-                var clothesComponents = chara.gameObject.GetComponentsInChildren<ChaClothesComponent>();
-                foreach(var clothComp in clothesComponents)
+                if(rend && rend.material.shader.name == "Shader Forge/main_skin" && !ManagedRenderers.Contains(rend))
                 {
-                    var renderers = clothComp.gameObject.GetComponentsInChildren<Renderer>();
-                    foreach(var rend in renderers)
-                    {
-                        if(rend && rend.material.shader.name == "Shader Forge/main_skin" && !ManagedRenderers.Contains(rend))
-                        {
-                            Console.WriteLine($"Managing {clothComp.name}");
-                            ManagedRenderers.Add(rend);
-                        }
-                    }
+                    Log.Info($"Managing {cloth.name}");
+                    ManagedRenderers.Add(rend);
                 }
             }
-        }
 
-        private static void UpdateRenderers(ChaControl chara)
-        {
-            if(chara && chara.customMatBody)
+            // Edit found renderers to use skin material
+            if(chara.customMatBody)
             {
                 foreach(var rend in ManagedRenderers)
                 {
