@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ChaCustom;
 using TMPro;
 using UILib;
 using UnityEngine;
@@ -21,8 +22,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static void CreateUI()
         {
-            var outfitDropDownObject = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CustomUIGroup/CvsCoordinateType/coordinateType/Dropdown");
-            outfitDropDown = outfitDropDownObject.GetComponent<TMP_Dropdown>();
+            outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
             sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top/Scroll View/Viewport/Content");
             var rbClothesStateTransform = sidebar.transform.Find("rbClothesState");
             clothingStateToggles = rbClothesStateTransform.gameObject;
@@ -69,7 +69,8 @@ namespace ClothingStateMenuX.Koikatu
                 foreach(var button in buttons)
                     button.GetComponent<Button>().SetColorMultiplier(1f);
 
-                buttons[x].GetComponent<Button>().SetColorMultiplier(0.7f);
+                if(0 <= x && x <= 6)
+                    buttons[x].GetComponent<Button>().SetColorMultiplier(0.7f);
             }
         }
 
