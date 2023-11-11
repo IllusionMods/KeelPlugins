@@ -221,6 +221,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MaterialLink", "MaterialLin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialLink.KoikatuSunshine", "src\MaterialLink.KoikatuSunshine\MaterialLink.KoikatuSunshine.csproj", "{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothingStateMenuX.KoikatuSunshine", "src\ClothingStateMenuX.KoikatuSunshine\ClothingStateMenuX.KoikatuSunshine.csproj", "{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -399,6 +401,10 @@ Global
 		{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -496,6 +502,7 @@ Global
 		{74EA67FD-3A71-4043-ABD5-B8907D70938C} = {E462D3D8-0715-45C9-869C-F1FA8CD2F5CD}
 		{A5AA9B05-D65A-458C-AF68-CDE11AE6DE63} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{30C7A56D-402B-4125-A5F7-073C8EC1ED3D} = {A5AA9B05-D65A-458C-AF68-CDE11AE6DE63}
+		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}

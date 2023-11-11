@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputPath>$(SolutionDir)bin\$(Configuration)\KeelPluginsKKS</OutputPath>
+    <DefineConstants>KKS</DefineConstants>
   </PropertyGroup>
 </Project>
