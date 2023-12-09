@@ -225,6 +225,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothingStateMenuX.KoikatuS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeAssAssistant.KoikatuSunshine", "src\AnimeAssAssistant.KoikatuSunshine\AnimeAssAssistant.KoikatuSunshine.csproj", "{1A4E5E63-B803-45C9-B65D-0FCA200CC388}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesselationSetting.KoikatuSunshine", "src\TesselationSetting.KoikatuSunshine\TesselationSetting.KoikatuSunshine.csproj", "{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -411,6 +413,10 @@ Global
 		{1A4E5E63-B803-45C9-B65D-0FCA200CC388}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A4E5E63-B803-45C9-B65D-0FCA200CC388}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A4E5E63-B803-45C9-B65D-0FCA200CC388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -510,6 +516,7 @@ Global
 		{30C7A56D-402B-4125-A5F7-073C8EC1ED3D} = {A5AA9B05-D65A-458C-AF68-CDE11AE6DE63}
 		{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{1A4E5E63-B803-45C9-B65D-0FCA200CC388} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
+		{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
