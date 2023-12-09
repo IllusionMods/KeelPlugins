@@ -18,7 +18,7 @@ namespace ItemLayerEdit.Koikatu
             if(data == null)
                 return;
 
-            if(operation == SceneOperationKind.Load && data.data.TryGetValue(SaveId, out var saveDataBytes))
+            if((operation == SceneOperationKind.Load || operation == SceneOperationKind.Import) && data.data.TryGetValue(SaveId, out var saveDataBytes))
             {
                 var saveData = MessagePackSerializer.Deserialize<List<LayerSaveData>>((byte[])saveDataBytes);
                 foreach(var layerData in saveData)
