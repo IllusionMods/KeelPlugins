@@ -29,9 +29,8 @@ namespace MakerBridge.Core
             SendChara = Config.Bind("Keyboard shortcuts", "Send character", new KeyboardShortcut(KeyCode.B), new ConfigDescription(DESCRIPTION_SENDCHARA));
             ShowMessages = Config.Bind("General", "Show messages", true, new ConfigDescription(DESCRIPTION_SHOWMSG));
 
-            var tempFolder = Path.GetTempPath();
-            MakerCardPath = Path.Combine(tempFolder, "makerbridge1.png");
-            OtherCardPath = Path.Combine(tempFolder, "makerbridge2.png");
+            MakerCardPath = Path.Combine(Paths.CachePath, "makerbridge1.png");
+            OtherCardPath = Path.Combine(Paths.CachePath, "makerbridge2.png");
         }
 
         internal static void LogMsg(object data)
