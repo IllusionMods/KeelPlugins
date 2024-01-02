@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace MakerBridge.Core
+namespace MakerBridge
 {
     internal class HandlerCore : MonoBehaviour
     {

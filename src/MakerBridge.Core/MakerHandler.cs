@@ -1,23 +1,22 @@
 ﻿using ChaCustom;
-using MakerBridge.Core;
 using System;
 using System.Linq;
 using UnityEngine;
 
-namespace MakerBridge.Koikatu
+namespace MakerBridge
 {
     internal class MakerHandler : HandlerCore
     {
         private void Start()
         {
-            watcher = CharaCardWatcher.Watch(MakerBridgeCore.OtherCardPath, LoadChara);
+            watcher = CharaCardWatcher.Watch(MakerBridge.OtherCardPath, LoadChara);
             watcher.EnableRaisingEvents = true;
         }
 
         private void Update()
         {
-            if(MakerBridgeCore.SendChara.Value.IsDown())
-                SaveCharacter(MakerBridgeCore.MakerCardPath);
+            if(MakerBridge.SendChara.Value.IsDown())
+                SaveCharacter(MakerBridge.MakerCardPath);
         }
 
         private void SaveCharacter(string path)
@@ -65,14 +64,14 @@ namespace MakerBridge.Koikatu
             if(chaCtrl.chaFile.parameter.sex != originalSex)
             {
                 chaCtrl.chaFile.parameter.sex = originalSex;
-                MakerBridgeCore.LogMsg("Warning: The character's sex has been changed to match the editor mode.");
+                MakerBridge.LogMsg("Warning: The character's sex has been changed to match the editor mode.");
             }
 
             chaCtrl.ChangeCoordinateType();
             chaCtrl.Reload(!loadCoord, !loadFace && !loadCoord, !loadHair, !loadBody);
             CustomBase.Instance.updateCustomUI = true;
 
-            MakerBridgeCore.LogMsg("Character received");
+            MakerBridge.LogMsg("Character received");
         }
     }
 }

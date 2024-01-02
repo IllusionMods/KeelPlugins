@@ -3,13 +3,18 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using System.IO;
 using UnityEngine;
+using HarmonyLib;
 
-namespace MakerBridge.Core
+[assembly: System.Reflection.AssemblyFileVersion(MakerBridge.MakerBridge.Version)]
+
+namespace MakerBridge
 {
-    public abstract class MakerBridgeCore : BaseUnityPlugin
+    [BepInPlugin(GUID, PluginName, Version)]
+    public class MakerBridge : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.makerbridge";
         public const string PluginName = "MakerBridge";
+        public const string Version = "1.0.4." + BuildNumber.Version;
 
         private const string DESCRIPTION_SENDCHARA = "Sends the selected character to the other open koikatu application.";
         private const string DESCRIPTION_SHOWMSG = "Show on screen messages about things the plugin is doing.";
@@ -31,11 +36,34 @@ namespace MakerBridge.Core
 
             MakerCardPath = Path.Combine(Paths.CachePath, "makerbridge1.png");
             OtherCardPath = Path.Combine(Paths.CachePath, "makerbridge2.png");
+
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
         internal static void LogMsg(object data)
         {
             Log.Level(ShowMessages.Value ? LogLevel.Message : LogLevel.Info, data);
+        }
+
+        private class Hooks
+        {
+            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
+            public static void MakerEntrypoint()
+            {
+                bepinex.GetOrAddComponent<MakerHandler>();
+            }
+
+            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
+            public static void MakerEnd()
+            {
+                Destroy(bepinex.GetComponent<MakerHandler>());
+            }
+
+            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+            public static void StudioEntrypoint()
+            {
+                bepinex.GetOrAddComponent<StudioHandler>();
+            }
         }
     }
 }

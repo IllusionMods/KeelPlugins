@@ -1,25 +1,24 @@
 ﻿using HarmonyLib;
-using MakerBridge.Core;
 using Studio;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace MakerBridge.Koikatu
+namespace MakerBridge
 {
     internal class StudioHandler : HandlerCore
     {
         private void Start()
         {
-            watcher = CharaCardWatcher.Watch(MakerBridgeCore.MakerCardPath, LoadChara);
+            watcher = CharaCardWatcher.Watch(MakerBridge.MakerCardPath, LoadChara);
             watcher.EnableRaisingEvents = true;
         }
 
         private void Update()
         {
-            if(MakerBridgeCore.SendChara.Value.IsDown())
-                SaveCharacter(MakerBridgeCore.OtherCardPath);
+            if(MakerBridge.SendChara.Value.IsDown())
+                SaveCharacter(MakerBridge.OtherCardPath);
         }
 
         private void SaveCharacter(string path)
@@ -40,7 +39,7 @@ namespace MakerBridge.Koikatu
             }
             else
             {
-                MakerBridgeCore.LogMsg("Select a character to send to maker");
+                MakerBridge.LogMsg("Select a character to send to maker");
             }
         }
 
@@ -49,7 +48,7 @@ namespace MakerBridge.Koikatu
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)
             {
-                MakerBridgeCore.LogMsg("Character received");
+                MakerBridge.LogMsg("Character received");
 
                 foreach(var chara in characters)
                     chara.ChangeChara(path);
@@ -58,7 +57,7 @@ namespace MakerBridge.Koikatu
             }
             else
             {
-                MakerBridgeCore.LogMsg("Select a character before replacing it");
+                MakerBridge.LogMsg("Select a character before replacing it");
             }
         }
 
