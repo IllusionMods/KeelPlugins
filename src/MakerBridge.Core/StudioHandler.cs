@@ -9,19 +9,10 @@ namespace MakerBridge
 {
     internal class StudioHandler : HandlerCore
     {
-        private void Start()
-        {
-            watcher = CharaCardWatcher.Watch(MakerBridge.MakerCardPath, LoadChara);
-            watcher.EnableRaisingEvents = true;
-        }
+        protected override string WatchedFilePath => MakerBridge.MakerCardPath;
+        protected override string OutputFilePath => MakerBridge.OtherCardPath;
 
-        private void Update()
-        {
-            if(MakerBridge.SendChara.Value.IsDown())
-                SaveCharacter(MakerBridge.OtherCardPath);
-        }
-
-        private void SaveCharacter(string path)
+        protected override void SaveCharacter(string path)
         {
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)
@@ -43,7 +34,7 @@ namespace MakerBridge
             }
         }
 
-        private void LoadChara(string path)
+        protected override void LoadCharacter(string path)
         {
             var characters = GetSelectedCharacters();
             if(characters.Count > 0)

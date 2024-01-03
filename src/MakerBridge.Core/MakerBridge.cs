@@ -3,7 +3,8 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using System.IO;
 using UnityEngine;
-using HarmonyLib;
+using KKAPI.Maker;
+using KKAPI.Studio;
 
 [assembly: System.Reflection.AssemblyFileVersion(MakerBridge.MakerBridge.Version)]
 
@@ -37,33 +38,14 @@ namespace MakerBridge
             MakerCardPath = Path.Combine(Paths.CachePath, "makerbridge1.png");
             OtherCardPath = Path.Combine(Paths.CachePath, "makerbridge2.png");
 
-            Harmony.CreateAndPatchAll(typeof(Hooks));
+            MakerAPI.MakerFinishedLoading += (sender, e) => bepinex.GetOrAddComponent<MakerHandler>();
+            MakerAPI.MakerExiting += (sender, e) => Destroy(bepinex.GetComponent<MakerHandler>());
+            StudioAPI.StudioLoadedChanged += (sender, e) => bepinex.GetOrAddComponent<StudioHandler>();
         }
 
         internal static void LogMsg(object data)
         {
             Log.Level(ShowMessages.Value ? LogLevel.Message : LogLevel.Info, data);
-        }
-
-        private class Hooks
-        {
-            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "Start")]
-            public static void MakerEntrypoint()
-            {
-                bepinex.GetOrAddComponent<MakerHandler>();
-            }
-
-            [HarmonyPrefix, HarmonyPatch(typeof(CustomScene), "OnDestroy")]
-            public static void MakerEnd()
-            {
-                Destroy(bepinex.GetComponent<MakerHandler>());
-            }
-
-            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
-            public static void StudioEntrypoint()
-            {
-                bepinex.GetOrAddComponent<StudioHandler>();
-            }
         }
     }
 }

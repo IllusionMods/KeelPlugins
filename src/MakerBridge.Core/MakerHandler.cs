@@ -7,19 +7,10 @@ namespace MakerBridge
 {
     internal class MakerHandler : HandlerCore
     {
-        private void Start()
-        {
-            watcher = CharaCardWatcher.Watch(MakerBridge.OtherCardPath, LoadChara);
-            watcher.EnableRaisingEvents = true;
-        }
+        protected override string WatchedFilePath => MakerBridge.OtherCardPath;
+        protected override string OutputFilePath => MakerBridge.MakerCardPath;
 
-        private void Update()
-        {
-            if(MakerBridge.SendChara.Value.IsDown())
-                SaveCharacter(MakerBridge.MakerCardPath);
-        }
-
-        private void SaveCharacter(string path)
+        protected override void SaveCharacter(string path)
         {
             var customBase = CustomBase.Instance;
             if(customBase)
@@ -36,7 +27,7 @@ namespace MakerBridge
             }
         }
 
-        private void LoadChara(string path)
+        protected override void LoadCharacter(string path)
         {
             var cfw = FindObjectsOfType<CustomFileWindow>().FirstOrDefault(x => x.fwType == CustomFileWindow.FileWindowType.CharaLoad);
             var loadFace = true;
