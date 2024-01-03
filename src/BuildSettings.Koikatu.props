@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
     <OutputPath>$(SolutionDir)bin\$(Configuration)\KeelPluginsKK</OutputPath>
+    <DefineConstants>KK</DefineConstants>
   </PropertyGroup>
 </Project>

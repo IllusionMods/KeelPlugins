@@ -1,16 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
-  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
-  <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;KKS</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;KKS</DefineConstants>
-  </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>LockOnPlugin.Koikatu</RootNamespace>
   </PropertyGroup>
@@ -28,4 +18,8 @@
   <ItemGroup>
     <EmbeddedResource Include="LockOnPluginData.json" />
   </ItemGroup>
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
+  <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />
+  <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
 </Project>

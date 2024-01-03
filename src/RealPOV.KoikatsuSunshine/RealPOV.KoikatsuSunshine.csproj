@@ -1,10 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
-  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
-  <Import Project="..\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems" Label="Shared" />
-  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <ItemGroup>
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Cinemachine" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Unity.TextMeshPro" Version="2019.4.9" />
@@ -15,4 +11,8 @@
       <GeneratePathProperty></GeneratePathProperty>
     </PackageReference>
   </ItemGroup>
+  <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
+  <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
+  <Import Project="..\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems" Label="Shared" />
+  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
 </Project>

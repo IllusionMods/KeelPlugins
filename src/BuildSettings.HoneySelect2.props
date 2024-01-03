@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <OutputPath>$(SolutionDir)bin\$(Configuration)\KeelPluginsHS2</OutputPath>
+    <DefineConstants>HS2</DefineConstants>
   </PropertyGroup>
 </Project>

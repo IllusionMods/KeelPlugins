@@ -1,20 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <DefineConstants>$(DefineConstants)TRACE;KKS</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <DefineConstants>$(DefineConstants)TRACE;KKS</DefineConstants>
-    </PropertyGroup>
     <Import Project="..\BuildSettings.Common.props" />
     <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
+    <ItemGroup>
+      <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0"/>
+    </ItemGroup>
     <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
     <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
     <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
     <Import Project="..\FreeHDefaults.Core\FreeHDefaults.Core.projitems" Label="Shared" />
-    <ItemGroup>
-      <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0"/>
-    </ItemGroup>
 </Project>

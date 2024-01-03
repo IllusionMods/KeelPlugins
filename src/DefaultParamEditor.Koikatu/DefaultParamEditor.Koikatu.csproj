@@ -1,17 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\bin\Release\KeelPluginsKK\</OutputPath>
-    <DefineConstants>TRACE;KK</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\bin\Debug\KeelPluginsKKS\</OutputPath>
-    <DefineConstants>TRACE;KK</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.35.0"/>
     <PackageReference Include="Sideloader.Koikatu" Version="16.3.0" />
+    <PackageReference Include="IllusionLibs.KoikatsuSunshine.Unity.TextMeshPro" Version="2019.4.9" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

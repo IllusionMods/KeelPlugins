@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Configuration;
-using HarmonyLib;
 using KeelPlugins.Koikatu;
 using KKAPI;
-using KKAPI.Maker;
 using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(TesselationSetting.Koikatu.TesselationSetting.Version)]

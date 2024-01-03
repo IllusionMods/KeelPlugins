@@ -5,7 +5,9 @@ using ParadoxNotion.Serialization;
 using System;
 using System.IO;
 using KKAPI;
+#if KKS
 using TMPro;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;

@@ -1,5 +1,4 @@
-﻿using AIProject;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using KeelPlugins.HoneySelect2;
 using System.Collections;
