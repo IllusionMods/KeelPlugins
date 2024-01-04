@@ -2,12 +2,10 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
-    <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="16.0.0" />
-    <PackageReference Include="IllusionLibs.BepInEx" Version="5.3.0" />
-    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.0.6" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" Version="2019.4.27.2" />
     <PackageReference Include="IllusionLibs.Koikatu.UnityEngine" Version="5.6.2.2" />
+    <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="16.0.0" />
     <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.13.4" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
