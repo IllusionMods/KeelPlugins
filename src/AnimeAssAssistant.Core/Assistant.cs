@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TMPro;
 using UnityEngine;
-using HarmonyLib;
 
 namespace AnimeAssAssistant
 {
@@ -14,16 +12,6 @@ namespace AnimeAssAssistant
     {
         private string currentCharacter;
         private List<string> loadedCharacters = new List<string>();
-        private TMP_Dropdown outfitDropDown;
-
-        private void Start()
-        {
-#if KK
-            outfitDropDown = Traverse.Create(Singleton<CustomControl>.Instance).Field("ddCoordinate").GetValue<TMP_Dropdown>();
-#elif KKS
-            outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
-#endif
-        }
 
         private void Update()
         {
@@ -37,21 +25,6 @@ namespace AnimeAssAssistant
                     RecycleCurrentChara();
                 else if(AAA.HotkeySave.Value.IsDown())
                     SaveCurrentChara();
-
-                else if(AAA.HotkeyOutfit1.Value.IsDown())
-                    outfitDropDown.value = 0;
-                else if(AAA.HotkeyOutfit2.Value.IsDown())
-                    outfitDropDown.value = 1;
-                else if(AAA.HotkeyOutfit3.Value.IsDown())
-                    outfitDropDown.value = 2;
-                else if(AAA.HotkeyOutfit4.Value.IsDown())
-                    outfitDropDown.value = 3;
-                else if(AAA.HotkeyOutfit5.Value.IsDown())
-                    outfitDropDown.value = 4;
-                else if(AAA.HotkeyOutfit6.Value.IsDown())
-                    outfitDropDown.value = 5;
-                else if(AAA.HotkeyOutfit7.Value.IsDown())
-                    outfitDropDown.value = 6;
             }
         }
 
