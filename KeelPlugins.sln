@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
@@ -169,39 +169,39 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common.KoikatsuSunshine", "
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RealPOV.Core.Koikatu", "src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.shproj", "{5034D4DD-F7D2-45C7-893F-9955098BFF4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraFrameMask.KoikatuSunshine", "src\CameraFrameMask.KoikatuSunshine\CameraFrameMask.KoikatuSunshine.csproj", "{869B9D19-89CC-47D4-9D8C-D0542A422B9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CameraFrameMask.KoikatuSunshine", "src\CameraFrameMask.KoikatuSunshine\CameraFrameMask.KoikatuSunshine.csproj", "{869B9D19-89CC-47D4-9D8C-D0542A422B9A}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CameraFrameMask.Core", "src\CameraFrameMask.Core\CameraFrameMask.Core.shproj", "{327037CF-62F6-46C0-9E7C-4D46BED9E56B}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CharaStateX.Core", "src\CharaStateX.Core\CharaStateX.Core.shproj", "{66EDEDB6-34F2-4613-A6FF-450341DA94CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharaStateX.KoikatuSunshine", "src\CharaStateX.KoikatuSunshine\CharaStateX.KoikatuSunshine.csproj", "{8627399A-2F2D-4189-AF7C-FC83345E148A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharaStateX.KoikatuSunshine", "src\CharaStateX.KoikatuSunshine\CharaStateX.KoikatuSunshine.csproj", "{8627399A-2F2D-4189-AF7C-FC83345E148A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultParamEditor.KoikatuSunshine", "src\DefaultParamEditor.KoikatuSunshine\DefaultParamEditor.KoikatuSunshine.csproj", "{0D28AB7E-CC4C-4EC5-B322-876641D7426B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultParamEditor.KoikatuSunshine", "src\DefaultParamEditor.KoikatuSunshine\DefaultParamEditor.KoikatuSunshine.csproj", "{0D28AB7E-CC4C-4EC5-B322-876641D7426B}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DefaultParamEditor.Core", "src\DefaultParamEditor.Core\DefaultParamEditor.Core.shproj", "{30236263-C659-45EC-9A6C-7947830BB343}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ItemLayerEdit.Core", "src\ItemLayerEdit.Core\ItemLayerEdit.Core.shproj", "{6AF96840-64FA-43DA-93CA-43D5AF47FD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.KoikatuSunshine", "src\ItemLayerEdit.KoikatuSunshine\ItemLayerEdit.KoikatuSunshine.csproj", "{E696AB96-E970-4F15-B9CE-911E0969C71B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItemLayerEdit.KoikatuSunshine", "src\ItemLayerEdit.KoikatuSunshine\ItemLayerEdit.KoikatuSunshine.csproj", "{E696AB96-E970-4F15-B9CE-911E0969C71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakerBridge.KoikatuSunshine", "src\MakerBridge.KoikatuSunshine\MakerBridge.KoikatuSunshine.csproj", "{F81D04E1-5FEC-4457-A694-E8C4AEABCDBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakerBridge.KoikatuSunshine", "src\MakerBridge.KoikatuSunshine\MakerBridge.KoikatuSunshine.csproj", "{F81D04E1-5FEC-4457-A694-E8C4AEABCDBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockOnPlugin.KoikatuSunshine", "src\LockOnPlugin.KoikatuSunshine\LockOnPlugin.KoikatuSunshine.csproj", "{E16FE139-DEEB-4659-A20C-242C03713347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioAddonLite.KoikatuSunshine", "src\StudioAddonLite.KoikatuSunshine\StudioAddonLite.KoikatuSunshine.csproj", "{CF849C91-B667-4196-B162-1635163F0476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudioAddonLite.KoikatuSunshine", "src\StudioAddonLite.KoikatuSunshine\StudioAddonLite.KoikatuSunshine.csproj", "{CF849C91-B667-4196-B162-1635163F0476}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StudioAddonLite.Core", "src\StudioAddonLite.Core\StudioAddonLite.Core.shproj", "{5A380F5E-DEBF-48E6-934F-593F20E93AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.HoneySelect2", "src\DefaultStudioScene.HoneySelect2\DefaultStudioScene.HoneySelect2.csproj", "{736F80A7-88A4-4508-B6C7-B36FDD175AE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultStudioScene.HoneySelect2", "src\DefaultStudioScene.HoneySelect2\DefaultStudioScene.HoneySelect2.csproj", "{736F80A7-88A4-4508-B6C7-B36FDD175AE4}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DefaultStudioScene.Core", "src\DefaultStudioScene.Core\DefaultStudioScene.Core.shproj", "{45DEF5DD-3617-482E-842F-B53ED60F59B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.AISyoujyo", "src\DefaultStudioScene.AISyoujyo\DefaultStudioScene.AISyoujyo.csproj", "{0EFAD08F-D9A9-49A0-AAEB-A47E9B60FB91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultStudioScene.AISyoujyo", "src\DefaultStudioScene.AISyoujyo\DefaultStudioScene.AISyoujyo.csproj", "{0EFAD08F-D9A9-49A0-AAEB-A47E9B60FB91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.HoneySelect2", "src\ItemLayerEdit.HoneySelect2\ItemLayerEdit.HoneySelect2.csproj", "{B026FAE9-1938-4650-B76B-E3810ED2C9CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItemLayerEdit.HoneySelect2", "src\ItemLayerEdit.HoneySelect2\ItemLayerEdit.HoneySelect2.csproj", "{B026FAE9-1938-4650-B76B-E3810ED2C9CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemLayerEdit.AISyoujyo", "src\ItemLayerEdit.AISyoujyo\ItemLayerEdit.AISyoujyo.csproj", "{57A8753A-3E34-478A-9AF4-746EFF566D6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItemLayerEdit.AISyoujyo", "src\ItemLayerEdit.AISyoujyo\ItemLayerEdit.AISyoujyo.csproj", "{57A8753A-3E34-478A-9AF4-746EFF566D6B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightManager.KoikatuSunshine", "src\LightManager.KoikatuSunshine\LightManager.KoikatuSunshine.csproj", "{8C76020F-A387-4306-8FD3-AA4E7660C8C8}"
 EndProject
@@ -215,19 +215,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TitleShortcuts.KoikatuSunsh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MaterialLink", "MaterialLink", "{A5AA9B05-D65A-458C-AF68-CDE11AE6DE63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialLink.KoikatuSunshine", "src\MaterialLink.KoikatuSunshine\MaterialLink.KoikatuSunshine.csproj", "{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialLink.KoikatuSunshine", "src\MaterialLink.KoikatuSunshine\MaterialLink.KoikatuSunshine.csproj", "{30C7A56D-402B-4125-A5F7-073C8EC1ED3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClothingStateMenuX.KoikatuSunshine", "src\ClothingStateMenuX.KoikatuSunshine\ClothingStateMenuX.KoikatuSunshine.csproj", "{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothingStateMenuX.KoikatuSunshine", "src\ClothingStateMenuX.KoikatuSunshine\ClothingStateMenuX.KoikatuSunshine.csproj", "{7E9EC937-1326-43C4-8FF9-2D68CCB65FB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeAssAssistant.KoikatuSunshine", "src\AnimeAssAssistant.KoikatuSunshine\AnimeAssAssistant.KoikatuSunshine.csproj", "{1A4E5E63-B803-45C9-B65D-0FCA200CC388}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeAssAssistant.KoikatuSunshine", "src\AnimeAssAssistant.KoikatuSunshine\AnimeAssAssistant.KoikatuSunshine.csproj", "{1A4E5E63-B803-45C9-B65D-0FCA200CC388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesselationSetting.KoikatuSunshine", "src\TesselationSetting.KoikatuSunshine\TesselationSetting.KoikatuSunshine.csproj", "{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesselationSetting.KoikatuSunshine", "src\TesselationSetting.KoikatuSunshine\TesselationSetting.KoikatuSunshine.csproj", "{0A6BBC35-D743-40FA-A44C-2EF5F10A7A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeLookEditor.KoikatuSunshine", "src\EyeLookEditor.KoikatuSunshine\EyeLookEditor.KoikatuSunshine.csproj", "{FF67C741-1941-455B-926C-A60064E9862F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EyeLookEditor.KoikatuSunshine", "src\EyeLookEditor.KoikatuSunshine\EyeLookEditor.KoikatuSunshine.csproj", "{FF67C741-1941-455B-926C-A60064E9862F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EyeLookEditor.Core", "src\EyeLookEditor.Core\EyeLookEditor.Core.shproj", "{E686C63E-3C7C-4B22-A4E5-4ACCA58E36ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeLookEditor.Koikatu", "src\EyeLookEditor.Koikatu\EyeLookEditor.Koikatu.csproj", "{3AA136B6-252A-42DA-AF22-41F802DC2893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EyeLookEditor.Koikatu", "src\EyeLookEditor.Koikatu\EyeLookEditor.Koikatu.csproj", "{3AA136B6-252A-42DA-AF22-41F802DC2893}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -420,6 +420,8 @@ Global
 		{FF67C741-1941-455B-926C-A60064E9862F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF67C741-1941-455B-926C-A60064E9862F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF67C741-1941-455B-926C-A60064E9862F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E686C63E-3C7C-4B22-A4E5-4ACCA58E36ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E686C63E-3C7C-4B22-A4E5-4ACCA58E36ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AA136B6-252A-42DA-AF22-41F802DC2893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3AA136B6-252A-42DA-AF22-41F802DC2893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AA136B6-252A-42DA-AF22-41F802DC2893}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -535,17 +537,21 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{0902bf3d-81d2-4aee-ab32-ef238f15052e}*SharedItemsImports = 5
-		src\Common.Core\Common.Core.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
-		src\Common.Unity\Common.Unity.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
-		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{0a6bbc35-d743-40fa-a44c-2ef5f10a7a3f}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{0a6bbc35-d743-40fa-a44c-2ef5f10a7a3f}*SharedItemsImports = 5
+		src\Common.Utils\Common.Utils.projitems*{0a6bbc35-d743-40fa-a44c-2ef5f10a7a3f}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 5
+		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{0d28ab7e-cc4c-4ec5-b322-876641d7426b}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{0dfa53ab-37b6-4aca-b5d2-4441f62cc15a}*SharedItemsImports = 5
-		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 4
-		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 4
+		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 5
+		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{0efad08f-d9a9-49a0-aaeb-a47e9b60fb91}*SharedItemsImports = 5
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{0f9aa09d-dcf3-41de-8028-61735024fe80}*SharedItemsImports = 5
@@ -557,14 +563,22 @@ Global
 		src\Common.Core\Common.Core.projitems*{124a215f-69b4-4310-98de-209fafe16d44}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{124a215f-69b4-4310-98de-209fafe16d44}*SharedItemsImports = 5
 		src\StudioAddonLite.Core\StudioAddonLite.Core.projitems*{124a215f-69b4-4310-98de-209fafe16d44}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{1a4e5e63-b803-45c9-b65d-0fca200cc388}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{1a4e5e63-b803-45c9-b65d-0fca200cc388}*SharedItemsImports = 5
+		src\Common.Utils\Common.Utils.projitems*{1a4e5e63-b803-45c9-b65d-0fca200cc388}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{2cbe1772-d2a2-40a5-8014-81904aab9781}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{2cbe1772-d2a2-40a5-8014-81904aab9781}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{2cbe1772-d2a2-40a5-8014-81904aab9781}*SharedItemsImports = 5
 		src\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems*{30236263-c659-45ec-9a6c-7947830bb343}*SharedItemsImports = 13
+		src\Common.Core\Common.Core.projitems*{30c7a56d-402b-4125-a5f7-073c8ec1ed3d}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{30c7a56d-402b-4125-a5f7-073c8ec1ed3d}*SharedItemsImports = 5
 		src\CameraFrameMask.Core\CameraFrameMask.Core.projitems*{327037cf-62f6-46c0-9e7c-4d46bed9e56b}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{394bc9b7-db38-4172-9b2c-60918e87b763}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{394bc9b7-db38-4172-9b2c-60918e87b763}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{394bc9b7-db38-4172-9b2c-60918e87b763}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{3aa136b6-252a-42da-af22-41f802dc2893}*SharedItemsImports = 5
+		src\Common.Koikatu\Common.Koikatu.projitems*{3aa136b6-252a-42da-af22-41f802dc2893}*SharedItemsImports = 5
+		src\EyeLookEditor.Core\EyeLookEditor.Core.projitems*{3aa136b6-252a-42da-af22-41f802dc2893}*SharedItemsImports = 5
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{3b6cd84f-6327-46b6-91e1-5eb972bc60fe}*SharedItemsImports = 13
 		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{45def5dd-3617-482e-842f-b53ed60f59b6}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{4aeb033d-d953-4e02-9274-cb44160e6b7f}*SharedItemsImports = 5
@@ -580,11 +594,11 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{558ed2d2-7fb3-4eec-b280-46decbe4ec3c}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 5
 		src\Common.PlayHome\Common.PlayHome.projitems*{55d59483-e493-40ca-9fd6-538063647f38}*SharedItemsImports = 5
-		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 4
-		src\Common.Unity\Common.Unity.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 4
-		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 4
-		src\UIUtility\UIUtility.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 4
+		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 5
+		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{57a8753a-3e34-478a-9af4-746eff566d6b}*SharedItemsImports = 5
 		src\Common.AISyoujyo\Common.AISyoujyo.projitems*{5837fde8-4b7c-431b-9402-3d8019f7bf37}*SharedItemsImports = 13
 		src\StudioAddonLite.Core\StudioAddonLite.Core.projitems*{5a380f5e-debf-48e6-934f-593f20e93aa2}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{5a7ae896-f7d0-4300-831b-cdd21a770e21}*SharedItemsImports = 5
@@ -595,8 +609,6 @@ Global
 		src\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems*{65d1defc-6733-47f3-84f8-1609c596fa5b}*SharedItemsImports = 13
 		src\CharaStateX.Core\CharaStateX.Core.projitems*{66ededb6-34f2-4613-a6ff-450341da94ce}*SharedItemsImports = 13
 		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{6af96840-64fa-43da-93ca-43d5af47fd60}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{6d058450-09b2-4d25-903f-9ae3a75df066}*SharedItemsImports = 5
-		src\Common.Koikatu\Common.Koikatu.projitems*{6d058450-09b2-4d25-903f-9ae3a75df066}*SharedItemsImports = 5
 		src\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{6ee11f86-3da2-4454-acca-8a9068cc7b7c}*SharedItemsImports = 5
@@ -605,27 +617,29 @@ Global
 		src\Common.Core\Common.Core.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\Common.Harmony\Common.Harmony.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
 		src\Common.PlayHome\Common.PlayHome.projitems*{6f020abd-6784-47e7-9526-1e8a83998942}*SharedItemsImports = 5
-		src\Common.Core\Common.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
-		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
-		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 5
+		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 5
+		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{736f80a7-88a4-4508-b6c7-b36fdd175ae4}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{74ea67fd-3a71-4043-abd5-b8907d70938c}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{7e9ec937-1326-43c4-8ff9-2d68ccb65fb5}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{7e9ec937-1326-43c4-8ff9-2d68ccb65fb5}*SharedItemsImports = 5
+		src\Common.Utils\Common.Utils.projitems*{7e9ec937-1326-43c4-8ff9-2d68ccb65fb5}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{7e9ec937-1326-43c4-8ff9-2d68ccb65fb5}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{7f30866a-1b8b-40f1-8960-0e203eede225}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
-		src\Common.Koikatu\Common.Koikatu.projitems*{805950cd-b415-4a41-97e2-7bce459c08a0}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems*{80c73b5c-d95e-4706-a7d8-48c79937283c}*SharedItemsImports = 5
 		src\Common.Harmony\Common.Harmony.projitems*{81e73402-3a7e-4ed3-b990-33c1b31fc205}*SharedItemsImports = 13
 		src\Common.Core\Common.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 5
 		src\MakerBridge.Core\MakerBridge.Core.projitems*{858d3c30-b4c8-4c81-88e3-d569b61b0443}*SharedItemsImports = 5
-		src\CharaStateX.Core\CharaStateX.Core.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 4
-		src\CameraFrameMask.Core\CameraFrameMask.Core.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 4
-		src\Common.Core\Common.Core.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 4
+		src\CharaStateX.Core\CharaStateX.Core.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{8627399a-2f2d-4189-af7c-fc83345e148a}*SharedItemsImports = 5
+		src\CameraFrameMask.Core\CameraFrameMask.Core.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{869b9d19-89cc-47d4-9d8c-d0542a422b9a}*SharedItemsImports = 5
 		src\BetterSceneLoader.Core\BetterSceneLoader.Core.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{8b9e7744-8345-46e9-96b7-13b0269819cc}*SharedItemsImports = 5
@@ -658,11 +672,11 @@ Global
 		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{a9a5b556-b590-4948-9e89-87d38623daf1}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{afc4ee66-2891-439a-925a-baf22553e1ba}*SharedItemsImports = 13
-		src\Common.Core\Common.Core.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 4
-		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 4
-		src\Common.Unity\Common.Unity.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 4
-		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 4
-		src\UIUtility\UIUtility.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 5
+		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 5
+		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{b026fae9-1938-4650-b76b-e3810ed2c9ce}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{c8de4a42-1b6c-4e58-985e-76972009a8bf}*SharedItemsImports = 5
 		src\CharaStateX.Core\CharaStateX.Core.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{c9703eb1-626b-4d1d-aeb9-42e7cc0e4220}*SharedItemsImports = 5
@@ -674,9 +688,9 @@ Global
 		src\Common.Core\Common.Core.projitems*{ca3c684f-a778-4c76-8ca2-dfb93a8cac13}*SharedItemsImports = 5
 		src\Common.HoneySelect2\Common.HoneySelect2.projitems*{ca3c684f-a778-4c76-8ca2-dfb93a8cac13}*SharedItemsImports = 5
 		src\TitleShortcuts.Core\TitleShortcuts.Core.projitems*{ca3c684f-a778-4c76-8ca2-dfb93a8cac13}*SharedItemsImports = 5
-		src\Common.Core\Common.Core.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 4
-		src\StudioAddonLite.Core\StudioAddonLite.Core.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 5
+		src\StudioAddonLite.Core\StudioAddonLite.Core.projitems*{cf849c91-b667-4196-b162-1635163f0476}*SharedItemsImports = 5
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{d0c39de2-d3e6-46bf-8a32-19250bf4f2d4}*SharedItemsImports = 13
 		src\LightManager.Core\LightManager.Core.projitems*{d2938a42-199f-4a5b-8c9b-6592e9e53424}*SharedItemsImports = 13
 		src\FreeHDefaults.Core\FreeHDefaults.Core.projitems*{d77a4720-b234-4a59-b7ef-7f9abea81cd3}*SharedItemsImports = 13
@@ -685,11 +699,11 @@ Global
 		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
 		src\LockOnPlugin.Core\LockOnPlugin.Core.projitems*{e16fe139-deeb-4659-a20c-242c03713347}*SharedItemsImports = 5
-		src\Common.Core\Common.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
-		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
-		src\Common.Unity\Common.Unity.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
-		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
-		src\UIUtility\UIUtility.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 5
+		src\Common.Unity\Common.Unity.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 5
+		src\ItemLayerEdit.Core\ItemLayerEdit.Core.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 5
+		src\UIUtility\UIUtility.projitems*{e696ab96-e970-4f15-b9ce-911e0969c71b}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 5
 		src\Common.Unity\Common.Unity.projitems*{efe42a5e-391c-4261-8b4a-9c9fb5aab9d8}*SharedItemsImports = 5
@@ -699,11 +713,14 @@ Global
 		src\Common.Koikatu\Common.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
 		src\RealPOV.Core\RealPOV.Core.projitems*{f6c012f1-f0bc-4b65-999d-8939da4b2dd5}*SharedItemsImports = 5
-		src\Common.Core\Common.Core.projitems*{f81d04e1-5fec-4457-a694-e8c4aeabcdbb}*SharedItemsImports = 4
-		src\MakerBridge.Core\MakerBridge.Core.projitems*{f81d04e1-5fec-4457-a694-e8c4aeabcdbb}*SharedItemsImports = 4
+		src\Common.Core\Common.Core.projitems*{f81d04e1-5fec-4457-a694-e8c4aeabcdbb}*SharedItemsImports = 5
+		src\MakerBridge.Core\MakerBridge.Core.projitems*{f81d04e1-5fec-4457-a694-e8c4aeabcdbb}*SharedItemsImports = 5
 		src\Common.Core\Common.Core.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
 		src\Common.Koikatu\Common.Koikatu.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
 		src\Common.Utils\Common.Utils.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
 		src\UIUtility\UIUtility.projitems*{f927c67b-778f-4144-92e4-2ae745790893}*SharedItemsImports = 5
+		src\Common.Core\Common.Core.projitems*{ff67c741-1941-455b-926c-a60064e9862f}*SharedItemsImports = 5
+		src\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems*{ff67c741-1941-455b-926c-a60064e9862f}*SharedItemsImports = 5
+		src\EyeLookEditor.Core\EyeLookEditor.Core.projitems*{ff67c741-1941-455b-926c-a60064e9862f}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
