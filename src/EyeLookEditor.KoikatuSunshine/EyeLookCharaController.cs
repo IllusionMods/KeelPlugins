@@ -116,34 +116,36 @@ namespace EyeLookEditor
         protected override void OnReload(GameMode currentGameMode)
         {
             eyeTypeState = ChaControl.eyeLookCtrl.eyeLookScript.eyeTypeStates[1];
-            ThresholdAngleDifference = eyeTypeState.thresholdAngleDifference;
-            BendingMultiplier = eyeTypeState.bendingMultiplier;
-            MaxAngleDifference = eyeTypeState.maxAngleDifference;
-            UpBendingAngle = eyeTypeState.upBendingAngle;
-            DownBendingAngle = eyeTypeState.downBendingAngle;
-            MinBendingAngle = eyeTypeState.minBendingAngle;
-            MaxBendingAngle = eyeTypeState.maxBendingAngle;
-            LeapSpeed = eyeTypeState.leapSpeed;
-            ForntTagDis = eyeTypeState.forntTagDis;
-            NearDis = eyeTypeState.nearDis;
-            HAngleLimit = eyeTypeState.hAngleLimit;
-            VAngleLimit = eyeTypeState.vAngleLimit;
+
+            ThresholdAngleDifference = DefaultValue.ThresholdAngleDifference;
+            BendingMultiplier = DefaultValue.BendingMultiplier;
+            MaxAngleDifference = DefaultValue.MaxAngleDifference;
+            UpBendingAngle = DefaultValue.UpBendingAngle;
+            DownBendingAngle = DefaultValue.DownBendingAngle;
+            MinBendingAngle = DefaultValue.MinBendingAngle;
+            MaxBendingAngle = DefaultValue.MaxBendingAngle;
+            LeapSpeed = DefaultValue.LeapSpeed;
+            ForntTagDis = DefaultValue.ForntTagDis;
+            NearDis = DefaultValue.NearDis;
+            HAngleLimit = DefaultValue.HAngleLimit;
+            VAngleLimit = DefaultValue.VAngleLimit;
 
             var pData = GetExtendedData();
             if(pData != null)
             {
-                { ThresholdAngleDifference = pData.data.TryGetValue(nameof(ThresholdAngleDifference), out var val) && val is float f ? f : eyeTypeState.thresholdAngleDifference; }
-                { BendingMultiplier = pData.data.TryGetValue(nameof(BendingMultiplier), out var val) && val is float f ? f : eyeTypeState.bendingMultiplier; }
-                { MaxAngleDifference = pData.data.TryGetValue(nameof(MaxAngleDifference), out var val) && val is float f ? f : eyeTypeState.maxAngleDifference; }
-                { UpBendingAngle = pData.data.TryGetValue(nameof(UpBendingAngle), out var val) && val is float f ? f : eyeTypeState.upBendingAngle; }
-                { DownBendingAngle = pData.data.TryGetValue(nameof(DownBendingAngle), out var val) && val is float f ? f : eyeTypeState.downBendingAngle; }
-                { MinBendingAngle = pData.data.TryGetValue(nameof(MinBendingAngle), out var val) && val is float f ? f : eyeTypeState.minBendingAngle; }
-                { MaxBendingAngle = pData.data.TryGetValue(nameof(MaxBendingAngle), out var val) && val is float f ? f : eyeTypeState.maxBendingAngle; }
-                { LeapSpeed = pData.data.TryGetValue(nameof(LeapSpeed), out var val) && val is float f ? f : eyeTypeState.leapSpeed; }
-                { ForntTagDis = pData.data.TryGetValue(nameof(ForntTagDis), out var val) && val is float f ? f : eyeTypeState.forntTagDis; }
-                { NearDis = pData.data.TryGetValue(nameof(NearDis), out var val) && val is float f ? f : eyeTypeState.nearDis; }
-                { HAngleLimit = pData.data.TryGetValue(nameof(HAngleLimit), out var val) && val is float f ? f : eyeTypeState.hAngleLimit; }
-                { VAngleLimit = pData.data.TryGetValue(nameof(VAngleLimit), out var val) && val is float f ? f : eyeTypeState.vAngleLimit; }
+                valueChanged = true;
+                { ThresholdAngleDifference = pData.data.TryGetValue(nameof(ThresholdAngleDifference), out var val) && val is float f ? f : DefaultValue.ThresholdAngleDifference; }
+                { BendingMultiplier = pData.data.TryGetValue(nameof(BendingMultiplier), out var val) && val is float f ? f : DefaultValue.BendingMultiplier; }
+                { MaxAngleDifference = pData.data.TryGetValue(nameof(MaxAngleDifference), out var val) && val is float f ? f : DefaultValue.MaxAngleDifference; }
+                { UpBendingAngle = pData.data.TryGetValue(nameof(UpBendingAngle), out var val) && val is float f ? f : DefaultValue.UpBendingAngle; }
+                { DownBendingAngle = pData.data.TryGetValue(nameof(DownBendingAngle), out var val) && val is float f ? f : DefaultValue.DownBendingAngle; }
+                { MinBendingAngle = pData.data.TryGetValue(nameof(MinBendingAngle), out var val) && val is float f ? f : DefaultValue.MinBendingAngle; }
+                { MaxBendingAngle = pData.data.TryGetValue(nameof(MaxBendingAngle), out var val) && val is float f ? f : DefaultValue.MaxBendingAngle; }
+                { LeapSpeed = pData.data.TryGetValue(nameof(LeapSpeed), out var val) && val is float f ? f : DefaultValue.LeapSpeed; }
+                { ForntTagDis = pData.data.TryGetValue(nameof(ForntTagDis), out var val) && val is float f ? f : DefaultValue.ForntTagDis; }
+                { NearDis = pData.data.TryGetValue(nameof(NearDis), out var val) && val is float f ? f : DefaultValue.NearDis; }
+                { HAngleLimit = pData.data.TryGetValue(nameof(HAngleLimit), out var val) && val is float f ? f : DefaultValue.HAngleLimit; }
+                { VAngleLimit = pData.data.TryGetValue(nameof(VAngleLimit), out var val) && val is float f ? f : DefaultValue.VAngleLimit; }
             }
         }
     }
