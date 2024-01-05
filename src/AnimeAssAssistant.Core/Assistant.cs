@@ -6,8 +6,9 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using HarmonyLib;
 
-namespace AnimeAssAssistant.Koikatu
+namespace AnimeAssAssistant
 {
     internal class Assistant : MonoBehaviour
     {
@@ -17,7 +18,11 @@ namespace AnimeAssAssistant.Koikatu
 
         private void Start()
         {
+#if KK
+            outfitDropDown = Traverse.Create(Singleton<CustomControl>.Instance).Field("ddCoordinate").GetValue<TMP_Dropdown>();
+#elif KKS
             outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
+#endif
         }
 
         private void Update()

@@ -7,20 +7,22 @@ using KKAPI.Maker.UI.Sidebar;
 using UniRx;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(AnimeAssAssistant.Koikatu.AAA.Version)]
+[assembly: System.Reflection.AssemblyFileVersion(AnimeAssAssistant.AAA.Version)]
 
-namespace AnimeAssAssistant.Koikatu
+namespace AnimeAssAssistant
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     [BepInProcess(Constants.MainGameProcessName)]
+#if KK
     [BepInProcess(Constants.VRProcessName)]
     [BepInProcess(Constants.MainGameProcessNameSteam)]
     [BepInProcess(Constants.VRProcessNameSteam)]
+#endif
     [BepInPlugin(GUID, "Anime Ass Assistant", Version)]
     public class AAA : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.animeassassistant";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         private const string SECTION_HOTKEY = "Keyboard shortcuts";
         private const string SECTION_FOLDER = "Folders";

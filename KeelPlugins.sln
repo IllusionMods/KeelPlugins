@@ -232,6 +232,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesselationSetting.KoikatuS
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EyeLookEditor.Core", "src\EyeLookEditor.Core\EyeLookEditor.Core.shproj", "{A8893D39-4731-4260-8FF9-E71033FFCED1}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AnimeAssAssistant.Core", "src\AnimeAssAssistant.Core\AnimeAssAssistant.Core.shproj", "{EDF05826-3E16-414F-AD86-A9FAABAD63FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -422,11 +424,9 @@ Global
 		{476DE84F-29B7-4A08-B439-335F3AEF1CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{476DE84F-29B7-4A08-B439-335F3AEF1CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{476DE84F-29B7-4A08-B439-335F3AEF1CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{476DE84F-29B7-4A08-B439-335F3AEF1CD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -530,6 +530,7 @@ Global
 		{5C94DE72-46BC-4E89-BC3A-4B55B2120D9E} = {BA55B5E5-B0FD-465F-93F2-D73BD193AC86}
 		{0785E670-8513-4670-BA37-1F50A0F42B7A} = {5C94DE72-46BC-4E89-BC3A-4B55B2120D9E}
 		{A8893D39-4731-4260-8FF9-E71033FFCED1} = {A3CEB40A-026B-4916-BCC1-5E9100582D7E}
+		{EDF05826-3E16-414F-AD86-A9FAABAD63FB} = {5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
