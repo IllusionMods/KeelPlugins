@@ -2,7 +2,7 @@
     <Import Project="..\BuildSettings.Common.props" />
     <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
     <ItemGroup>
-      <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0"/>
+      <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0" />
     </ItemGroup>
     <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
     <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
