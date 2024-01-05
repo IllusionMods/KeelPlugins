@@ -21,80 +21,91 @@ namespace EyeLookEditor
         private float _hAngleLimit;
         private float _vAngleLimit;
 
+        private bool valueChanged = false;
+
         public float ThresholdAngleDifference
         {
             get => _thresholdAngleDifference;
-            set { eyeTypeState.thresholdAngleDifference = value; _thresholdAngleDifference = value; }
+            set { eyeTypeState.thresholdAngleDifference = value; _thresholdAngleDifference = value; MarkChanged(DefaultValue.ThresholdAngleDifference, value); }
         }
 
         public float BendingMultiplier
         {
             get => _bendingMultiplier;
-            set { eyeTypeState.bendingMultiplier = value; _bendingMultiplier = value; }
+            set { eyeTypeState.bendingMultiplier = value; _bendingMultiplier = value; MarkChanged(DefaultValue.BendingMultiplier, value); }
         }
 
         public float MaxAngleDifference
         {
             get => _maxAngleDifference;
-            set { eyeTypeState.maxAngleDifference = value; _maxAngleDifference = value; }
+            set { eyeTypeState.maxAngleDifference = value; _maxAngleDifference = value; MarkChanged(DefaultValue.MaxAngleDifference, value); }
         }
 
         public float UpBendingAngle
         {
             get => _upBendingAngle;
-            set { eyeTypeState.upBendingAngle = value; _upBendingAngle = value; }
+            set { eyeTypeState.upBendingAngle = value; _upBendingAngle = value; MarkChanged(DefaultValue.UpBendingAngle, value); }
         }
 
         public float DownBendingAngle
         {
             get => _downBendingAngle;
-            set { eyeTypeState.downBendingAngle = value; _downBendingAngle = value; }
+            set { eyeTypeState.downBendingAngle = value; _downBendingAngle = value; MarkChanged(DefaultValue.DownBendingAngle, value); }
         }
 
         public float MinBendingAngle
         {
             get => _minBendingAngle;
-            set { eyeTypeState.minBendingAngle = value; _minBendingAngle = value; }
+            set { eyeTypeState.minBendingAngle = value; _minBendingAngle = value; MarkChanged(DefaultValue.MinBendingAngle, value); }
         }
 
         public float MaxBendingAngle
         {
             get => _maxBendingAngle;
-            set { eyeTypeState.maxBendingAngle = value; _maxBendingAngle = value; }
+            set { eyeTypeState.maxBendingAngle = value; _maxBendingAngle = value; MarkChanged(DefaultValue.MaxBendingAngle, value); }
         }
 
         public float LeapSpeed
         {
             get => _leapSpeed;
-            set { eyeTypeState.leapSpeed = value; _leapSpeed = value; }
+            set { eyeTypeState.leapSpeed = value; _leapSpeed = value; MarkChanged(DefaultValue.LeapSpeed, value); }
         }
 
         public float ForntTagDis
         {
             get => _forntTagDis;
-            set { eyeTypeState.forntTagDis = value; _forntTagDis = value; }
+            set { eyeTypeState.forntTagDis = value; _forntTagDis = value; MarkChanged(DefaultValue.ForntTagDis, value); }
         }
 
         public float NearDis
         {
             get => _nearDis;
-            set { eyeTypeState.nearDis = value; _nearDis = value; }
+            set { eyeTypeState.nearDis = value; _nearDis = value; MarkChanged(DefaultValue.NearDis, value); }
         }
 
         public float HAngleLimit
         {
             get => _hAngleLimit;
-            set { eyeTypeState.hAngleLimit = value; _hAngleLimit = value; }
+            set { eyeTypeState.hAngleLimit = value; _hAngleLimit = value; MarkChanged(DefaultValue.HAngleLimit, value); }
         }
 
         public float VAngleLimit
         {
             get => _vAngleLimit;
-            set { eyeTypeState.vAngleLimit = value; _vAngleLimit = value; }
+            set { eyeTypeState.vAngleLimit = value; _vAngleLimit = value; MarkChanged(DefaultValue.VAngleLimit, value); }
+        }
+
+        private void MarkChanged(float def, float value)
+        {
+            if(def != value)
+                valueChanged = true;
         }
 
         protected override void OnCardBeingSaved(GameMode currentGameMode)
         {
+            if(!valueChanged)
+                return;
+
             var pData = new PluginData();
             pData.data.Add(nameof(ThresholdAngleDifference), ThresholdAngleDifference);
             pData.data.Add(nameof(BendingMultiplier), BendingMultiplier);
