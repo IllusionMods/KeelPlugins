@@ -16,21 +16,21 @@ An alternative auto mode for H scenes.
 Edits the full auto mode so you can control the speed of the animation but not the pose.
 There is also some added randomization to make the pose changing feel more natural.
 
-#### AnimeAssAssistant [KK]
+#### AnimeAssAssistant [KK][KKS]
 An assistant to help you manage your huge card collections.  
 It provides a few shortcuts in maker that let you go through your cards quickly while deciding which cards to keep.  
 Enable the plugin in the maker sidebar for the hotkeys to work.
 
 <!--
-#### BetterSceneLoader
+#### BetterSceneLoader [KK][HS][HS2]
 An alternative scene loader for Studio.  
 The subfolders of the scene folder will act as categories for your scenes.
 -->
 
-#### CameraFrameMask [KK]
+#### CameraFrameMask [KK][KKS]
 Mask certain ugly frames caused by other plugins during character loading.
 
-#### CharaStateX [KK]
+#### CharaStateX [KK][KKS]
 Allows editing the state of multiple studio characters simultaneously.  
 Normally only a few parameters such as animation speed/pattern can be edited for multiple characters at once,
 but with this you can very easily load poses, change blinking state, switch animation, change clothing state, correct joints and so on.
@@ -42,49 +42,53 @@ By selecting a male and a female, and then clicking on an H anim in the list whi
 Adds options to edit chara clothing states and current outfit to the maker sidebar.  
 <sub><sup>Accessory options might come later.</sup></sub>
 
-#### DefaultParamEditor [KK]
+#### DefaultParamEditor [KK][KKS]
 Allows editing default settings for character/scene parameters such as eye blinking or shadow density.  
 This only affects parameters that make sense to be saved.
 
 To use, set your preferred settings normally and then save them with the new buttons in the studio menus.  
 Now when loading a character or starting the studio these settings will be used.
 
-#### DefaultStudioScene [KK]
+#### DefaultStudioScene [KK][AI][HS2]
 Load the scene specified in the config automatically when starting studio.
 
-#### FreeHDefaults [KK]
+#### EyeLookEditor [KK][KKS]
+Edit the way the characters look at the camera.  
+Settings are under the maker head options.
+
+#### FreeHDefaults [KK][KKS]
 Keeps freeh selection screen settings and freeh fov and aibu hand state saved.
 
-#### ItemLayerEdit [KK]
+#### ItemLayerEdit [KK][KKS][AI][HS2]
 Adds a hotkey that switches the currently selected objects layer between the character layer and the map layer.  
 This allows for more in-depth editing of lighting in studio.
 
-#### LightManager [KK]
+#### LightManager [KK][KKS]
 Make studio spotlights automatically track characters.  
 First select the lights you want to edit then add the character you want to track to the selection and hit apply in the light settings. You cannot select a character first because the light menu has to be open to edit the settings.
 
-#### LockOnPlugin [KK]
+#### LockOnPlugin [KK][KKS]
 A camera helper plugin that lets you forget the annoying camera controls and keeps the action right where it needs to be.
 Select a character and press the hotkey to automatically keep the camera focus on the character.
 In an H scene the closest character to the camera target will be selected.
 
-#### MakerBridge [KK]
+#### MakerBridge [KK][KKS]
 Press the hotkey to send the selected character from maker to studio and vice versa.  
 To put it plainly, a temporary character card is created by the sending program which is then loaded by the receiving program when it is detected.
 
-#### MaterialLink [KK]
+#### MaterialLink [KKS]
 Automatically matches your characters skin on clothing meshes that are using the `Shader Forge/main_skin` shader (for example, thigh high socks with skindentation).
 
-#### RealPOV [KK][PH]
+#### RealPOV [KK][KKS][PH]
 First person mode for studio and H scenes.
-
-#### TitleShortcuts [KK][HS][AI]
-Title menu keyboard shortcuts to open different modes.  
-For example, press F to open the female editor.
 
 #### StudioAddonLite [KK]
 A lite version of the StudioAddon from HS.  
 Currently only has the object manipulation hotkeys for studio.
+
+#### TitleShortcuts [KK][KKS][AI][HS][HS2]
+Title menu keyboard shortcuts to open different modes.  
+For example, press F to open the female editor.
 
 ## Patchers
 
