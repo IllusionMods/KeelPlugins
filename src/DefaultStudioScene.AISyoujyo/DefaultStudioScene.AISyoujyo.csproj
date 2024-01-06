@@ -5,9 +5,11 @@
     <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="IllusionLibs.AIGirl.Assembly-CSharp" Version="2020.5.29.4" />
     <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.CoreModule" Version="2018.2.21.4" />
+    <PackageReference Include="IllusionModdingAPI.AIAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.AISyoujyo\Common.AISyoujyo.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+  <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
   <Import Project="..\DefaultStudioScene.Core\DefaultStudioScene.Core.projitems" Label="Shared" />
 </Project>
