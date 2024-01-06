@@ -1,6 +1,8 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins.Koikatu;
+using KeelPlugins.Utils;
 using ParadoxNotion.Serialization;
 using System;
 using System.IO;
@@ -23,14 +25,23 @@ namespace DefaultParamEditor.Koikatu
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.3.1." + BuildNumber.Version;
+        public const string Version = "1.4.0." + BuildNumber.Version;
 
         private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
         private static ParamData data = new ParamData();
 
+        private static ConfigEntry<bool> CreateUISaveButtons { get; set; }
+        private static ConfigEntry<string> SceneParamButtons { get; set; }
+        private static ConfigEntry<string> CharaParamButtons { get; set; }
+
         private void Awake()
         {
             Log.SetLogSource(Logger);
+
+            CreateUISaveButtons = Config.Bind("General", "Create UI Save Buttons", false, "Create save buttons in the studio UI next to the load buttons.\nRequires restart");
+            SceneParamButtons = Config.Bind("General", "Scene Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = SceneParamDrawer }));
+            CharaParamButtons = Config.Bind("General", "Character Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = CharaParamDrawer }));
+
             Harmony.CreateAndPatchAll(typeof(Hooks));
 
             if (File.Exists(savePath))
@@ -57,6 +68,24 @@ namespace DefaultParamEditor.Koikatu
             File.WriteAllText(savePath, json);
         }
 
+        private void SceneParamDrawer(ConfigEntryBase configEntry)
+        {
+            if(GUILayout.Button("Save", GUILayout.ExpandWidth(true)))
+            {
+                SceneParam.Save();
+                SaveToFile();
+            }
+        }
+
+        private void CharaParamDrawer(ConfigEntryBase configEntry)
+        {
+            if(GUILayout.Button("Save", GUILayout.ExpandWidth(true)))
+            {
+                CharacterParam.Save();
+                SaveToFile();
+            }
+        }
+
         private class Hooks
         {
             [HarmonyPostfix, HarmonyPatch(typeof(Studio.Studio), nameof(Studio.Studio.Init))]
@@ -64,19 +93,22 @@ namespace DefaultParamEditor.Koikatu
             {
                 var mainlist = SetupList("StudioScene/Canvas Main Menu/04_System");
                 CreateMainButton("Load scene param", mainlist, SceneParam.LoadDefaults);
-                CreateMainButton("Save scene param", mainlist, () =>
-                {
-                    SceneParam.Save();
-                    SaveToFile();
-                });
-
                 var charalist = SetupList("StudioScene/Canvas Main Menu/02_Manipulate/00_Chara/00_Root");
                 //CreateCharaButton("Load chara param", charalist, CharacterParam.LoadDefaults);
-                CreateCharaButton("Save chara param", charalist, () =>
+
+                if(CreateUISaveButtons.Value)
                 {
-                    CharacterParam.Save();
-                    SaveToFile();
-                });
+                    CreateMainButton("Save scene param", mainlist, () =>
+                    {
+                        SceneParam.Save();
+                        SaveToFile();
+                    });
+                    CreateCharaButton("Save chara param", charalist, () =>
+                    {
+                        CharacterParam.Save();
+                        SaveToFile();
+                    });
+                }
             }
 
             private static ScrollRect SetupList(string goPath)

@@ -16,5 +16,6 @@
   <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
+  <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />
   <Import Project="..\DefaultParamEditor.Core\DefaultParamEditor.Core.projitems" Label="Shared" />
 </Project>
