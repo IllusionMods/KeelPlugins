@@ -234,6 +234,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "EyeLookEditor.Core", "src\E
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AnimeAssAssistant.Core", "src\AnimeAssAssistant.Core\AnimeAssAssistant.Core.shproj", "{EDF05826-3E16-414F-AD86-A9FAABAD63FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.KoikatuSunshine", "src\DefaultStudioScene.KoikatuSunshine\DefaultStudioScene.KoikatuSunshine.csproj", "{04DE1497-4957-490A-B4EA-4BB53C76F24D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -427,6 +429,10 @@ Global
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0785E670-8513-4670-BA37-1F50A0F42B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04DE1497-4957-490A-B4EA-4BB53C76F24D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DE1497-4957-490A-B4EA-4BB53C76F24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04DE1497-4957-490A-B4EA-4BB53C76F24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04DE1497-4957-490A-B4EA-4BB53C76F24D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -531,6 +537,7 @@ Global
 		{0785E670-8513-4670-BA37-1F50A0F42B7A} = {5C94DE72-46BC-4E89-BC3A-4B55B2120D9E}
 		{A8893D39-4731-4260-8FF9-E71033FFCED1} = {A3CEB40A-026B-4916-BCC1-5E9100582D7E}
 		{EDF05826-3E16-414F-AD86-A9FAABAD63FB} = {5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC}
+		{04DE1497-4957-490A-B4EA-4BB53C76F24D} = {A41DE533-BC37-42DC-8EA3-7433E91AB0CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}
