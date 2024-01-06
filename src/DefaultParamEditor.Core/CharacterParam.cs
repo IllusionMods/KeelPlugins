@@ -92,7 +92,7 @@ namespace DefaultParamEditor.Koikatu
             var mpCharCtrl = GameObject.FindObjectOfType<MPCharCtrl>();
             if(mpCharCtrl)
             {
-                int select = Traverse.Create(mpCharCtrl).Field("select").GetValue<int>();
+                int select = mpCharCtrl.select;
                 if(select == 0) mpCharCtrl.OnClickRoot(0);
             }
         }
