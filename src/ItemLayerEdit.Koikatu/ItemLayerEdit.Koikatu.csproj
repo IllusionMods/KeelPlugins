@@ -2,7 +2,7 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="16.0.0" />
     <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp" Version="2019.4.27.2" />
     <PackageReference Include="IllusionLibs.Koikatu.Assembly-CSharp-firstpass" Version="2019.4.27.2" />

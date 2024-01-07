@@ -2,7 +2,7 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.AISyoujyo.props" />
   <ItemGroup>
-    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="IllusionLibs.AIGirl.Assembly-CSharp" Version="2020.5.29.2" />
     <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.CoreModule" Version="2018.2.21.3" />
     <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.UI" Version="2018.2.21.3" />

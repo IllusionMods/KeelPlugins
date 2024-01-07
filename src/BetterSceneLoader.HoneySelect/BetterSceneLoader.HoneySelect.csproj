@@ -2,7 +2,7 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.HoneySelect.props" />
   <ItemGroup>
-    <PackageReference Include="BepInEx.Core" Version="5.4.4" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="IllusionLibs.HoneySelect.Assembly-CSharp" Version="2017.6.30.2" />
     <PackageReference Include="IllusionLibs.HoneySelect.UnityEngine" Version="5.3.5.2" />
     <PackageReference Include="IllusionLibs.HoneySelect.UnityEngine.UI" Version="5.3.5.2" />
