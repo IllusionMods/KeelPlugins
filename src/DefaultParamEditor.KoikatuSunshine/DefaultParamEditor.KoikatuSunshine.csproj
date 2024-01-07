@@ -10,8 +10,8 @@
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.InputLegacyModule" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UIModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.35.0" />
-    <PackageReference Include="Sideloader.KoikatsuSunshine" Version="16.9.2" />
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
+    <PackageReference Include="Sideloader.KoikatsuSunshine" Version="19.4.0" />
   </ItemGroup>
   <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

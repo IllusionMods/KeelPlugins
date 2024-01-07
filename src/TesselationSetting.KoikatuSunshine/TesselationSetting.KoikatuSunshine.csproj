@@ -5,7 +5,7 @@
     <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.36.0" />
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

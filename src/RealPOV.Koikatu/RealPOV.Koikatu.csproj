@@ -2,9 +2,7 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.34.0">
-	    <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />

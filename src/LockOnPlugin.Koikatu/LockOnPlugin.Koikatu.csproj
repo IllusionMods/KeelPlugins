@@ -8,11 +8,7 @@
     <EmbeddedResource Include="LockOnPluginData.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.33.0">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets></IncludeAssets>
-	    <GeneratePathProperty></GeneratePathProperty>
-    </PackageReference>
+    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />

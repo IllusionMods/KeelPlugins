@@ -2,8 +2,8 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.35.0" />
-    <PackageReference Include="Sideloader.Koikatu" Version="16.3.0" />
+    <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
+    <PackageReference Include="Sideloader.Koikatu" Version="19.4.0" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Unity.TextMeshPro" Version="2019.4.9" />
   </ItemGroup>
   <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />

@@ -5,11 +5,7 @@
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Cinemachine" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Unity.TextMeshPro" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.AnimationModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.34.0">
-      <PrivateAssets>all</PrivateAssets>
-    <IncludeAssets></IncludeAssets>
-      <GeneratePathProperty></GeneratePathProperty>
-    </PackageReference>
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />

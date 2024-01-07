@@ -9,11 +9,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UIModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.33.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets></IncludeAssets>
-      <GeneratePathProperty></GeneratePathProperty>
-    </PackageReference>
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LockOnPluginData.json" />

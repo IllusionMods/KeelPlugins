@@ -7,7 +7,7 @@
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.CoreModule" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.ImageConversionModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.36.0" />
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\MakerBridge.Core\MakerBridge.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

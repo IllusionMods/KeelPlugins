@@ -2,9 +2,9 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.HoneySelect2.props" />
   <ItemGroup>
-    <PackageReference Include="ExtensibleSaveFormat.HoneySelect2" Version="16.4.0" />
-    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.15" />
-    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.5.4" />
+    <PackageReference Include="ExtensibleSaveFormat.HoneySelect2" Version="19.4.0" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
+    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.9.0" />
     <PackageReference Include="IllusionLibs.HoneySelect2.Assembly-CSharp" Version="2020.5.29.4" />
     <PackageReference Include="IllusionLibs.HoneySelect2.Assembly-CSharp-firstpass" Version="2020.5.29.4" />
     <PackageReference Include="IllusionLibs.HoneySelect2.IL" Version="2020.5.29.4" />
@@ -16,7 +16,7 @@
     <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.TextRenderingModule" Version="2018.4.11.4" />
     <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UI" Version="2018.4.11.4" />
     <PackageReference Include="IllusionLibs.HoneySelect2.UnityEngine.UIModule" Version="2018.4.11.4" />
-    <PackageReference Include="IllusionModdingAPI.HS2API" Version="1.30.1" />
+    <PackageReference Include="IllusionModdingAPI.HS2API" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.HoneySelect2\Common.HoneySelect2.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />

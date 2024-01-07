@@ -29,7 +29,7 @@ namespace SoundEffects.PlayHome
 #if DEBUG
         private void OnDestroy()
         {
-            harmony.UnpatchAll();
+            harmony.UnpatchSelf();
         }
 #endif
 

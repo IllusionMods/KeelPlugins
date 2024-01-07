@@ -2,9 +2,9 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
   <ItemGroup>
-    <PackageReference Include="ExtensibleSaveFormat.KoikatsuSunshine" Version="16.8.1" />
-    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.15" />
-    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.5.4" />
+    <PackageReference Include="ExtensibleSaveFormat.KoikatsuSunshine" Version="19.4.0" />
+    <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
+    <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.9.0" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp-firstpass" Version="2021.9.17" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UniRx" Version="2021.9.17" />
@@ -16,7 +16,7 @@
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.TextRenderingModule" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UIModule" Version="2019.4.9" />
-    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.30.1" />
+    <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
