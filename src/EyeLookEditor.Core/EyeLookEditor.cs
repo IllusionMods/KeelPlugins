@@ -25,7 +25,7 @@ namespace EyeLookEditor
         {
             var irisCategory = MakerConstants.Face.Iris;
 
-            var category = new MakerCategory(irisCategory.CategoryName, "eyelookeditor", irisCategory.Position, "EyeLookEditor");
+            var category = new MakerCategory(irisCategory.CategoryName, "eyelookeditor", irisCategory.Position+1, "Eye Look");
             e.AddSubCategory(category);
 
             var stringToValue = new Func<string, float>(float.Parse);
