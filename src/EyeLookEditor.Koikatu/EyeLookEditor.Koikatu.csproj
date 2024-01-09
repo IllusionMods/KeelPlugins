@@ -8,7 +8,6 @@
     <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
     <PackageReference Include="ExtensibleSaveFormat.Koikatu" Version="19.4.0" />
   </ItemGroup>
-  <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\EyeLookEditor.Core\EyeLookEditor.Core.projitems" Label="Shared" />
 </Project>

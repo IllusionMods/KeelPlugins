@@ -10,5 +10,4 @@
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core\RealPOV.Core.projitems" Label="Shared" />
   <Import Project="..\RealPOV.Core.Koikatu\RealPOV.Core.Koikatu.projitems" Label="Shared" />
-  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
 </Project>

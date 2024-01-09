@@ -8,5 +8,4 @@
     <PackageReference Include="IllusionLibs.PlayHome.UnityEngine.UI" Version="5.5.5.4" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.PlayHome\Common.PlayHome.projitems" Label="Shared" />
 </Project>

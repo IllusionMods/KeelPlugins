@@ -8,7 +8,6 @@
     <PackageReference Include="IllusionLibs.HoneySelect.UnityEngine" Version="5.3.5.2" />
     <PackageReference Include="IllusionLibs.HoneySelect.UnityEngine.UI" Version="5.3.5.2" />
   </ItemGroup>
-  <Import Project="..\Common.HoneySelect\Common.HoneySelect.projitems" Label="Shared" />
   <Import Project="..\TitleShortcuts.Core\TitleShortcuts.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
 </Project>

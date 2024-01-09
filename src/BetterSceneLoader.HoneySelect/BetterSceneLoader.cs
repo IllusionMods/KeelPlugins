@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using BetterSceneLoader.Core;
 using HarmonyLib;
-using KeelPlugins.HoneySelect;
+using KeelPlugins;
 using System.Linq;
 using UILib;
 

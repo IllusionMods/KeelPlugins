@@ -9,7 +9,6 @@
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.InputLegacyModule" Version="2019.4.9" />
     <PackageReference Include="IllusionLibs.KoikatsuSunshine.UnityEngine.UI" Version="2019.4.9" />
   </ItemGroup>
-  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\CharaStateX.Core\CharaStateX.Core.projitems" Label="Shared" />
 </Project>

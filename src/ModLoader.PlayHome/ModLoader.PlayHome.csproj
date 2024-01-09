@@ -8,6 +8,5 @@
     <PackageReference Include="XUnity.ResourceRedirector" Version="1.1.0" />
   </ItemGroup>
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.PlayHome\Common.PlayHome.projitems" Label="Shared" />
   <Import Project="..\Common.Harmony\Common.Harmony.projitems" Label="Shared" />
 </Project>

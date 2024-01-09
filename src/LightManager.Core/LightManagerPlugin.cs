@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using KKAPI.Studio.SaveLoad;
 using UnityEngine;
 

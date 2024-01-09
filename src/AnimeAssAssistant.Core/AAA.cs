@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using KeelPlugins.Utils;
 using KKAPI.Maker;
 using KKAPI.Maker.UI.Sidebar;
@@ -13,11 +13,9 @@ namespace AnimeAssAssistant
 {
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     [BepInProcess(Constants.MainGameProcessName)]
-#if KK
     [BepInProcess(Constants.VRProcessName)]
     [BepInProcess(Constants.MainGameProcessNameSteam)]
     [BepInProcess(Constants.VRProcessNameSteam)]
-#endif
     [BepInPlugin(GUID, "Anime Ass Assistant", Version)]
     public class AAA : BaseUnityPlugin
     {

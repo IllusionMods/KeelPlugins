@@ -2,7 +2,6 @@
     <Import Project="..\BuildSettings.Common.props" />
     <Import Project="..\BuildSettings.KoikatsuSunshine.props" />
     <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
-    <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
     <ItemGroup>
         <PackageReference Include="IllusionLibs.BepInEx" Version="5.4.22" />
         <PackageReference Include="IllusionLibs.KoikatsuSunshine.Assembly-CSharp" Version="2021.9.17" />

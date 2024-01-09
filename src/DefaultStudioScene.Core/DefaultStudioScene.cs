@@ -5,13 +5,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using KKAPI.Utilities;
-#if AI
-using KeelPlugins.AISyoujyo;
-#elif HS2
-using KeelPlugins.HoneySelect2;
-#else
-using KeelPlugins.Koikatu;
-#endif
+using KeelPlugins;
 
 [assembly: System.Reflection.AssemblyFileVersion(DefaultStudioScene.Koikatu.DefaultStudioScene.Version)]
 

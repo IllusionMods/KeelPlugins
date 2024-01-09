@@ -5,7 +5,6 @@
         <PackageReference Include="IllusionLibs.Koikatu.TextMeshPro" Version="2019.4.27.4" />
         <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
     </ItemGroup>
-    <Import Project="..\Common.Koikatu\Common.Koikatu.projitems" Label="Shared" />
     <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
     <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
     <Import Project="..\FreeHDefaults.Core\FreeHDefaults.Core.projitems" Label="Shared" />

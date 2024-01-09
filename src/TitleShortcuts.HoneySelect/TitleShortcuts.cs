@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
-using KeelPlugins.HoneySelect;
+using KeelPlugins;
 using System;
 using System.Collections;
 using TitleShortcuts.Core;

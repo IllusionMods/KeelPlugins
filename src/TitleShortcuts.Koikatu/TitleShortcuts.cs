@@ -2,7 +2,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using System.Collections;
 using KeelPlugins.Harmony;
 using TitleShortcuts.Core;

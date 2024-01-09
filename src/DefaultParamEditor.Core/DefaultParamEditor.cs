@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using KeelPlugins.Utils;
 using ParadoxNotion.Serialization;
 using System;

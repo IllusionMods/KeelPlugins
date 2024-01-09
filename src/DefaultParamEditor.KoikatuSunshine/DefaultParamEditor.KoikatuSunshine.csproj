@@ -13,7 +13,6 @@
     <PackageReference Include="IllusionModdingAPI.KKSAPI" Version="1.37.0" />
     <PackageReference Include="Sideloader.KoikatsuSunshine" Version="19.4.0" />
   </ItemGroup>
-  <Import Project="..\Common.KoikatsuSunshine\Common.KoikatsuSunshine.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />
   <Import Project="..\Common.Utils\Common.Utils.projitems" Label="Shared" />

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Configuration;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using KKAPI;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ using UnityEngine;
 namespace TesselationSetting.Koikatu
 {
     [BepInProcess(Constants.MainGameProcessName)]
+    [BepInProcess(Constants.MainGameProcessNameSteam)]
     [BepInDependency(KoikatuAPI.GUID)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TesselationSetting : BaseUnityPlugin

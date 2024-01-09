@@ -8,6 +8,5 @@
     <PackageReference Include="IllusionLibs.AIGirl.UnityEngine.UI" Version="2018.2.21.4" />
   </ItemGroup>
   <Import Project="..\TitleShortcuts.Core\TitleShortcuts.Core.projitems" Label="Shared" />
-  <Import Project="..\Common.AISyoujyo\Common.AISyoujyo.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
 </Project>

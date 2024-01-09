@@ -1,6 +1,6 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 
 [assembly: System.Reflection.AssemblyFileVersion(CharaStateX.Koikatu.CharaStateX.Version)]
 

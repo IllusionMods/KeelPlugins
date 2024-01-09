@@ -18,7 +18,6 @@
     <PackageReference Include="IllusionLibs.BepInEx.Harmony" Version="2.9.0" />
     <PackageReference Include="IllusionModdingAPI.AIAPI" Version="1.37.0" />
   </ItemGroup>
-  <Import Project="..\Common.AISyoujyo\Common.AISyoujyo.projitems" Label="Shared" />
   <Import Project="..\Common.Core\Common.Core.projitems" Label="Shared" />
   <Import Project="..\UIUtility\UIUtility.projitems" Label="Shared" />
   <Import Project="..\Common.Unity\Common.Unity.projitems" Label="Shared" />

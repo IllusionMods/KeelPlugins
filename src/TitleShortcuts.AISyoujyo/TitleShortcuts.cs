@@ -1,7 +1,7 @@
 ﻿using AIProject;
 using BepInEx;
 using BepInEx.Configuration;
-using KeelPlugins.AISyoujyo;
+using KeelPlugins;
 using System.Collections;
 using TitleShortcuts.Core;
 using UnityEngine;
@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 namespace TitleShortcuts.AISyoujyo
 {
     [BepInProcess(Constants.MainGameProcessName)]
-    [BepInProcess(Constants.SteamGameProcessName)]
+    [BepInProcess(Constants.MainGameProcessNameSteam)]
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {

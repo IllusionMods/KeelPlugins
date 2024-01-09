@@ -1,5 +1,5 @@
 ﻿using BepInEx;
-using KeelPlugins.Koikatu;
+using KeelPlugins;
 using Studio;
 using System.Collections.Generic;
 using UILib;
