@@ -102,9 +102,9 @@ namespace DefaultParamEditor.Koikatu
             public static void CreateUI()
             {
                 var mainlist = SetupList("StudioScene/Canvas Main Menu/04_System");
-                CreateMainButton("Load scene param", mainlist, SceneParam.LoadDefaults);
+                CreateMainButton("Load scene param", mainlist, SceneParam.Load);
                 var charalist = SetupList("StudioScene/Canvas Main Menu/02_Manipulate/00_Chara/00_Root");
-                //CreateCharaButton("Load chara param", charalist, CharacterParam.LoadDefaults);
+                CreateCharaButton("Load chara param", charalist, CharacterParam.Load);
 
                 if(CreateUISaveButtons.Value)
                 {

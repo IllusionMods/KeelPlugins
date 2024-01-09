@@ -102,7 +102,7 @@ namespace DefaultParamEditor.Koikatu
             _sceneData.saved = false;
         }
 
-        public static void LoadDefaults()
+        public static void Load()
         {
             if(_sceneData.saved && Studio.Studio.Instance)
             {

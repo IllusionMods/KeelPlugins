@@ -52,7 +52,7 @@ namespace DefaultParamEditor.Koikatu
             _charaData.saved = false;
         }
 
-        public static void LoadDefaults()
+        public static void Load()
         {
             if(_charaData.saved)
             {
