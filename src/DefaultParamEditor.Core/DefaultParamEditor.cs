@@ -31,16 +31,14 @@ namespace DefaultParamEditor.Koikatu
         private static ParamData data = new ParamData();
 
         private static ConfigEntry<bool> CreateUISaveButtons { get; set; }
-        private static ConfigEntry<string> SceneParamButtons { get; set; }
-        private static ConfigEntry<string> CharaParamButtons { get; set; }
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
 
-            CreateUISaveButtons = Config.Bind("General", "Create UI Save Buttons", false, "Create save buttons in the studio UI next to the load buttons.\nRequires restart");
-            SceneParamButtons = Config.Bind("General", "Scene Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = SceneParamDrawer }));
-            CharaParamButtons = Config.Bind("General", "Character Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9, HideDefaultButton = true, CustomDrawer = CharaParamDrawer }));
+            CreateUISaveButtons = Config.Bind("General", "Create UI Save Buttons", false, new ConfigDescription("Create save buttons in the studio UI next to the load buttons.\nRequires restart", null, new ConfigurationManagerAttributes { Order = 1 }));
+            Config.Bind("General", "Character Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 4, HideDefaultButton = true, CustomDrawer = CharaParamDrawer }));
+            Config.Bind("General", "Scene Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 5, HideDefaultButton = true, CustomDrawer = SceneParamDrawer }));
 
             Harmony.CreateAndPatchAll(typeof(Hooks));
 
@@ -75,6 +73,12 @@ namespace DefaultParamEditor.Koikatu
                 SceneParam.Save();
                 SaveToFile();
             }
+
+            if(GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
+            {
+                SceneParam.Reset();
+                SaveToFile();
+            }
         }
 
         private void CharaParamDrawer(ConfigEntryBase configEntry)
@@ -82,6 +86,12 @@ namespace DefaultParamEditor.Koikatu
             if(GUILayout.Button("Save", GUILayout.ExpandWidth(true)))
             {
                 CharacterParam.Save();
+                SaveToFile();
+            }
+
+            if(GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
+            {
+                CharacterParam.Reset();
                 SaveToFile();
             }
         }
