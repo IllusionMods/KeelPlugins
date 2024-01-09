@@ -93,7 +93,7 @@ namespace DefaultParamEditor.Koikatu
                 _sceneData.fov = Studio.Studio.Instance.cameraCtrl.fieldOfView;
 
                 _sceneData.saved = true;
-                Log.Message("Default scene settings saved");
+                Log.Info("Default scene settings saved");
             }
         }
 
@@ -109,6 +109,10 @@ namespace DefaultParamEditor.Koikatu
                 Log.Info("Loading scene defaults");
                 SetSceneInfoValues(Studio.Studio.Instance.sceneInfo);
                 Studio.Studio.Instance.systemButtonCtrl.UpdateInfo();
+            }
+            else
+            {
+                Log.Message("Scene defaults have not been saved yet");
             }
         }
 

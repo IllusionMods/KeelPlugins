@@ -39,11 +39,11 @@ namespace DefaultParamEditor.Koikatu
                 _charaData.mouthPtn = status.mouthPtn;
 
                 _charaData.saved = true;
-                Log.Message("Default character settings saved");
+                Log.Info("Default character settings saved");
             }
             else
             {
-                Log.Message("Warning: Select character to save default settings");
+                Log.Message("Warning: Select a character to save default settings");
             }
         }
 
@@ -61,12 +61,16 @@ namespace DefaultParamEditor.Koikatu
 
                 if(selected.Count > 0)
                 {
+                    Log.Info("Loading chara defaults");
+
                     foreach(var chara in selected)
                         SetCharaValues(chara.charFileStatus);
-
                     UpdateStateInfo();
-                    Log.Info("Loading chara defaults");
                 }
+            }
+            else
+            {
+                Log.Message("Character defaults have not been saved yet");
             }
         }
 
