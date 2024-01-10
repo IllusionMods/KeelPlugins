@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BetterSceneLoader.Core
+namespace BetterSceneLoader
 {
     public class LoadingIcon : MonoBehaviour
     {

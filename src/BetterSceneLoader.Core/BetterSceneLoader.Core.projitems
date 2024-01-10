@@ -10,9 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AutoGridLayout.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BetterSceneLoaderCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoadingIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneLoaderUI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BetterSceneLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\loadicon" />

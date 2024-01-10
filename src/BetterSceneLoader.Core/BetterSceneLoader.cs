@@ -1,12 +1,21 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using HarmonyLib;
+using KeelPlugins;
 using KeelPlugins.Utils;
+using System.Linq;
 using System.IO;
+using UILib;
 
-namespace BetterSceneLoader.Core
+[assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.BetterSceneLoader.Version)]
+
+namespace BetterSceneLoader
 {
-    public abstract class BetterSceneLoaderCore : BaseUnityPlugin
+    [BepInProcess(Constants.StudioProcessName)]
+    [BepInPlugin(GUID, PluginName, Version)]
+    public class BetterSceneLoader : BaseUnityPlugin
     {
+        public const string Version = "1.0.2." + BuildNumber.Version;
         public const string GUID = "keelhauled.bettersceneloader";
         public const string PluginName = "BetterSceneLoader";
 
@@ -34,15 +43,40 @@ namespace BetterSceneLoader.Core
             SceneLoaderUI.OnSaveButtonClick += SaveScene;
             SceneLoaderUI.OnDeleteButtonClick += DeleteScene;
             SceneLoaderUI.OnImportButtonClick += ImportScene;
+
+            Harmony.CreateAndPatchAll(typeof(Hooks));
+            UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
         }
 
-        protected abstract void LoadScene(string path);
-        protected abstract void SaveScene(string path);
-        protected abstract void ImportScene(string path);
-
-        protected void DeleteScene(string path)
+        private void DeleteScene(string path)
         {
             File.Delete(path);
+        }
+
+        private void LoadScene(string path)
+        {
+            Studio.Studio.Instance.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
+        }
+
+        private void SaveScene(string path)
+        {
+            Studio.Studio.Instance.dicObjectCtrl.Values.ToList().ForEach(x => x.OnSavePreprocessing());
+            Studio.Studio.Instance.sceneInfo.cameraSaveData = Studio.Studio.Instance.cameraCtrl.Export();
+            Studio.Studio.Instance.sceneInfo.Save(path);
+        }
+
+        private void ImportScene(string path)
+        {
+            Studio.Studio.Instance.ImportScene(path);
+        }
+
+        private class Hooks
+        {
+            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+            public static void StudioEntrypoint()
+            {
+                SceneLoaderUI.CreateUI();
+            }
         }
     }
 }

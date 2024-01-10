@@ -14,7 +14,7 @@ using KeelPlugins.Utils;
 // imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
 
-namespace BetterSceneLoader.Core
+namespace BetterSceneLoader
 {
     public class SceneLoaderUI
     {
@@ -66,19 +66,19 @@ namespace BetterSceneLoader.Core
                 var gridlayout = scene.Value.gameObject.GetComponent<AutoGridLayout>();
                 if(gridlayout != null)
                 {
-                    gridlayout.m_Column = BetterSceneLoaderCore.ColumnAmount.Value;
+                    gridlayout.m_Column = BetterSceneLoader.ColumnAmount.Value;
                     gridlayout.CalculateLayoutInputHorizontal();
                 }
             }
 
             if(imagelist != null)
             {
-                imagelist.scrollSensitivity = Mathf.Lerp(30f, 300f, BetterSceneLoaderCore.ScrollSensitivity.Value / 10f);
+                imagelist.scrollSensitivity = Mathf.Lerp(30f, 300f, BetterSceneLoader.ScrollSensitivity.Value / 10f);
             }
 
             if(mainPanel)
             {
-                mainPanel.transform.SetRect(BetterSceneLoaderCore.SmallWindow.Value ? 0.5f : 0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
+                mainPanel.transform.SetRect(BetterSceneLoader.SmallWindow.Value ? 0.5f : 0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
             }
         }
 
@@ -185,7 +185,7 @@ namespace BetterSceneLoader.Core
                 confirmpanel.gameObject.SetActive(false);
                 optionspanel.gameObject.SetActive(false);
                 OnLoadButtonClick(currentPath);
-                if(BetterSceneLoaderCore.AutoClose.Value)
+                if(BetterSceneLoader.AutoClose.Value)
                     ShowWindow(false);
             });
 
@@ -272,7 +272,7 @@ namespace BetterSceneLoader.Core
                 var gridlayout = container.gameObject.AddComponent<AutoGridLayout>();
                 gridlayout.spacing = new Vector2(marginSize, marginSize);
                 gridlayout.m_IsColumn = true;
-                gridlayout.m_Column = BetterSceneLoaderCore.ColumnAmount.Value;
+                gridlayout.m_Column = BetterSceneLoader.ColumnAmount.Value;
 
                 ThreadingHelper.Instance.StartCoroutine(LoadButtonsAsync(container.transform, scenefiles));
                 sceneCache.Add(currentCategoryFolder, container);

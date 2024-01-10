@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace BetterSceneLoader.Core
+namespace BetterSceneLoader
 {
     public class AutoGridLayout : GridLayoutGroup
     {
