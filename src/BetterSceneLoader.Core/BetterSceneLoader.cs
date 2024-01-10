@@ -6,6 +6,7 @@ using KeelPlugins.Utils;
 using System.Linq;
 using System.IO;
 using UILib;
+using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.BetterSceneLoader.Version)]
 
@@ -43,6 +44,7 @@ namespace BetterSceneLoader
             SceneLoaderUI.OnSaveButtonClick += SaveScene;
             SceneLoaderUI.OnDeleteButtonClick += DeleteScene;
             SceneLoaderUI.OnImportButtonClick += ImportScene;
+            SceneLoaderUI.OnFolderButtonClick += OpenFolder;
 
             Harmony.CreateAndPatchAll(typeof(Hooks));
             UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
@@ -68,6 +70,11 @@ namespace BetterSceneLoader
         private void ImportScene(string path)
         {
             Studio.Studio.Instance.ImportScene(path);
+        }
+
+        private void OpenFolder(string path)
+        {
+            Application.OpenURL($"file:///{path}");
         }
 
         private class Hooks
