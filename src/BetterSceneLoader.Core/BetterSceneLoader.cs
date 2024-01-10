@@ -31,10 +31,10 @@ namespace BetterSceneLoader
 
         protected virtual void Awake()
         {
-            SmallWindow = Config.Bind(CATEGORY_GENERAL, nameof(SmallWindow), true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 1 }));
-            AutoClose = Config.Bind(CATEGORY_GENERAL, nameof(AutoClose), true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 2 }));
-            ColumnAmount = Config.Bind(CATEGORY_GENERAL, nameof(ColumnAmount), 3, new ConfigDescription("", new AcceptableValueRange<int>(1, 10)));
-            ScrollSensitivity = Config.Bind(CATEGORY_GENERAL, nameof(ScrollSensitivity), 3f, new ConfigDescription("", new AcceptableValueRange<float>(1f, 10f)));
+            SmallWindow = Config.Bind(CATEGORY_GENERAL, "Small Window", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 1 }));
+            AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 2 }));
+            ColumnAmount = Config.Bind(CATEGORY_GENERAL, "Column Amount", 3, new ConfigDescription("", new AcceptableValueRange<int>(1, 10)));
+            ScrollSensitivity = Config.Bind(CATEGORY_GENERAL, "Scroll Sensitivity", 3f, new ConfigDescription("", new AcceptableValueRange<float>(1f, 10f)));
 
             SmallWindow.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
             ColumnAmount.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
