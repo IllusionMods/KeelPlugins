@@ -172,7 +172,12 @@ namespace BetterSceneLoader
 
             yesbutton = UIUtility.CreateButton("YesButton", confirmpanel.transform, "Y");
             yesbutton.transform.SetRect(0f, 0f, 0.5f, 1f);
-            yesbutton.onClick.AddListener(() => OnDeleteButtonClick(currentPath));
+            yesbutton.onClick.AddListener(() =>
+            {
+                OnDeleteButtonClick(currentPath);
+                confirmpanel.gameObject.SetActive(false);
+                currentButton.gameObject.SetActive(false);
+            });
 
             nobutton = UIUtility.CreateButton("NoButton", confirmpanel.transform, "N");
             nobutton.transform.SetRect(0.5f, 0f, 1f, 1f);
@@ -200,13 +205,7 @@ namespace BetterSceneLoader
 
             var deletebutton = UIUtility.CreateButton("DeleteButton", optionspanel.transform, "Delete");
             deletebutton.transform.SetRect(0.7f, 0f, 1f, 1f);
-            deletebutton.onClick.AddListener(() =>
-            {
-                confirmpanel.gameObject.SetActive(true);
-                currentButton.gameObject.SetActive(false);
-                confirmpanel.gameObject.SetActive(false);
-                optionspanel.gameObject.SetActive(false);
-            });
+            deletebutton.onClick.AddListener(() => confirmpanel.gameObject.SetActive(true));
 
             var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.pluginicon"));
             toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
