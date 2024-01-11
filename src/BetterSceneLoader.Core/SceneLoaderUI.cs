@@ -86,6 +86,7 @@ namespace BetterSceneLoader
         {
             UISystem = UIUtility.CreateNewUISystem("BetterSceneLoaderCanvas");
             UISystem.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f / UIScale, 1080f / UIScale);
+            UISystem.sortingOrder = 10;
             ShowWindow(false);
 
             mainPanel = UIUtility.CreatePanel("Panel", UISystem.transform);
