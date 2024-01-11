@@ -25,7 +25,6 @@ namespace BetterSceneLoader
         private float headerSize = 20f;
         private float UIScale = 1.0f;
         private float scrollOffsetX = -15f;
-        private float windowMargin = 130f;
 
         private readonly Color dragColor = new Color(0.4f, 0.4f, 0.4f, 1f);
         private readonly Color backgroundColor = new Color(1f, 1f, 1f, 1f);
@@ -78,7 +77,10 @@ namespace BetterSceneLoader
 
             if(mainPanel)
             {
-                mainPanel.transform.SetRect(BetterSceneLoader.SmallWindow.Value ? 0.5f : 0f, 0f, 1f, 1f, windowMargin, windowMargin, -windowMargin, -windowMargin);
+                mainPanel.transform.SetRect(BetterSceneLoader.AnchorLeft.Value, BetterSceneLoader.AnchorBottom.Value,
+                                            BetterSceneLoader.AnchorRight.Value, BetterSceneLoader.AnchorTop.Value,
+                                            BetterSceneLoader.UIMargin.Value, BetterSceneLoader.UIMargin.Value,
+                                            -BetterSceneLoader.UIMargin.Value, -BetterSceneLoader.UIMargin.Value);
             }
         }
 

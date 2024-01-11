@@ -21,24 +21,39 @@ namespace BetterSceneLoader
         public const string PluginName = "BetterSceneLoader";
 
         private const string CATEGORY_GENERAL = "General";
+        private const string CATEGORY_UISIZE = "UI Size";
 
         public static ConfigEntry<int> ColumnAmount { get; set; }
         public static ConfigEntry<float> ScrollSensitivity { get; set; }
         public static ConfigEntry<bool> AutoClose { get; set; }
-        public static ConfigEntry<bool> SmallWindow { get; set; }
+
+        public static ConfigEntry<float> AnchorLeft { get; set; }
+        public static ConfigEntry<float> AnchorBottom { get; set; }
+        public static ConfigEntry<float> AnchorRight { get; set; }
+        public static ConfigEntry<float> AnchorTop { get; set; }
+        public static ConfigEntry<float> UIMargin { get; set; }
 
         internal static readonly SceneLoaderUI SceneLoaderUI = new SceneLoaderUI();
 
         protected virtual void Awake()
         {
-            SmallWindow = Config.Bind(CATEGORY_GENERAL, "Small Window", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 1 }));
-            AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 2 }));
-            ColumnAmount = Config.Bind(CATEGORY_GENERAL, "Column Amount", 3, new ConfigDescription("", new AcceptableValueRange<int>(1, 10)));
+            AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading"));
+            ColumnAmount = Config.Bind(CATEGORY_GENERAL, "Column Amount", 7, new ConfigDescription("", new AcceptableValueRange<int>(1, 12)));
             ScrollSensitivity = Config.Bind(CATEGORY_GENERAL, "Scroll Sensitivity", 3f, new ConfigDescription("", new AcceptableValueRange<float>(1f, 10f)));
 
-            SmallWindow.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            AnchorLeft = Config.Bind(CATEGORY_UISIZE, "Left Anchor", 0f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
+            AnchorBottom = Config.Bind(CATEGORY_UISIZE, "Bottom Anchor", 0f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
+            AnchorRight = Config.Bind(CATEGORY_UISIZE, "Right Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
+            AnchorTop = Config.Bind(CATEGORY_UISIZE, "Top Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
+            UIMargin = Config.Bind(CATEGORY_UISIZE, "Margin", 60f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 200f), new ConfigurationManagerAttributes { Order = 1 }));
+
             ColumnAmount.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
             ScrollSensitivity.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            AnchorLeft.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            AnchorBottom.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            AnchorRight.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            AnchorTop.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
+            UIMargin.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
 
             SceneLoaderUI.OnLoadButtonClick += LoadScene;
             SceneLoaderUI.OnSaveButtonClick += SaveScene;
