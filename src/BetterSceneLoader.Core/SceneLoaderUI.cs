@@ -10,8 +10,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using KeelPlugins.Utils;
+using UnityEngine.Networking;
 
-// imitate windows explorer thumbnail spacing and positioning for scene loader
 // problem adjusting thumbnail size when certain number range of scenes
 
 namespace BetterSceneLoader
@@ -287,9 +287,19 @@ namespace BetterSceneLoader
             {
                 LoadingIcon.loadingState[currentCategoryFolder] = true;
 
-#pragma warning disable CS0618 // Type or member is obsolete
+#if KKS
+                using(var uwr = UnityWebRequestTexture.GetTexture("file:///" + scene.Value, true))
+                {
+                    yield return uwr.SendWebRequest();
+
+                    if(uwr.isNetworkError || uwr.isHttpError)
+                        throw new Exception(uwr.error);
+
+                    var texture = DownloadHandlerTexture.GetContent(uwr);
+                    CreateSceneButton(parent, texture, scene.Value);
+                }
+#else
                 using(var www = new WWW("file:///" + scene.Value))
-#pragma warning restore CS0618
                 {
                     yield return www;
 
@@ -298,6 +308,7 @@ namespace BetterSceneLoader
 
                     CreateSceneButton(parent, PngAssist.ChangeTextureFromByte(www.bytes), scene.Value);
                 }
+#endif
             }
 
             LoadingIcon.loadingState[currentCategoryFolder] = false;
