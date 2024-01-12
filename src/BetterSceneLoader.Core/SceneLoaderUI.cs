@@ -149,8 +149,13 @@ namespace BetterSceneLoader
             folder.transform.SetRect(0f, 0f, 0f, 1f, 260f, 0f, 340f);
             folder.onClick.AddListener(() => OnFolderButtonClick(scenePath));
 
+            var autoCloseToggle = UIUtility.CreateToggle("AutoCloseToggle", drag.transform, "Auto Close");
+            autoCloseToggle.transform.SetRect(0f, 0f, 0f, 1f, 340f, 0f, 420f);
+            autoCloseToggle.GetComponentInChildren<Text>().color = new Color(1f, 1f, 1f, 1f);
+            autoCloseToggle.onValueChanged.AddListener(x => BetterSceneLoader.AutoClose.Value = x);
+
             var loadingPanel = UIUtility.CreatePanel("LoadingIconPanel", drag.transform);
-            loadingPanel.transform.SetRect(0f, 0f, 0f, 1f, 340f, 0f, 340f + headerSize);
+            loadingPanel.transform.SetRect(0f, 0f, 0f, 1f, 420f, 0f, 420f + headerSize);
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
