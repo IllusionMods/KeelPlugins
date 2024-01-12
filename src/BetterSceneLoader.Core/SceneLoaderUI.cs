@@ -228,14 +228,6 @@ namespace BetterSceneLoader
                 Directory.CreateDirectory(scenePath);
 
             var folders = Directory.GetDirectories(scenePath).ToList();
-
-            if(folders.Count == 0)
-            {
-                Directory.CreateDirectory(Path.Combine(scenePath, "Category1"));
-                Directory.CreateDirectory(Path.Combine(scenePath, "Category2"));
-                folders = Directory.GetDirectories(scenePath).ToList();
-            }
-
             folders.Insert(0, scenePath);
 
             return folders.Select(x =>
