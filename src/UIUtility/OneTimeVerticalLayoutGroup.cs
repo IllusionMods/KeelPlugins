@@ -5,14 +5,22 @@ namespace UILib
 {
     public class OneTimeVerticalLayoutGroup : VerticalLayoutGroup
     {
+#if HS
+        protected override void OnEnable()
+#else
         public override void OnEnable()
+#endif
         {
             base.OnEnable();
             if(Application.isEditor == false || Application.isPlaying)
                 this.ExecuteDelayed(() => enabled = false, 3);
         }
 
+#if HS
+        protected override void OnDisable()
+#else
         public override void OnDisable()
+#endif
         {
         }
 

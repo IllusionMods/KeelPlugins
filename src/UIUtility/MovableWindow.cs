@@ -19,7 +19,11 @@ namespace UILib
         public RectTransform toDrag;
         public bool preventCameraControl;
 
+#if HS
+        protected override void Awake()
+#else
         public override void Awake()
+#endif
         {
             base.Awake();
             _cameraControl = FindObjectOfType<BaseCameraControl>();
