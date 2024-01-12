@@ -13,6 +13,9 @@ using UnityEngine;
 namespace BetterSceneLoader
 {
     [BepInProcess(Constants.StudioProcessName)]
+#if HS
+    [BepInProcess(Constants.StudioProcessName32)]
+#endif
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BaseUnityPlugin
     {
@@ -72,7 +75,11 @@ namespace BetterSceneLoader
 
         private void LoadScene(string path)
         {
+#if HS
+            Studio.Studio.Instance.LoadScene(path);
+#else
             Studio.Studio.Instance.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
+#endif
         }
 
         private void SaveScene(string path)
