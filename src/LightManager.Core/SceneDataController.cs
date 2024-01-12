@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace LightManager.Koikatu
 {
-    internal class SceneDataController : SceneCustomFunctionController
+    public class SceneDataController : SceneCustomFunctionController
     {
         private const string SavedLights = "SavedLights";
 
