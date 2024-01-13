@@ -12,7 +12,7 @@ namespace ClothingStateMenuX.Koikatu
     [BepInPlugin("keelhauled.clothingstatemenux", "ClothingStateMenuX", Version)]
     public class ClothingStateMenu : BaseUnityPlugin
     {
-        public const string Version = "1.0.3." + BuildNumber.Version;
+        public const string Version = "1.0.4." + BuildNumber.Version;
 
         private void Awake()
         {

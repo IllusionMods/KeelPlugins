@@ -7,7 +7,7 @@ namespace AssOverride
 {
     public class AssOverride
     {
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private static readonly Dictionary<string, string> asses = new Dictionary<string, string>();
 

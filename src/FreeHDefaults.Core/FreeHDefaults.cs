@@ -33,7 +33,7 @@ namespace FreeHDefaults.Koikatu
     public class FreeHDefaults : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.freehdefaults";
-        public const string Version = "2.0.1." + BuildNumber.Version;
+        public const string Version = "2.0.2." + BuildNumber.Version;
 
         private static readonly string saveFilePath = Path.Combine(Paths.ConfigPath, "FreeHDefaults.xml");
         private static readonly XmlSerializer xmlSerializer = new XmlSerializer(typeof(Savedata));

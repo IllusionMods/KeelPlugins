@@ -15,7 +15,7 @@ namespace MakerBridge
     {
         public const string GUID = "keelhauled.makerbridge";
         public const string PluginName = "MakerBridge";
-        public const string Version = "1.0.4." + BuildNumber.Version;
+        public const string Version = "1.0.5." + BuildNumber.Version;
 
         private const string DESCRIPTION_SENDCHARA = "Sends the selected character to the other open koikatu application.";
         private const string DESCRIPTION_SHOWMSG = "Show on screen messages about things the plugin is doing.";

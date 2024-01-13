@@ -14,7 +14,7 @@ namespace ModLoader.PlayHome
     public class Loader : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.modloader";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private static string modFolder;
         private static string[] modFolders;

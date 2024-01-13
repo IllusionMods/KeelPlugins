@@ -16,7 +16,7 @@ namespace TitleShortcuts.KoikatuSunshine
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.3.0." + BuildNumber.Version;
+        public const string Version = "1.3.1." + BuildNumber.Version;
 
         private static ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private static ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }

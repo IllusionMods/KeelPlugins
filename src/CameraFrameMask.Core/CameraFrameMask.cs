@@ -12,7 +12,7 @@ namespace CameraFrameMask.Koikatu
     {
         public const string GUID = "keelhauled.cameraframemask";
         public const string PluginName = "CameraFrameMask";
-        public const string Version = "1.1.0." + BuildNumber.Version;
+        public const string Version = "1.1.1." + BuildNumber.Version;
 
         private static MaskComponent maskComponent;
         private static readonly bool inStudio = Paths.ProcessName == "CharaStudio";

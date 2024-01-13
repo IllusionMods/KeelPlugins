@@ -19,7 +19,7 @@ namespace BetterSceneLoader
     [BepInPlugin(GUID, PluginName, Version)]
     public class BetterSceneLoader : BaseUnityPlugin
     {
-        public const string Version = "1.0.2." + BuildNumber.Version;
+        public const string Version = "1.0.3." + BuildNumber.Version;
         public const string GUID = "keelhauled.bettersceneloader";
         public const string PluginName = "BetterSceneLoader";
 

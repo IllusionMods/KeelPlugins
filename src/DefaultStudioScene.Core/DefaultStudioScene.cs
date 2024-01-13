@@ -16,7 +16,7 @@ namespace DefaultStudioScene.Koikatu
     public class DefaultStudioScene : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultstudioscene";
-        public const string Version = "1.0.3." + BuildNumber.Version;
+        public const string Version = "1.0.4." + BuildNumber.Version;
 
         private static ConfigEntry<string> DefaultScenePath { get; set; }
         private static DefaultStudioScene plugin;

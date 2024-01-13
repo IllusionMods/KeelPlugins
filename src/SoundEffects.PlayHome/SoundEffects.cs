@@ -14,7 +14,7 @@ namespace SoundEffects.PlayHome
     {
         public const string GUID = "keelhauled.soundeffects";
         public const string PluginName = "SoundEffects";
-        public const string Version = "1.0.1." + BuildNumber.Version;
+        public const string Version = "1.0.2." + BuildNumber.Version;
 
         private Harmony harmony;
         private static List<AudioClip> slaps = new List<AudioClip>();

@@ -11,7 +11,7 @@ namespace LockOnPlugin.Koikatu
     [BepInPlugin(GUID, PluginName, Version)]
     public class LockOnPlugin : LockOnPluginCore
     {
-        public const string Version = "2.6.3." + BuildNumber.Version;
+        public const string Version = "2.6.4." + BuildNumber.Version;
 
         protected override void Awake()
         {

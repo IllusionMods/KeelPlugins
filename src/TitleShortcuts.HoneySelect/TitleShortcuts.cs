@@ -15,7 +15,7 @@ namespace TitleShortcuts.HoneySelect
     [BepInPlugin(GUID, PluginName, Version)]
     public class TitleShortcuts : TitleShortcutsCore
     {
-        public const string Version = "1.2.2." + BuildNumber.Version;
+        public const string Version = "1.2.3." + BuildNumber.Version;
 
         private ConfigEntry<KeyboardShortcut> StartFemaleMaker { get; set; }
         private ConfigEntry<KeyboardShortcut> StartMaleMaker { get; set; }

@@ -29,7 +29,7 @@ namespace BlendShaper.Koikatu
     public class BlendShaper : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.blendshaper";
-        public const string Version = "1.0.0." + BuildNumber.Version;
+        public const string Version = "1.0.1." + BuildNumber.Version;
 
         private float UIScale = 1.0f;
         private float elementSize = 20f;
