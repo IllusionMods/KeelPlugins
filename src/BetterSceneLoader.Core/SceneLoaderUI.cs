@@ -46,7 +46,7 @@ namespace BetterSceneLoader
         private string currentCategoryFolder = scenePath;
         private Dictionary<string, string> CategoryFolders = new Dictionary<string, string>();
 
-        public UnityAction<string> OnSaveButtonClick;
+        public UnityAction OnSaveButtonClick;
         public UnityAction<string> OnLoadButtonClick;
         public UnityAction<string> OnDeleteButtonClick;
         public UnityAction<string> OnImportButtonClick;
@@ -136,13 +136,16 @@ namespace BetterSceneLoader
 
             var save = UIUtility.CreateButton("SaveButton", drag.transform, "Save");
             save.transform.SetRect(0f, 0f, 0f, 1f, 180f, 0f, 260f);
-            save.interactable = false;
             save.onClick.AddListener(() =>
             {
-                string path = Path.Combine(currentCategoryFolder, DateTime.Now.ToString("yyyy_MMdd_HHmm_ss_fff") + ".png");
-                OnSaveButtonClick(path);
-                var button = CreateSceneButton(imagelist.content.GetComponentInChildren<Image>().transform, PngAssist.LoadTexture(path), path);
-                button.transform.SetAsFirstSibling();
+                OnSaveButtonClick();
+                if(currentCategoryFolder == scenePath)
+                {
+                    var dir = new DirectoryInfo(scenePath);
+                    var path = dir.GetFiles().OrderByDescending(f => f.LastWriteTime).First().FullName;
+                    var button = CreateSceneButton(imagelist.content.GetComponentInChildren<Image>().transform, PngAssist.LoadTexture(path), path);
+                    button.transform.SetAsFirstSibling();
+                }
             });
 
             var folder = UIUtility.CreateButton("FolderButton", drag.transform, "Folder");

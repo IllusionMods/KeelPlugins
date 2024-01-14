@@ -82,11 +82,9 @@ namespace BetterSceneLoader
 #endif
         }
 
-        private void SaveScene(string path)
+        private void SaveScene()
         {
-            Studio.Studio.Instance.dicObjectCtrl.Values.ToList().ForEach(x => x.OnSavePreprocessing());
-            Studio.Studio.Instance.sceneInfo.cameraSaveData = Studio.Studio.Instance.cameraCtrl.Export();
-            Studio.Studio.Instance.sceneInfo.Save(path);
+            Studio.Studio.Instance.systemButtonCtrl.OnClickSave();
         }
 
         private void ImportScene(string path)
