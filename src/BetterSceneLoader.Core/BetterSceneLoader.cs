@@ -13,6 +13,7 @@ namespace BetterSceneLoader
 {
     [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, PluginName, Version)]
+    [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class BetterSceneLoader : BaseUnityPlugin
     {
         public const string Version = "1.0.3." + BuildNumber.Version;

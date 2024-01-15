@@ -13,6 +13,7 @@ namespace DefaultStudioScene.Koikatu
 {
     [BepInProcess(Constants.StudioProcessName)]
     [BepInPlugin(GUID, "DefaultStudioScene", Version)]
+    [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class DefaultStudioScene : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultstudioscene";

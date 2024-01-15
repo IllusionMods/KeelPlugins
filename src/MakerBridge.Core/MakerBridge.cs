@@ -11,6 +11,7 @@ using KKAPI.Studio;
 namespace MakerBridge
 {
     [BepInPlugin(GUID, PluginName, Version)]
+    [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class MakerBridge : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.makerbridge";
