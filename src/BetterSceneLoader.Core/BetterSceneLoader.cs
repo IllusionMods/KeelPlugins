@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins;
@@ -26,48 +26,42 @@ namespace BetterSceneLoader
         public static ConfigEntry<int> ColumnAmount { get; set; }
         public static ConfigEntry<float> ScrollSensitivity { get; set; }
         public static ConfigEntry<bool> AutoClose { get; set; }
-
         public static ConfigEntry<float> AnchorLeft { get; set; }
         public static ConfigEntry<float> AnchorBottom { get; set; }
         public static ConfigEntry<float> AnchorRight { get; set; }
         public static ConfigEntry<float> AnchorTop { get; set; }
         public static ConfigEntry<float> UIMargin { get; set; }
 
-        internal static readonly SceneLoaderUI SceneLoaderUI = new SceneLoaderUI();
+        private static ImageGrid sceneLoaderUI;
 
         protected virtual void Awake()
         {
+            sceneLoaderUI = new ImageGrid(
+                defaultPath: BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene"),
+                onSaveButtonClick: SaveScene,
+                onLoadButtonClick: LoadScene,
+                onImportButtonClick: ImportScene
+            );
+
             AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading"));
             ColumnAmount = Config.Bind(CATEGORY_GENERAL, "Column Amount", 7, new ConfigDescription("", new AcceptableValueRange<int>(1, 12)));
             ScrollSensitivity = Config.Bind(CATEGORY_GENERAL, "Scroll Sensitivity", 3f, new ConfigDescription("", new AcceptableValueRange<float>(1f, 10f)));
-
             AnchorLeft = Config.Bind(CATEGORY_UISIZE, "Left Anchor", 0f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             AnchorBottom = Config.Bind(CATEGORY_UISIZE, "Bottom Anchor", 0f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             AnchorRight = Config.Bind(CATEGORY_UISIZE, "Right Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             AnchorTop = Config.Bind(CATEGORY_UISIZE, "Top Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             UIMargin = Config.Bind(CATEGORY_UISIZE, "Margin", 60f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 200f), new ConfigurationManagerAttributes { Order = 1 }));
 
-            ColumnAmount.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            ScrollSensitivity.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            AnchorLeft.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            AnchorBottom.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            AnchorRight.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            AnchorTop.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-            UIMargin.SettingChanged += (x, y) => SceneLoaderUI.UpdateWindow();
-
-            SceneLoaderUI.OnLoadButtonClick += LoadScene;
-            SceneLoaderUI.OnSaveButtonClick += SaveScene;
-            SceneLoaderUI.OnDeleteButtonClick += DeleteScene;
-            SceneLoaderUI.OnImportButtonClick += ImportScene;
-            SceneLoaderUI.OnFolderButtonClick += OpenFolder;
+            ColumnAmount.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            ScrollSensitivity.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            AnchorLeft.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            AnchorBottom.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            AnchorRight.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            AnchorTop.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
+            UIMargin.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
 
             Harmony.CreateAndPatchAll(typeof(Hooks));
             UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
-        }
-
-        private void DeleteScene(string path)
-        {
-            File.Delete(path);
         }
 
         private void LoadScene(string path)
@@ -85,17 +79,12 @@ namespace BetterSceneLoader
             Studio.Studio.Instance.ImportScene(path);
         }
 
-        private void OpenFolder(string path)
-        {
-            Application.OpenURL($"file:///{path}");
-        }
-
         private class Hooks
         {
             [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
             public static void StudioEntrypoint()
             {
-                SceneLoaderUI.CreateUI();
+                sceneLoaderUI.CreateUI("BetterSceneLoaderCanvas", 10, "Scenes");
             }
         }
     }

@@ -12,19 +12,15 @@ using UnityEngine.UI;
 using KeelPlugins.Utils;
 using UnityEngine.Networking;
 
-// problem adjusting thumbnail size when certain number range of scenes
-
 namespace BetterSceneLoader
 {
-    public class SceneLoaderUI
+    public class ImageGrid
     {
-        private static readonly string scenePath = BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene");
-
-        private float buttonSize = 10f;
-        private float marginSize = 5f;
-        private float headerSize = 20f;
-        private float UIScale = 1.0f;
-        private float scrollOffsetX = -15f;
+        private readonly float buttonSize = 10f;
+        private readonly float marginSize = 5f;
+        private readonly float headerSize = 20f;
+        private readonly float UIScale = 1.0f;
+        private readonly float scrollOffsetX = -15f;
 
         private readonly Color dragColor = new Color(0.4f, 0.4f, 0.4f, 1f);
         private readonly Color backgroundColor = new Color(1f, 1f, 1f, 1f);
@@ -40,17 +36,27 @@ namespace BetterSceneLoader
         private Text nametext;
         private ToolbarToggle toolbarToggle;
 
-        private Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
+        private readonly Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
         private Button currentButton;
+        private readonly string defaultPath;
         private string currentPath;
-        private string currentCategoryFolder = scenePath;
-        private Dictionary<string, string> CategoryFolders = new Dictionary<string, string>();
+        private string currentCategoryFolder;
+        private readonly Dictionary<string, string> CategoryFolders = new Dictionary<string, string>();
 
         public UnityAction OnSaveButtonClick;
         public UnityAction<string> OnLoadButtonClick;
         public UnityAction<string> OnDeleteButtonClick;
         public UnityAction<string> OnImportButtonClick;
-        public UnityAction<string> OnFolderButtonClick;
+
+        public ImageGrid(string defaultPath, UnityAction onSaveButtonClick,
+                         UnityAction<string> onLoadButtonClick, UnityAction<string> onImportButtonClick)
+        {
+            this.defaultPath = defaultPath;
+            currentCategoryFolder = defaultPath;
+            OnSaveButtonClick = onSaveButtonClick;
+            OnLoadButtonClick = onLoadButtonClick;
+            OnImportButtonClick = onImportButtonClick;
+        }
 
         public void ShowWindow(bool flag)
         {
@@ -84,11 +90,11 @@ namespace BetterSceneLoader
             }
         }
 
-        public void CreateUI()
+        public void CreateUI(string name, int sortingOrder, string titleText)
         {
-            UISystem = UIUtility.CreateNewUISystem("BetterSceneLoaderCanvas");
+            UISystem = UIUtility.CreateNewUISystem(name);
             UISystem.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f / UIScale, 1080f / UIScale);
-            UISystem.sortingOrder = 10;
+            UISystem.sortingOrder = sortingOrder;
             ShowWindow(false);
 
             mainPanel = UIUtility.CreatePanel("Panel", UISystem.transform);
@@ -100,7 +106,7 @@ namespace BetterSceneLoader
             drag.color = dragColor;
             UIUtility.MakeObjectDraggable(drag.rectTransform, mainPanel.rectTransform);
 
-            nametext = UIUtility.CreateText("Nametext", drag.transform, "Scenes");
+            nametext = UIUtility.CreateText("Nametext", drag.transform, titleText);
             nametext.transform.SetRect(0f, 0f, 1f, 1f, 340f, 0f, -buttonSize * 2f);
             nametext.alignment = TextAnchor.MiddleCenter;
 
@@ -139,9 +145,9 @@ namespace BetterSceneLoader
             save.onClick.AddListener(() =>
             {
                 OnSaveButtonClick();
-                if(currentCategoryFolder == scenePath)
+                if(currentCategoryFolder == defaultPath)
                 {
-                    var dir = new DirectoryInfo(scenePath);
+                    var dir = new DirectoryInfo(defaultPath);
                     var path = dir.GetFiles().OrderByDescending(f => f.LastWriteTime).First().FullName;
                     var button = CreateSceneButton(imagelist.content.GetComponentInChildren<Image>().transform, PngAssist.LoadTexture(path), path);
                     button.transform.SetAsFirstSibling();
@@ -150,7 +156,7 @@ namespace BetterSceneLoader
 
             var folder = UIUtility.CreateButton("FolderButton", drag.transform, "Folder");
             folder.transform.SetRect(0f, 0f, 0f, 1f, 260f, 0f, 340f);
-            folder.onClick.AddListener(() => OnFolderButtonClick(scenePath));
+            folder.onClick.AddListener(() => Application.OpenURL($"file:///{currentCategoryFolder}"));
 
             var autoCloseToggle = UIUtility.CreateToggle("AutoCloseToggle", drag.transform, "Auto Close");
             autoCloseToggle.transform.SetRect(0f, 0f, 0f, 1f, 340f, 0f, 420f);
@@ -162,7 +168,7 @@ namespace BetterSceneLoader
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
-            var loadiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.loadicon"));
+            var loadiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.loadicon"));
             loadingIcon.sprite = Sprite.Create(loadiconTex, new Rect(0, 0, loadiconTex.width, loadiconTex.height), new Vector2(0.5f, 0.5f));
             LoadingIcon.Init(loadingIcon, -5f);
 
@@ -185,7 +191,7 @@ namespace BetterSceneLoader
             yesbutton.transform.SetRect(0f, 0f, 0.5f, 1f);
             yesbutton.onClick.AddListener(() =>
             {
-                OnDeleteButtonClick(currentPath);
+                File.Delete(currentPath);
                 confirmpanel.gameObject.SetActive(false);
                 currentButton.gameObject.SetActive(false);
             });
@@ -218,7 +224,7 @@ namespace BetterSceneLoader
             deletebutton.transform.SetRect(0.7f, 0f, 1f, 1f);
             deletebutton.onClick.AddListener(() => confirmpanel.gameObject.SetActive(true));
 
-            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(SceneLoaderUI).Assembly, "Resources.pluginicon"));
+            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
             toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
 
             UpdateWindow();
@@ -227,11 +233,11 @@ namespace BetterSceneLoader
 
         private List<Dropdown.OptionData> GetCategories()
         {
-            if(!File.Exists(scenePath))
-                Directory.CreateDirectory(scenePath);
+            if(!File.Exists(defaultPath))
+                Directory.CreateDirectory(defaultPath);
 
-            var folders = Directory.GetDirectories(scenePath).ToList();
-            folders.Insert(0, scenePath);
+            var folders = Directory.GetDirectories(defaultPath).ToList();
+            folders.Insert(0, defaultPath);
 
             return folders.Select(x =>
             {
