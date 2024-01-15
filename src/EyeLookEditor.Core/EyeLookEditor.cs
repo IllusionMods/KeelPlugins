@@ -3,12 +3,14 @@ using KKAPI.Chara;
 using KKAPI.Maker;
 using KKAPI.Maker.UI;
 using System;
+using UnityEngine;
 
 [assembly: System.Reflection.AssemblyFileVersion(EyeLookEditor.EyeLookEditor.Version)]
 
 namespace EyeLookEditor
 {
     [BepInPlugin(GUID, "EyeLookEditor", Version)]
+    [BepInDependency(KKAPI.KoikatuAPI.GUID, KKAPI.KoikatuAPI.VersionConst)]
     public class EyeLookEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.eyelookeditor";
@@ -24,12 +26,12 @@ namespace EyeLookEditor
         private void RegisterCustomSubCategories(object sender, RegisterSubCategoriesEvent e)
         {
             var irisCategory = MakerConstants.Face.Iris;
-
             var category = new MakerCategory(irisCategory.CategoryName, "eyelookeditor", irisCategory.Position+1, "Eye Look");
             e.AddSubCategory(category);
 
             var stringToValue = new Func<string, float>(float.Parse);
             var valueToString = new Func<float, string>(f => f.ToString("0.#"));
+            var mouseScrollFunc = new Func<Vector2, float>(x => x.y > 0 ? -1 : 1);
 
             var slider_thresholdAngleDifference = e.AddControl(new MakerSlider(category, "thresholdAngleDifference", -360f, 360f, DefaultValue.ThresholdAngleDifference, this)
                 { StringToValue = stringToValue, ValueToString = valueToString, WholeNumbers = true });
@@ -46,7 +48,7 @@ namespace EyeLookEditor
             var slider_maxBendingAngle = e.AddControl(new MakerSlider(category, "maxBendingAngle", -360f, 360f, DefaultValue.MaxBendingAngle, this)
                 { StringToValue = stringToValue, ValueToString = valueToString, WholeNumbers = true });
             var slider_leapSpeed = e.AddControl(new MakerSlider(category, "Tracking Speed", 0f, 50f, DefaultValue.LeapSpeed, this)
-                { StringToValue = stringToValue, ValueToString = valueToString, WholeNumbers = true });
+                { StringToValue = stringToValue, ValueToString = valueToString, WholeNumbers = true, MouseScrollValueChange = mouseScrollFunc });
             var slider_forntTagDis = e.AddControl(new MakerSlider(category, "forntTagDis", -100f, 100f, DefaultValue.ForntTagDis, this)
                 { StringToValue = stringToValue, ValueToString = valueToString, WholeNumbers = true });
             var slider_nearDis = e.AddControl(new MakerSlider(category, "nearDis", -100f, 100f, DefaultValue.NearDis, this)
