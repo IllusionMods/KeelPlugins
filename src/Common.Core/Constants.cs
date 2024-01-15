@@ -6,15 +6,6 @@ namespace KeelPlugins
         public const string MainGameProcessName = "AI-Syoujyo";
         public const string MainGameProcessNameSteam = "AI-Shoujo";
         public const string StudioProcessName = "StudioNEOV2";
-#elif HS
-        public const string MainGameProcessName64bit = "HoneySelect_64";
-        public const string MainGameProcessName32bit = "HoneySelect_32";
-        public const string StudioProcessName = "StudioNEO_64";
-        public const string StudioProcessName32 = "StudioNEO_32";
-        public const string StudioOldProcessName64bit = "HoneyStudio_64";
-        public const string StudioOldProcessName32bit = "HoneyStudio_32";
-        public const string BattleArenaProcessName64bit = "BattleArena_64";
-        public const string BattleArenaProcessName32bit = "BattleArena_32";
 #elif HS2
         public const string MainGameProcessName = "HoneySelect2";
         public const string MainGameProcessNameSteam = MainGameProcessName;
