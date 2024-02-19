@@ -236,9 +236,9 @@ namespace BetterSceneLoader
             if(!File.Exists(defaultPath))
                 Directory.CreateDirectory(defaultPath);
 
-            var folders = Directory.GetDirectories(defaultPath).ToList();
+            var folders = Directory.GetDirectories(defaultPath, "*", SearchOption.AllDirectories).ToList();
             folders.Insert(0, defaultPath);
-
+            
             return folders.Select(x =>
             {
                 var filename = Path.GetFileName(x);
