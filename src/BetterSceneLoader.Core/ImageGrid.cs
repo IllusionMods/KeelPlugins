@@ -21,6 +21,7 @@ namespace BetterSceneLoader
         private readonly float headerSize = 20f;
         private readonly float UIScale = 1.0f;
         private readonly float scrollOffsetX = -15f;
+        private readonly float dropdownWidth = 250f;
 
         private readonly Color dragColor = new Color(0.4f, 0.4f, 0.4f, 1f);
         private readonly Color backgroundColor = new Color(1f, 1f, 1f, 1f);
@@ -35,6 +36,7 @@ namespace BetterSceneLoader
         private Button nobutton;
         private Text nametext;
         private ToolbarToggle toolbarToggle;
+        private Dropdown category;
 
         private readonly Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
         private Button currentButton;
@@ -62,6 +64,7 @@ namespace BetterSceneLoader
         {
             UISystem.gameObject.SetActive(flag);
             toolbarToggle?.SetValue(flag);
+            category?.template.SetRect(0f, 1f, 0f, 0f, 0f, 0f, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
         }
 
         public void UpdateWindow()
@@ -123,10 +126,12 @@ namespace BetterSceneLoader
             x2.rectTransform.eulerAngles = new Vector3(0f, 0f, -45f);
             x2.color = new Color(0f, 0f, 0f, 1f);
 
-            var category = UIUtility.CreateDropdown("Dropdown", drag.transform, "Categories");
-            category.transform.SetRect(0f, 0f, 0f, 1f, 0f, 0f, 100f);
+            var curPos = 0f;
+            category = UIUtility.CreateDropdown("Dropdown", drag.transform, "Categories");
+            category.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=dropdownWidth);
             category.captionText.transform.SetRect(0f, 0f, 1f, 1f, 0f, 2f, -15f, -2f);
             category.captionText.alignment = TextAnchor.MiddleCenter;
+            category.template.GetComponent<ScrollRect>().scrollSensitivity = 40f;
             category.options = GetCategories();
             category.onValueChanged.AddListener(x =>
             {
@@ -137,11 +142,11 @@ namespace BetterSceneLoader
             });
 
             var refresh = UIUtility.CreateButton("RefreshButton", drag.transform, "Refresh");
-            refresh.transform.SetRect(0f, 0f, 0f, 1f, 100f, 0f, 180f);
+            refresh.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
             refresh.onClick.AddListener(ReloadImages);
 
             var save = UIUtility.CreateButton("SaveButton", drag.transform, "Save");
-            save.transform.SetRect(0f, 0f, 0f, 1f, 180f, 0f, 260f);
+            save.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
             save.onClick.AddListener(() =>
             {
                 OnSaveButtonClick();
@@ -155,16 +160,16 @@ namespace BetterSceneLoader
             });
 
             var folder = UIUtility.CreateButton("FolderButton", drag.transform, "Folder");
-            folder.transform.SetRect(0f, 0f, 0f, 1f, 260f, 0f, 340f);
-            folder.onClick.AddListener(() => Application.OpenURL($"file:///{currentCategoryFolder}"));
+            folder.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
+            folder.onClick.AddListener(() => Application.OpenURL($"file:///{EncodePath(currentCategoryFolder)}"));
 
             var autoCloseToggle = UIUtility.CreateToggle("AutoCloseToggle", drag.transform, "Auto Close");
-            autoCloseToggle.transform.SetRect(0f, 0f, 0f, 1f, 340f, 0f, 420f);
+            autoCloseToggle.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
             autoCloseToggle.GetComponentInChildren<Text>().color = new Color(1f, 1f, 1f, 1f);
             autoCloseToggle.onValueChanged.AddListener(x => BetterSceneLoader.AutoClose.Value = x);
 
             var loadingPanel = UIUtility.CreatePanel("LoadingIconPanel", drag.transform);
-            loadingPanel.transform.SetRect(0f, 0f, 0f, 1f, 420f, 0f, 420f + headerSize);
+            loadingPanel.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=headerSize);
             loadingPanel.color = new Color(0f, 0f, 0f, 0f);
             var loadingIcon = UIUtility.CreatePanel("LoadingIcon", loadingPanel.transform);
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
@@ -241,9 +246,9 @@ namespace BetterSceneLoader
             
             return folders.Select(x =>
             {
-                var filename = Path.GetFileName(x);
-                CategoryFolders[filename] = x;
-                return new Dropdown.OptionData(filename);
+                var catname = x == defaultPath ? "/" : x.Remove(0, defaultPath.Length+1).Replace("\\", "/");
+                CategoryFolders[catname] = x;
+                return new Dropdown.OptionData(catname);
             }).ToList();
         }
 
@@ -254,9 +259,21 @@ namespace BetterSceneLoader
             optionspanel.gameObject.SetActive(false);
             confirmpanel.gameObject.SetActive(false);
 
-            GameObject.Destroy(imagelist.content.GetComponentInChildren<Image>().gameObject);
-            imagelist.content.anchoredPosition = new Vector2(0f, 0f);
-            PopulateGrid(true);
+            var newCats = GetCategories();
+            var oldIndex = category.value;
+            var newIndex = FirstIndexMatch(newCats, x => x.text == category.options[oldIndex].text);
+            category.options = newCats;
+            if(oldIndex != newIndex || newIndex == -1)
+            {
+                category.value = newIndex == -1 ? 0 : newIndex;
+                category.RefreshShownValue();
+            }
+            else
+            {
+                GameObject.Destroy(imagelist.content.GetComponentInChildren<Image>().gameObject);
+                imagelist.content.anchoredPosition = new Vector2(0f, 0f);
+                PopulateGrid(true);
+            }
         }
 
         private void PopulateGrid(bool forceUpdate = false)
@@ -292,9 +309,10 @@ namespace BetterSceneLoader
             foreach(var scene in scenefiles)
             {
                 LoadingIcon.loadingState[currentCategoryFolder] = true;
+                var uri = "file:///" + EncodePath(scene.Value);
 
 #if KKS
-                using(var uwr = UnityWebRequestTexture.GetTexture("file:///" + scene.Value, true))
+                using(var uwr = UnityWebRequestTexture.GetTexture(uri, true))
                 {
                     yield return uwr.SendWebRequest();
 
@@ -305,7 +323,7 @@ namespace BetterSceneLoader
                     CreateSceneButton(parent, texture, scene.Value);
                 }
 #else
-                using(var www = new WWW("file:///" + scene.Value))
+                using(var www = new WWW(uri))
                 {
                     yield return www;
 
@@ -349,6 +367,25 @@ namespace BetterSceneLoader
             button.gameObject.GetComponent<Image>().sprite = sprite;
 
             return button;
+        }
+
+        private string EncodePath(string path)
+        {
+            return path.Replace("#", "%23").Replace("+", "%2B").Replace("&", "%26");
+        }
+
+        private int FirstIndexMatch<TItem>(IEnumerable<TItem> items, Func<TItem,bool> matchCondition)
+        {
+            var index = 0;
+            foreach (var item in items)
+            {
+                if(matchCondition.Invoke(item))
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
         }
     }
 }

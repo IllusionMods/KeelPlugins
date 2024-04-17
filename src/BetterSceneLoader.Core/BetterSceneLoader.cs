@@ -62,6 +62,7 @@ namespace BetterSceneLoader
 
             Harmony.CreateAndPatchAll(typeof(Hooks));
             UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
+            Log.SetLogSource(Logger);
         }
 
         private void LoadScene(string path)
