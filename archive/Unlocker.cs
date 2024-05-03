@@ -34,8 +34,7 @@ namespace UnlockHPositions
 
         private void Awake()
         {
-            var harmony = new Harmony("keelhauled.unlockhpositions.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks));
+            Harmony.CreateAndPatchAll(typeof(Hooks), "keelhauled.unlockhpositions.harmony");
         }
 
         private class Hooks

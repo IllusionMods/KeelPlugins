@@ -30,7 +30,7 @@ namespace DefaultParamEditor.Koikatu
                 _sceneData.aceNo = sceneInfo.aceNo;
                 _sceneData.aceBlend = sceneInfo.aceBlend;
 
-                var aceInfo = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.ResolveItem && x.LocalSlot == sceneInfo.aceNo);
+                var aceInfo = UniversalAutoResolver.GetStudioResolveInfos(sceneInfo.aceNo, true).FirstOrDefault();
                 if(aceInfo != null)
                 {
                     _sceneData.aceNo = aceInfo.Slot;
@@ -47,12 +47,14 @@ namespace DefaultParamEditor.Koikatu
                     if (prop.PropertyExists())
                     {
                         _sceneData.ace2No = prop.GetValue<int>();
-
-                        var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.ResolveItem && x.LocalSlot == _sceneData.ace2No);
-                        if (ace2Info != null)
+                        if (_sceneData.ace2No.HasValue)
                         {
-                            _sceneData.ace2No = ace2Info.Slot;
-                            _sceneData.ace2No_GUID = ace2Info.GUID;
+                            var ace2Info = UniversalAutoResolver.GetStudioResolveInfos(_sceneData.ace2No.Value, true).FirstOrDefault();
+                            if (ace2Info != null)
+                            {
+                                _sceneData.ace2No = ace2Info.Slot;
+                                _sceneData.ace2No_GUID = ace2Info.GUID;
+                            }
                         }
                     }
                 }
@@ -121,7 +123,7 @@ namespace DefaultParamEditor.Koikatu
             sceneInfo.aceNo = _sceneData.aceNo;
             if(!string.IsNullOrEmpty(_sceneData.aceNo_GUID))
             {
-                var aceInfo = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.aceNo_GUID && x.Slot == _sceneData.aceNo);
+                var aceInfo = UniversalAutoResolver.GetStudioResolveInfos(_sceneData.aceNo_GUID, _sceneData.aceNo, false).FirstOrDefault();
                 if(aceInfo != null)
                     sceneInfo.aceNo = aceInfo.LocalSlot;
             }
@@ -142,9 +144,9 @@ namespace DefaultParamEditor.Koikatu
                             {
                                 prop.SetValue(_sceneData.ace2No);
 
-                                if (!string.IsNullOrEmpty(_sceneData.ace2No_GUID))
+                                if (!string.IsNullOrEmpty(_sceneData.ace2No_GUID) && _sceneData.ace2No.HasValue)
                                 {
-                                    var ace2Info = UniversalAutoResolver.LoadedStudioResolutionInfo.FirstOrDefault(x => x.GUID == _sceneData.ace2No_GUID && x.Slot == _sceneData.ace2No);
+                                    var ace2Info = UniversalAutoResolver.GetStudioResolveInfos(_sceneData.ace2No_GUID, _sceneData.ace2No.Value, false).FirstOrDefault();
                                     if (ace2Info != null)
                                         prop.SetValue(ace2Info.LocalSlot);
                                 }

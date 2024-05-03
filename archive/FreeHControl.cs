@@ -22,8 +22,7 @@ namespace FreeHControl
 
         private void Awake()
         {
-            harmony = new Harmony($"{GUID}.harmony");
-            HarmonyWrapper.PatchAll(typeof(Hooks), harmony);
+            harmony = Harmony.CreateAndPatchAll(typeof(Hooks), $"{GUID}.harmony");
         }
 
 #if DEBUG
