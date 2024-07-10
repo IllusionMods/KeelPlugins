@@ -31,6 +31,13 @@ namespace MaterialLink.KoikatuSunshine
         {
             UpdateMaterials(__instance);
         }
+
+        // coordinate change
+        [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.UpdateClothesStateAll))]
+        private static void UpdateClothesStateAll_Postfix(ChaControl __instance)
+        {
+            UpdateMaterialsDelayed(__instance, 10);
+        }
         
         // character start
         [HarmonyPostfix, HarmonyPatch(typeof(ChaControl), nameof(ChaControl.Initialize)), HarmonyWrapSafe]
