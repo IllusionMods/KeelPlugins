@@ -19,6 +19,7 @@ namespace ClothingStateMenuX.Koikatu
         private static GameObject buttonTemplate;
         private static GameObject buttonContainerTemplate;
         private static GameObject separatorTemplate;
+        private static GameObject btnDelete;
 
         public static void CreateUI()
         {
@@ -32,6 +33,11 @@ namespace ClothingStateMenuX.Koikatu
             buttonContainerTemplate = btnLightingInitializeTransform.gameObject;
             buttonTemplate = btnLightingInitializeTransform.transform.Find("btnDefault").gameObject;
             separatorTemplate = sidebar.transform.Find("Separate").gameObject;
+            btnDelete = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CustomUIGroup/CvsMenuTree/06_SystemTop/charaFileControl/charaFileWindow/WinRect/Save/btnDelete");
+            var buttonTemplateBtn = buttonTemplate.GetComponent<Button>();
+            var tempSprites = buttonTemplateBtn.spriteState;
+            tempSprites.disabledSprite = btnDelete.GetComponent<Button>().spriteState.disabledSprite;
+            buttonTemplateBtn.spriteState = tempSprites;
             
             CreateTitle("Clothing Sets", 0);
             CreateClothingSets(1);
