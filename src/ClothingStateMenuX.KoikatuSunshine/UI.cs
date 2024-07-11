@@ -1,4 +1,5 @@
-﻿using ChaCustom;
+﻿using System.Collections.Generic;
+using ChaCustom;
 using TMPro;
 using UILib;
 using UnityEngine;
@@ -19,7 +20,9 @@ namespace ClothingStateMenuX.Koikatu
         private static GameObject buttonContainerTemplate;
         private static GameObject separatorTemplate;
 
-        public static void CreateUI()
+        private static readonly List<GameObject> clothingSetObjects = new List<GameObject>();
+
+        public static void Setup()
         {
             outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
             sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top/Scroll View/Viewport/Content");
@@ -38,23 +41,30 @@ namespace ClothingStateMenuX.Koikatu
             tempSprites.disabledSprite = btnDelete.GetComponent<Button>().spriteState.disabledSprite;
             buttonTemplateBtn.spriteState = tempSprites;
             
-            CreateTitle("Clothing Type", 0);
-            CreateClothingSets(1);
             CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
         }
 
-        public static void CreateClothingSets(int index)
+        public static void CreateClothingSets()
         {
+            // Reset sets
+            foreach (var obj in clothingSetObjects)
+                GameObject.Destroy(obj);
+            clothingSetObjects.Clear();
+
+            clothingSetObjects.Add(CreateTitle("Clothing Sets", 0));
+            
+            var index = 1;
             for (int i = 0; i < outfitDropDown.options.Count; i++)
             {
                 var container = CreateContainer(25, index++);
+                clothingSetObjects.Add(container);
                 var option = outfitDropDown.options[i];
                 var optionIndex = i;
                 var button = CreateButton(option.text, 14, () => outfitDropDown.value = optionIndex, container.transform);
                 button.transform.SetRect(0f, 0f, 1f, 1f);
             }
 
-            CreateSeparator(index);
+            clothingSetObjects.Add(CreateSeparator(index));
         }
 
         public static void CreateClothingOptions(int index)
@@ -158,13 +168,6 @@ namespace ClothingStateMenuX.Koikatu
                 GameObject.DestroyImmediate(t.gameObject);
 
             return copy;
-        }
-
-        public static void SetColorMultiplier(this Button button, float value)
-        {
-            var color = button.colors;
-            color.colorMultiplier = value;
-            button.colors = color;
         }
     }
 }

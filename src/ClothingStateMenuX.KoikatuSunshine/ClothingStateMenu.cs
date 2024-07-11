@@ -16,7 +16,9 @@ namespace ClothingStateMenuX.Koikatu
 
         private void Awake()
         {
-            MakerAPI.MakerStartedLoading += (x, y) => UI.CreateUI();
+            Log.SetLogSource(Logger);
+            MakerAPI.MakerStartedLoading += (x, y) => UI.Setup();
+            MakerAPI.ReloadCustomInterface += (x, y) => UI.CreateClothingSets();
         }
     }
 }
