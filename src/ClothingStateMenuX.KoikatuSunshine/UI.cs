@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ChaCustom;
+﻿using ChaCustom;
 using TMPro;
 using UILib;
 using UnityEngine;
@@ -19,7 +18,6 @@ namespace ClothingStateMenuX.Koikatu
         private static GameObject buttonTemplate;
         private static GameObject buttonContainerTemplate;
         private static GameObject separatorTemplate;
-        private static GameObject btnDelete;
 
         public static void CreateUI()
         {
@@ -33,57 +31,34 @@ namespace ClothingStateMenuX.Koikatu
             buttonContainerTemplate = btnLightingInitializeTransform.gameObject;
             buttonTemplate = btnLightingInitializeTransform.transform.Find("btnDefault").gameObject;
             separatorTemplate = sidebar.transform.Find("Separate").gameObject;
-            btnDelete = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CustomUIGroup/CvsMenuTree/06_SystemTop/charaFileControl/charaFileWindow/WinRect/Save/btnDelete");
+
+            var btnDelete = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CustomUIGroup/CvsMenuTree/06_SystemTop/charaFileControl/charaFileWindow/WinRect/Save/btnDelete");
             var buttonTemplateBtn = buttonTemplate.GetComponent<Button>();
             var tempSprites = buttonTemplateBtn.spriteState;
             tempSprites.disabledSprite = btnDelete.GetComponent<Button>().spriteState.disabledSprite;
             buttonTemplateBtn.spriteState = tempSprites;
             
-            CreateTitle("Clothing Sets", 0);
+            CreateTitle("Clothing Type", 0);
             CreateClothingSets(1);
-            CreateSeparator(2);
             CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
         }
 
         public static void CreateClothingSets(int index)
         {
-            var container = CreateContainer(25, index);
-
-            var buttons = new List<GameObject>
+            for (int i = 0; i < outfitDropDown.options.Count; i++)
             {
-                CreateButton("1", 14, () => outfitDropDown.value = 0, container.transform),
-                CreateButton("2", 14, () => outfitDropDown.value = 1, container.transform),
-                CreateButton("3", 14, () => outfitDropDown.value = 2, container.transform),
-                CreateButton("4", 14, () => outfitDropDown.value = 3, container.transform),
-                CreateButton("5", 14, () => outfitDropDown.value = 4, container.transform),
-                CreateButton("6", 14, () => outfitDropDown.value = 5, container.transform),
-                CreateButton("7", 14, () => outfitDropDown.value = 6, container.transform),
-            };
-
-            var pos = 0.03f;
-            var step = (1f - pos * 2) / 7f;
-
-            foreach(var button in buttons)
-                button.transform.SetRect(pos, 0f, pos += step, 1f);
-
-            buttons[outfitDropDown.value].GetComponent<Button>().SetColorMultiplier(0.7f);
-
-            outfitDropDown.onValueChanged.AddListener(SetMultipliers);
-
-            void SetMultipliers(int x)
-            {
-                foreach(var button in buttons)
-                    button.GetComponent<Button>().SetColorMultiplier(1f);
-
-                if(0 <= x && x <= 6)
-                    buttons[x].GetComponent<Button>().SetColorMultiplier(0.7f);
+                var container = CreateContainer(25, index++);
+                var option = outfitDropDown.options[i];
+                var optionIndex = i;
+                var button = CreateButton(option.text, 14, () => outfitDropDown.value = optionIndex, container.transform);
+                button.transform.SetRect(0f, 0f, 1f, 1f);
             }
+
+            CreateSeparator(index);
         }
 
         public static void CreateClothingOptions(int index)
         {
-            int counter = 0;
-
             CreateClothingStateButtons("Top", ChaFileDefine.ClothesKind.top, 3);
             CreateClothingStateButtons("Bottom", ChaFileDefine.ClothesKind.bot, 3);
             CreateClothingStateButtons("Bra", ChaFileDefine.ClothesKind.bra, 3);
@@ -95,7 +70,7 @@ namespace ClothingStateMenuX.Koikatu
 
             void CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind, int buttons)
             {
-                var container = CreateContainer(22, index + counter++);
+                var container = CreateContainer(22, index++);
 
                 const float margin = 0.03f;
                 var pos = 0.4f;
