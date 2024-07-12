@@ -44,7 +44,7 @@ namespace ClothingStateMenuX.Koikatu
             CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
         }
 
-        public static void CreateClothingSets()
+        public static void ReloadClothingSets()
         {
             // Reset sets
             foreach (var obj in clothingSetObjects)
