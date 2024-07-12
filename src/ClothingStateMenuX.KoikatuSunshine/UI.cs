@@ -46,10 +46,7 @@ namespace ClothingStateMenuX.Koikatu
 
         public static void ReloadClothingSets()
         {
-            // Reset sets
-            foreach (var obj in clothingSetObjects)
-                GameObject.Destroy(obj);
-            clothingSetObjects.Clear();
+            RemoveClothingSets();
 
             clothingSetObjects.Add(CreateTitle("Clothing Sets", 0));
             
@@ -65,6 +62,13 @@ namespace ClothingStateMenuX.Koikatu
             }
 
             clothingSetObjects.Add(CreateSeparator(index));
+        }
+
+        public static void RemoveClothingSets()
+        {
+            foreach (var obj in clothingSetObjects)
+                GameObject.Destroy(obj);
+            clothingSetObjects.Clear();
         }
 
         public static void CreateClothingOptions(int index)

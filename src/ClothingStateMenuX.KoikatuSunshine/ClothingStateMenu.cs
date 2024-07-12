@@ -1,5 +1,7 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.Bootstrap;
+using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins;
 using KKAPI;
@@ -17,23 +19,56 @@ namespace ClothingStateMenuX.Koikatu
     {
         public const string Version = "1.0.4." + BuildNumber.Version;
 
+        public static ConfigEntry<bool> ShowClothingSets { get; set; }
+
         private const string MoreOutfitsGUID = "com.deathweasel.bepinex.moreoutfits";
+        private Harmony harmony;
 
         private void Awake()
         {
             Log.SetLogSource(Logger);
-            MakerAPI.MakerStartedLoading += (x, y) => UI.Setup();
+            ShowClothingSets = Config.Bind("General", "Show Clothing Sets", true);
+            ShowClothingSets.SettingChanged += (sender, args) =>
+            {
+                if(ShowClothingSets.Value)
+                {
+                    StartClothingSetEvents();
+                    UI.ReloadClothingSets();
+                }
+                else
+                {
+                    harmony?.UnpatchSelf();
+                    MakerAPI.ReloadCustomInterface -= OnReloadCustomInterface;
+                    UI.RemoveClothingSets();
+                }
+            };
 
-            if(Chainloader.PluginInfos.ContainsKey(MoreOutfitsGUID))
-                Harmony.CreateAndPatchAll(typeof(ClothingStateMenu));
-            else
-                MakerAPI.ReloadCustomInterface += (x, y) => UI.ReloadClothingSets();
+            MakerAPI.MakerStartedLoading += (sender, args) => UI.Setup();
+
+            if(ShowClothingSets.Value)
+                StartClothingSetEvents();
         }
 
-        [HarmonyPostfix, HarmonyPatch("KK_Plugins.MoreOutfits.MakerUI, KKS_MoreOutfits", "UpdateMakerUI"), HarmonyWrapSafe]
-        private static void MoreOutfitsHook()
+        private void StartClothingSetEvents()
+        {
+            if(Chainloader.PluginInfos.ContainsKey(MoreOutfitsGUID))
+                harmony = Harmony.CreateAndPatchAll(typeof(Hooks));
+            else
+                MakerAPI.ReloadCustomInterface += OnReloadCustomInterface;
+        }
+
+        private void OnReloadCustomInterface(object sender, EventArgs args)
         {
             UI.ReloadClothingSets();
+        }
+
+        private static class Hooks
+        {
+            [HarmonyPostfix, HarmonyPatch("KK_Plugins.MoreOutfits.MakerUI, KKS_MoreOutfits", "UpdateMakerUI"), HarmonyWrapSafe]
+            private static void MoreOutfitsHook()
+            {
+                UI.ReloadClothingSets();
+            }
         }
     }
 }
