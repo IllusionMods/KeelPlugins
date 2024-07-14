@@ -175,7 +175,7 @@ namespace BetterSceneLoader
             loadingIcon.transform.SetRect(0.1f, 0.1f, 0.9f, 0.9f);
             var loadiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.loadicon"));
             loadingIcon.sprite = Sprite.Create(loadiconTex, new Rect(0, 0, loadiconTex.width, loadiconTex.height), new Vector2(0.5f, 0.5f));
-            LoadingIcon.Init(loadingIcon, -5f);
+            LoadingIcon.Init(loadingPanel.gameObject, loadingIcon, -5f);
 
             imagelist = UIUtility.CreateScrollView("Imagelist", mainPanel.transform);
             imagelist.transform.SetRect(0f, 0f, 1f, 1f, marginSize, marginSize, -marginSize, -headerSize - marginSize / 2f);
@@ -306,11 +306,10 @@ namespace BetterSceneLoader
 
         private IEnumerator LoadButtonsAsync(Transform parent, List<KeyValuePair<DateTime, string>> scenefiles)
         {
+            LoadingIcon.loadingCount++;
             foreach(var scene in scenefiles)
             {
-                LoadingIcon.loadingState[currentCategoryFolder] = true;
                 var uri = "file:///" + EncodePath(scene.Value);
-
 #if KKS
                 using(var uwr = UnityWebRequestTexture.GetTexture(uri, true))
                 {
@@ -334,8 +333,7 @@ namespace BetterSceneLoader
                 }
 #endif
             }
-
-            LoadingIcon.loadingState[currentCategoryFolder] = false;
+            LoadingIcon.loadingCount--;
         }
 
         private Button CreateSceneButton(Transform parent, Texture2D texture, string path)
