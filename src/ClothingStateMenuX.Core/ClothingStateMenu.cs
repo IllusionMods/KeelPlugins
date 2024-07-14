@@ -7,9 +7,9 @@ using KeelPlugins;
 using KKAPI;
 using KKAPI.Maker;
 
-[assembly: System.Reflection.AssemblyFileVersion(ClothingStateMenuX.Koikatu.ClothingStateMenu.Version)]
+[assembly: System.Reflection.AssemblyFileVersion(ClothingStateMenuX.ClothingStateMenu.Version)]
 
-namespace ClothingStateMenuX.Koikatu
+namespace ClothingStateMenuX
 {
     [BepInProcess(Constants.MainGameProcessName)]
     [BepInDependency(KoikatuAPI.GUID)]

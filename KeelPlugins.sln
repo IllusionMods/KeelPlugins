@@ -219,6 +219,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultStudioScene.KoikatuS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSceneLoader.KoikatuSunshine", "src\BetterSceneLoader.KoikatuSunshine\BetterSceneLoader.KoikatuSunshine.csproj", "{96565160-651F-4A5A-8387-56D10F1AB3F9}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ClothingStateMenuX.Core", "src\ClothingStateMenuX.Core\ClothingStateMenuX.Core.shproj", "{4DD73961-C8A1-429D-A756-D382A4259EBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -509,6 +511,7 @@ Global
 		{EDF05826-3E16-414F-AD86-A9FAABAD63FB} = {5EFF8F21-DA17-4E53-A5CE-E44992A6ACCC}
 		{04DE1497-4957-490A-B4EA-4BB53C76F24D} = {A41DE533-BC37-42DC-8EA3-7433E91AB0CE}
 		{96565160-651F-4A5A-8387-56D10F1AB3F9} = {8C9D88EC-5F03-43EF-8954-B54144A5089C}
+		{4DD73961-C8A1-429D-A756-D382A4259EBD} = {1D5A23BB-7E05-42BF-AD34-DF616BC2E787}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECC9C6B-8041-49A1-B7FD-DC89264B7393}

@@ -1,21 +1,18 @@
 ﻿using System.Collections.Generic;
 using ChaCustom;
-using HarmonyLib;
 using TMPro;
 using UILib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace ClothingStateMenuX.Koikatu
+namespace ClothingStateMenuX
 {
     public static class UI
     {
         private const string ID = "(CSMX)";
-        private static ChaControl character;
         private static TMP_Dropdown outfitDropDown;
         private static GameObject sidebar;
-        //private static GameObject accessoryToggles;
         private static GameObject clothingStateToggles;
         private static GameObject titleTextTemplate;
         private static GameObject normalTextTemplate;
@@ -23,63 +20,59 @@ namespace ClothingStateMenuX.Koikatu
         private static GameObject buttonContainerTemplate;
         private static GameObject separatorTemplate;
 
-        public static void CreateUI()
+        private static readonly List<GameObject> clothingSetObjects = new List<GameObject>();
+
+        public static void Setup()
         {
-            character = GameObject.FindObjectOfType<ChaControl>();
-            outfitDropDown = Traverse.Create(Singleton<CustomControl>.Instance).Field("ddCoordinate").GetValue<TMP_Dropdown>();
-            sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top");
-            //accessoryToggles = sidebar.transform.Find("tglAcsGrp").gameObject;
-            clothingStateToggles = sidebar.transform.Find("rbClothesState").gameObject;
+            outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
+            sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top/Scroll View/Viewport/Content");
+            var rbClothesStateTransform = sidebar.transform.Find("rbClothesState");
+            clothingStateToggles = rbClothesStateTransform.gameObject;
             titleTextTemplate = sidebar.transform.Find("txtClothesState").gameObject;
-            normalTextTemplate = sidebar.transform.Find("rbClothesState/imgRbCol00/textRbSelect").gameObject;
-            buttonTemplate = sidebar.transform.Find("btnLightingInitialize/btnSelect").gameObject;
-            buttonContainerTemplate = sidebar.transform.Find("btnLightingInitialize").gameObject;
+            normalTextTemplate = rbClothesStateTransform.transform.Find("imgRbCol00/textRbSelect").gameObject;
+            var btnLightingInitializeTransform = sidebar.transform.Find("btnLightingInitialize");
+            buttonContainerTemplate = btnLightingInitializeTransform.gameObject;
+            buttonTemplate = btnLightingInitializeTransform.transform.Find("btnDefault").gameObject;
             separatorTemplate = sidebar.transform.Find("Separate").gameObject;
+
+            var btnDelete = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CustomUIGroup/CvsMenuTree/06_SystemTop/charaFileControl/charaFileWindow/WinRect/Save/btnDelete");
+            var buttonTemplateBtn = buttonTemplate.GetComponent<Button>();
+            var tempSprites = buttonTemplateBtn.spriteState;
+            tempSprites.disabledSprite = btnDelete.GetComponent<Button>().spriteState.disabledSprite;
+            buttonTemplateBtn.spriteState = tempSprites;
             
-            CreateTitle("Clothing Sets", 0);
-            CreateClothingSets(1);
-            CreateSeparator(2);
             CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
         }
 
-        public static void CreateClothingSets(int index)
+        public static void ReloadClothingSets()
         {
-            var container = CreateContainer(25, index);
+            RemoveClothingSets();
 
-            var buttons = new List<GameObject>
+            clothingSetObjects.Add(CreateTitle("Clothing Sets", 0));
+            
+            var index = 1;
+            for (int i = 0; i < outfitDropDown.options.Count; i++)
             {
-                CreateButton("1", 14, () => outfitDropDown.value = 0, container.transform),
-                CreateButton("2", 14, () => outfitDropDown.value = 1, container.transform),
-                CreateButton("3", 14, () => outfitDropDown.value = 2, container.transform),
-                CreateButton("4", 14, () => outfitDropDown.value = 3, container.transform),
-                CreateButton("5", 14, () => outfitDropDown.value = 4, container.transform),
-                CreateButton("6", 14, () => outfitDropDown.value = 5, container.transform),
-                CreateButton("7", 14, () => outfitDropDown.value = 6, container.transform),
-            };
-
-            var pos = 0.03f;
-            var step = (1f - pos * 2) / 7f;
-
-            foreach(var button in buttons)
-                button.transform.SetRect(pos, 0f, pos += step, 1f);
-
-            buttons[outfitDropDown.value].GetComponent<Button>().SetColorMultiplier(0.7f);
-
-            outfitDropDown.onValueChanged.AddListener(SetMultipliers);
-
-            void SetMultipliers(int x)
-            {
-                foreach(var button in buttons)
-                    button.GetComponent<Button>().SetColorMultiplier(1f);
-
-                buttons[x].GetComponent<Button>().SetColorMultiplier(0.7f);
+                var container = CreateContainer(25, index++);
+                clothingSetObjects.Add(container);
+                var option = outfitDropDown.options[i];
+                var optionIndex = i;
+                var button = CreateButton(option.text, 14, () => outfitDropDown.value = optionIndex, container.transform);
+                button.transform.SetRect(0f, 0f, 1f, 1f);
             }
+
+            clothingSetObjects.Add(CreateSeparator(index));
+        }
+
+        public static void RemoveClothingSets()
+        {
+            foreach (var obj in clothingSetObjects)
+                GameObject.Destroy(obj);
+            clothingSetObjects.Clear();
         }
 
         public static void CreateClothingOptions(int index)
         {
-            int counter = 0;
-
             CreateClothingStateButtons("Top", ChaFileDefine.ClothesKind.top, 3);
             CreateClothingStateButtons("Bottom", ChaFileDefine.ClothesKind.bot, 3);
             CreateClothingStateButtons("Bra", ChaFileDefine.ClothesKind.bra, 3);
@@ -91,7 +84,7 @@ namespace ClothingStateMenuX.Koikatu
 
             void CreateClothingStateButtons(string text, ChaFileDefine.ClothesKind kind, int buttons)
             {
-                var container = CreateContainer(22, index + counter++);
+                var container = CreateContainer(22, index++);
 
                 const float margin = 0.03f;
                 var pos = 0.4f;
@@ -99,6 +92,8 @@ namespace ClothingStateMenuX.Koikatu
 
                 var textElem = CreateText(text, 12, container.transform);
                 textElem.transform.SetRect(margin, 0f, pos, 1f);
+
+                var character = KKAPI.Maker.MakerAPI.GetCharacterControl();
 
                 var buttonOn = CreateButton("On", 10, () => character.SetClothesState((int)kind, 0), container.transform);
                 buttonOn.transform.SetRect(pos, 0f, pos += step, 1f);
@@ -177,13 +172,6 @@ namespace ClothingStateMenuX.Koikatu
                 GameObject.DestroyImmediate(t.gameObject);
 
             return copy;
-        }
-
-        public static void SetColorMultiplier(this Button button, float value)
-        {
-            var color = button.colors;
-            color.colorMultiplier = value;
-            button.colors = color;
         }
     }
 }
