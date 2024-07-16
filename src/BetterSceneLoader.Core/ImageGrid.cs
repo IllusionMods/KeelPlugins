@@ -140,6 +140,7 @@ namespace BetterSceneLoader
                 imagelist.content.anchoredPosition = new Vector2(0f, 0f);
                 PopulateGrid();
             });
+            DropdownAutoScroll.Setup(category);
 
             var refresh = UIUtility.CreateButton("RefreshButton", drag.transform, "Refresh");
             refresh.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);

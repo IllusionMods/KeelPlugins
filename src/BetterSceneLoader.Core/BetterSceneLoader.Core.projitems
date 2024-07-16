@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LoadingIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ImageGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BetterSceneLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DropdownAutoScroll.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\loadicon" />
