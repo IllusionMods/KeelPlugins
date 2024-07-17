@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ImageGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BetterSceneLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DropdownAutoScroll.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DropdownFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\loadicon" />

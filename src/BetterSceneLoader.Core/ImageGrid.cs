@@ -64,7 +64,7 @@ namespace BetterSceneLoader
         {
             UISystem.gameObject.SetActive(flag);
             toolbarToggle?.SetValue(flag);
-            category?.template.SetRect(0f, 1f, 0f, 0f, 0f, 0f, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
+            category?.template.SetRect(0f, 1f, 0f, 0f, 0f, headerSize - marginSize, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
         }
 
         public void UpdateWindow()
@@ -141,6 +141,7 @@ namespace BetterSceneLoader
                 PopulateGrid();
             });
             DropdownAutoScroll.Setup(category);
+            DropdownFilter.AddFilterUI(category, "BetterSceneLoaderDropdown");
 
             var refresh = UIUtility.CreateButton("RefreshButton", drag.transform, "Refresh");
             refresh.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
