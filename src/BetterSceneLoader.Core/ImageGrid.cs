@@ -230,7 +230,16 @@ namespace BetterSceneLoader
 
             var deletebutton = UIUtility.CreateButton("DeleteButton", optionspanel.transform, "Delete");
             deletebutton.transform.SetRect(0.7f, 0f, 1f, 1f);
-            deletebutton.onClick.AddListener(() => confirmpanel.gameObject.SetActive(true));
+            deletebutton.onClick.AddListener(() =>
+            {
+                if(BetterSceneLoader.ConfirmDelete.Value)
+                    confirmpanel.gameObject.SetActive(true);
+                else
+                {
+                    RecycleBinUtil.MoveToRecycleBin(currentPath);
+                    currentButton.gameObject.SetActive(false);
+                }
+            });
 
             var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
             toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
