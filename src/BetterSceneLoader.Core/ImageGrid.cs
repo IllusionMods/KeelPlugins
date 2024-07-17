@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using KeelPlugins.Utils;
 using UnityEngine.Networking;
+using KKAPI.Utilities;
 
 namespace BetterSceneLoader
 {
@@ -198,7 +199,7 @@ namespace BetterSceneLoader
             yesbutton.transform.SetRect(0f, 0f, 0.5f, 1f);
             yesbutton.onClick.AddListener(() =>
             {
-                File.Delete(currentPath);
+                RecycleBinUtil.MoveToRecycleBin(currentPath);
                 confirmpanel.gameObject.SetActive(false);
                 currentButton.gameObject.SetActive(false);
             });
