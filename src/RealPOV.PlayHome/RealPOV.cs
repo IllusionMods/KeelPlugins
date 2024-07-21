@@ -66,6 +66,12 @@ namespace RealPOV.PlayHome
             Chainloader.ManagerObject.GetOrAddComponent<PointOfView>();
         }
 
+        [HarmonyPostfix, HarmonyPatch(typeof(StudioScene), "Start")]
+        private static void StudioSceneInit()
+        {
+            Chainloader.ManagerObject.GetOrAddComponent<PointOfView>();
+        }
+
         [HarmonyPostfix, HarmonyPatch(typeof(H_Scene), "OnDestroy")]
         private static void HSceneDestroy()
         {

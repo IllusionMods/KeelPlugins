@@ -3,6 +3,7 @@ using RealPOV.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Studio;
 
 namespace RealPOV.PlayHome
 {
@@ -185,6 +186,12 @@ namespace RealPOV.PlayHome
 
         [HarmonyPrefix, HarmonyPatch(typeof(IllusionCamera), "LateUpdate")]
         public static bool IllusionCameraHook()
+        {
+            return !lockNormalCamera;
+        }
+
+        [HarmonyPrefix, HarmonyPatch(typeof(CameraControl), "LateUpdate")]
+        public static bool StudioCameraHook()
         {
             return !lockNormalCamera;
         }
