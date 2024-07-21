@@ -21,6 +21,7 @@ namespace RealPOV.PlayHome
         private Vector3 MaleOffset => new Vector3(RealPOV.MaleOffsetX.Value, RealPOV.MaleOffsetY.Value, RealPOV.MaleOffsetZ.Value);
 
         private float fovBackup;
+        private float nearClipBackup;
         private LookAtRotator.TYPE neckBackup;
         private LookAtRotator.TYPE femEyeBackup;
 
@@ -111,6 +112,7 @@ namespace RealPOV.PlayHome
                     neckBackup = currentTarget.NeckLook.CalcType;
                     currentTarget.NeckLook.Change(LookAtRotator.TYPE.NO, Camera.main.transform, true);
                     fovBackup = Camera.main.fieldOfView;
+                    nearClipBackup = Camera.main.nearClipPlane;
                     lockNormalCamera = true;
 
                     if(female)
@@ -133,6 +135,7 @@ namespace RealPOV.PlayHome
                     female.EyeLook.ChangePtn(femEyeBackup);
             }
 
+            Camera.main.nearClipPlane = nearClipBackup;
             Camera.main.fieldOfView = fovBackup;
             lockNormalCamera = false;
         }
@@ -146,6 +149,7 @@ namespace RealPOV.PlayHome
             Camera.main.transform.Translate(offset);
             Camera.main.transform.rotation = currentTarget.head.Rend_eye_L.transform.rotation;
             Camera.main.fieldOfView = RealPOVCore.DefaultFOV.Value;
+            Camera.main.nearClipPlane = RealPOV.DefaultNearClip.Value;
 
             if(!OnUI && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
                 dragging = true;

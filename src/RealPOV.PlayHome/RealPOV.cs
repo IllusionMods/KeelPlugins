@@ -26,6 +26,9 @@ namespace RealPOV.PlayHome
         internal static ConfigEntry<KeyboardShortcut> CycleNextHotkey { get; set; }
         internal static ConfigEntry<KeyboardShortcut> CyclePrevHotkey { get; set; }
         internal static ConfigEntry<bool> IncludeFemalePOV { get; set; }
+        internal static ConfigEntry<float> DefaultNearClip { get; set; }
+
+        protected static float defaultNearClip = 0.06f;
 
         protected override void Awake()
         {
@@ -42,6 +45,7 @@ namespace RealPOV.PlayHome
             CycleNextHotkey = Config.Bind(SECTION_HOTKEYS, "Cycle next character POV", new KeyboardShortcut(KeyCode.KeypadPlus));
             CyclePrevHotkey = Config.Bind(SECTION_HOTKEYS, "Cycle previous character POV", new KeyboardShortcut(KeyCode.KeypadMinus));
             IncludeFemalePOV = Config.Bind(SECTION_GENERAL, "Include female POV when cycling", false);
+            DefaultNearClip = Config.Bind(SECTION_GENERAL, "Default camera near clip", defaultNearClip, new ConfigDescription("", new AcceptableValueRange<float>(0.01f, 0.1f)));
 
             Harmony.CreateAndPatchAll(GetType());
         }
