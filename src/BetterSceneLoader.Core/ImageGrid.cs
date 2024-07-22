@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using KKAPI.Studio.UI;
 using System;
 using System.Collections;
@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using KeelPlugins.Utils;
 using UnityEngine.Networking;
 using KKAPI.Utilities;
+using UnityEngine.EventSystems;
 
 namespace BetterSceneLoader
 {
@@ -366,7 +367,9 @@ namespace BetterSceneLoader
         private Button CreateSceneButton(Transform parent, Texture2D texture, FileInfo fileInfo)
         {
             var button = UIUtility.CreateButton("ImageButton", parent, "");
-            button.onClick.AddListener(() =>
+            var pointerEnterEvent = new EventTrigger.Entry{ eventID = EventTriggerType.PointerEnter };
+            button.gameObject.AddComponent<EventTrigger>().triggers.Add(pointerEnterEvent);
+            pointerEnterEvent.callback.AddListener(e =>
             {
                 currentButton = button;
                 currentPath = fileInfo.FullName;
@@ -385,14 +388,14 @@ namespace BetterSceneLoader
                     infopanel.gameObject.SetActive(true);
                     infotext.text = $"{FormatFilesize(fileInfo.Length)} {fileInfo.LastWriteTime}";
                 }
-                else
-                {
-                    optionspanel.gameObject.SetActive(!optionspanel.gameObject.activeSelf);
-                    infopanel.gameObject.SetActive(!infopanel.gameObject.activeSelf);
-                }
 
                 confirmpanel.gameObject.SetActive(false);
             });
+
+            // Pass scroll event through
+            var scrollEvent = new EventTrigger.Entry{ eventID = EventTriggerType.Scroll };
+            button.gameObject.AddComponent<EventTrigger>().triggers.Add(scrollEvent);
+            scrollEvent.callback.AddListener(e => imagelist.SendMessage("OnScroll", e));
 
             var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             button.gameObject.GetComponent<Image>().sprite = sprite;
