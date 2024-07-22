@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Studio;
+using System.Collections.Generic;
 
 namespace RealPOV.PlayHome
 {
@@ -12,7 +13,7 @@ namespace RealPOV.PlayHome
         private static bool lockNormalCamera;
         private static Human currentTarget;
         private static Female female;
-        private static Human[] targets;
+        private static List<Human> targets;
         private static int currentTargetIndex = 0;
 
         private bool OnUI => EventSystem.current && EventSystem.current.IsPointerOverGameObject();
@@ -32,6 +33,7 @@ namespace RealPOV.PlayHome
 
         private void Awake()
         {
+            targets = new List<Human>();
             harmony = Harmony.CreateAndPatchAll(GetType());
         }
 
@@ -59,7 +61,7 @@ namespace RealPOV.PlayHome
                 {
                     Restore();
                     currentTargetIndex++;
-                    if(currentTargetIndex >= targets.Length) {
+                    if(currentTargetIndex >= targets.Count) {
                         currentTargetIndex = 0;
                     }
                     SetPOV();
@@ -69,7 +71,7 @@ namespace RealPOV.PlayHome
                     Restore();
                     currentTargetIndex--;
                     if(currentTargetIndex < 0) {
-                        currentTargetIndex = targets.Length - 1;
+                        currentTargetIndex = targets.Count - 1;
                     }
                     SetPOV();
                 }
@@ -86,18 +88,26 @@ namespace RealPOV.PlayHome
             if(!lockNormalCamera)
             {
                 female = FindObjectOfType<Female>();
+                
+                targets.Clear();
+                Male[] males = FindObjectsOfType<Male>();
                 if(RealPOV.IncludeFemalePOV.Value)
                 {
-                    targets = FindObjectsOfType<Human>();
+                    Female[] females = FindObjectsOfType<Female>();
+                    if(females != null && females.Length > 0)
+                    {
+                        targets.AddRange(females);
+                        targets.AddRange(males);
+                    }
                 }
                 else
                 {
-                    targets = FindObjectsOfType<Male>();
+                    targets.AddRange(males);
                 }
 
-                if(targets.Length != 0)
+                if(targets.Count != 0)
                 {
-                    if(currentTargetIndex > targets.Length - 1)
+                    if(currentTargetIndex > targets.Count - 1)
                     {
                         currentTargetIndex = 0;
                     }
@@ -129,6 +139,7 @@ namespace RealPOV.PlayHome
         {
             if(currentTarget)
             {
+                rotation.Set(0, 0, 0);
                 currentTarget.NeckLook.ChangePtn(neckBackup);
                 currentTarget = null;
 
