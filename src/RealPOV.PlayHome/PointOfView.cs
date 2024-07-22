@@ -3,6 +3,8 @@ using RealPOV.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Studio;
+using System.Collections.Generic;
 
 namespace RealPOV.PlayHome
 {
@@ -11,7 +13,7 @@ namespace RealPOV.PlayHome
         private static bool lockNormalCamera;
         private static Human currentTarget;
         private static Female female;
-        private static Human[] targets;
+        private static List<Human> targets;
         private static int currentTargetIndex = 0;
 
         private bool OnUI => EventSystem.current && EventSystem.current.IsPointerOverGameObject();
@@ -21,6 +23,7 @@ namespace RealPOV.PlayHome
         private Vector3 MaleOffset => new Vector3(RealPOV.MaleOffsetX.Value, RealPOV.MaleOffsetY.Value, RealPOV.MaleOffsetZ.Value);
 
         private float fovBackup;
+        private float nearClipBackup;
         private LookAtRotator.TYPE neckBackup;
         private LookAtRotator.TYPE femEyeBackup;
 
@@ -30,6 +33,7 @@ namespace RealPOV.PlayHome
 
         private void Awake()
         {
+            targets = new List<Human>();
             harmony = Harmony.CreateAndPatchAll(GetType());
         }
 
@@ -57,7 +61,7 @@ namespace RealPOV.PlayHome
                 {
                     Restore();
                     currentTargetIndex++;
-                    if(currentTargetIndex >= targets.Length) {
+                    if(currentTargetIndex >= targets.Count) {
                         currentTargetIndex = 0;
                     }
                     SetPOV();
@@ -67,7 +71,7 @@ namespace RealPOV.PlayHome
                     Restore();
                     currentTargetIndex--;
                     if(currentTargetIndex < 0) {
-                        currentTargetIndex = targets.Length - 1;
+                        currentTargetIndex = targets.Count - 1;
                     }
                     SetPOV();
                 }
@@ -84,26 +88,42 @@ namespace RealPOV.PlayHome
             if(!lockNormalCamera)
             {
                 female = FindObjectOfType<Female>();
+                
+                targets.Clear();
+                Male[] males = FindObjectsOfType<Male>();
                 if(RealPOV.IncludeFemalePOV.Value)
                 {
-                    targets = FindObjectsOfType<Human>();
+                    Female[] females = FindObjectsOfType<Female>();
+                    if(females != null && females.Length > 0)
+                    {
+                        targets.AddRange(females);
+                        targets.AddRange(males);
+                    }
                 }
                 else
                 {
-                    targets = FindObjectsOfType<Male>();
+                    targets.AddRange(males);
                 }
 
-                if(currentTargetIndex > targets.Length - 1)
+                if(targets.Count != 0)
                 {
-                    currentTargetIndex = 0;
+                    if(currentTargetIndex > targets.Count - 1)
+                    {
+                        currentTargetIndex = 0;
+                    }
+                    currentTarget = targets[currentTargetIndex];
                 }
-                currentTarget = targets[currentTargetIndex];
+                else
+                {
+                    Log.Info("Unable to enter POV, no targets available.");
+                }
 
                 if(currentTarget)
                 {
                     neckBackup = currentTarget.NeckLook.CalcType;
                     currentTarget.NeckLook.Change(LookAtRotator.TYPE.NO, Camera.main.transform, true);
                     fovBackup = Camera.main.fieldOfView;
+                    nearClipBackup = Camera.main.nearClipPlane;
                     lockNormalCamera = true;
 
                     if(female)
@@ -119,6 +139,7 @@ namespace RealPOV.PlayHome
         {
             if(currentTarget)
             {
+                rotation.Set(0, 0, 0);
                 currentTarget.NeckLook.ChangePtn(neckBackup);
                 currentTarget = null;
 
@@ -126,6 +147,7 @@ namespace RealPOV.PlayHome
                     female.EyeLook.ChangePtn(femEyeBackup);
             }
 
+            Camera.main.nearClipPlane = nearClipBackup;
             Camera.main.fieldOfView = fovBackup;
             lockNormalCamera = false;
         }
@@ -139,6 +161,7 @@ namespace RealPOV.PlayHome
             Camera.main.transform.Translate(offset);
             Camera.main.transform.rotation = currentTarget.head.Rend_eye_L.transform.rotation;
             Camera.main.fieldOfView = RealPOVCore.DefaultFOV.Value;
+            Camera.main.nearClipPlane = RealPOV.DefaultNearClip.Value;
 
             if(!OnUI && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
                 dragging = true;
@@ -174,6 +197,12 @@ namespace RealPOV.PlayHome
 
         [HarmonyPrefix, HarmonyPatch(typeof(IllusionCamera), "LateUpdate")]
         public static bool IllusionCameraHook()
+        {
+            return !lockNormalCamera;
+        }
+
+        [HarmonyPrefix, HarmonyPatch(typeof(CameraControl), "LateUpdate")]
+        public static bool StudioCameraHook()
         {
             return !lockNormalCamera;
         }
