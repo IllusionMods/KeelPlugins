@@ -38,6 +38,8 @@ namespace BetterSceneLoader
         private Text nametext;
         private ToolbarToggle toolbarToggle;
         private Dropdown category;
+        private Image infopanel;
+        private Text infotext;
 
         private readonly Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
         private Button currentButton;
@@ -65,7 +67,8 @@ namespace BetterSceneLoader
         {
             UISystem.gameObject.SetActive(flag);
             toolbarToggle?.SetValue(flag);
-            category?.template.SetRect(0f, 1f, 0f, 0f, 0f, headerSize - marginSize, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
+            if(category != null)
+                category.template.SetRect(0f, 1f, 0f, 0f, 0f, headerSize - marginSize, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
         }
 
         public void UpdateWindow()
@@ -156,8 +159,9 @@ namespace BetterSceneLoader
                 if(currentCategoryFolder == defaultPath)
                 {
                     var dir = new DirectoryInfo(defaultPath);
-                    var path = dir.GetFiles().OrderByDescending(f => f.LastWriteTime).First().FullName;
-                    var button = CreateSceneButton(imagelist.content.GetComponentInChildren<Image>().transform, PngAssist.LoadTexture(path), path);
+                    var fileInfo = dir.GetFiles().OrderByDescending(f => f.LastWriteTime).First();
+                    var gridContainer = imagelist.content.GetComponentInChildren<Image>();
+                    var button = CreateSceneButton(gridContainer.transform, PngAssist.LoadTexture(fileInfo.FullName), fileInfo);
                     button.transform.SetAsFirstSibling();
                 }
             });
@@ -241,6 +245,14 @@ namespace BetterSceneLoader
                 }
             });
 
+            infopanel = UIUtility.CreatePanel("InfoPanel", imagelist.transform);
+            infopanel.gameObject.SetActive(false);
+
+            infotext = UIUtility.CreateText("InfoText", infopanel.transform, "INFO");
+            infotext.transform.SetRect(0f, 0f, 1f, 1f);
+            infotext.alignment = TextAnchor.MiddleCenter;
+            UIUtility.AddOutlineToObject(infotext.transform);
+
             var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
             toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
 
@@ -268,8 +280,10 @@ namespace BetterSceneLoader
         {
             optionspanel.transform.SetParent(imagelist.transform);
             confirmpanel.transform.SetParent(imagelist.transform);
+            infopanel.transform.SetParent(imagelist.transform);
             optionspanel.gameObject.SetActive(false);
             confirmpanel.gameObject.SetActive(false);
+            infopanel.gameObject.SetActive(false);
 
             var newCats = GetCategories();
             var oldIndex = category.value;
@@ -299,8 +313,8 @@ namespace BetterSceneLoader
             }
             else
             {
-                var scenefiles = Directory.GetFiles(currentCategoryFolder, "*.png").Select(x => new KeyValuePair<DateTime, string>(File.GetLastWriteTime(x), x)).ToList();
-                scenefiles.Sort((a, b) => b.Key.CompareTo(a.Key));
+                var dirInfo = new DirectoryInfo(currentCategoryFolder);
+                var scenefiles = dirInfo.GetFiles("*.png").OrderByDescending(x => x.LastWriteTime).ToList();
 
                 var container = UIUtility.CreatePanel("GridContainer", imagelist.content.transform);
                 container.transform.SetRect(0f, 0f, 1f, 1f);
@@ -316,12 +330,12 @@ namespace BetterSceneLoader
             }
         }
 
-        private IEnumerator LoadButtonsAsync(Transform parent, List<KeyValuePair<DateTime, string>> scenefiles)
+        private IEnumerator LoadButtonsAsync(Transform parent, List<FileInfo> scenefiles)
         {
             LoadingIcon.loadingCount++;
             foreach(var scene in scenefiles)
             {
-                var uri = "file:///" + EncodePath(scene.Value);
+                var uri = "file:///" + EncodePath(scene.FullName);
 #if KKS
                 using(var uwr = UnityWebRequestTexture.GetTexture(uri, true))
                 {
@@ -330,8 +344,8 @@ namespace BetterSceneLoader
                     if(uwr.isNetworkError || uwr.isHttpError)
                         throw new Exception(uwr.error);
 
-                    var texture = DownloadHandlerTexture.GetContent(uwr);
-                    CreateSceneButton(parent, texture, scene.Value);
+                    var tex = DownloadHandlerTexture.GetContent(uwr);
+                    CreateSceneButton(parent, tex, scene);
                 }
 #else
                 using(var www = new WWW(uri))
@@ -341,20 +355,21 @@ namespace BetterSceneLoader
                     if(!string.IsNullOrEmpty(www.error))
                         throw new Exception(www.error);
 
-                    CreateSceneButton(parent, PngAssist.ChangeTextureFromByte(www.bytes), scene.Value);
+                    var tex = PngAssist.ChangeTextureFromByte(www.bytes);
+                    CreateSceneButton(parent, tex, scene);
                 }
 #endif
             }
             LoadingIcon.loadingCount--;
         }
 
-        private Button CreateSceneButton(Transform parent, Texture2D texture, string path)
+        private Button CreateSceneButton(Transform parent, Texture2D texture, FileInfo fileInfo)
         {
             var button = UIUtility.CreateButton("ImageButton", parent, "");
             button.onClick.AddListener(() =>
             {
                 currentButton = button;
-                currentPath = path;
+                currentPath = fileInfo.FullName;
 
                 if(optionspanel.transform.parent != button.transform)
                 {
@@ -364,10 +379,16 @@ namespace BetterSceneLoader
 
                     confirmpanel.transform.SetParent(button.transform);
                     confirmpanel.transform.SetRect(0.4f, 0.4f, 0.6f, 0.6f);
+
+                    infopanel.transform.SetParent(button.transform);
+                    infopanel.transform.SetRect(0f, 0.88f, 1f, 1f);
+                    infopanel.gameObject.SetActive(true);
+                    infotext.text = $"{FormatFilesize(fileInfo.Length)} {fileInfo.LastWriteTime}";
                 }
                 else
                 {
                     optionspanel.gameObject.SetActive(!optionspanel.gameObject.activeSelf);
+                    infopanel.gameObject.SetActive(!infopanel.gameObject.activeSelf);
                 }
 
                 confirmpanel.gameObject.SetActive(false);
@@ -387,15 +408,28 @@ namespace BetterSceneLoader
         private int FirstIndexMatch<TItem>(IEnumerable<TItem> items, Func<TItem,bool> matchCondition)
         {
             var index = 0;
-            foreach (var item in items)
+            foreach(var item in items)
             {
                 if(matchCondition.Invoke(item))
-                {
                     return index;
-                }
                 index++;
             }
             return -1;
+        }
+
+        private string FormatFilesize(long length)
+        {
+            string[] units = { "B", "KB", "MB", "GB", "TB" };
+            var size = Convert.ToDecimal(length);
+
+            int order = 0;
+            while(size >= 1024 && order < units.Length - 1)
+            {
+                order++;
+                size /= 1024;
+            }
+
+            return $"{size:0.#} {units[order]}";
         }
     }
 }
