@@ -1,4 +1,4 @@
-using ChaCustom;
+﻿using ChaCustom;
 using KKAPI.Utilities;
 using System;
 using System.Collections.Generic;
@@ -49,9 +49,20 @@ namespace AnimeAssAssistant
                 return;
             }
 
-            var path = files[UnityEngine.Random.Range(0, files.Length - 1)];
-            loadedCharacters.Add(path);
-            LoadChara(path);
+            files = files.Except(loadedCharacters).ToArray();
+            Log.Debug($"Found {files.Length} new PNG files in {AAA.SearchFolder.Value}");
+
+            if(files.Length > 0)
+            {
+                var path = files[UnityEngine.Random.Range(0, files.Length - 1)];
+                loadedCharacters.Add(path);
+                LoadChara(path);
+            }
+            else
+            {
+                LoadChara(loadedCharacters[0]);
+            }
+
         }
 
         private void RecycleCurrentChara()
