@@ -47,6 +47,12 @@ namespace AnimeAssAssistant
 
             SearchFolder = Config.Bind(SECTION_FOLDER, "Search folder path", "", new ConfigDescription("The folder where the plugin draws characters from"));
             SaveFolder = Config.Bind(SECTION_FOLDER, "Save folder path", "", new ConfigDescription("The folder where characters are saved to when pressing the save hotkey"));
+
+            SearchFolder.SettingChanged += (x, y) =>
+            {
+                var ass = gameObject.GetComponent<Assistant>();
+                if(ass != null) ass.ClearLoadedCharas();
+            };
         }
 
         private void Start()

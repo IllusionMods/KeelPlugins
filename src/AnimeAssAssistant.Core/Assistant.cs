@@ -1,4 +1,4 @@
-﻿using ChaCustom;
+using ChaCustom;
 using KKAPI.Utilities;
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,12 @@ namespace AnimeAssAssistant
                 else if(AAA.HotkeySave.Value.IsDown())
                     SaveCurrentChara();
             }
+        }
+
+        public void ClearLoadedCharas()
+        {
+            currentCharacter = null;
+            loadedCharacters.Clear();
         }
 
         private void LoadRandomChara()
