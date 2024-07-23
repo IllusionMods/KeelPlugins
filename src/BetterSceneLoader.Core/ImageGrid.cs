@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using KKAPI.Studio.UI;
 using System;
 using System.Collections;
@@ -14,6 +14,7 @@ using UnityEngine.Networking;
 using KKAPI.Utilities;
 using UniRx.Triggers;
 using UniRx;
+using UnityEngine.EventSystems;
 
 namespace BetterSceneLoader
 {
@@ -255,11 +256,25 @@ namespace BetterSceneLoader
             infotext.alignment = TextAnchor.MiddleCenter;
             UIUtility.AddOutlineToObject(infotext.transform);
 
-            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
-            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
+            ThreadingHelper.Instance.StartCoroutine(AddToolbarButton());
 
             UpdateWindow();
             PopulateGrid();
+        }
+
+        private IEnumerator AddToolbarButton()
+        {
+            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
+            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
+
+            yield return new WaitUntil(() => toolbarToggle.ControlObject != null);
+
+            var button = toolbarToggle.ControlObject.GetComponent<Button>();
+            button.OnPointerClickAsObservable().Subscribe(e =>
+            {
+                if(e.button == PointerEventData.InputButton.Right)
+                    OnSaveButtonClick();
+            });
         }
 
         private List<Dropdown.OptionData> GetCategories()
