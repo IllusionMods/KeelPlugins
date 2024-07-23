@@ -82,7 +82,7 @@ namespace BetterSceneLoader
 
         private class Hooks
         {
-            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
+            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start"), HarmonyWrapSafe]
             public static void StudioEntrypoint()
             {
                 sceneLoaderUI.CreateUI("BetterSceneLoaderCanvas", 10, "Scenes");
