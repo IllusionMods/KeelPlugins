@@ -2,6 +2,7 @@
 using ChaCustom;
 using TMPro;
 using UILib;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,7 +26,9 @@ namespace ClothingStateMenuX
         public static void Setup()
         {
             outfitDropDown = Singleton<CustomControl>.Instance.ddCoordinate;
-            sidebar = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top/Scroll View/Viewport/Content");
+            var scrollView = GameObject.Find("CustomScene/CustomRoot/FrontUIGroup/CvsDraw/Top/Scroll View");
+            scrollView.GetComponent<ScrollRect>().scrollSensitivity = 60f;
+            sidebar = scrollView.transform.Find("Viewport/Content").gameObject;
             var rbClothesStateTransform = sidebar.transform.Find("rbClothesState");
             clothingStateToggles = rbClothesStateTransform.gameObject;
             titleTextTemplate = sidebar.transform.Find("txtClothesState").gameObject;
@@ -42,6 +45,9 @@ namespace ClothingStateMenuX
             buttonTemplateBtn.spriteState = tempSprites;
             
             CreateClothingOptions(clothingStateToggles.transform.GetSiblingIndex() + 1);
+
+            foreach(var trigger in sidebar.GetComponentsInChildren<ObservableScrollTrigger>())
+                trigger.enabled = false;
         }
 
         public static void ReloadClothingSets()
