@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Configuration;
 using KeelPlugins;
 using KeelPlugins.Utils;
@@ -6,6 +6,11 @@ using KKAPI.Maker;
 using KKAPI.Maker.UI.Sidebar;
 using UniRx;
 using UnityEngine;
+using HarmonyLib;
+using ChaCustom;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+using System.Linq;
 
 [assembly: System.Reflection.AssemblyFileVersion(AnimeAssAssistant.AAA.Version)]
 
@@ -66,6 +71,29 @@ namespace AnimeAssAssistant
             };
 
             MakerAPI.MakerExiting += (sender, e) => Destroy(gameObject.GetComponent<Assistant>());
+
+            Harmony.CreateAndPatchAll(typeof(Hooks));
+        }
+
+        private class Hooks
+        {
+            [HarmonyTranspiler, HarmonyPatch(typeof(BaseCameraControl_Ver2), nameof(BaseCameraControl_Ver2.InputKeyProc)), HarmonyWrapSafe]
+            private static IEnumerable<CodeInstruction> CameraControlBlock(IEnumerable<CodeInstruction> instructions)
+            {
+                return new CodeMatcher(instructions)
+                    // match all arrow key KeyCode
+                    .MatchForward(false, new CodeMatch(i => i.opcode == OpCodes.Ldc_I4 && new[]{273, 274, 275, 276}.Contains((int)i.operand)))
+                    .Repeat(matcher =>
+                    {
+                        matcher.Advance(2);
+                        // save GetKeyDown label
+                        var label = matcher.Operand;
+                        matcher.Advance(1);
+                        // add branch to the same label
+                        matcher.Insert(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(AAA), nameof(EnableAAA))),
+                                       new CodeInstruction(OpCodes.Brtrue, label));
+                    }).InstructionEnumeration();
+        }
         }
     }
 }
