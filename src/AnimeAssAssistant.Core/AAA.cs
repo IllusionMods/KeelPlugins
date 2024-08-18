@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using KeelPlugins;
 using KeelPlugins.Utils;
@@ -77,6 +77,12 @@ namespace AnimeAssAssistant
 
         private class Hooks
         {
+            [HarmonyPostfix, HarmonyPatch(typeof(CustomCharaFile), nameof(CustomCharaFile.OnChangeSelect)), HarmonyWrapSafe]
+            private static void OnChangeSelect()
+            {
+                FindObjectOfType<Assistant>().ClearLoadedCharas();
+            }
+
             [HarmonyTranspiler, HarmonyPatch(typeof(BaseCameraControl_Ver2), nameof(BaseCameraControl_Ver2.InputKeyProc)), HarmonyWrapSafe]
             private static IEnumerable<CodeInstruction> CameraControlBlock(IEnumerable<CodeInstruction> instructions)
             {
@@ -93,7 +99,7 @@ namespace AnimeAssAssistant
                         matcher.Insert(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(AAA), nameof(EnableAAA))),
                                        new CodeInstruction(OpCodes.Brtrue, label));
                     }).InstructionEnumeration();
-        }
+            }
         }
     }
 }

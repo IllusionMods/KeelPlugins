@@ -11,7 +11,13 @@ namespace AnimeAssAssistant
     internal class Assistant : MonoBehaviour
     {
         private string currentCharacter;
-        private List<string> loadedCharacters = new List<string>();
+        private readonly List<string> loadedCharacters = new List<string>();
+        private CustomCharaFile customCharaFile;
+
+        private void Start()
+        {
+            customCharaFile = FindObjectOfType<CustomCharaFile>();
+        }
 
         private void Update()
         {
@@ -30,6 +36,7 @@ namespace AnimeAssAssistant
 
         public void ClearLoadedCharas()
         {
+            Log.Debug("Clearing loaded characters");
             currentCharacter = null;
             loadedCharacters.Clear();
         }
@@ -39,6 +46,12 @@ namespace AnimeAssAssistant
             if(string.IsNullOrEmpty(AAA.SearchFolder.Value))
             {
                 Log.Message("Search folder has not been set, please set it in ConfigManager");
+                return;
+            }
+
+            if(!Directory.Exists(AAA.SearchFolder.Value))
+            {
+                Log.Message("Search folder does not exist");
                 return;
             }
 
@@ -60,9 +73,10 @@ namespace AnimeAssAssistant
             }
             else
             {
-                LoadChara(loadedCharacters[0]);
+                Log.Message("All files have been checked, starting over");
+                ClearLoadedCharas();
+                LoadRandomChara();
             }
-
         }
 
         private void RecycleCurrentChara()
@@ -73,6 +87,14 @@ namespace AnimeAssAssistant
                 loadedCharacters.Remove(currentCharacter);
                 Log.Info($"{currentCharacter} moved to the recycle bin.");
                 LoadRandomChara();
+            }
+            else
+            {
+                if(TryGetSelectedChara(out var path))
+                {
+                    RecycleBinUtil.MoveToRecycleBin(path);
+                    Log.Info($"{path} moved to the recycle bin.");
+                }
             }
         }
 
@@ -92,10 +114,32 @@ namespace AnimeAssAssistant
                 Log.Info($"{currentCharacter} moved to save folder.");
                 LoadRandomChara();
             }
+            else
+            {
+                if(TryGetSelectedChara(out var path))
+                {
+                    var dest = Path.Combine(AAA.SaveFolder.Value, Path.GetFileName(path));
+                    File.Move(path, dest);
+                    Log.Info($"{path} moved to save folder.");
+                }
+            }
+        }
+
+        private bool TryGetSelectedChara(out string path)
+        {
+            path = null;
+            var listCtrl = customCharaFile.listCtrl;
+            var selectIndex = listCtrl.GetSelectIndex();
+            if(selectIndex.Length == 0) return false;
+            path = listCtrl.GetFileInfoFromIndex(selectIndex[0]).FullPath;
+            listCtrl.Delete(selectIndex[0]);
+            return true;
         }
 
         private void LoadNextChara()
         {
+            customCharaFile.listCtrl.ToggleAllOff();
+
             var index = loadedCharacters.IndexOf(currentCharacter);
             if(index == -1 || index == loadedCharacters.Count - 1)
                 LoadRandomChara();
@@ -114,7 +158,7 @@ namespace AnimeAssAssistant
         {
             currentCharacter = path;
 
-            var cfw = GameObject.FindObjectsOfType<CustomFileWindow>().FirstOrDefault(x => x.fwType == CustomFileWindow.FileWindowType.CharaLoad);
+            var cfw = customCharaFile.fileWindow;
             var loadFace = true;
             var loadBody = true;
             var loadHair = true;
