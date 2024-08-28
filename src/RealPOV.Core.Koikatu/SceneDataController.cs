@@ -17,8 +17,12 @@ namespace RealPOV.Koikatu
             if(extData == null)
                 return;
             
-            if(operation == SceneOperationKind.Load && extData.data.TryGetValue(DictID, out var povRawData))
-                RealPOV.EnablePov(MessagePackSerializer.Deserialize<ScenePovData>((byte[])povRawData));
+            if(operation == SceneOperationKind.Load && extData.data.TryGetValue(DictID, out var povRawData)) {
+                var povData = MessagePackSerializer.Deserialize<ScenePovData>((byte[])povRawData);
+                if(povData.FormatVersion < 1)
+                    povData.CharaPrevVisibleHeadAlways = true;
+                RealPOV.EnablePov(povData);
+            }
         }
 
         protected override void OnSceneSave()
@@ -36,8 +40,10 @@ namespace RealPOV.Koikatu
     [MessagePackObject(true)]
     public class ScenePovData
     {
+        public int FormatVersion = 1;
         public Vector3 Rotation;
         public int CharaId;
+        public bool CharaPrevVisibleHeadAlways;
         public float Fov;
     }
 }

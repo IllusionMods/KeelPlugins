@@ -41,7 +41,7 @@ namespace RealPOV.Koikatu
             defaultViewOffset = 0.05f;
             base.Awake();
 
-            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "Whene entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
+            HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "When entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
 
             Harmony.CreateAndPatchAll(GetType());
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
@@ -64,21 +64,19 @@ namespace RealPOV.Koikatu
                 LookRotation[currentCharaGo] = povData.Rotation;
                 CurrentFOV = povData.Fov;
                 plugin.EnablePov();
+                // order matters here, as we want to override the value after it's been set by the call above
+                plugin.prevVisibleHeadAlways = povData.CharaPrevVisibleHeadAlways;
             }
         }
 
         public static ScenePovData GetPovData()
         {
-            if(currentCharaId == -1)
-                return null;
-            if (CurrentFOV == null)
-                throw new InvalidOperationException("CurrentFOV == null");
-
             return new ScenePovData
             {
                 CharaId = currentCharaId,
-                Fov = CurrentFOV.Value,
-                Rotation = LookRotation[currentCharaGo]
+                CharaPrevVisibleHeadAlways = plugin.prevVisibleHeadAlways,
+                Fov = CurrentFOV != null ? CurrentFOV.Value : defaultFov,
+                Rotation = currentCharaGo != null ? LookRotation[currentCharaGo] : new Vector3(0, 0, 0)
             };
         }
 
