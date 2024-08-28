@@ -17,7 +17,8 @@ namespace RealPOV.Koikatu
             if(extData == null)
                 return;
             
-            if(operation == SceneOperationKind.Load && extData.data.TryGetValue(DictID, out var povRawData)) {
+            if(operation == SceneOperationKind.Load && extData.data.TryGetValue(DictID, out var povRawData))
+            {
                 var povData = MessagePackSerializer.Deserialize<ScenePovData>((byte[])povRawData);
                 if(povData.FormatVersion < 1)
                     povData.CharaPrevVisibleHeadAlways = true;

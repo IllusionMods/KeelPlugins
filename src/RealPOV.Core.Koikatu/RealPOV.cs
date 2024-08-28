@@ -101,41 +101,22 @@ namespace RealPOV.Koikatu
                 }
                 else
                 {
-                    Queue<ChaControl> CreateQueue()
-                    {
-                        return new Queue<ChaControl>(FindObjectsOfType<ChaControl>());
-                    }
-
-                    ChaControl GetCurrentChara()
-                    {
-                        for(int i = 0; i < charaQueue.Count; i++)
-                        {
-                            var chaControl = charaQueue.Dequeue();
-
-                            // Remove destroyed
-                            if(!chaControl)
-                                continue;
-
-                            // Rotate the queue
-                            charaQueue.Enqueue(chaControl);
-                            if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
-                            // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
-                            if(chaControl.objTop.activeInHierarchy) return chaControl;
-                        }
-                        return null;
-                    }
-
                     if(charaQueue == null)
-                        charaQueue = CreateQueue();
+                        charaQueue = new Queue<ChaControl>(FindObjectsOfType<ChaControl>());
 
                     currentChara = GetCurrentChara();
                     if(!currentChara)
                     {
-                        charaQueue = CreateQueue();
+                        charaQueue = new Queue<ChaControl>(FindObjectsOfType<ChaControl>());
                         currentChara = GetCurrentChara();
                     }
 
-                    currentCharaGo = currentChara?.gameObject;
+                    currentCharaGo = null;
+                    if(!currentChara)
+                    {
+                        currentCharaGo = currentChara.gameObject;
+                        Log.Message("Can't enter POV: Could not find any valid characters");
+                    }
                 }
             }
 
@@ -145,7 +126,8 @@ namespace RealPOV.Koikatu
                 if(HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
 
                 GameCamera = Camera.main;
-                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
+                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>();
+                if(!cc) cc = GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = false;
 
                 // Fix depth of field being completely out of focus
@@ -160,7 +142,7 @@ namespace RealPOV.Koikatu
                 }
 
                 // only use head rotation if there is no existing rotation
-                if(!LookRotation.TryGetValue(currentCharaGo ?? throw new InvalidOperationException("currentCharaGo null"), out _))
+                if(!LookRotation.TryGetValue(currentCharaGo != null ? currentCharaGo : throw new InvalidOperationException("currentCharaGo null"), out _))
                 {
                     LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
                 }
@@ -176,10 +158,25 @@ namespace RealPOV.Koikatu
                 backupLayer = GameCamera.gameObject.layer;
                 GameCamera.gameObject.layer = 0;
             }
-            else
+        }
+
+        private ChaControl GetCurrentChara()
+        {
+            for(int i = 0; i < charaQueue.Count; i++)
             {
-                Log.Message("Can't enter POV: Could not find any valid characters");
+                var chaControl = charaQueue.Dequeue();
+
+                // Remove destroyed
+                if(!chaControl)
+                    continue;
+
+                // Rotate the queue
+                charaQueue.Enqueue(chaControl);
+                if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
+                // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
+                if(chaControl.objTop.activeInHierarchy) return chaControl;
             }
+            return null;
         }
 
         protected override void DisablePov()
@@ -190,7 +187,8 @@ namespace RealPOV.Koikatu
 
             if(GameCamera != null)
             {
-                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>() ?? GameCamera.GetComponent<Studio.CameraControl>();
+                var cc = (MonoBehaviour)GameCamera.GetComponent<CameraControl_Ver2>();
+                if(!cc) cc = GameCamera.GetComponent<Studio.CameraControl>();
                 if(cc) cc.enabled = true;
 
                 var depthOfField = GameCamera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
@@ -204,44 +202,37 @@ namespace RealPOV.Koikatu
                 GameCamera.gameObject.layer = backupLayer;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate))]
+        [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate)), HarmonyWrapSafe]
         private static bool ApplyRotation(NeckLookControllerVer2 __instance)
         {
             if(POVEnabled)
             {
-                try
+                if(!currentChara)
                 {
-                    if(!currentChara)
-                    {
-                        plugin.DisablePov();
-                        return true;
-                    }
-
-                    Vector3 rot;
-                    if(LookRotation.TryGetValue(currentCharaGo, out var val))
-                        rot = val;
-                    else
-                        LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
-
-                    if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
-                    {
-                        __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
-                        __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
-                        __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
-
-                        var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
-                        GameCamera.transform.position = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
-                        GameCamera.transform.rotation = currentChara.objHeadBone.transform.rotation;
-                        GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
-                        if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
-                        GameCamera.fieldOfView = CurrentFOV.Value;
-
-                        return false;
-                    }
+                    plugin.DisablePov();
+                    return true;
                 }
-                catch (Exception e)
+
+                Vector3 rot;
+                if(LookRotation.TryGetValue(currentCharaGo, out var val))
+                    rot = val;
+                else
+                    LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
+
+                if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
                 {
-                    Log.Error(e);
+                    __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
+                    __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
+                    __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
+
+                    var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
+                    var pos = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
+                    GameCamera.transform.SetPositionAndRotation(pos, currentChara.objHeadBone.transform.rotation);
+                    GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
+                    if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
+                    GameCamera.fieldOfView = CurrentFOV.Value;
+
+                    return false;
                 }
             }
 
