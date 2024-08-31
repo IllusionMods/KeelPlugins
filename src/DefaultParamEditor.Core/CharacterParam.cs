@@ -62,10 +62,8 @@ namespace DefaultParamEditor.Koikatu
                 if(selected.Count > 0)
                 {
                     Log.Info("Loading chara defaults");
-
                     foreach(var chara in selected)
-                        SetCharaValues(chara.charFileStatus);
-                    UpdateStateInfo();
+                        UpdateCharaState(chara);
                 }
             }
             else
@@ -74,7 +72,7 @@ namespace DefaultParamEditor.Koikatu
             }
         }
 
-        private static void SetCharaValues(ChaFileStatus chaFileStatus)
+        private static void UpdateChaFileStatus(ChaFileStatus chaFileStatus)
         {
             chaFileStatus.clothesState = _charaData.clothesState.ToArray();
             chaFileStatus.shoesType = _charaData.shoesType;
@@ -91,14 +89,26 @@ namespace DefaultParamEditor.Koikatu
             chaFileStatus.mouthPtn = _charaData.mouthPtn;
         }
 
-        private static void UpdateStateInfo()
+        private static void UpdateCharaState(OCIChar chara)
         {
+            UpdateChaFileStatus(chara.charFileStatus);
+
+            // This could work but disables accessories
+            //AddObjectAssist.UpdateState(chara, chara.charFileStatus);
+            chara.ChangeLookEyesPtn(chara.charFileStatus.eyesLookPtn, true);
+            chara.ChangeLookNeckPtn(chara.charFileStatus.neckLookPtn);
+            chara.charInfo.ChangeEyebrowPtn(chara.charFileStatus.eyebrowPtn);
+            chara.charInfo.ChangeEyesPtn(chara.charFileStatus.eyesPtn);
+            chara.ChangeEyesOpen(chara.charFileStatus.eyesOpenMax);
+            chara.ChangeBlink(chara.charFileStatus.eyesBlink);
+            chara.charInfo.ChangeMouthPtn(chara.charFileStatus.mouthPtn);
+            //chara.ChangeMouthOpen(chara.oiCharInfo.mouthOpen);
+            //chara.ChangeHandAnime(0, chara.oiCharInfo.handPtn[0]);
+            //chara.ChangeHandAnime(1, chara.oiCharInfo.handPtn[1]);
+            
             var mpCharCtrl = GameObject.FindObjectOfType<MPCharCtrl>();
-            if(mpCharCtrl)
-            {
-                int select = mpCharCtrl.select;
-                if(select == 0) mpCharCtrl.OnClickRoot(0);
-            }
+            if(mpCharCtrl && (mpCharCtrl.select == 0 || mpCharCtrl.select == 1))
+                mpCharCtrl.OnClickRoot(mpCharCtrl.select);
         }
 
         private class Hooks
@@ -109,7 +119,7 @@ namespace DefaultParamEditor.Koikatu
                 if(_charaData.saved)
                 {
                     Log.Debug("Loading defaults for a new character");
-                    SetCharaValues(__instance);
+                    UpdateChaFileStatus(__instance);
                 }
             }
         }
