@@ -1,19 +1,13 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using Studio;
 using System.Linq;
 using UnityEngine;
 
 namespace DefaultParamEditor.Koikatu
 {
-    internal class CharacterParam
+    public static class CharacterParam
     {
-        private static ParamData.CharaData _charaData;
-
-        public static void Init(ParamData.CharaData data)
-        {
-            _charaData = data;
-            Harmony.CreateAndPatchAll(typeof(Hooks));
-        }
+        private static readonly ParamData.CharaData _charaData = ParamData.Instance.charaParamData;
 
         public static void Save()
         {
@@ -111,7 +105,7 @@ namespace DefaultParamEditor.Koikatu
                 mpCharCtrl.OnClickRoot(mpCharCtrl.select);
         }
 
-        private class Hooks
+        public class Hooks
         {
             [HarmonyPostfix, HarmonyPatch(typeof(ChaFileStatus), nameof(ChaFileStatus.MemberInit))]
             public static void HarmonyPatch_ChaFileStatus_MemberInit(ChaFileStatus __instance)

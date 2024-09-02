@@ -1,9 +1,49 @@
-﻿using UnityEngine;
+using System;
+using System.IO;
+using BepInEx;
+using ParadoxNotion.Serialization;
+using UnityEngine;
 
 namespace DefaultParamEditor.Koikatu
 {
-    internal class ParamData
+    public class ParamData
     {
+        private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
+
+        private static ParamData _instance;
+        public static ParamData Instance
+        {
+            get
+            {
+                if(_instance == null)
+                {
+                    _instance = new ParamData();
+
+                    if(File.Exists(savePath))
+                    {
+                        try
+                        {
+                            var json = File.ReadAllText(savePath);
+                            _instance = JSONSerializer.Deserialize<ParamData>(json);
+                        }
+                        catch(Exception ex)
+                        {
+                            Log.Error($"Failed to load settings from {savePath} with error: " + ex);
+                            _instance = new ParamData();
+                        }
+                    }
+                }
+                
+                return _instance;
+            }
+        }
+
+        public static void SaveToFile()
+        {
+            var json = JSONSerializer.Serialize(typeof(ParamData), Instance, true);
+            File.WriteAllText(savePath, json);
+        }
+
         public readonly CharaData charaParamData = new CharaData();
         public readonly SceneData sceneParamData = new SceneData();
 

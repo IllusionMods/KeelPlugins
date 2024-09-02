@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using BepInEx;
 using HarmonyLib;
 using KKAPI.Studio;
@@ -10,16 +10,10 @@ using UnityEngine;
 
 namespace DefaultParamEditor.Koikatu
 {
-    internal static class SceneParam
+    public static class SceneParam
     {
-        private static ParamData.SceneData _sceneData;
-
-        public static void Init(ParamData.SceneData data)
-        {
-            _sceneData = data;
-            Harmony.CreateAndPatchAll(typeof(Hooks));
-        }
-
+        private static readonly ParamData.SceneData _sceneData = ParamData.Instance.sceneParamData;
+        
         public static void Save()
         {
             var sceneInfo = Studio.Studio.Instance.sceneInfo;
@@ -190,7 +184,7 @@ namespace DefaultParamEditor.Koikatu
             sceneInfo.ambientShadow = _sceneData.ambientShadow;
         }
 
-        private static class Hooks
+        public static class Hooks
         {
             [HarmonyPostfix, HarmonyPatch(typeof(SceneInfo), nameof(SceneInfo.Init))]
             public static void HarmonyPatch_SceneInfo_Init(SceneInfo __instance)

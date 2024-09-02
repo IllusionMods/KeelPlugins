@@ -3,9 +3,6 @@ using BepInEx.Configuration;
 using HarmonyLib;
 using KeelPlugins;
 using KeelPlugins.Utils;
-using ParadoxNotion.Serialization;
-using System;
-using System.IO;
 using KKAPI;
 #if KKS
 using TMPro;
@@ -27,9 +24,6 @@ namespace DefaultParamEditor.Koikatu
         public const string GUID = "keelhauled.defaultparameditor";
         public const string Version = "1.4.1." + BuildNumber.Version;
 
-        private static readonly string savePath = Path.Combine(Paths.ConfigPath, "DefaultParamEditorData.json");
-        private static ParamData data = new ParamData();
-
         private static ConfigEntry<bool> CreateUISaveButtons { get; set; }
 
         private void Awake()
@@ -41,29 +35,8 @@ namespace DefaultParamEditor.Koikatu
             Config.Bind("General", "Scene Parameters", "", new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 5, HideDefaultButton = true, CustomDrawer = SceneParamDrawer }));
 
             Harmony.CreateAndPatchAll(typeof(Hooks));
-
-            if (File.Exists(savePath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(savePath);
-                    data = JSONSerializer.Deserialize<ParamData>(json);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"Failed to load settings from {savePath} with error: " + ex);
-                    data = new ParamData();
-                }
-            }
-
-            CharacterParam.Init(data.charaParamData);
-            SceneParam.Init(data.sceneParamData);
-        }
-
-        private static void SaveToFile()
-        {
-            var json = JSONSerializer.Serialize(data.GetType(), data, true);
-            File.WriteAllText(savePath, json);
+            Harmony.CreateAndPatchAll(typeof(CharacterParam.Hooks));
+            Harmony.CreateAndPatchAll(typeof(SceneParam.Hooks));
         }
 
         private void SceneParamDrawer(ConfigEntryBase configEntry)
@@ -71,13 +44,13 @@ namespace DefaultParamEditor.Koikatu
             if(GUILayout.Button("Save", GUILayout.ExpandWidth(true)))
             {
                 SceneParam.Save();
-                SaveToFile();
+                ParamData.SaveToFile();
             }
 
             if(GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
             {
                 SceneParam.Reset();
-                SaveToFile();
+                ParamData.SaveToFile();
             }
         }
 
@@ -86,13 +59,13 @@ namespace DefaultParamEditor.Koikatu
             if(GUILayout.Button("Save", GUILayout.ExpandWidth(true)))
             {
                 CharacterParam.Save();
-                SaveToFile();
+                ParamData.SaveToFile();
             }
 
             if(GUILayout.Button("Reset", GUILayout.ExpandWidth(false)))
             {
                 CharacterParam.Reset();
-                SaveToFile();
+                ParamData.SaveToFile();
             }
         }
 
@@ -111,12 +84,12 @@ namespace DefaultParamEditor.Koikatu
                     CreateMainButton("Save scene param", mainlist, () =>
                     {
                         SceneParam.Save();
-                        SaveToFile();
+                        ParamData.SaveToFile();
                     });
                     CreateCharaButton("Save chara param", charalist, () =>
                     {
                         CharacterParam.Save();
-                        SaveToFile();
+                        ParamData.SaveToFile();
                     });
                 }
             }
