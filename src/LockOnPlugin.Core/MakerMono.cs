@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LockOnPlugin.Koikatu
+namespace LockOnPlugin
 {
     internal class MakerMono : LockOnBase
     {

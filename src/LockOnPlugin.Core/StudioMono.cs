@@ -1,11 +1,10 @@
 ﻿using HarmonyLib;
-using LockOnPlugin.Core;
 using Studio;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LockOnPlugin.Koikatu
+namespace LockOnPlugin
 {
     internal class StudioMono : LockOnBase
     {
@@ -164,7 +163,8 @@ namespace LockOnPlugin.Koikatu
         {
             base.ResetModState();
             currentCharaOCI = null;
-            treeNodeCtrl.SelectSingle(null);
+            if(treeNodeCtrl)
+                treeNodeCtrl.SelectSingle(null);
         }
 
         private List<TreeNodeObject> GetCharaNodes<CharaType>()

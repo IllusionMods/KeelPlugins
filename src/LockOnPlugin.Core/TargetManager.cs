@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LockOnPlugin.Core
+namespace LockOnPlugin
 {
     internal class CameraTargetManager : MonoBehaviour
     {

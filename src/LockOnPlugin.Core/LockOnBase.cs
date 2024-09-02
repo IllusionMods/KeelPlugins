@@ -1,9 +1,8 @@
-﻿using LockOnPlugin.Core;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace LockOnPlugin.Koikatu
+namespace LockOnPlugin
 {
     internal abstract class LockOnBase : MonoBehaviour
     {

@@ -13,5 +13,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)LockOnPluginCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TargetData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TargetManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HSceneMono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MakerMono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StudioMono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LockOnBase.cs" />
   </ItemGroup>
 </Project>

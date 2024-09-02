@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using KKAPI.Utilities;
 
-namespace LockOnPlugin.Core
+namespace LockOnPlugin
 {
     internal class TargetData
     {
