@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using BepInEx;
 using ParadoxNotion.Serialization;
@@ -59,7 +59,6 @@ namespace DefaultParamEditor.Koikatu
             public float hohoAkaRate;
             public float nipStandRate;
             public byte tearsLv;
-
             public int eyesLookPtn;
             public int neckLookPtn;
             public int eyebrowPtn;
@@ -67,11 +66,12 @@ namespace DefaultParamEditor.Koikatu
             public float eyesOpenMax;
             public bool eyesBlink;
             public int mouthPtn;
+            public int[] handPtn;
+            public float mouthOpen;
 
             // parameters to add
             // default animation
             // siru
-            // mouth open
             // eyebrow and eye overlaying
             // donger options
         }
