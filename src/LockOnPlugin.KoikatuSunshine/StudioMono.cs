@@ -164,7 +164,8 @@ namespace LockOnPlugin.Koikatu
         {
             base.ResetModState();
             currentCharaOCI = null;
-            treeNodeCtrl.SelectSingle(null);
+            if(treeNodeCtrl)
+                treeNodeCtrl.SelectSingle(null);
         }
 
         private List<TreeNodeObject> GetCharaNodes<CharaType>()
