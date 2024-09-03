@@ -39,8 +39,7 @@ namespace SoundEffects.PlayHome
             if(slaps.Count > 0)
             {
                 var random = Random.Range(0, slaps.Count - 1);
-                var gameCtrl = Traverse.Create(__instance).Field("gameCtrl").GetValue<GameControl>();
-                gameCtrl.audioCtrl.Play3DSE(slaps[random], female.CrotchTrans.position);
+                __instance.gameCtrl.audioCtrl.Play3DSE(slaps[random], female.CrotchTrans.position);
                 return false;
             }
 

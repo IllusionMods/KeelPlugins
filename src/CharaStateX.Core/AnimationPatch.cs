@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using Studio;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,12 +10,8 @@ namespace CharaStateX.Koikatu
         [HarmonyPostfix, HarmonyPatch(typeof(PauseRegistrationList), "OnClickLoad")]
         public static void PoseLoadPatch(PauseRegistrationList __instance)
         {
-            var traverse = Traverse.Create(__instance);
-            var listPath = traverse.Field("listPath").GetValue<List<string>>();
-            var select = traverse.Field("select").GetValue<int>();
-
             foreach(var chara in Utils.GetSelectedCharacters().Where(chara => chara != __instance.ociChar))
-                PauseCtrl.Load(chara, listPath[select]);
+                PauseCtrl.Load(chara, __instance.listPath[__instance.select]);
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(MPCharCtrl), "LoadAnime")]
@@ -44,7 +39,7 @@ namespace CharaStateX.Koikatu
 
             int group = sexMatch ? MatchCategory(__instance.ociChar.sex, _group) : _group;
             __instance.ociChar.LoadAnime(group, _category, _no);
-            Traverse.Create(__instance).Field("animeControl").Method("UpdateInfo").GetValue();
+            __instance.animeControl.UpdateInfo();
 
             __instance.ociChar.animeOptionParam1 = animeOptionParam1;
             __instance.ociChar.animeOptionParam2 = animeOptionParam2;

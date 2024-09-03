@@ -60,11 +60,8 @@ namespace MakerBridge
         private void UpdateStateInfo()
         {
             var mpCharCtrl = FindObjectOfType<MPCharCtrl>();
-            if(mpCharCtrl)
-            {
-                int select = Traverse.Create(mpCharCtrl).Field("select").GetValue<int>();
-                if(select == 0) mpCharCtrl.OnClickRoot(0);
-            }
+            if(mpCharCtrl && (mpCharCtrl.select == 0 || mpCharCtrl.select == 1))
+                mpCharCtrl.OnClickRoot(mpCharCtrl.select);
         }
     }
 }

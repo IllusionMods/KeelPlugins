@@ -156,7 +156,7 @@ namespace ModLoader.PlayHome
                             var assetBundleName = streamReader.ReadLine();
 
                             var listLoader = new CustomDataListLoader();
-                            Traverse.Create(listLoader).Method("Load", new[] { typeof(TextReader) }).GetValue(streamReader);
+                            listLoader.Load(streamReader);
 
                             var abc = new AssetBundleController();
                             abc.OpenFromFile(Path.Combine(folder, "abdata"), assetBundleName);

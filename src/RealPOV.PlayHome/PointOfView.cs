@@ -213,10 +213,7 @@ namespace RealPOV.PlayHome
             if(lockNormalCamera && currentTarget)
             {
                 if(currentTarget.NeckLook == __instance && __instance.CalcType == LookAtRotator.TYPE.NO)
-                {
-                    var rotateBones = Traverse.Create(__instance).Field("rotateBones").GetValue<IList>();
-                    Traverse.Create(rotateBones[1]).Field("bone").GetValue<Transform>().Rotate(rotation);
-                }
+                    __instance.rotateBones[1].bone.Rotate(rotation);
             }
         }
     }
