@@ -1,8 +1,10 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Configuration;
-using HarmonyLib;
+using BepInEx.Logging;
 using KeelPlugins.Utils;
+using KKAPI.MainGame;
 using KKAPI.Maker;
+using KKAPI.Studio;
 using System;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ using UnityEngine;
 namespace LockOnPlugin
 {
     [BepInPlugin(GUID, PluginName, Version)]
+    [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class LockOnPluginCore : BaseUnityPlugin
     {
         public const string Version = "2.6.4." + BuildNumber.Version;
@@ -54,40 +57,16 @@ namespace LockOnPlugin
             PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
             NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
             
-            Harmony.CreateAndPatchAll(typeof(Entrypoints));
-            MakerAPI.MakerBaseLoaded += Entrypoints.MakerEntrypoint;
-            MakerAPI.MakerExiting += Entrypoints.MakerEnd;
+            MakerAPI.MakerBaseLoaded += (x, y) => bepinex.GetOrAddComponent<MakerMono>();
+            MakerAPI.MakerExiting += (x, y) => Destroy(bepinex.GetComponent<MakerMono>());
+            GameAPI.StartH += (x, y) => bepinex.GetOrAddComponent<HSceneMono>();
+            GameAPI.EndH += (x, y) => Destroy(bepinex.GetComponent<HSceneMono>());
+            StudioAPI.StudioLoadedChanged += (x, y) => bepinex.GetOrAddComponent<StudioMono>();
         }
 
-        private class Entrypoints
+        public static void LogMsg(object data)
         {
-            public static void MakerEntrypoint(object sender, RegisterCustomControlsEvent e)
-            {
-                bepinex.GetOrAddComponent<MakerMono>();
-            }
-
-            public static void MakerEnd(object sender, EventArgs e)
-            {
-                Destroy(bepinex.GetComponent<MakerMono>());
-            }
-
-            [HarmonyPrefix, HarmonyPatch(typeof(StudioScene), "Start")]
-            public static void StudioEntrypoint()
-            {
-                bepinex.GetOrAddComponent<StudioMono>();
-            }
-
-            [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "SetShortcutKey")]
-            public static void HSceneEntrypoint()
-            {
-                bepinex.GetOrAddComponent<HSceneMono>();
-            }
-
-            [HarmonyPrefix, HarmonyPatch(typeof(HSceneProc), "OnDestroy")]
-            public static void HSceneEnd()
-            {
-                Destroy(bepinex.GetComponent<HSceneMono>());
-            }
+            Log.Level(ShowInfoMsg.Value ? LogLevel.Message : LogLevel.Debug, data);
         }
     }
 }
