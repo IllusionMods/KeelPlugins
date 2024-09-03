@@ -10,38 +10,44 @@ namespace LockOnPlugin
 {
     internal class TargetData
     {
-        internal static TargetData data;
-        private const string dataFileName = "LockOnPluginData.json";
+        private static readonly string savePath = Path.Combine(Paths.ConfigPath, "LockOnPluginData.json");
 
-        public static void LoadData()
+        private static TargetData _instance;
+        public static TargetData Instance
         {
-            var dataPath = Path.Combine(Paths.ConfigPath, dataFileName);
+            get
+            {
+                if(_instance == null)
+                {
+                    if(File.Exists(savePath))
+                    {
+                        try
+                        {
+                            var json = File.ReadAllText(savePath);
+                            _instance = JSONSerializer.Deserialize<TargetData>(json);
+                            Log.Info("Loading custom target data.");
+                        }
+                        catch(Exception ex)
+                        {
+                            Log.Info($"Failed to deserialize custom target data. Loading default target data.\n{ex}");
+                            _instance = LoadResourceData();
+                        }
+                    }
+                    else
+                    {
+                        Log.Debug("Loading default target data.");
+                        _instance = LoadResourceData();
+                    }
+                }
 
-            if(File.Exists(dataPath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(dataPath);
-                    data = JSONSerializer.Deserialize<TargetData>(json);
-                    Log.Info("Loading custom target data.");
-                }
-                catch(Exception ex)
-                {
-                    Log.Info($"Failed to deserialize custom target data. Loading default target data.\n{ex}");
-                    LoadResourceData();
-                }
-            }
-            else
-            {
-                Log.Debug("Loading default target data.");
-                LoadResourceData();
+                return _instance;
             }
         }
 
-        private static void LoadResourceData()
+        private static TargetData LoadResourceData()
         {
-            var json = Encoding.UTF8.GetString(ResourceUtils.GetEmbeddedResource(dataFileName, typeof(LockOnPluginCore).Assembly));
-            data = JSONSerializer.Deserialize<TargetData>(json);
+            var json = Encoding.UTF8.GetString(ResourceUtils.GetEmbeddedResource(savePath, typeof(LockOnPluginCore).Assembly));
+            return JSONSerializer.Deserialize<TargetData>(json);
         }
 
 #pragma warning disable 649 // disable never assigned warning

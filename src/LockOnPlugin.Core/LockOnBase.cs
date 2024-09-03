@@ -32,12 +32,10 @@ namespace LockOnPlugin
         protected GameObject lockOnTarget;
         protected Vector3? lastTargetPos;
         protected float defaultCameraSpeed;
-        protected float trackingSpeedMax = 0.3f;
         protected bool shouldResetLock;
 
         protected Vector3 targetOffsetSize;
         protected Vector3 targetOffsetSizeAdded;
-        protected float offsetKeyHeld;
         protected bool reduceOffset;
 
         protected virtual void Start()
@@ -122,39 +120,12 @@ namespace LockOnPlugin
                     }
                 }
 
-                bool RightArrow = Input.GetKey(KeyCode.RightArrow), LeftArrow = Input.GetKey(KeyCode.LeftArrow);
-                bool UpArrow = Input.GetKey(KeyCode.UpArrow), DownArrow = Input.GetKey(KeyCode.DownArrow);
-                bool PageUp = Input.GetKey(KeyCode.PageUp), PageDown = Input.GetKey(KeyCode.PageDown);
-
-                if(!InputFieldSelected && (RightArrow || LeftArrow || UpArrow || DownArrow || PageUp || PageDown))
-                {
-                    reduceOffset = false;
-                    offsetKeyHeld += Time.deltaTime / 3f;
-                    if(offsetKeyHeld > 1f) offsetKeyHeld = 1f;
-                    float speed = Time.deltaTime * Mathf.Lerp(0.2f, 2f, offsetKeyHeld);
-
-                    if(RightArrow) targetOffsetSize += CameraRight * speed;
-                    else if(LeftArrow) targetOffsetSize += CameraRight * -speed;
-
-                    if(UpArrow) targetOffsetSize += CameraForward * speed;
-                    else if(DownArrow) targetOffsetSize += CameraForward * -speed;
-
-                    if(PageUp) targetOffsetSize += CameraUp * speed;
-                    else if(PageDown) targetOffsetSize += CameraUp * -speed;
-                }
-                else
-                {
-                    offsetKeyHeld -= Time.deltaTime * 2f;
-                    if(offsetKeyHeld < 0f) offsetKeyHeld = 0f;
-                }
-
                 if(reduceOffset)
                 {
                     // add this as a setting
                     if(targetOffsetSize.magnitude > 0.00001f)
                     {
-                        float trackingSpeed = CameraTargetManager.IsMovementPoint(lockOnTarget) ? trackingSpeedMax : LockOnPluginCore.TrackingSpeedNormal.Value;
-                        targetOffsetSize = Vector3.MoveTowards(targetOffsetSize, new Vector3(), targetOffsetSize.magnitude / (1f / trackingSpeed));
+                        targetOffsetSize = Vector3.MoveTowards(targetOffsetSize, new Vector3(), targetOffsetSize.magnitude / (1f / LockOnPluginCore.TrackingSpeedNormal.Value));
                     }
                     else
                     {
@@ -165,20 +136,8 @@ namespace LockOnPlugin
 
                 if(AllowTracking)
                 {
-                    float trackingSpeed;
-                    float leash;
-
-                    if(CameraTargetManager.IsMovementPoint(lockOnTarget))
-                    {
-                        trackingSpeed = trackingSpeedMax;
-                        leash = 0f;
-                    }
-                    else
-                    {
-                        trackingSpeed = LockOnPluginCore.TrackingSpeedNormal.Value;
-                        leash = LockOnPluginCore.LockLeashLength.Value;
-                    }
-
+                    float trackingSpeed = LockOnPluginCore.TrackingSpeedNormal.Value;
+                    float leash = LockOnPluginCore.LockLeashLength.Value;
                     float distance = Vector3.Distance(CameraTargetPos, lastTargetPos.Value);
                     if(distance > leash + 0.00001f)
                         CameraTargetPos = Vector3.MoveTowards(CameraTargetPos, LockOnTargetPos + targetOffsetSize, (distance - leash) * trackingSpeed * Time.deltaTime * 60f);
@@ -191,12 +150,6 @@ namespace LockOnPlugin
 
         protected virtual void OnGUI()
         {
-            if(LockOnPluginCore.ShowInfoMsg.Value && Guitime.info > 0f)
-            {
-                DebugGUI(Guitime.pos.x, Guitime.pos.y, 200f, 45f, Guitime.msg);
-                Guitime.info -= Time.deltaTime;
-            }
-
             if(Guitime.angle > 0f)
             {
                 DebugGUI(0.5f, 0.5f, 100f, 50f, "Camera tilt\n" + CameraAngle.z.ToString("0.0"));
@@ -297,7 +250,7 @@ namespace LockOnPlugin
                 lockOnTarget = target;
                 if(lastTargetPos == null) lastTargetPos = LockOnTargetPos + targetOffsetSize;
                 CameraMoveSpeed = 0f;
-                Guitime.InfoMsg("Locked to \"" + lockOnTarget.name + "\"");
+                LockOnPluginCore.LogMsg($"Locked to \"{lockOnTarget.name}\"");
                 return true;
             }
 
@@ -313,7 +266,7 @@ namespace LockOnPlugin
                 lockOnTarget = null;
                 lastTargetPos = null;
                 CameraMoveSpeed = defaultCameraSpeed;
-                Guitime.InfoMsg("Camera unlocked");
+                LockOnPluginCore.LogMsg("Camera unlocked");
             }
         }
 
@@ -329,23 +282,16 @@ namespace LockOnPlugin
             lockOnTarget = null;
             lastTargetPos = null;
             CameraMoveSpeed = defaultCameraSpeed;
-            Guitime.InfoMsg("Camera unlocked");
             currentCharaInfo = null;
+            LockOnPluginCore.LogMsg("Camera unlocked");
         }
 
         protected static class Guitime
         {
             public static float angle;
             public static float fov;
-            public static float info;
             public static string msg = "";
             public static Vector2 pos = new Vector2(0.5f, 0f);
-
-            public static void InfoMsg(string newMsg, float time = 3f)
-            {
-                msg = newMsg;
-                info = time;
-            }
         }
     }
 }

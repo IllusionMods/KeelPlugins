@@ -6,7 +6,6 @@ namespace LockOnPlugin
 {
     internal class CameraTargetManager : MonoBehaviour
     {
-        private const string MOVEMENTPOINT_NAME = "MovementPoint";
         private const string CENTERPOINT_NAME = "CenterPoint";
 
         private List<GameObject> quickTargets = new List<GameObject>();
@@ -15,24 +14,14 @@ namespace LockOnPlugin
 
         public static CameraTargetManager GetTargetManager(ChaInfo chara)
         {
-            var targetManager = chara.gameObject.GetComponent<CameraTargetManager>();
-            if(!targetManager)
-            {
-                targetManager = chara.gameObject.AddComponent<CameraTargetManager>();
-                targetManager.UpdateAllTargets(chara);
-            }
-
+            var targetManager = chara.gameObject.GetOrAddComponent<CameraTargetManager>();
+            targetManager.UpdateAllTargets(chara);
             return targetManager;
         }
 
         public static bool IsCenterPoint(GameObject point)
         {
             return point.name == CENTERPOINT_NAME;
-        }
-
-        public static bool IsMovementPoint(GameObject point)
-        {
-            return point.name == MOVEMENTPOINT_NAME;
         }
 
         public List<GameObject> GetTargets()
@@ -65,7 +54,7 @@ namespace LockOnPlugin
         {
             var quickTargets = new List<GameObject>();
 
-            foreach(var targetName in TargetData.data.quickTargets)
+            foreach(var targetName in TargetData.Instance.quickTargets)
             {
                 bool customFound = false;
 
@@ -98,13 +87,13 @@ namespace LockOnPlugin
         {
             var customTargets = new List<CustomTarget>();
 
-            foreach(var data in TargetData.data.customTargets)
+            foreach(var data in TargetData.Instance.customTargets)
             {
-                bool targetInUse = TargetData.data.quickTargets.Contains(data.target);
+                bool targetInUse = TargetData.Instance.quickTargets.Contains(data.target);
 
                 if(!targetInUse)
                 {
-                    foreach(var target in TargetData.data.customTargets)
+                    foreach(var target in TargetData.Instance.customTargets)
                     {
                         if(target.point1 == data.target || target.point2 == data.target)
                         {
@@ -154,10 +143,10 @@ namespace LockOnPlugin
 
         private class CustomTarget
         {
-            private GameObject target;
-            private GameObject point1;
-            private GameObject point2;
-            private float midpoint;
+            private readonly GameObject target;
+            private readonly GameObject point1;
+            private readonly GameObject point2;
+            private readonly float midpoint;
 
             public CustomTarget(string name, GameObject point1, GameObject point2, float midpoint = 0.5f)
             {
@@ -196,12 +185,12 @@ namespace LockOnPlugin
 
         private class CenterPoint
         {
-            private List<WeightPoint> points = new List<WeightPoint>();
-            private GameObject point;
+            private readonly List<WeightPoint> points = new List<WeightPoint>();
+            private readonly GameObject point;
 
             public CenterPoint(ChaInfo character)
             {
-                foreach(var data in TargetData.data.centerWeigths)
+                foreach(var data in TargetData.Instance.centerWeigths)
                 {
                     var point = character.objBodyBone.transform.FindLoop(data.bone);
                     points.Add(new WeightPoint(point, data.weigth));
@@ -226,7 +215,8 @@ namespace LockOnPlugin
 
             public void UpdatePosition()
             {
-                if(point) point.transform.position = CalculateCenterPoint(points);
+                if(point)
+                    point.transform.position = CalculateCenterPoint(points);
             }
 
             private Vector3 CalculateCenterPoint(List<WeightPoint> points)
@@ -245,8 +235,8 @@ namespace LockOnPlugin
 
         private class WeightPoint
         {
-            public GameObject point;
-            public float weight;
+            public readonly GameObject point;
+            public readonly float weight;
 
             public WeightPoint(GameObject point, float weight)
             {

@@ -34,8 +34,8 @@ namespace LockOnPlugin
 
         protected override Vector3 CameraDir
         {
-            get => cameraData.distance;
-            set => cameraData.distance = value;
+            get => camera.cameraData.distance;
+            set => camera.cameraData.distance = value;
         }
 
         protected override bool CameraTargetTex
@@ -49,19 +49,17 @@ namespace LockOnPlugin
         protected override bool InputFieldSelected => base.InputFieldSelected || studio.isInputNow || guideObjectManager.isOperationTarget;
         protected override bool CameraEnabled => camera.enabled;
 
-        private Studio.Studio studio = Studio.Studio.Instance;
-        private Studio.CameraControl camera = Studio.Studio.Instance.cameraCtrl;
-        private TreeNodeCtrl treeNodeCtrl = Studio.Studio.Instance.treeNodeCtrl;
-        private GuideObjectManager guideObjectManager = GuideObjectManager.Instance;
+        private readonly Studio.Studio studio = Studio.Studio.Instance;
+        private readonly Studio.CameraControl camera = Studio.Studio.Instance.cameraCtrl;
+        private readonly TreeNodeCtrl treeNodeCtrl = Studio.Studio.Instance.treeNodeCtrl;
+        private readonly GuideObjectManager guideObjectManager = GuideObjectManager.Instance;
 
-        private Studio.CameraControl.CameraData cameraData;
         private OCIChar currentCharaOCI;
 
         protected override void Start()
         {
             base.Start();
 
-            cameraData = Traverse.Create(camera).Field("cameraData").GetValue<Studio.CameraControl.CameraData>();
             treeNodeCtrl.onSelect += OnSelectWork;
             studio.onDelete += OnDeleteWork;
             var systemMenuContent = studio.transform.Find("Canvas Main Menu/04_System/Viewport/Content");

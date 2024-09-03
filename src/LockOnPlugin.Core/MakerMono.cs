@@ -4,7 +4,7 @@ namespace LockOnPlugin
 {
     internal class MakerMono : LockOnBase
     {
-        private CameraControl_Ver2 camera = Singleton<CameraControl_Ver2>.Instance;
+        private readonly CameraControl_Ver2 camera = Singleton<CameraControl_Ver2>.Instance;
 
         protected override void Start()
         {

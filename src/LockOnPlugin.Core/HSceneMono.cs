@@ -5,7 +5,7 @@ namespace LockOnPlugin
 {
     internal class HSceneMono : LockOnBase
     {
-        private CameraControl_Ver2 camera = Singleton<CameraControl_Ver2>.Instance;
+        private readonly CameraControl_Ver2 camera = Singleton<CameraControl_Ver2>.Instance;
 
         protected override float CameraMoveSpeed
         {
@@ -60,7 +60,7 @@ namespace LockOnPlugin
             foreach(var chara in FindObjectsOfType<ChaControl>())
             {
                 float magnitude = 0f;
-                foreach(var targetname in TargetData.data.presenceTargets)
+                foreach(var targetname in TargetData.Instance.presenceTargets)
                 {
                     var target = chara.objBodyBone.transform.FindLoop(targetname);
                     float distance = Vector3.Distance(camera.TargetPos, camera.transBase.InverseTransformPoint(target.transform.position));
