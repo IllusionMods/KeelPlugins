@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace LockOnPlugin
 {
-    internal class CameraTargetManager : MonoBehaviour
+    public class CameraTargetManager : MonoBehaviour
     {
         private const string CENTERPOINT_NAME = "CenterPoint";
 
-        private List<GameObject> quickTargets = new List<GameObject>();
+        public List<GameObject> QuickTargets { get; private set; }  = new List<GameObject>();
         private List<CustomTarget> customTargets = new List<CustomTarget>();
         private CenterPoint centerPoint;
 
-        public static CameraTargetManager GetTargetManager(ChaInfo chara)
+        public static CameraTargetManager GetOrAddManager(ChaInfo chara)
         {
             var targetManager = chara.gameObject.GetComponent<CameraTargetManager>();
             if(!targetManager)
@@ -20,28 +20,13 @@ namespace LockOnPlugin
                 targetManager = chara.gameObject.AddComponent<CameraTargetManager>();
                 targetManager.UpdateAllTargets(chara);
             }
-
             return targetManager;
-        }
-        
-        public static bool IsCenterPoint(GameObject point)
-        {
-            return point.name == CENTERPOINT_NAME;
-        }
-
-        public List<GameObject> GetTargets()
-        {
-            return quickTargets;
         }
 
         private void Update()
         {
-            UpdateCustomTargetTransforms();
-        }
-
-        private void UpdateCustomTargetTransforms()
-        {
-            customTargets.ForEach(x => x.UpdateTransform());
+            foreach(var customTarget in customTargets)
+                customTarget.UpdatePosition();
             centerPoint?.UpdatePosition();
         }
 
@@ -50,12 +35,12 @@ namespace LockOnPlugin
             if(character)
             {
                 centerPoint = new CenterPoint(character);
-                customTargets = UpdateCustomTargets(character);
-                quickTargets = UpdateQuickTargets(character);
+                customTargets = GetCustomTargets(character);
+                QuickTargets = GetQuickTargets(character);
             }
         }
 
-        private List<GameObject> UpdateQuickTargets(ChaInfo character)
+        private List<GameObject> GetQuickTargets(ChaInfo character)
         {
             var quickTargets = new List<GameObject>();
 
@@ -65,15 +50,15 @@ namespace LockOnPlugin
 
                 if(targetName == CENTERPOINT_NAME)
                 {
-                    quickTargets.Add(centerPoint.GetPoint());
+                    quickTargets.Add(centerPoint.point);
                     customFound = true;
                 }
 
                 foreach(var customTarget in customTargets)
                 {
-                    if(customTarget.GetTarget().name == targetName)
+                    if(customTarget.target.name == targetName)
                     {
-                        quickTargets.Add(customTarget.GetTarget());
+                        quickTargets.Add(customTarget.target);
                         customFound = true;
                     }
                 }
@@ -88,7 +73,7 @@ namespace LockOnPlugin
             return quickTargets;
         }
 
-        private List<CustomTarget> UpdateCustomTargets(ChaInfo character)
+        private List<CustomTarget> GetCustomTargets(ChaInfo character)
         {
             var customTargets = new List<CustomTarget>();
 
@@ -113,24 +98,24 @@ namespace LockOnPlugin
                     var point1 = character.objBodyBone.transform.FindLoop(data.point1);
                     var point2 = character.objBodyBone.transform.FindLoop(data.point2);
 
-                    foreach(var target in customTargets)
+                    foreach(var customTarget in customTargets)
                     {
-                        if(target.GetTarget().name == data.point1)
+                        if(customTarget.target.name == data.point1)
                         {
-                            point1 = target.GetTarget();
+                            point1 = customTarget.target;
                         }
 
-                        if(target.GetTarget().name == data.point2)
+                        if(customTarget.target.name == data.point2)
                         {
-                            point2 = target.GetTarget();
+                            point2 = customTarget.target;
                         }
                     }
 
                     if(point1 && point2)
                     {
-                        var target = new CustomTarget(data.target, point1, point2, data.midpoint);
-                        target.GetTarget().transform.SetParent(character.transform);
-                        customTargets.Add(target);
+                        var customTarget = new CustomTarget(data.target, point1, point2, data.midpoint);
+                        customTarget.target.transform.SetParent(character.transform);
+                        customTargets.Add(customTarget);
                     }
                     else
                     {
@@ -148,7 +133,7 @@ namespace LockOnPlugin
 
         private class CustomTarget
         {
-            private readonly GameObject target;
+            public readonly GameObject target;
             private readonly GameObject point1;
             private readonly GameObject point2;
             private readonly float midpoint;
@@ -159,39 +144,21 @@ namespace LockOnPlugin
                 this.point1 = point1;
                 this.point2 = point2;
                 this.midpoint = midpoint;
-                UpdateTransform();
-            }
-
-            public GameObject GetTarget()
-            {
-                return target;
-            }
-
-            public void UpdateTransform()
-            {
                 UpdatePosition();
-                UpdateRotation();
             }
 
-            private void UpdatePosition()
+            public void UpdatePosition()
             {
                 var pos1 = point1.transform.position;
                 var pos2 = point2.transform.position;
                 target.transform.position = Vector3.Lerp(pos1, pos2, midpoint);
-            }
-
-            private void UpdateRotation()
-            {
-                var rot1 = point1.transform.rotation;
-                var rot2 = point2.transform.rotation;
-                target.transform.rotation = Quaternion.Slerp(rot1, rot2, 0.5f);
             }
         }
 
         private class CenterPoint
         {
             private readonly List<WeightPoint> points = new List<WeightPoint>();
-            private readonly GameObject point;
+            public readonly GameObject point;
 
             public CenterPoint(ChaInfo character)
             {
@@ -213,18 +180,13 @@ namespace LockOnPlugin
                 }
             }
 
-            public GameObject GetPoint()
-            {
-                return point;
-            }
-
             public void UpdatePosition()
             {
                 if(point)
-                    point.transform.position = CalculateCenterPoint(points);
+                    point.transform.position = CalculateCenterPoint();
             }
 
-            private Vector3 CalculateCenterPoint(List<WeightPoint> points)
+            private Vector3 CalculateCenterPoint()
             {
                 var center = new Vector3();
                 float totalWeight = 0f;

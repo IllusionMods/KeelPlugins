@@ -176,7 +176,7 @@ namespace LockOnPlugin
         {
             if(currentCharaInfo)
             {
-                var targets = CameraTargetManager.GetTargetManager(currentCharaInfo).GetTargets();
+                var targets = CameraTargetManager.GetOrAddManager(currentCharaInfo).QuickTargets;
 
                 if(shouldResetLock)
                 {
@@ -219,7 +219,7 @@ namespace LockOnPlugin
 
         protected virtual bool LockOn(string targetName, bool lockOnAnyway = false, bool resetOffset = true)
         {
-            foreach(var target in CameraTargetManager.GetTargetManager(currentCharaInfo).GetTargets())
+            foreach(var target in CameraTargetManager.GetOrAddManager(currentCharaInfo).QuickTargets)
             {
                 if(target.name == targetName)
                 {
