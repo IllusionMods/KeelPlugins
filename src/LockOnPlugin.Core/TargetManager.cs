@@ -14,11 +14,16 @@ namespace LockOnPlugin
 
         public static CameraTargetManager GetTargetManager(ChaInfo chara)
         {
-            var targetManager = chara.gameObject.GetOrAddComponent<CameraTargetManager>();
-            targetManager.UpdateAllTargets(chara);
+            var targetManager = chara.gameObject.GetComponent<CameraTargetManager>();
+            if(!targetManager)
+            {
+                targetManager = chara.gameObject.AddComponent<CameraTargetManager>();
+                targetManager.UpdateAllTargets(chara);
+            }
+
             return targetManager;
         }
-
+        
         public static bool IsCenterPoint(GameObject point)
         {
             return point.name == CENTERPOINT_NAME;
