@@ -2,12 +2,6 @@
   <Import Project="..\BuildSettings.Common.props" />
   <Import Project="..\BuildSettings.Koikatu.props" />
   <ItemGroup>
-    <None Remove="LockOnPluginData.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LockOnPluginData.json" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="IllusionModdingAPI.KKAPI" Version="1.37.0" />
   </ItemGroup>
   <Import Project="..\LockOnPlugin.Core\LockOnPlugin.Core.projitems" Label="Shared" />
