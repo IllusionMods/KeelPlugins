@@ -112,15 +112,15 @@ namespace RealPOV.Koikatu
                     }
 
                     currentCharaGo = null;
-                    if(!currentChara)
-                    {
+                    if(currentChara)
                         currentCharaGo = currentChara.gameObject;
+
+                    if(!currentChara)
                         Log.Message("Can't enter POV: Could not find any valid characters");
-                    }
                 }
             }
 
-            if(currentChara != null)
+            if(currentChara)
             {
                 prevVisibleHeadAlways = currentChara.fileStatus.visibleHeadAlways;
                 if(HideHead.Value) currentChara.fileStatus.visibleHeadAlways = false;
