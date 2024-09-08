@@ -45,7 +45,7 @@ namespace RealPOV.Koikatu
             HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "When entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
             SelectedPOV = Config.Bind(SECTION_GENERAL, "Selected POV", PovSex.Male, "Choose which sex to use as your point of view.");
 
-            Harmony.CreateAndPatchAll(GetType());
+            Harmony.CreateAndPatchAll(typeof(Hooks));
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
 
             SceneManager.sceneLoaded += (arg0, scene) =>
@@ -116,8 +116,7 @@ namespace RealPOV.Koikatu
                     currentCharaGo = null;
                     if(currentChara)
                         currentCharaGo = currentChara.gameObject;
-
-                    if(!currentChara)
+                    else
                         Log.Message("Can't enter POV: Could not find any valid characters");
                 }
             }
@@ -144,8 +143,7 @@ namespace RealPOV.Koikatu
                 }
 
                 // only use head rotation if there is no existing rotation
-                if(!LookRotation.TryGetValue(currentCharaGo != null ? currentCharaGo : throw new InvalidOperationException("currentCharaGo null"), out _))
-                {
+                if(!LookRotation.TryGetValue(currentCharaGo, out _))
                     LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
 
                 base.EnablePov();
@@ -167,10 +165,14 @@ namespace RealPOV.Koikatu
 
                 // Rotate the queue
                 charaQueue.Enqueue(chaControl);
-                if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
-                if(SelectedPOV.Value != PovSex.Either && chaControl.sex != (int)SelectedPOV.Value) continue;
+
+                if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) 
+                    continue;
+                if(SelectedPOV.Value != PovSex.Either && chaControl.sex != (int)SelectedPOV.Value)
+                    continue;
                 // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
-                if(chaControl.objTop.activeInHierarchy) return chaControl;
+                if(chaControl.objTop.activeInHierarchy)
+                    return chaControl;
             }
             return null;
         }
@@ -198,49 +200,52 @@ namespace RealPOV.Koikatu
                 GameCamera.gameObject.layer = backupLayer;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate)), HarmonyWrapSafe]
-        private static bool ApplyRotation(NeckLookControllerVer2 __instance)
+        private class Hooks
         {
-            if(POVEnabled)
+            [HarmonyPrefix, HarmonyPatch(typeof(NeckLookControllerVer2), nameof(NeckLookControllerVer2.LateUpdate)), HarmonyWrapSafe]
+            private static bool ApplyRotation(NeckLookControllerVer2 __instance)
             {
-                if(!currentChara)
+                if(POVEnabled)
                 {
-                    plugin.DisablePov();
-                    return true;
+                    if(!currentChara)
+                    {
+                        plugin.DisablePov();
+                        return true;
+                    }
+
+                    Vector3 rot;
+                    if(LookRotation.TryGetValue(currentCharaGo, out var val))
+                        rot = val;
+                    else
+                        LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
+
+                    if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
+                    {
+                        __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
+                        __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
+
+                        var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
+                        var pos = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
+                        GameCamera.transform.SetPositionAndRotation(pos, currentChara.objHeadBone.transform.rotation);
+                        GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
+                        if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
+                        GameCamera.fieldOfView = CurrentFOV.Value;
+
+                        return false;
+                    }
                 }
 
-                Vector3 rot;
-                if(LookRotation.TryGetValue(currentCharaGo, out var val))
-                    rot = val;
-                else
-                    LookRotation[currentCharaGo] = rot = currentChara.objHeadBone.transform.rotation.eulerAngles;
-
-                if(__instance.neckLookScript && currentChara.neckLookCtrl == __instance)
-                {
-                    __instance.neckLookScript.aBones[0].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.rotation = Quaternion.identity;
-                    __instance.neckLookScript.aBones[1].neckBone.Rotate(rot);
-
-                    var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
-                    var pos = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
-                    GameCamera.transform.SetPositionAndRotation(pos, currentChara.objHeadBone.transform.rotation);
-                    GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
-                    if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
-                    GameCamera.fieldOfView = CurrentFOV.Value;
-
-                    return false;
-                }
+                return true;
             }
 
-            return true;
-        }
-
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
-        [HarmonyPatch(typeof(HFlag), nameof(HFlag.selectAnimationListInfo), MethodType.Setter)]
-        private static void ResetAllRotations()
-        {
-            LookRotation.Clear();
+            [HarmonyPostfix]
+            [HarmonyPatch(typeof(HSceneProc), "ChangeAnimator")]
+            [HarmonyPatch(typeof(HFlag), nameof(HFlag.selectAnimationListInfo), MethodType.Setter)]
+            private static void ResetAllRotations()
+            {
+                LookRotation.Clear();
+            }
         }
 
         private enum PovSex
