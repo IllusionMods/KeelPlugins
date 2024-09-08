@@ -21,6 +21,7 @@ namespace RealPOV.Koikatu
         public const string Version = "1.3.3." + BuildNumber.Version;
 
         private ConfigEntry<bool> HideHead { get; set; }
+        private ConfigEntry<PovSex> SelectedPOV { get; set; }
 
         private static int backupLayer;
         private static ChaControl currentChara;
@@ -42,6 +43,7 @@ namespace RealPOV.Koikatu
             base.Awake();
 
             HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "When entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
+            SelectedPOV = Config.Bind(SECTION_GENERAL, "Selected POV", PovSex.Male, "Choose which sex to use as your point of view.");
 
             Harmony.CreateAndPatchAll(GetType());
             StudioSaveLoadApi.RegisterExtraBehaviour<SceneDataController>(GUID);
@@ -173,6 +175,7 @@ namespace RealPOV.Koikatu
                 // Rotate the queue
                 charaQueue.Enqueue(chaControl);
                 if(chaControl.sex == 0 && hFlag && (hFlag.mode == HFlag.EMode.aibu || hFlag.mode == HFlag.EMode.lesbian || hFlag.mode == HFlag.EMode.masturbation)) continue;
+                if(SelectedPOV.Value != PovSex.Either && chaControl.sex != (int)SelectedPOV.Value) continue;
                 // Found a valid character, otherwise skip (needed for story mode H because roam mode characters are in the queue too, just disabled)
                 if(chaControl.objTop.activeInHierarchy) return chaControl;
             }
@@ -245,6 +248,13 @@ namespace RealPOV.Koikatu
         private static void ResetAllRotations()
         {
             LookRotation.Clear();
+        }
+
+        private enum PovSex
+        {
+            Male,
+            Female,
+            Either
         }
     }
 }
