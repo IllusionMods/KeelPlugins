@@ -147,13 +147,6 @@ namespace RealPOV.Koikatu
                 if(!LookRotation.TryGetValue(currentCharaGo != null ? currentCharaGo : throw new InvalidOperationException("currentCharaGo null"), out _))
                 {
                     LookRotation[currentCharaGo] = currentChara.objHeadBone.transform.rotation.eulerAngles;
-                }
-                else
-                {
-                    // always get z axis from head
-                    var rot = LookRotation[currentCharaGo];
-                    LookRotation[currentCharaGo] = new Vector3(rot.x, rot.y, currentChara.objHeadBone.transform.rotation.eulerAngles.z);
-                }
 
                 base.EnablePov();
 
