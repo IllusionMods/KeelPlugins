@@ -64,7 +64,11 @@ namespace ClothingStateMenuX
 
         private static class Hooks
         {
+#if KK
+            [HarmonyPostfix, HarmonyPatch("KK_Plugins.MoreOutfits.MakerUI, KK_MoreOutfits", "UpdateMakerUI"), HarmonyWrapSafe]
+#else
             [HarmonyPostfix, HarmonyPatch("KK_Plugins.MoreOutfits.MakerUI, KKS_MoreOutfits", "UpdateMakerUI"), HarmonyWrapSafe]
+#endif
             private static void MoreOutfitsHook()
             {
                 UI.ReloadClothingSets();
