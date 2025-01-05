@@ -5,7 +5,7 @@ using KeelPlugins;
 using KKAPI;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(TesselationSetting.Koikatu.TesselationSetting.Version)]
+[assembly: System.Reflection.AssemblyVersion(TesselationSetting.Koikatu.TesselationSetting.Version)]
 
 namespace TesselationSetting.Koikatu
 {

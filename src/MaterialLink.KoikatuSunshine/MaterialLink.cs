@@ -4,7 +4,7 @@ using BepInEx;
 using HarmonyLib;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(MaterialLink.KoikatuSunshine.MaterialLinkInfo.Version)]
+[assembly: System.Reflection.AssemblyVersion(MaterialLink.KoikatuSunshine.MaterialLinkInfo.Version)]
 
 namespace MaterialLink.KoikatuSunshine
 {

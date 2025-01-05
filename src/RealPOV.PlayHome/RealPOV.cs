@@ -6,7 +6,7 @@ using KeelPlugins.Utils;
 using RealPOV.Core;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(RealPOV.PlayHome.RealPOV.Version)]
+[assembly: System.Reflection.AssemblyVersion(RealPOV.PlayHome.RealPOV.Version)]
 
 namespace RealPOV.PlayHome
 {

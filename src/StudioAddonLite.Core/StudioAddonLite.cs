@@ -4,7 +4,7 @@ using HarmonyLib;
 using KeelPlugins;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(StudioAddonLite.Koikatu.StudioAddonLite.Version)]
+[assembly: System.Reflection.AssemblyVersion(StudioAddonLite.Koikatu.StudioAddonLite.Version)]
 
 namespace StudioAddonLite.Koikatu
 {

@@ -14,7 +14,7 @@ using Manager;
 using UniRx;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(FreeHDefaults.Koikatu.FreeHDefaults.Version)]
+[assembly: System.Reflection.AssemblyVersion(FreeHDefaults.Koikatu.FreeHDefaults.Version)]
 
 namespace FreeHDefaults.Koikatu
 {

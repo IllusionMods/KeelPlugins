@@ -4,7 +4,7 @@ using KeelPlugins;
 using KKAPI.Studio.SaveLoad;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(LightManager.Koikatu.LightManagerPlugin.Version)]
+[assembly: System.Reflection.AssemblyVersion(LightManager.Koikatu.LightManagerPlugin.Version)]
 
 namespace LightManager.Koikatu
 {
