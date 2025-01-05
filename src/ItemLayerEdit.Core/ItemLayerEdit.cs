@@ -6,7 +6,7 @@ using Studio;
 using System.Linq;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(ItemLayerEdit.Koikatu.ItemLayerEdit.Version)]
+[assembly: System.Reflection.AssemblyVersion(ItemLayerEdit.Koikatu.ItemLayerEdit.Version)]
 
 namespace ItemLayerEdit.Koikatu
 {

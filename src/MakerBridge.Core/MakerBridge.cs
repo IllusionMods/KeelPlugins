@@ -6,7 +6,7 @@ using UnityEngine;
 using KKAPI.Maker;
 using KKAPI.Studio;
 
-[assembly: System.Reflection.AssemblyFileVersion(MakerBridge.MakerBridge.Version)]
+[assembly: System.Reflection.AssemblyVersion(MakerBridge.MakerBridge.Version)]
 
 namespace MakerBridge
 {

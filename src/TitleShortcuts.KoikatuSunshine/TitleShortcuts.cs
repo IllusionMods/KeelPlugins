@@ -7,7 +7,7 @@ using System.Collections;
 using TitleShortcuts.Core;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.KoikatuSunshine.TitleShortcuts.Version)]
+[assembly: System.Reflection.AssemblyVersion(TitleShortcuts.KoikatuSunshine.TitleShortcuts.Version)]
 
 namespace TitleShortcuts.KoikatuSunshine
 {

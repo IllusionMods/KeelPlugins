@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Linq;
 
-[assembly: System.Reflection.AssemblyFileVersion(AnimeAssAssistant.AAA.Version)]
+[assembly: System.Reflection.AssemblyVersion(AnimeAssAssistant.AAA.Version)]
 
 namespace AnimeAssAssistant
 {

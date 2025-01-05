@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.HoneySelect2.TitleShortcuts.Version)]
+[assembly: System.Reflection.AssemblyVersion(TitleShortcuts.HoneySelect2.TitleShortcuts.Version)]
 
 namespace TitleShortcuts.HoneySelect2
 {

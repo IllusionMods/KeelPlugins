@@ -7,7 +7,7 @@ using UnityEngine;
 using KKAPI.Utilities;
 using KeelPlugins;
 
-[assembly: System.Reflection.AssemblyFileVersion(DefaultStudioScene.Koikatu.DefaultStudioScene.Version)]
+[assembly: System.Reflection.AssemblyVersion(DefaultStudioScene.Koikatu.DefaultStudioScene.Version)]
 
 namespace DefaultStudioScene.Koikatu
 {

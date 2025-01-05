@@ -5,7 +5,7 @@ using KeelPlugins;
 using KeelPlugins.Utils;
 using UILib;
 
-[assembly: System.Reflection.AssemblyFileVersion(BetterSceneLoader.BetterSceneLoader.Version)]
+[assembly: System.Reflection.AssemblyVersion(BetterSceneLoader.BetterSceneLoader.Version)]
 
 namespace BetterSceneLoader
 {

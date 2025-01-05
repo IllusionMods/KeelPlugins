@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[assembly: System.Reflection.AssemblyFileVersion(AltAutoMode.PlayHome.AltAutoMode.Version)]
+[assembly: System.Reflection.AssemblyVersion(AltAutoMode.PlayHome.AltAutoMode.Version)]
 
 namespace AltAutoMode.PlayHome
 {

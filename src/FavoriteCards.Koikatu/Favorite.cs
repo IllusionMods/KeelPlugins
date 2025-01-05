@@ -5,7 +5,7 @@ using KKAPI.Utilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[assembly: System.Reflection.AssemblyFileVersion(FavoriteCards.Koikatu.Favorite.Version)]
+[assembly: System.Reflection.AssemblyVersion(FavoriteCards.Koikatu.Favorite.Version)]
 
 namespace FavoriteCards.Koikatu
 {

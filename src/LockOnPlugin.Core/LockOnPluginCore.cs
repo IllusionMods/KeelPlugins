@@ -8,7 +8,7 @@ using KKAPI.Studio;
 using System;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(LockOnPlugin.LockOnPluginCore.Version)]
+[assembly: System.Reflection.AssemblyVersion(LockOnPlugin.LockOnPluginCore.Version)]
 
 namespace LockOnPlugin
 {

@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(SoundEffects.PlayHome.SoundEffects.Version)]
+[assembly: System.Reflection.AssemblyVersion(SoundEffects.PlayHome.SoundEffects.Version)]
 
 namespace SoundEffects.PlayHome
 {

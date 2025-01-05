@@ -8,7 +8,7 @@ using KeelPlugins.Harmony;
 using TitleShortcuts.Core;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(TitleShortcuts.Koikatu.TitleShortcuts.Version)]
+[assembly: System.Reflection.AssemblyVersion(TitleShortcuts.Koikatu.TitleShortcuts.Version)]
 
 namespace TitleShortcuts.Koikatu
 {

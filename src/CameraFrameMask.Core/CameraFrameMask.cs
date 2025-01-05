@@ -3,7 +3,7 @@ using HarmonyLib;
 using Studio;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(CameraFrameMask.Koikatu.CameraFrameMask.Version)]
+[assembly: System.Reflection.AssemblyVersion(CameraFrameMask.Koikatu.CameraFrameMask.Version)]
 
 namespace CameraFrameMask.Koikatu
 {

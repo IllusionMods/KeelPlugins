@@ -10,7 +10,7 @@ using KKAPI.Studio.SaveLoad;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[assembly: System.Reflection.AssemblyFileVersion(RealPOV.Koikatu.RealPOV.Version)]
+[assembly: System.Reflection.AssemblyVersion(RealPOV.Koikatu.RealPOV.Version)]
 
 namespace RealPOV.Koikatu
 {

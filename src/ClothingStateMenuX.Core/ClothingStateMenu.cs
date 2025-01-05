@@ -7,7 +7,7 @@ using KeelPlugins;
 using KKAPI;
 using KKAPI.Maker;
 
-[assembly: System.Reflection.AssemblyFileVersion(ClothingStateMenuX.ClothingStateMenu.Version)]
+[assembly: System.Reflection.AssemblyVersion(ClothingStateMenuX.ClothingStateMenu.Version)]
 
 namespace ClothingStateMenuX
 {

@@ -2,7 +2,7 @@
 using HarmonyLib;
 using KeelPlugins;
 
-[assembly: System.Reflection.AssemblyFileVersion(CharaStateX.Koikatu.CharaStateX.Version)]
+[assembly: System.Reflection.AssemblyVersion(CharaStateX.Koikatu.CharaStateX.Version)]
 
 namespace CharaStateX.Koikatu
 {

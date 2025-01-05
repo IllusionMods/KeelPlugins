@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-[assembly: System.Reflection.AssemblyFileVersion(UnityLogFilter.UnityLogFilter.Version)]
+[assembly: System.Reflection.AssemblyVersion(UnityLogFilter.UnityLogFilter.Version)]
 
 namespace UnityLogFilter
 {

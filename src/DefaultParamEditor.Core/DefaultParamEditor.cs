@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[assembly: System.Reflection.AssemblyFileVersion(DefaultParamEditor.Koikatu.DefaultParamEditor.Version)]
+[assembly: System.Reflection.AssemblyVersion(DefaultParamEditor.Koikatu.DefaultParamEditor.Version)]
 
 namespace DefaultParamEditor.Koikatu
 {

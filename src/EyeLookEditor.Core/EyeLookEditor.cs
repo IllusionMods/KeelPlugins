@@ -5,7 +5,7 @@ using KKAPI.Maker.UI;
 using System;
 using UnityEngine;
 
-[assembly: System.Reflection.AssemblyFileVersion(EyeLookEditor.EyeLookEditor.Version)]
+[assembly: System.Reflection.AssemblyVersion(EyeLookEditor.EyeLookEditor.Version)]
 
 namespace EyeLookEditor
 {
