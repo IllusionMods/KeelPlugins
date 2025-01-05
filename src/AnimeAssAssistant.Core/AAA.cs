@@ -19,8 +19,6 @@ namespace AnimeAssAssistant
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     [BepInProcess(Constants.MainGameProcessName)]
     [BepInProcess(Constants.VRProcessName)]
-    [BepInProcess(Constants.MainGameProcessNameSteam)]
-    [BepInProcess(Constants.VRProcessNameSteam)]
     [BepInPlugin(GUID, "Anime Ass Assistant", Version)]
     public class AAA : BaseUnityPlugin
     {
