@@ -22,7 +22,7 @@ namespace DefaultParamEditor.Koikatu
     public class DefaultParamEditor : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.defaultparameditor";
-        public const string Version = "1.4.1." + BuildNumber.Version;
+        public const string Version = "1.4.2." + BuildNumber.Version;
 
         private static ConfigEntry<bool> CreateUISaveButtons { get; set; }
 

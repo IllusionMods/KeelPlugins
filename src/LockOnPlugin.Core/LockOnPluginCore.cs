@@ -16,7 +16,7 @@ namespace LockOnPlugin
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class LockOnPluginCore : BaseUnityPlugin
     {
-        public const string Version = "2.6.4." + BuildNumber.Version;
+        public const string Version = "2.7.0." + BuildNumber.Version;
         public const string GUID = "keelhauled.lockonplugin";
         public const string PluginName = "LockOnPlugin";
 
@@ -54,7 +54,7 @@ namespace LockOnPlugin
             LockOnKey = Config.Bind(SECTION_HOTKEYS, "Lock on", new KeyboardShortcut(KeyCode.Mouse4), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 10 }));
             PrevCharaKey = Config.Bind(SECTION_HOTKEYS, "Select previous character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 8 }));
             NextCharaKey = Config.Bind(SECTION_HOTKEYS, "Select next character", new KeyboardShortcut(KeyCode.None), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 9 }));
-            
+
             MakerAPI.MakerBaseLoaded += (x, y) => bepinex.GetOrAddComponent<MakerMono>();
             MakerAPI.MakerExiting += (x, y) => Destroy(bepinex.GetComponent<MakerMono>());
             GameAPI.StartH += (x, y) => bepinex.GetOrAddComponent<HSceneMono>();

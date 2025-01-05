@@ -25,7 +25,7 @@ namespace AnimeAssAssistant
     public class AAA : BaseUnityPlugin
     {
         public const string GUID = "keelhauled.animeassassistant";
-        public const string Version = "1.0.3." + BuildNumber.Version;
+        public const string Version = "1.1.0." + BuildNumber.Version;
 
         private const string SECTION_HOTKEY = "Keyboard shortcuts";
         private const string SECTION_FOLDER = "Folders";
