@@ -132,7 +132,9 @@ namespace AnimeAssAssistant
             var selectIndex = listCtrl.GetSelectIndex();
             if(selectIndex.Length == 0) return false;
             path = listCtrl.GetFileInfoFromIndex(selectIndex[0]).FullPath;
+#if KKS
             listCtrl.Delete(selectIndex[0]);
+#endif
             return true;
         }
 
