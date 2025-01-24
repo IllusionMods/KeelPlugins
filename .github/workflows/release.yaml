@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+      - run: dotnet build --configuration Release
+      - run: zip -r file.zip bin/Release
+      - uses: softprops/action-gh-release@v2
+        with:
+         draft: true
+         generate_release_notes: true
+         files: file.zip
