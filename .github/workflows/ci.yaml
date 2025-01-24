@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - uses: actions/setup-dotnet@v4
+    - run: dotnet build
+    - uses: actions/upload-artifact@v4
+      with:
+        path: KeelPlugins/KeelPlugins/bin/
