@@ -13,4 +13,4 @@ jobs:
     - run: dotnet build
     - uses: actions/upload-artifact@v4
       with:
-        path: KeelPlugins/bin/
+        path: bin/
