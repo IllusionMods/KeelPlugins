@@ -18,7 +18,9 @@ jobs:
     - run: dotnet build --configuration Release
       
     - name: Create release notes
+      continue-on-error: true
       run: |
+        pwd
         LAST_TAG=$(git describe --tags --abbrev=0)
         git log $LAST_TAG..HEAD --pretty=format:"* %s" >> body.md
         echo "" >> body.md
