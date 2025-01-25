@@ -9,7 +9,7 @@ jobs:
     - name: Gather info
       id: info
       run: |
-        $DATE = $(date +'%Y-%m-%d')
+        DATE=$(date +'%Y-%m-%d')
         echo "::set-output name=date::$DATE"
         echo "::set-output name=file::${{ github.event.repository.name }}_$DATE.zip"
         
@@ -19,7 +19,7 @@ jobs:
       
     - name: Create release notes
       run: >
-        $LAST_TAG=$(git describe --tags --abbrev=0)
+        LAST_TAG=$(git describe --tags --abbrev=0)
         git log $LAST_TAG..HEAD --pretty=format:"* %s" >> body.md
         echo "" >> body.md
         echo "**Full Changelog**: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$LAST_TAG...${{ steps.info.outputs.date }}" >> body.md
