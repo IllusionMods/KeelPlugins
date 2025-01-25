@@ -10,15 +10,15 @@ jobs:
       id: info
       run: |
         DATE=$(date +'%Y-%m-%d')
-        echo "::set-output name=date::$DATE"
-        echo "::set-output name=file::${{ github.event.repository.name }}_$DATE.zip"
+        echo "date=$DATE" >> $GITHUB_OUTPUT
+        echo "file=${{ github.event.repository.name }}_$DATE.zip" >> $GITHUB_OUTPUT
         
     - uses: actions/checkout@v4
     - uses: actions/setup-dotnet@v4
     - run: dotnet build --configuration Release
       
     - name: Create release notes
-      run: >
+      run: |
         LAST_TAG=$(git describe --tags --abbrev=0)
         git log $LAST_TAG..HEAD --pretty=format:"* %s" >> body.md
         echo "" >> body.md
