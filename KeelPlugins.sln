@@ -99,6 +99,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repo", "repo", "{29232F8B-4
 		LICENSE = LICENSE
 		nuget.config = nuget.config
 		README.md = README.md
+		.github\workflows\ci.yaml = .github\workflows\ci.yaml
+		.github\workflows\release.yaml = .github\workflows\release.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClothingStateMenuX.Koikatu", "src\ClothingStateMenuX.Koikatu\ClothingStateMenuX.Koikatu.csproj", "{F927C67B-778F-4144-92E4-2AE745790893}"
