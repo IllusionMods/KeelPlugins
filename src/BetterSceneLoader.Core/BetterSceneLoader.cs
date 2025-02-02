@@ -30,6 +30,7 @@ namespace BetterSceneLoader
         public static ConfigEntry<float> AnchorTop { get; set; }
         public static ConfigEntry<float> UIMargin { get; set; }
         public static ConfigEntry<bool> ConfirmDelete { get; set; }
+        public static ConfigEntry<SortBy> SceneSorting { get; set; }
 
         private static ImageGrid sceneLoaderUI;
 
@@ -42,8 +43,9 @@ namespace BetterSceneLoader
                 onImportButtonClick: ImportScene
             );
 
-            AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 2 }));
-            ConfirmDelete = Config.Bind(CATEGORY_GENERAL, "Confirm Delete", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 1 }));
+            AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 3 }));
+            ConfirmDelete = Config.Bind(CATEGORY_GENERAL, "Confirm Delete", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 2 }));
+            SceneSorting = Config.Bind(CATEGORY_GENERAL, "Default Sort Order", SortBy.DateDescending, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 1 }));
             ColumnAmount = Config.Bind(CATEGORY_GENERAL, "Column Amount", 7, new ConfigDescription("", new AcceptableValueRange<int>(1, 12)));
             ScrollSensitivity = Config.Bind(CATEGORY_GENERAL, "Scroll Sensitivity", 3f, new ConfigDescription("", new AcceptableValueRange<float>(1f, 10f)));
             AnchorLeft = Config.Bind(CATEGORY_UISIZE, "Left Anchor", 0f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));

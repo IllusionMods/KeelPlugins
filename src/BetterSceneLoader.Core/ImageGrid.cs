@@ -43,8 +43,9 @@ namespace BetterSceneLoader
         private Dropdown category;
         private Image infopanel;
         private Text infotext;
+        private Dropdown sorting;
 
-        private readonly Dictionary<string, Image> sceneCache = new Dictionary<string, Image>();
+        private readonly Dictionary<string, CategoryData> sceneCache = new Dictionary<string, CategoryData>();
         private Button currentButton;
         private readonly string defaultPath;
         private string currentPath;
@@ -55,6 +56,12 @@ namespace BetterSceneLoader
         public UnityAction<string> OnLoadButtonClick;
         public UnityAction<string> OnDeleteButtonClick;
         public UnityAction<string> OnImportButtonClick;
+        
+        public class CategoryData
+        {
+            public Image Container;
+            public SortBy SortBy;
+        }
 
         public ImageGrid(string defaultPath, UnityAction onSaveButtonClick,
                          UnityAction<string> onLoadButtonClick, UnityAction<string> onImportButtonClick)
@@ -76,9 +83,9 @@ namespace BetterSceneLoader
 
         public void UpdateWindow()
         {
-            foreach(var scene in sceneCache)
+            foreach(var scene in sceneCache.Values)
             {
-                var gridlayout = scene.Value.gameObject.GetComponent<AutoGridLayout>();
+                var gridlayout = scene.Container.gameObject.GetComponent<AutoGridLayout>();
                 if(gridlayout != null)
                 {
                     gridlayout.m_Column = BetterSceneLoader.ColumnAmount.Value;
@@ -134,7 +141,7 @@ namespace BetterSceneLoader
             x2.color = new Color(0f, 0f, 0f, 1f);
 
             var curPos = 0f;
-            category = UIUtility.CreateDropdown("Dropdown", drag.transform, "Categories");
+            category = UIUtility.CreateDropdown("CategoryDropdown", drag.transform, "Categories");
             category.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=dropdownWidth);
             category.captionText.transform.SetRect(0f, 0f, 1f, 1f, 0f, 2f, -15f, -2f);
             category.captionText.alignment = TextAnchor.MiddleCenter;
@@ -149,6 +156,19 @@ namespace BetterSceneLoader
             });
             DropdownAutoScroll.Setup(category);
             DropdownFilter.AddFilterUI(category, "BetterSceneLoaderDropdown");
+
+            sorting = UIUtility.CreateDropdown("SortDropdown", drag.transform, "Sort");
+            sorting.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=150f);
+            sorting.captionText.transform.SetRect(0f, 0f, 1f, 1f, 0f, 2f, -15f, -2f);
+            sorting.captionText.alignment = TextAnchor.MiddleCenter;
+            sorting.options = Enum.GetNames(typeof(SortBy)).Select(x => new Dropdown.OptionData(x)).ToList();
+            sorting.onValueChanged.AddListener(x =>
+            {
+                sceneCache[currentCategoryFolder].SortBy = (SortBy)x;
+                var container = imagelist.content.GetComponentInChildren<Image>();
+                if(container && container.gameObject.activeSelf) // only reload when not changing category
+                    ReloadImages();
+            });
 
             var refresh = UIUtility.CreateButton("RefreshButton", drag.transform, "Refresh");
             refresh.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
@@ -321,17 +341,39 @@ namespace BetterSceneLoader
 
         private void PopulateGrid(bool forceUpdate = false)
         {
+            var sortBy = BetterSceneLoader.SceneSorting.Value;
+            
             if(forceUpdate)
-                sceneCache.Remove(currentCategoryFolder);
-
-            if(sceneCache.TryGetValue(currentCategoryFolder, out Image sceneList))
             {
-                sceneList.gameObject.SetActive(true);
+                if(sceneCache.TryGetValue(currentCategoryFolder, out var temp))
+                    sortBy = temp.SortBy;
+                sceneCache.Remove(currentCategoryFolder);
+            }
+
+            if(sceneCache.TryGetValue(currentCategoryFolder, out var catData))
+            {
+                sorting.value = (int)catData.SortBy;
+                catData.Container.gameObject.SetActive(true);
             }
             else
             {
                 var dirInfo = new DirectoryInfo(currentCategoryFolder);
-                var scenefiles = dirInfo.GetFiles("*.png").OrderByDescending(x => x.LastWriteTime).ToList();
+                var scenefiles = dirInfo.GetFiles("*.png").ToList();
+                switch(sortBy)
+                {
+                    case SortBy.DateAscending:
+                        scenefiles = scenefiles.OrderBy(x => x.LastWriteTime).ToList();
+                        break;
+                    case SortBy.DateDescending:
+                        scenefiles = scenefiles.OrderByDescending(x => x.LastWriteTime).ToList();
+                        break;
+                    case SortBy.SizeAscending:
+                        scenefiles = scenefiles.OrderBy(x => x.Length).ToList();
+                        break;
+                    case SortBy.SizeDescending:
+                        scenefiles = scenefiles.OrderByDescending(x => x.Length).ToList();
+                        break;
+                }
 
                 var container = UIUtility.CreatePanel("GridContainer", imagelist.content.transform);
                 container.transform.SetRect(0f, 0f, 1f, 1f);
@@ -343,7 +385,8 @@ namespace BetterSceneLoader
                 gridlayout.m_Column = BetterSceneLoader.ColumnAmount.Value;
 
                 ThreadingHelper.Instance.StartCoroutine(LoadButtonsAsync(container.transform, scenefiles));
-                sceneCache.Add(currentCategoryFolder, container);
+                sceneCache.Add(currentCategoryFolder, new CategoryData{ Container = container, SortBy = sortBy });
+                sorting.value = (int)sortBy;
             }
         }
 
