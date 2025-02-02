@@ -12,13 +12,13 @@ jobs:
         DATE=$(date +'%Y-%m-%d')
         echo "date=$DATE" >> $GITHUB_OUTPUT
         echo "file=${{ github.event.repository.name }}_$DATE.zip" >> $GITHUB_OUTPUT
-        
+
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 0 # for creating the changelog
     - uses: actions/setup-dotnet@v4
     - run: dotnet build --configuration Release
-      
+
     - name: Create release notes
       continue-on-error: true
       run: |
@@ -27,11 +27,11 @@ jobs:
         git log $LATEST_TAG..HEAD --pretty=format:"* %s" >> body.md
         echo "" >> body.md
         echo "**Full Changelog**: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$LATEST_TAG...${{ steps.info.outputs.date }}" >> body.md
+
     - name: Create zip
       run: |
         cd bin/Release
         zip -r ${{ steps.info.outputs.file }} *
-    - run: pwd
     - uses: softprops/action-gh-release@v2
       with:
         draft: true
