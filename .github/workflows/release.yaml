@@ -36,6 +36,6 @@ jobs:
       with:
         draft: true
         generate_release_notes: false
-        files: ${{ steps.info.outputs.file }}
+        files: bin/Release/${{ steps.info.outputs.file }}
         tag_name: ${{ steps.info.outputs.date }}
         body_path: body.md
