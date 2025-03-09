@@ -56,5 +56,22 @@ namespace ItemLayerEdit.Koikatu
                 SetExtendedData(data);
             }
         }
+
+        protected override void OnObjectsCopied(ReadOnlyDictionary<int, ObjectCtrlInfo> copiedItems) {
+            foreach (var kvp in copiedItems)
+            {
+                if (
+                    Studio.Studio.Instance.dicObjectCtrl.TryGetValue(kvp.Key, out var oci) &&
+                    oci is OCIItem original &&
+                    original.objectItem.GetComponent<LayerDataContainer>() != null
+                ) {
+                    OCIItem copy = kvp.Value as OCIItem;
+                    copy.objectItem.AddComponent<LayerDataContainer>().DefaultLayer = copy.objectItem.layer;
+                    copy.objectItem.SetAllLayers(original.objectItem.layer);
+                }
+            }
+
+            base.OnObjectsCopied(copiedItems);
+        }
     }
 }
