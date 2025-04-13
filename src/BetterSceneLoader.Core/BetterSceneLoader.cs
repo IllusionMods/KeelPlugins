@@ -34,14 +34,9 @@ namespace BetterSceneLoader
 
         private static ImageGrid sceneLoaderUI;
 
-        protected virtual void Awake()
+        private void Awake()
         {
-            sceneLoaderUI = new ImageGrid(
-                defaultPath: BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene"),
-                onSaveButtonClick: SaveScene,
-                onLoadButtonClick: LoadScene,
-                onImportButtonClick: ImportScene
-            );
+            sceneLoaderUI = new SceneGrid();
 
             AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 3 }));
             ConfirmDelete = Config.Bind(CATEGORY_GENERAL, "Confirm Delete", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 2 }));
@@ -65,21 +60,6 @@ namespace BetterSceneLoader
             Harmony.CreateAndPatchAll(typeof(Hooks));
             UIUtility.InitKOI(typeof(BetterSceneLoader).Assembly);
             Log.SetLogSource(Logger);
-        }
-
-        private void LoadScene(string path)
-        {
-            Studio.Studio.Instance.StartCoroutine(Studio.Studio.Instance.LoadSceneCoroutine(path));
-        }
-
-        private void SaveScene()
-        {
-            Studio.Studio.Instance.systemButtonCtrl.OnClickSave();
-        }
-
-        private void ImportScene(string path)
-        {
-            Studio.Studio.Instance.ImportScene(path);
         }
 
         private class Hooks

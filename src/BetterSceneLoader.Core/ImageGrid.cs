@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using KKAPI.Studio.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ using UnityEngine.Networking;
 using KKAPI.Utilities;
 using UniRx.Triggers;
 using UniRx;
-using UnityEngine.EventSystems;
 
 namespace BetterSceneLoader
 {
@@ -39,7 +37,6 @@ namespace BetterSceneLoader
         private Button yesbutton;
         private Button nobutton;
         private Text nametext;
-        private ToolbarToggle toolbarToggle;
         private Dropdown category;
         private Image infopanel;
         private Text infotext;
@@ -52,12 +49,11 @@ namespace BetterSceneLoader
         private string currentCategoryFolder;
         private readonly Dictionary<string, string> CategoryFolders = new Dictionary<string, string>();
 
-        public UnityAction OnSaveButtonClick;
-        public UnityAction<string> OnLoadButtonClick;
-        public UnityAction<string> OnDeleteButtonClick;
-        public UnityAction<string> OnImportButtonClick;
-        
-        public class CategoryData
+        public readonly UnityAction OnSaveButtonClick;
+        public readonly UnityAction<string> OnLoadButtonClick;
+        public readonly UnityAction<string> OnImportButtonClick;
+
+        private class CategoryData
         {
             public Image Container;
             public SortBy SortBy;
@@ -73,10 +69,9 @@ namespace BetterSceneLoader
             OnImportButtonClick = onImportButtonClick;
         }
 
-        public void ShowWindow(bool flag)
+        public virtual void ShowWindow(bool flag)
         {
             UISystem.gameObject.SetActive(flag);
-            toolbarToggle?.SetValue(flag);
             if(category != null)
                 category.template.SetRect(0f, 1f, 0f, 0f, 0f, headerSize - marginSize, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
         }
@@ -107,7 +102,7 @@ namespace BetterSceneLoader
             }
         }
 
-        public void CreateUI(string name, int sortingOrder, string titleText)
+        public virtual void CreateUI(string name, int sortingOrder, string titleText)
         {
             UISystem = UIUtility.CreateNewUISystem(name);
             UISystem.GetComponent<CanvasScaler>().referenceResolution = new Vector2(1920f / UIScale, 1080f / UIScale);
@@ -178,7 +173,7 @@ namespace BetterSceneLoader
             save.transform.SetRect(0f, 0f, 0f, 1f, curPos, 0f, curPos+=80f);
             save.onClick.AddListener(() =>
             {
-                OnSaveButtonClick();
+                OnSaveButtonClick?.Invoke();
                 if(currentCategoryFolder == defaultPath)
                 {
                     var dir = new DirectoryInfo(defaultPath);
@@ -241,7 +236,7 @@ namespace BetterSceneLoader
             {
                 confirmpanel.gameObject.SetActive(false);
                 optionspanel.gameObject.SetActive(false);
-                OnLoadButtonClick(currentPath);
+                OnLoadButtonClick?.Invoke(currentPath);
                 if(BetterSceneLoader.AutoClose.Value)
                     ShowWindow(false);
             });
@@ -250,7 +245,7 @@ namespace BetterSceneLoader
             importbutton.transform.SetRect(0.35f, 0f, 0.65f, 1f);
             importbutton.onClick.AddListener(() =>
             {
-                OnImportButtonClick(currentPath);
+                OnImportButtonClick?.Invoke(currentPath);
                 confirmpanel.gameObject.SetActive(false);
                 optionspanel.gameObject.SetActive(false);
             });
@@ -276,25 +271,8 @@ namespace BetterSceneLoader
             infotext.alignment = TextAnchor.MiddleCenter;
             UIUtility.AddOutlineToObject(infotext.transform);
 
-            ThreadingHelper.Instance.StartCoroutine(AddToolbarButton());
-
             UpdateWindow();
             PopulateGrid();
-        }
-
-        private IEnumerator AddToolbarButton()
-        {
-            var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
-            toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
-
-            yield return new WaitUntil(() => toolbarToggle.ControlObject != null);
-
-            var button = toolbarToggle.ControlObject.GetComponent<Button>();
-            button.OnPointerClickAsObservable().Subscribe(e =>
-            {
-                if(e.button == PointerEventData.InputButton.Right)
-                    OnSaveButtonClick();
-            });
         }
 
         private List<Dropdown.OptionData> GetCategories()
