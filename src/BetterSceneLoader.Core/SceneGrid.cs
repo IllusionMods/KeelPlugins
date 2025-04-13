@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using KeelPlugins.Utils;
+using Studio;
 using UniRx.Triggers;
 using UniRx;
 using UnityEngine.EventSystems;
@@ -13,6 +14,7 @@ namespace BetterSceneLoader
     public class SceneGrid : ImageGrid
     {
         private ToolbarToggle toolbarToggle;
+        private AddButtonCtrl addButtonCtrl;
 
         public SceneGrid() : base(
             defaultPath: BepInEx.Utility.CombinePaths(Paths.GameRootPath, "UserData", "Studio", "scene"),
@@ -25,12 +27,15 @@ namespace BetterSceneLoader
         {
             base.ShowWindow(flag);
             toolbarToggle?.SetValue(flag);
+            if(flag && (addButtonCtrl.select == 0 || addButtonCtrl.select == 1))
+                addButtonCtrl.OnClick(addButtonCtrl.select);
         }
 
         public override void CreateUI(string name, int sortingOrder, string titleText)
         {
             base.CreateUI(name, sortingOrder, titleText);
             ThreadingHelper.Instance.StartCoroutine(AddToolbarButton());
+            addButtonCtrl = GameObject.Find("StudioScene/Canvas Main Menu/01_Add").GetComponent<AddButtonCtrl>();
         }
 
         private IEnumerator AddToolbarButton()
