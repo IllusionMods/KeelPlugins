@@ -1,0 +1,170 @@
+﻿<Solution>
+  <Folder Name="/archive/">
+    <File Path="archive/AssetHelper.cs" />
+    <File Path="archive/BoundsUtils.cs" />
+    <File Path="archive/DragManager.cs" />
+    <File Path="archive/FreeHControl.cs" />
+    <File Path="archive/SelfieCam.cs" />
+    <File Path="archive/ShadowRealm.cs" />
+    <File Path="archive/StudioUX.cs" />
+    <File Path="archive/Unlocker.cs" />
+  </Folder>
+  <Folder Name="/repo/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="nuget.config" />
+    <File Path="README.md" />
+    <File Path=".github/workflows/ci.yaml" />
+    <File Path=".github/workflows/release.yaml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AssOverride/AssOverride.csproj">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+    <Project Path="src/Common.Core/Common.Core.shproj" />
+    <Project Path="src/Common.Harmony/Common.Harmony.shproj" />
+    <Project Path="src/Common.Unity/Common.Unity.shproj" />
+    <Project Path="src/Common.Utils/Common.Utils.shproj" />
+    <Project Path="src/UIUtility/UIUtility.shproj" />
+    <Project Path="src/UnityLogFilter/UnityLogFilter.csproj" />
+    <File Path="src/BuildSettings.AISyoujyo.props" />
+    <File Path="src/BuildSettings.Common.props" />
+    <File Path="src/BuildSettings.HoneySelect2.props" />
+    <File Path="src/BuildSettings.KoikatsuSunshine.props" />
+    <File Path="src/BuildSettings.Koikatu.props" />
+    <File Path="src/BuildSettings.Patcher.props" />
+    <File Path="src/BuildSettings.PlayHome.props" />
+    <File Path="src/SkipAllRefs.targets" />
+  </Folder>
+  <Folder Name="/src/AltAutoMode/">
+    <Project Path="src/AltAutoMode.PlayHome/AltAutoMode.PlayHome.csproj" />
+  </Folder>
+  <Folder Name="/src/AnimeAssAssistant/">
+    <Project Path="src/AnimeAssAssistant.Core/AnimeAssAssistant.Core.shproj" />
+    <Project Path="src/AnimeAssAssistant.KoikatuSunshine/AnimeAssAssistant.KoikatuSunshine.csproj" Type="Classic C#" />
+    <Project Path="src/AnimeAssAssistant.Koikatu/AnimeAssAssistant.Koikatu.csproj">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/BetterSceneLoader/">
+    <Project Path="src/BetterSceneLoader.Core/BetterSceneLoader.Core.shproj" />
+    <Project Path="src/BetterSceneLoader.KoikatuSunshine/BetterSceneLoader.KoikatuSunshine.csproj" Type="Classic C#" />
+    <Project Path="src/BetterSceneLoader.Koikatu/BetterSceneLoader.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/BlendShaper/">
+    <Project Path="src/BlendShaper.Koikatu/BlendShaper.Koikatu.csproj">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/CameraFrameMask/">
+    <Project Path="src/CameraFrameMask.Core/CameraFrameMask.Core.shproj" />
+    <Project Path="src/CameraFrameMask.KoikatuSunshine/CameraFrameMask.KoikatuSunshine.csproj" />
+    <Project Path="src/CameraFrameMask.Koikatu/CameraFrameMask.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/CharaStateX/">
+    <Project Path="src/CharaStateX.Core/CharaStateX.Core.shproj" />
+    <Project Path="src/CharaStateX.KoikatuSunshine/CharaStateX.KoikatuSunshine.csproj" />
+    <Project Path="src/CharaStateX.Koikatu/CharaStateX.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/ClothingStateMenuX/">
+    <Project Path="src/ClothingStateMenuX.Core/ClothingStateMenuX.Core.shproj" />
+    <Project Path="src/ClothingStateMenuX.KoikatuSunshine/ClothingStateMenuX.KoikatuSunshine.csproj" Type="Classic C#" />
+    <Project Path="src/ClothingStateMenuX.Koikatu/ClothingStateMenuX.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/DefaultParamEditor/">
+    <Project Path="src/DefaultParamEditor.Core/DefaultParamEditor.Core.shproj" />
+    <Project Path="src/DefaultParamEditor.KoikatuSunshine/DefaultParamEditor.KoikatuSunshine.csproj" />
+    <Project Path="src/DefaultParamEditor.Koikatu/DefaultParamEditor.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/DefaultStudioScene/">
+    <Project Path="src/DefaultStudioScene.AISyoujyo/DefaultStudioScene.AISyoujyo.csproj" />
+    <Project Path="src/DefaultStudioScene.Core/DefaultStudioScene.Core.shproj" />
+    <Project Path="src/DefaultStudioScene.HoneySelect2/DefaultStudioScene.HoneySelect2.csproj" />
+    <Project Path="src/DefaultStudioScene.KoikatuSunshine/DefaultStudioScene.KoikatuSunshine.csproj" Type="Classic C#" />
+    <Project Path="src/DefaultStudioScene.Koikatu/DefaultStudioScene.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/EyeLookEditor/">
+    <Project Path="src/EyeLookEditor.Core/EyeLookEditor.Core.shproj" />
+    <Project Path="src/EyeLookEditor.KoikatuSunshine/EyeLookEditor.KoikatuSunshine.csproj" Type="Classic C#">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+    <Project Path="src/EyeLookEditor.Koikatu/EyeLookEditor.Koikatu.csproj" Type="Classic C#">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/FavoriteCards/">
+    <Project Path="src/FavoriteCards.Koikatu/FavoriteCards.Koikatu.csproj">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/FreeHDefaults/">
+    <Project Path="src/FreeHDefaults.Core/FreeHDefaults.Core.shproj" />
+    <Project Path="src/FreeHDefaults.KoikatuSunshine/FreeHDefaults.KoikatuSunshine.csproj" />
+    <Project Path="src/FreeHDefaults.Koikatu/FreeHDefaults.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/ItemLayerEdit/">
+    <Project Path="src/ItemLayerEdit.AISyoujyo/ItemLayerEdit.AISyoujyo.csproj" />
+    <Project Path="src/ItemLayerEdit.Core/ItemLayerEdit.Core.shproj" />
+    <Project Path="src/ItemLayerEdit.HoneySelect2/ItemLayerEdit.HoneySelect2.csproj" />
+    <Project Path="src/ItemLayerEdit.KoikatuSunshine/ItemLayerEdit.KoikatuSunshine.csproj" />
+    <Project Path="src/ItemLayerEdit.Koikatu/ItemLayerEdit.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/LightManager/">
+    <Project Path="src/LightManager.Core/LightManager.Core.shproj" />
+    <Project Path="src/LightManager.KoikatuSunshine/LightManager.KoikatuSunshine.csproj" />
+    <Project Path="src/LightManager.Koikatu/LightManager.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/LockOnPlugin/">
+    <Project Path="src/LockOnPlugin.Core/LockOnPlugin.Core.shproj" />
+    <Project Path="src/LockOnPlugin.KoikatuSunshine/LockOnPlugin.KoikatuSunshine.csproj" />
+    <Project Path="src/LockOnPlugin.Koikatu/LockOnPlugin.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/MakerBridge/">
+    <Project Path="src/MakerBridge.Core/MakerBridge.Core.shproj" />
+    <Project Path="src/MakerBridge.KoikatuSunshine/MakerBridge.KoikatuSunshine.csproj" />
+    <Project Path="src/MakerBridge.Koikatu/MakerBridge.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/MaterialLink/">
+    <Project Path="src/MaterialLink.KoikatuSunshine/MaterialLink.KoikatuSunshine.csproj" />
+  </Folder>
+  <Folder Name="/src/ModLoader/">
+    <Project Path="src/ModLoader.PlayHome/ModLoader.PlayHome.csproj">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/RealPOV/">
+    <Project Path="src/RealPOV.Core.Koikatu/RealPOV.Core.Koikatu.shproj" />
+    <Project Path="src/RealPOV.Core/RealPOV.Core.shproj" />
+    <Project Path="src/RealPOV.KoikatsuSunshine/RealPOV.KoikatsuSunshine.csproj" />
+    <Project Path="src/RealPOV.Koikatu/RealPOV.Koikatu.csproj" />
+    <Project Path="src/RealPOV.PlayHome/RealPOV.PlayHome.csproj" />
+  </Folder>
+  <Folder Name="/src/SoundEffects/">
+    <Project Path="src/SoundEffects.PlayHome/SoundEffects.PlayHome.csproj" />
+  </Folder>
+  <Folder Name="/src/StudioAddonLite/">
+    <Project Path="src/StudioAddonLite.Core/StudioAddonLite.Core.shproj" />
+    <Project Path="src/StudioAddonLite.KoikatuSunshine/StudioAddonLite.KoikatuSunshine.csproj" />
+    <Project Path="src/StudioAddonLite.Koikatu/StudioAddonLite.Koikatu.csproj" />
+  </Folder>
+  <Folder Name="/src/TesselationSetting/">
+    <Project Path="src/TesselationSetting.KoikatuSunshine/TesselationSetting.KoikatuSunshine.csproj" Type="Classic C#">
+      <Configuration Solution="Debug|Any CPU" Project="Debug|Any CPU|NoBuild" />
+      <Configuration Solution="Release|Any CPU" Project="Release|Any CPU|NoBuild" />
+    </Project>
+  </Folder>
+  <Folder Name="/src/TitleShortcuts/">
+    <Project Path="src/TitleShortcuts.AISyoujyo/TitleShortcuts.AISyoujyo.csproj" />
+    <Project Path="src/TitleShortcuts.Core/TitleShortcuts.Core.shproj" />
+    <Project Path="src/TitleShortcuts.HoneySelect2/TitleShortcuts.HoneySelect2.csproj" />
+    <Project Path="src/TitleShortcuts.KoikatuSunshine/TitleShortcuts.KoikatuSunshine.csproj" />
+    <Project Path="src/TitleShortcuts.Koikatu/TitleShortcuts.Koikatu.csproj" />
+  </Folder>
+</Solution>
