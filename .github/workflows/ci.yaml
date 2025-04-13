@@ -8,6 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
     - name: Update build number
       run: echo "internal static class BuildNumber{public const string Version = \"${{ github.run_number }}\";}" > src/Common.Core/BuildNumber.cs
     - run: dotnet build --configuration Release

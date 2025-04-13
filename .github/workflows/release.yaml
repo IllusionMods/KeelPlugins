@@ -17,6 +17,8 @@ jobs:
       with:
         fetch-depth: 0 # for creating the changelog
     - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
     - run: dotnet build --configuration Release
 
     - name: Create release notes
