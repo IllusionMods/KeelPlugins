@@ -14,7 +14,7 @@ namespace BetterSceneLoader
     [BepInDependency(KKAPI.KoikatuAPI.GUID)]
     public class BetterSceneLoader : BaseUnityPlugin
     {
-        public const string Version = "1.1.0." + BuildNumber.Version;
+        public const string Version = "1.1.1." + BuildNumber.Version;
         public const string GUID = "keelhauled.bettersceneloader";
         public const string PluginName = "BetterSceneLoader";
 
