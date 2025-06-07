@@ -14,7 +14,9 @@ namespace RealPOV.Core
         protected const string SECTION_GENERAL = "General";
         protected const string SECTION_HOTKEYS = "Keyboard shortcuts";
 
-        internal static ConfigEntry<float> ViewOffset { get; set; }
+        internal static ConfigEntry<float> ViewOffsetZ { get; set; }
+        internal static ConfigEntry<float> ViewOffsetY { get; set; }
+        internal static ConfigEntry<float> ViewOffsetX { get; set; }
         internal static ConfigEntry<float> DefaultFOV { get; set; }
         internal static ConfigEntry<float> MouseSens { get; set; }
         internal static ConfigEntry<KeyboardShortcut> POVHotkey { get; set; }
@@ -24,7 +26,6 @@ namespace RealPOV.Core
         protected static readonly Dictionary<GameObject, Vector3> LookRotation = new Dictionary<GameObject, Vector3>();
         protected static GameObject currentCharaGo;
         protected static Camera GameCamera;
-        protected static float defaultViewOffset = 0.03f;
         protected static float defaultFov = 70f;
 
         private static float backupFOV;
@@ -40,7 +41,9 @@ namespace RealPOV.Core
             POVHotkey = Config.Bind(SECTION_HOTKEYS, "Toggle POV", new KeyboardShortcut(KeyCode.Backspace));
             DefaultFOV = Config.Bind(SECTION_GENERAL, "Default FOV", defaultFov, new ConfigDescription("", new AcceptableValueRange<float>(20f, 120f)));
             MouseSens = Config.Bind(SECTION_GENERAL, "Mouse sensitivity", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0.1f, 2f)));
-            ViewOffset = Config.Bind(SECTION_GENERAL, "View offset", defaultViewOffset, new ConfigDescription("Move the camera backward or forward", new AcceptableValueRange<float>(-0.5f, 0.5f)));
+            ViewOffsetZ = Config.Bind(SECTION_GENERAL, "View offset Z", 0f, new ConfigDescription("Move the camera backward or forward", new AcceptableValueRange<float>(-0.5f, 0.5f)));
+            ViewOffsetY = Config.Bind(SECTION_GENERAL, "View offset Y", 0f, new ConfigDescription("Move the camera up or down", new AcceptableValueRange<float>(-0.5f, 0.5f)));
+            ViewOffsetX = Config.Bind(SECTION_GENERAL, "View offset X", 0f, new ConfigDescription("Move the camera left or right", new AcceptableValueRange<float>(-0.5f, 0.5f)));
         }
 
         private void Update()

@@ -39,7 +39,6 @@ namespace RealPOV.Koikatu
         {
             plugin = this;
             defaultFov = 45f;
-            defaultViewOffset = 0.05f;
             base.Awake();
 
             HideHead = Config.Bind(SECTION_GENERAL, "Hide character head", false, "When entering POV, hide the character's head. Prevents accessories and hair from obstructing the view.");
@@ -228,7 +227,7 @@ namespace RealPOV.Koikatu
                         var eyeObjs = currentChara.eyeLookCtrl.eyeLookScript.eyeObjs;
                         var pos = Vector3.Lerp(eyeObjs[0].eyeTransform.position, eyeObjs[1].eyeTransform.position, 0.5f);
                         GameCamera.transform.SetPositionAndRotation(pos, currentChara.objHeadBone.transform.rotation);
-                        GameCamera.transform.Translate(Vector3.forward * ViewOffset.Value);
+                        GameCamera.transform.Translate(ViewOffsetX.Value, ViewOffsetY.Value, ViewOffsetZ.Value);
                         if (CurrentFOV == null) throw new InvalidOperationException("CurrentFOV == null");
                         GameCamera.fieldOfView = CurrentFOV.Value;
 
