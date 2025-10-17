@@ -20,7 +20,6 @@ namespace BetterSceneLoader
 
         private const string CATEGORY_GENERAL = "General";
         private const string CATEGORY_UISIZE = "UI Size";
-        private const string CATEGORY_ADVANCED = "Advanced";
 
         public static ConfigEntry<int> ColumnAmount { get; set; }
         public static ConfigEntry<float> ScrollSensitivity { get; set; }
@@ -32,7 +31,6 @@ namespace BetterSceneLoader
         public static ConfigEntry<float> UIMargin { get; set; }
         public static ConfigEntry<bool> ConfirmDelete { get; set; }
         public static ConfigEntry<SortBy> SceneSorting { get; set; }
-        public static ConfigEntry<bool> AddButton { get; set; }
 
         private static ImageGrid sceneLoaderUI;
 
@@ -50,7 +48,6 @@ namespace BetterSceneLoader
             AnchorRight = Config.Bind(CATEGORY_UISIZE, "Right Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             AnchorTop = Config.Bind(CATEGORY_UISIZE, "Top Anchor", 1f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 1f)));
             UIMargin = Config.Bind(CATEGORY_UISIZE, "Margin", 60f, new ConfigDescription("", new AcceptableValueRange<float>(0f, 200f), new ConfigurationManagerAttributes { Order = 1 }));
-            AddButton = Config.Bind(CATEGORY_ADVANCED, "Add Save Button", false, new ConfigDescription("Adds a save button to the bottom left quick actions section.\nWARNING: Can cause problems if spammed. Only enable if you know what you're doing. Needs Studio restart to apply.", null, new ConfigurationManagerAttributes { IsAdvanced = true }));
 
             ColumnAmount.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();
             ScrollSensitivity.SettingChanged += (x, y) => sceneLoaderUI.UpdateWindow();

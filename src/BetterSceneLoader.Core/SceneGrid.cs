@@ -40,8 +40,6 @@ namespace BetterSceneLoader
 
         private IEnumerator AddToolbarButton()
         {
-            if (!BetterSceneLoader.AddButton.Value) yield break;
-
             var pluginiconTex = PngAssist.ChangeTextureFromByte(Resource.GetResourceAsBytes(typeof(ImageGrid).Assembly, "Resources.pluginicon"));
             toolbarToggle = CustomToolbarButtons.AddLeftToolbarToggle(pluginiconTex, false, ShowWindow);
 
