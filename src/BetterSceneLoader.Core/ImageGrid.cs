@@ -76,6 +76,11 @@ namespace BetterSceneLoader
                 category.template.SetRect(0f, 1f, 0f, 0f, 0f, headerSize - marginSize, dropdownWidth, mainPanel.rectTransform.rect.height / 2);
         }
 
+        public virtual void HideWindow()
+        {
+            ShowWindow(false);
+        }
+
         public void UpdateWindow()
         {
             foreach(var scene in sceneCache.Values)
@@ -124,7 +129,7 @@ namespace BetterSceneLoader
 
             var close = UIUtility.CreateButton("CloseButton", drag.transform, "");
             close.transform.SetRect(1f, 0f, 1f, 1f, -buttonSize * 2f);
-            close.onClick.AddListener(() => ShowWindow(false));
+            close.onClick.AddListener(HideWindow);
 
             var x1 = UIUtility.CreatePanel("x1", close.transform);
             x1.transform.SetRect(0f, 0f, 1f, 1f, 8f, 0f, -8f);
@@ -238,7 +243,7 @@ namespace BetterSceneLoader
                 optionspanel.gameObject.SetActive(false);
                 OnLoadButtonClick?.Invoke(currentPath);
                 if(BetterSceneLoader.AutoClose.Value)
-                    ShowWindow(false);
+                    HideWindow();
             });
 
             var importbutton = UIUtility.CreateButton("ImportButton", optionspanel.transform, "Import");

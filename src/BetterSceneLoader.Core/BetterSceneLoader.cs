@@ -33,10 +33,12 @@ namespace BetterSceneLoader
         public static ConfigEntry<SortBy> SceneSorting { get; set; }
 
         private static ImageGrid sceneLoaderUI;
+        public static BaseUnityPlugin plugin;
 
         private void Awake()
         {
             sceneLoaderUI = new SceneGrid();
+            plugin = this;
 
             AutoClose = Config.Bind(CATEGORY_GENERAL, "Auto Close", true, new ConfigDescription("Automatically close scene window after loading", null, new ConfigurationManagerAttributes { Order = 3 }));
             ConfirmDelete = Config.Bind(CATEGORY_GENERAL, "Confirm Delete", true, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 2 }));
